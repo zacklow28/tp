@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Karthika Warrier
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/karthu0301.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/karthu0301)]
+[[portfolio](team/karthu0301.md)]
 
-* Role: Project Advisor
+* Role: Teammate
 
 ### Jane Doe
 
