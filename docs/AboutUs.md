@@ -35,9 +35,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zacklow28.png" width="200px">
 
-[[github](http://github.com/zacklow28)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zacklow28)] [[portfolio](team/zacklow28.md)]
 
-* Role: Developer
+* Role: Teammate
 * Responsibilities: Data
 
 ### Jean Doe
