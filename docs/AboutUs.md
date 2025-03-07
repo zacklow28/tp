@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jadecheah.png" width="200px">
 
 [[github](http://github.com/JadeCheah)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jadecheah.md)]
 
-* Role: Developer
+* Role: Teammate
 * Responsibilities: UI
