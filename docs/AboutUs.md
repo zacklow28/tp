@@ -40,15 +40,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Teammate
 * Responsibilities: Data
 
-### Jean Doe
+### Ravichandran Amirdha
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ravichandranamirdha.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/amir-dha)]
+[[portfolio](team/amir-dha.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Teammate
 
 ### Cheah Yue Pei
 
