@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+    title: "About Us"
 ---
 
 # About Us
@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Teammate
 
-### Jane Doe
+### Koh Yu Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/noahkoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/noahkoh)]
+[[portfolio](team/noahkoh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Teammate
+* Responsibilities: Logic
 
 ### Zack Low Zong Yun
 
