@@ -348,13 +348,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
+* **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
 * **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information. 
-* **Patient tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
-* **Active patient**: A patient who currently requires regular dietary consultations. Active patients are included in the daily workflow and consultations.
-* **High-Risk Patient**: A patient flagged for urgent attention due to specific health conditions or dietary needs. High-risk patients are visually highlighted in the app for quick identification.
-* **Archived Patient**: A patient who no longer requires regular visits but whose data is retained in the system for future reference. Archived patients are hidden by default but can be retrieved when needed.
+* **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
+* **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
+* **Tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
+* **Priority**: The level of importance or urgency assigned to a task or patient. For example, a high-priority patient needs immediate attention, while low-priority patients may not require urgent care.
+* **Reminder**: A notification or alert set by the nutritionist to prompt follow-up actions or visits for patients based on their care schedule.
+* **Consultation Log**: A record of all interactions with a patient, including the date, purpose, and key details from the consultation.
 * **Stale Records**: Patient profiles that have not been updated or accessed in a long time. These records are flagged for follow-up or archiving to keep the patient list organized.
-* **Search Criteria**: Parameters used to search for patients within the application. For example, name, dietary conditions, priority status, or meeting date.
 * **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
 * **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
 * **DBMS (Database Management System)**: A software used to store, manage, and retrieve data in databases. Not used in this project.
