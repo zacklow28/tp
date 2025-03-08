@@ -285,48 +285,162 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| As a …            | I want to …                                | So that I can…                                  | Notes                                                                                          |
+|-------------------|--------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Busy Nutritionist | Search for a patient by name               | Quickly access relevant dietary information     | Search results should be fast and accurate.                                                   |
+| Busy Nutritionist | Add tags to classify my patients easily    | Easily filter and find the relevant patients    | Allow for multiple tags per patient. The system should allow filtering based on tags.         |
+| Busy Nutritionist | Undo my last action when using the application | Easily revert to the original state in the event of mistakes or change of plans | Limits to actions that modify data only.                                                     |
+| Busy Nutritionist | Schedule Follow-up Appointment             | See and review patient’s status after an appropriate time |                                                                                          |
+| Busy Nutritionist | Set reminders for follow-up appointments   | Not forget important patient visits             | Notifications should appear on a dashboard.                                                  |
+| Busy Nutritionist | Receive notifications about patient dietary updates | Stay informed                                | Push/email notifications should be configurable.                                             |
+| Elderly Nutritionist | Enable high-contrast colors              | Easily read and navigate the app                | A toggle option for high contrast should be available in settings.                            |
+| Elderly Nutritionist | Increase the font size                   | Read text comfortably                           | Font size settings should be adjustable in the UI.                                            |
+| First-Time Nutritionist | Ensure no duplicates in the patient’s information are added | Refer to the correct information and make necessary changes | Alert the user of possible duplication when adding a new patient.                        |
+| First-Time Nutritionist | Access the application’s help function | Learn how to use the application effectively    | List down all available commands that the user can use.                                       |
+| First-Time Nutritionist | See some sample contacts when I open the app | Easily try out its features without needing to add my data first |                                                                                |
+| Nutritionist      | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                                |
+| Nutritionist      | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                          |
+| Nutritionist      | Clear all data in the application          | Reset the application when necessary            | Requires confirmation to prevent accidental reset.                                            |
+| Nutritionist      | Filter patients based on dietary conditions| Group similar cases                             | Filters should be easy to apply and reset.                                                    |
+| Nutritionist      | Edit/Update patient information            | Keep records accurate                           | Changes should be logged with timestamps.                                                     |
+| Nutritionist      | View a patient's information               | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted.   |
+| Nutritionist      | Archive patients that no longer require visits | Keep track of their information, yet not clutter up the address book | Able to retrieve archived information easily when needed.                                  |
+| Nutritionist      | Upload and attach files to patient profiles | Have all relevant data in one place             | Users should be able to upload PDFs, images, and other common file types.                     |
+| Nutritionist      | Sort patients based on name                | Find patients at a glance                       | Sorting options can allow easy finding of patients.                                           |
+| Nutritionist      | Mark high-risk patients                    | Quickly identify those needing urgent attention | High-risk patients should be visually highlighted.                                            |
+| Nutritionist      | Add emergency contacts to a patient profile | Contact them in urgent situations               | Emergency contacts should be stored and easily accessible.                                    |
+| Nutritionist      | Add custom notes to a patient’s profile    | Track observations over time                    | Notes should be editable and timestamped.                                                     |
 
-*{More to be added}*
+User stories for the MVP version:
+
+| As a …        | I want to …                                | So that I can…                                  | Notes                                                                                  |
+|---------------|--------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------------------|
+| Nutritionist  | View a patient's medical history, food allergies, and dietary restrictions | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted in the profile. |
+| Nutritionist  | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                         |
+| Nutritionist  | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                   |
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `Nutritionist (user)`, unless specified otherwise)
 
-**Use case: Delete a person**
 
-**MSS**
+**Use Case: UC01 - Edit Patient Information**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**MSS:**
 
+1.  Nutritionist selects a patient from the patient list or searches by name/ID.
+2.  HMS displays the selected patient’s profile.
+3.  Nutritionist clicks on the ‘Edit’ button to modify patient information.
+4.  HMS provides editable fields (e.g., contact details, dietary restrictions).
+5.  Nutritionist makes necessary changes and submits the updated information.
+6.  HMS verifies the updated data and requests confirmation.
+7.  Nutritionist confirms the updates.
+8.  HMS saves the updated information and displays the updated profile. Use case ends.
+
+
+**Use Case: UC02 - Delete Patient Record**
+
+**MSS:**
+
+1.  Nutritionist searches for a patient by name or ID in the HMS.
+2.  HMS displays the search results.
+3.  Nutritionist selects the patient whose record needs to be deleted.
+4.  HMS displays the patient's full profile.
+5.  Nutritionist selects the option to delete the patient record.
+6.  HMS requests confirmation to ensure the deletion is intentional.
+7.  Nutritionist confirms the deletion.
+8.  HMS deletes the patient record and confirms the deletion to the Nutritionist. Use case ends.
+
+**Extensions:**
+
+* 7a. Nutritionist cancels the deletion at the confirmation step. 
+  * 7a1. HMS cancels the deletion process and retains the patient record. 
     Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
 
-  Use case ends.
+**Use Case: UC03 - Archive Patient**
 
-* 3a. The given index is invalid.
+**MSS:**
 
-    * 3a1. AddressBook shows an error message.
+1.  Nutritionist accesses the patient list and selects a patient.
+2.  HMS displays the patient’s profile.
+3.  Nutritionist selects the option to archive the patient’s profile.
+4.  HMS asks for confirmation to archive to prevent accidental archiving.
+5.  Nutritionist confirms the archiving.
+6.  HMS archives the patient’s profile and confirms the action to the Nutritionist. Use case ends.
 
-      Use case resumes at step 2.
+**Extensions:**
 
-*{More to be added}*
+* 4a. Nutritionist decides not to archive the profile at the confirmation step. 
+  * 4a1. HMS cancels the archiving request. 
+    Use case ends.
 
+
+**Use Case: UC04 - Add Patient Tag**
+
+**MSS:**
+1.  Nutritionist selects the patient to tag from the patient list.
+2.  HMS displays the patient's profile.
+3.  Nutritionist chooses to add a tag.
+4.  HMS prompts for the tag details.
+5.  Nutritionist enters the tag (e.g., "Diabetic", "Low Sodium") and submits.
+6.  HMS confirms the tag addition and updates the patient's profile.
+   Use case ends.
+
+**Extensions:**
+
+* 4a. HMS detects an error in the entered tag (e.g., forbidden characters).
+  * 4a1. HMS displays an error message.
+  * 4a2. Nutritionist corrects the tag information.
+    Steps 4a1-4a2 are repeated until valid information is entered.
+    Use case resumes from step 6.
+
+* 6a. Nutritionist decides to add multiple tags at once.
+  * 6a1. HMS allows entry of additional tags. 
+  * 6a2. Nutritionist enters and submits additional tags. 
+  * 6a3. HMS updates the patient's profile with all new tags.
+    Use case ends.
+
+
+* 6b. HMS is unable to update the patient profile due to a system error. 
+  * 6b1. HMS displays an error message indicating the failure.
+  * 6b2. HMS offers the option to retry.
+  * 6b3. Nutritionist retries the submission or cancels. Use case resumes at step 5 if retried, ends if cancelled
+    Use case ends.
+
+
+**Use Case: UC05 - Schedule Follow-up Appointment**
+
+**MSS:**
+
+1. Nutritionist accesses the appointment scheduling feature in HMS.
+2. Nutritionist selects a patient from the list and chooses to schedule a follow-up.
+3. HMS displays the appointment scheduling form.
+4. Nutritionist enters the date, time, and nature of the follow-up.
+5. HMS requests confirmation of the details.
+6. Nutritionist confirms.
+7. HMS schedules the appointment and sends a confirmation to the Nutritionist.
+   Use case ends.
+
+**Extensions:**
+
+* 4a. The selected date/time is unavailable. 
+  * 4a1. HMS notifies about the scheduling conflict. 
+  * 4a2. Nutritionist selects a new date/time.
+    Use case resumes from step 5.
+
+* 5a. Nutritionist decides to set a reminder for the appointment. 
+  * 5a1. HMS provides options for setting reminders. 
+  * 5a2. Nutritionist sets and confirms the reminder details.
+    Use case resumes at step 7.
+
+* 7a. HMS encounters a system error while scheduling the appointment. 
+  * 7a1. HMS displays an error message and offers to retry. 
+  * 7a2. Nutritionist retries or cancels the scheduling. 
+    Use case resumes at step 3 if retried, ends if cancelled.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
