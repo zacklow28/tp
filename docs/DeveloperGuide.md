@@ -332,6 +332,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should respond within 5 seconds for most user interactions.
+5.  The application should be portable, working without an installer. It should be distributed in a single JAR file for easy execution on different platforms.
+6.  Data should be stored in a human-editable file, ensuring that the nutritionist can manually back up or recover patient data if needed.
+7.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+8.  The GUI should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
+9.  The application should not use a DBMS to store data.
+10.  The product's file size, including the JAR file and necessary assets, should not exceed 100MB.
+11.  The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit.
 
 *{More to be added}*
 
@@ -339,6 +347,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
+* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information. 
+* **Patient tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
+* **Active patient**: A patient who currently requires regular dietary consultations. Active patients are included in the daily workflow and consultations.
+* **High-Risk Patient**: A patient flagged for urgent attention due to specific health conditions or dietary needs. High-risk patients are visually highlighted in the app for quick identification.
+* **Archived Patient**: A patient who no longer requires regular visits but whose data is retained in the system for future reference. Archived patients are hidden by default but can be retrieved when needed.
+* **Stale Records**: Patient profiles that have not been updated or accessed in a long time. These records are flagged for follow-up or archiving to keep the patient list organized.
+* **Search Criteria**: Parameters used to search for patients within the application. For example, name, dietary conditions, priority status, or meeting date.
+* **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
+* **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
+* **DBMS (Database Management System)**: A software used to store, manage, and retrieve data in databases. Not used in this project.
+* **JAR File (Java ARchive)**: A compressed file that contains Java classes, libraries, and resources, packaged for distribution.
 
 --------------------------------------------------------------------------------------------------------------------
 
