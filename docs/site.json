@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "VitaBook",
   "titleSuffix": "VitaBook Level-1",
-  "faviconPath": "images/VitaBook_Logo.png",
+  "faviconPath": "images/VitaBookLogo.png",
   "style": {
     "codeTheme": "light"
   },
