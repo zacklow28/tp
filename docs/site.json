@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "VitaBook",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "VitaBook Level-1",
+  "faviconPath": "images/VitaBookLogo.png",
   "style": {
     "codeTheme": "light"
   },
