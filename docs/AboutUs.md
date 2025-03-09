@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-    title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ravichandran Amirdha
 
-<img src="images/ravichandranamirdha.png" width="200px">
+<img src="images/amir-dha.png" width="200px">
 
 [[github](http://github.com/amir-dha)]
 [[portfolio](team/amir-dha.md)]
