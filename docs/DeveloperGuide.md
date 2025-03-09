@@ -268,19 +268,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Requirements**D  
 
 ### Product scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* works as a freelance nutritionist, often visiting multiple patients daily
+* has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
+* prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
+* can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
+* is comfortable using command-line interfaces (CLI) for managing data and interactions
+* values portability and the ability to work across different devices without the need for installation or complex setups
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patient profiles faster and more efficiently than traditional GUI-driven applications by utilizing a CLI, with features designed to streamline patient management, scheduling, and follow-ups, all in a portable, easy-to-use format.
 
 
 ### User stories
