@@ -268,19 +268,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Requirements**  
 
 ### Product scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* works as a freelance nutritionist, often visiting multiple patients daily
+* has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
+* prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
+* can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
+* is comfortable using command-line interfaces (CLI) for managing data and interactions
+* values portability and the ability to work across different devices without the need for installation or complex setups
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patient profiles faster and more efficiently than traditional GUI-driven applications by utilizing a CLI, with features designed to streamline patient management, scheduling, and follow-ups, all in a portable, easy-to-use format.
 
 
 ### User stories
@@ -441,13 +442,19 @@ User stories for the MVP version:
   * 7a1. HMS displays an error message and offers to retry. 
   * 7a2. Nutritionist retries or cancels the scheduling. 
     Use case resumes at step 3 if retried, ends if cancelled.
-
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should respond within 5 seconds for most user interactions.
+5.  The application should be portable, working without an installer. It should be distributed in a single JAR file for easy execution on different platforms.
+6.  Data should be stored in a human-editable file, ensuring that the nutritionist can manually back up or recover patient data if needed.
+7.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+8.  The GUI should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
+9.  The application should not use a DBMS to store data.
+10.  The product's file size, including the JAR file and necessary assets, should not exceed 100MB.
+11.  The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit.
 
 *{More to be added}*
 
@@ -455,6 +462,20 @@ User stories for the MVP version:
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
+* **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
+* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information. 
+* **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
+* **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
+* **Tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
+* **Priority**: The level of importance or urgency assigned to a task or patient. For example, a high-priority patient needs immediate attention, while low-priority patients may not require urgent care.
+* **Reminder**: A notification or alert set by the nutritionist to prompt follow-up actions or visits for patients based on their care schedule.
+* **Consultation Log**: A record of all interactions with a patient, including the date, purpose, and key details from the consultation.
+* **Stale Records**: Patient profiles that have not been updated or accessed in a long time. These records are flagged for follow-up or archiving to keep the patient list organized.
+* **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
+* **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
+* **DBMS (Database Management System)**: A software used to store, manage, and retrieve data in databases. Not used in this project.
+* **JAR File (Java ARchive)**: A compressed file that contains Java classes, libraries, and resources, packaged for distribution.
 
 --------------------------------------------------------------------------------------------------------------------
 
