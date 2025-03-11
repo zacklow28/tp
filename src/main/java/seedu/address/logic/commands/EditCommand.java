@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -26,7 +27,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -44,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,8 +104,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,updatedPriority);
     }
 
     @Override
@@ -138,6 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Priority priority;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +157,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setPriority(toCopy.priority);
         }
 
         /**
@@ -191,6 +198,13 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -225,7 +239,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(priority, otherEditPersonDescriptor.priority);
         }
 
         @Override
@@ -236,6 +251,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("priority", priority)
                     .toString();
         }
     }
