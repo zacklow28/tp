@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
@@ -49,6 +51,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_DIET + "DIET] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -107,10 +110,11 @@ public class EditCommand extends Command {
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Diet updatedDiet = editPersonDescriptor.getDiet().orElse(personToEdit.getDiet());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
-                updatedTags);
+                updatedDiet, updatedTags);
     }
 
     @Override
@@ -148,6 +152,7 @@ public class EditCommand extends Command {
         private Weight weight;
         private Phone phone;
         private Email email;
+        private Diet diet;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -163,6 +168,7 @@ public class EditCommand extends Command {
             setWeight(toCopy.weight);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setDiet(toCopy.diet);
             setTags(toCopy.tags);
         }
 
@@ -170,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, diet, tags);
         }
 
         public void setName(Name name) {
@@ -221,6 +227,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setDiet(Diet diet) {
+            this.diet = diet;
+        }
+
+        public Optional<Diet> getDiet() {
+            return Optional.ofNullable(diet);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -256,6 +270,7 @@ public class EditCommand extends Command {
                     && Objects.equals(weight, otherEditPersonDescriptor.weight)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(diet, otherEditPersonDescriptor.diet)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -268,6 +283,7 @@ public class EditCommand extends Command {
                     .add("weight", weight)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("diet", diet)
                     .add("tags", tags)
                     .toString();
         }
