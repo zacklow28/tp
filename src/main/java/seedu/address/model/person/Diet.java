@@ -13,12 +13,15 @@ public class Diet {
             "Diet must be one of the following: regular, low sodium, low fat, low carb, low sugar.";
 
     private static final String VALIDATION_REGEX =
-            "regular|low sodium|low fat|low carb|low sugar";
+            "regular|low sodium|low fat|low carb|low sugar|none";
 
-    public final String diet;
+    public static final String DEFAULT_DIET = "none";
+
+    public final String diet; // Can be null
 
     /**
      * Constructs a {@code Diet}.
+     *  If the given diet is null or empty, it is stored as "none".
      *
      * @param diet A valid diet type.
      */

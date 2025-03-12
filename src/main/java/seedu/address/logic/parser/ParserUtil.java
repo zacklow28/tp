@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -129,14 +130,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String diet} into an {@code Diet}.
+     * Parses a {@code Optional<String> diet} into an {@code Diet}.
      * Leading and trailing whitespaces will be trimmed.
+     * If the diet is missing, returns a Diet object with no value.
      *
      * @throws ParseException if the given {@code diet} is invalid.
      */
-    public static Diet parseDiet(String diet) throws ParseException {
-        requireNonNull(diet);
-        String trimmedDiet = diet.trim();
+    public static Diet parseDiet(Optional<String> diet) throws ParseException {
+        String trimmedDiet = diet.map(String::trim).orElse(Diet.DEFAULT_DIET);
+
         if (!Diet.isValidDiet(trimmedDiet)) {
             throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
         }

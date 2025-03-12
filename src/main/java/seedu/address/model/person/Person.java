@@ -25,7 +25,7 @@ public class Person {
     private final Gender gender;
     private final Height height;
     private final Weight weight;
-    private final Diet diet;
+    private final Diet diet; //Nullable
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -33,7 +33,7 @@ public class Person {
      */
     public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Diet diet,
                   Set<Tag> tags) {
-        requireAllNonNull(name, gender, height, weight, phone, email, diet, tags);
+        requireAllNonNull(name, gender, height, weight, phone, email, tags);
         this.name = name;
         this.gender = gender;
         this.height = height;

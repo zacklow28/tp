@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
+        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, gender, height, weight, phone, email, diet, tagList);
