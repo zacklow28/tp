@@ -338,6 +338,7 @@
 }
 
 #tags {
+    -fx-padding: 0 0 5px 0;
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
@@ -350,3 +351,25 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#priority-tag-container .priority-label {
+    -fx-padding: 15px 0 5px;
+    -fx-font-size: 0.8em;
+    -fx-border-radius: 4px;
+    -fx-color: white;
+    -fx-margin-right: 5px;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.priority-high {
+    -fx-background-color: red;
+}
+
+.priority-medium {
+    -fx-background-color: orange;
+}
+
+.priority-low {
+    -fx-background-color: green;
+}
+

@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label priority;
+    private FlowPane priorityTag;
     @FXML
     private FlowPane tags;
 
@@ -57,6 +57,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        priority.setText(person.getPriority().toString());
+        Label priorityLabel = new Label(person.getPriority().toString());
+        priorityLabel.getStyleClass().addAll("priority-label", "priority-"
+                + person.getPriority().toString().toLowerCase());
+        priorityTag.getChildren().add(priorityLabel);
     }
 }
