@@ -1,14 +1,17 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Priority;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-
-public class PriorityCommandParser{
+/**
+ * This class parses the priority command provided in the command input.
+ */
+public class PriorityCommandParser {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     /**

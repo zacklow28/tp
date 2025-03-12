@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Priority;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * This class is called to set the priority of the patient.
+ */
 public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "priority";

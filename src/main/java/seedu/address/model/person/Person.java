@@ -62,7 +62,9 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-    public Priority getPriority() { return priority; }
+    public Priority getPriority() {
+        return priority;
+    }
 
     /**
      * Returns true if both persons have the same name.
