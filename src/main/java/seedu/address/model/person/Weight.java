@@ -41,7 +41,7 @@ public class Weight {
 
     @Override
     public String toString() {
-        return String.format("%.2f kg", weight); // Display with 2 decimal places + unit
+        return String.format("%.2f", weight); // Display with 2 decimal places + unit
     }
 
     @Override

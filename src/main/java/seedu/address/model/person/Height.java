@@ -43,7 +43,7 @@ public class Height {
 
     @Override
     public String toString() {
-        return String.format("%.2f m", height); // Display height with 2 decimal places
+        return String.format("%.2f", height); // Display height with 2 decimal places
     }
 
     @Override
