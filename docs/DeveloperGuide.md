@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,7 +268,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**  
+## **Appendix: Requirements**
 
 ### Product scope
 
@@ -356,8 +356,8 @@ User stories for the MVP version:
 
 **Extensions:**
 
-* 7a. Nutritionist cancels the deletion at the confirmation step. 
-  * 7a1. HMS cancels the deletion process and retains the patient record. 
+* 7a. Nutritionist cancels the deletion at the confirmation step.
+  * 7a1. HMS cancels the deletion process and retains the patient record.
     Use case ends.
 
 
@@ -375,8 +375,8 @@ User stories for the MVP version:
 
 **Extensions:**
 
-* 4a. Nutritionist decides not to archive the profile at the confirmation step. 
-  * 4a1. HMS cancels the archiving request. 
+* 4a. Nutritionist decides not to archive the profile at the confirmation step.
+  * 4a1. HMS cancels the archiving request.
     Use case ends.
 
 
@@ -400,13 +400,13 @@ User stories for the MVP version:
     Use case resumes from step 6.
 
 * 6a. Nutritionist decides to add multiple tags at once.
-  * 6a1. HMS allows entry of additional tags. 
-  * 6a2. Nutritionist enters and submits additional tags. 
+  * 6a1. HMS allows entry of additional tags.
+  * 6a2. Nutritionist enters and submits additional tags.
   * 6a3. HMS updates the patient's profile with all new tags.
     Use case ends.
 
 
-* 6b. HMS is unable to update the patient profile due to a system error. 
+* 6b. HMS is unable to update the patient profile due to a system error.
   * 6b1. HMS displays an error message indicating the failure.
   * 6b2. HMS offers the option to retry.
   * 6b3. Nutritionist retries the submission or cancels. Use case resumes at step 5 if retried, ends if cancelled
@@ -428,19 +428,19 @@ User stories for the MVP version:
 
 **Extensions:**
 
-* 4a. The selected date/time is unavailable. 
-  * 4a1. HMS notifies about the scheduling conflict. 
+* 4a. The selected date/time is unavailable.
+  * 4a1. HMS notifies about the scheduling conflict.
   * 4a2. Nutritionist selects a new date/time.
     Use case resumes from step 5.
 
-* 5a. Nutritionist decides to set a reminder for the appointment. 
-  * 5a1. HMS provides options for setting reminders. 
+* 5a. Nutritionist decides to set a reminder for the appointment.
+  * 5a1. HMS provides options for setting reminders.
   * 5a2. Nutritionist sets and confirms the reminder details.
     Use case resumes at step 7.
 
-* 7a. HMS encounters a system error while scheduling the appointment. 
-  * 7a1. HMS displays an error message and offers to retry. 
-  * 7a2. Nutritionist retries or cancels the scheduling. 
+* 7a. HMS encounters a system error while scheduling the appointment.
+  * 7a1. HMS displays an error message and offers to retry.
+  * 7a2. Nutritionist retries or cancels the scheduling.
     Use case resumes at step 3 if retried, ends if cancelled.
 ### Non-Functional Requirements
 
@@ -464,7 +464,7 @@ User stories for the MVP version:
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
 * **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
-* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information. 
+* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information.
 * **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
 * **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
 * **Tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
