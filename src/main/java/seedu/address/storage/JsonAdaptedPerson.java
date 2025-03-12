@@ -13,9 +13,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +29,8 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String gender;
+    private final String height;
+    private final String weight;
     private final String phone;
     private final String email;
     private final String address;
@@ -37,10 +41,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("height") String height, @JsonProperty("weight") String weight,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
+        this.height = height;
+        this.weight = weight;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -55,6 +62,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         gender = source.getGender().gender;
+        height = source.getHeight().toString();
+        weight = source.getWeight().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -90,6 +99,22 @@ class JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(gender);
 
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
+        }
+        if (!Height.isValidHeight(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+        }
+        final Height modelHeight = new Height(height);
+
+        if (weight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
+        }
+        if (!Weight.isValidWeight(weight)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+        }
+        final Weight modelWeight = new Weight(weight);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -115,7 +140,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelAddress,
+                modelTags);
     }
 
 }

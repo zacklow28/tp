@@ -33,6 +33,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label gender;
     @FXML
+    private Label height;
+    @FXML
+    private Label weight;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -52,6 +56,8 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         gender.setText(person.getGender().gender);
+        height.setText(person.getHeight().toString());
+        weight.setText(person.getWeight().toString());
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);

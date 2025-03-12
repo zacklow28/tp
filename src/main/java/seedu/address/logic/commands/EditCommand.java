@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -24,9 +27,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,6 +46,9 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -98,12 +106,15 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+        Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags);
     }
 
     @Override
@@ -137,6 +148,8 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Gender gender;
+        private Height height;
+        private Weight weight;
         private Phone phone;
         private Email email;
         private Address address;
@@ -151,6 +164,8 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setGender(toCopy.gender);
+            setHeight(toCopy.height);
+            setWeight(toCopy.weight);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -178,6 +193,22 @@ public class EditCommand extends Command {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
+        }
+
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
+
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(weight);
         }
 
         public void setPhone(Phone phone) {
@@ -235,6 +266,8 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(height, otherEditPersonDescriptor.height)
+                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -246,6 +279,8 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("gender", gender)
+                    .add("height", height)
+                    .add("weight", weight)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

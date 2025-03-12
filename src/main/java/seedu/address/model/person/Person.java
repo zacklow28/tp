@@ -23,16 +23,21 @@ public class Person {
 
     // Data fields
     private final Gender gender;
+    private final Height height;
+    private final Weight weight;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, gender, phone, email, address, tags);
+    public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Address address,
+            Set<Tag> tags) {
+        requireAllNonNull(name, gender, height, weight, phone, email, address, tags);
         this.name = name;
         this.gender = gender;
+        this.height = height;
+        this.weight = weight;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -45,6 +50,14 @@ public class Person {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
+
+    public Weight getWeight() {
+        return weight;
     }
 
     public Phone getPhone() {
@@ -98,6 +111,8 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && gender.equals(otherPerson.gender)
+                && height.equals(otherPerson.height)
+                && weight.equals(otherPerson.weight)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -107,7 +122,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags);
+        return Objects.hash(name, gender, height, weight, phone, email, address, tags);
     }
 
     @Override
@@ -115,6 +130,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("gender", gender)
+                .add("height", height)
+                .add("weight", weight)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
