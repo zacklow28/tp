@@ -16,6 +16,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -143,6 +144,22 @@ public class ParserUtil {
             throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
         }
         return new Diet(trimmedDiet);
+    }
+
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     * If the priority is missing, returns a Priority object with no value.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(Optional<String> priority) throws ParseException {
+        String trimmedPriority = priority.map(String::trim).orElse(Priority.DEFAULT_PRIORITY);
+
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
     }
 
     /**

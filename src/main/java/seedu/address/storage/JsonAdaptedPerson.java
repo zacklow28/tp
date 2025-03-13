@@ -17,6 +17,7 @@ import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String diet;
+    private final String priority;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,7 +45,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("diet") String diet, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("diet") String diet, @JsonProperty String priority,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -51,6 +54,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.diet = diet;
+        this.priority = priority;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -67,6 +71,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         diet = source.getDiet().toString();
+        priority = source.getPriority().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -139,9 +144,17 @@ class JsonAdaptedPerson {
         }
         final Diet modelDiet = new Diet(diet);
 
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
+        }
+        if (!Priority.isValidPriority(priority)) {
+            throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        final Priority modelPriority = new Priority(priority);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelDiet,
-                modelTags);
+                modelPriority, modelTags);
     }
 
 }

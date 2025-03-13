@@ -49,6 +49,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Diet: ")
                 .append(person.getDiet())
+                .append("; Priority: ")
+                .append(person.getPriority())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

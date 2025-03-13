@@ -14,7 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_DIET = new Prefix("d/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
-    public static final Prefix PREFIX_ALLERGIES = new Prefix("a/");
+    public static final Prefix PREFIX_FOOD_ALLERGIES = new Prefix("a/");
     public static final Prefix PREFIX_MEETING_DATE = new Prefix("m/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 //    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");

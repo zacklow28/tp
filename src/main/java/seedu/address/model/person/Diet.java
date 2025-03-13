@@ -17,7 +17,7 @@ public class Diet {
 
     public static final String DEFAULT_DIET = "none";
 
-    public final String diet; // Can be null
+    public final String diet;
 
     /**
      * Constructs a {@code Diet}.
