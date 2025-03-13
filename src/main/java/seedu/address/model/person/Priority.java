@@ -4,61 +4,62 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's priority in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
+ * Represents a Patient's priority.
+ * Guarantees: mutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
+    /**
+     * Enumerates the valid priority levels.
+     */
+    public enum Level {
+        LOW, MEDIUM, HIGH
+    }
 
-    public static final String DEFAULT_PRIORITY = "none";
+    public static final String MESSAGE_CONSTRAINTS = "Priority must be high, medium, or low";
+    public static final String VALIDATION_REGEX = "HIGH|MEDIUM|LOW";
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Priority must be one of the following: h, m, l";
-
-    private static final String VALIDATION_REGEX = "h|m|l|none";
-
-
-    public final String priority;
+    private Level value;
 
     /**
      * Constructs a {@code Priority}.
-     *  If the given priority is null or empty, it is stored as "none".
      *
-     * @param priority A valid diet type.
+     * @param priority A valid priority level.
      */
     public Priority(String priority) {
         requireNonNull(priority);
         checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
-        this.priority = priority;
+        this.value = Level.valueOf(priority.toUpperCase());
     }
 
     /**
-     * Returns true if a given string is a valid priority type.
+     * Returns true if a given string is a valid priority.
      */
     public static boolean isValidPriority(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
+    public Level getValue() {
+        return this.value;
+    }
     @Override
     public String toString() {
-        return priority;
+        return getValue().name();
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
-
         if (!(other instanceof Priority)) {
             return false;
         }
-
         Priority otherPriority = (Priority) other;
-        return priority.equals(otherPriority.priority);
+        return value == otherPriority.value;
     }
 
     @Override
     public int hashCode() {
-        return priority.hashCode();
+        return value.hashCode();
     }
 }

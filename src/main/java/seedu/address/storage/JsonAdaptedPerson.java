@@ -41,6 +41,7 @@ class JsonAdaptedPerson {
     private final String priority;
     private final String meetingDate;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -64,6 +65,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.priority = priority;
     }
 
     /**
@@ -83,6 +85,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        priority = source.getPriority().toString();
     }
 
     /**
@@ -164,6 +167,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Priority.class.getSimpleName()));
         }
+
         if (!Priority.isValidPriority(priority)) {
             throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
         }

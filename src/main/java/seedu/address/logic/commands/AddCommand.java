@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -31,8 +33,12 @@ public class AddCommand extends Command {
             + PREFIX_WEIGHT + "[weight] "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DIET + "[diet] "
+            + PREFIX_PRIORITY + "PRIORITY"
+            + PREFIX_MEETING_DATE + "MEETING DATE"
             + "[" + PREFIX_TAG + "TAG]...\n"
+
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_GENDER + "m "
@@ -40,7 +46,10 @@ public class AddCommand extends Command {
             + PREFIX_WEIGHT + "70 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "100 Clementi"
             + PREFIX_DIET + "low sodium "
+            + PREFIX_MEETING_DATE + "2025-01-25"
+            + PREFIX_PRIORITY + "low"
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

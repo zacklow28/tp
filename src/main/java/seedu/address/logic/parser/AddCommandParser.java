@@ -68,6 +68,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = new Person(name, gender, height, weight, phone, email, address, diet, priority, meetingDate,
                 tagList);
 
+
         return new AddCommand(person);
     }
 

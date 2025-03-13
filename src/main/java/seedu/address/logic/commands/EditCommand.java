@@ -40,6 +40,7 @@ import seedu.address.model.person.Priority;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Edits the details of an existing person in the address book.
  */
@@ -62,6 +63,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_MEETING_DATE + "MEETING_DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -124,6 +126,8 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
+
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
                 updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedTags);
@@ -169,6 +173,7 @@ public class EditCommand extends Command {
         private Priority priority;
         private MeetingDate meetingDate;
         private Set<Tag> tags;
+        private Priority priority;
 
         public EditPersonDescriptor() {}
 
@@ -188,6 +193,7 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setMeetingDate(toCopy.meetingDate);
             setTags(toCopy.tags);
+            setPriority(toCopy.priority);
         }
 
         /**
@@ -252,6 +258,13 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         public void setDiet(Diet diet) {
@@ -318,6 +331,7 @@ public class EditCommand extends Command {
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(meetingDate, otherEditPersonDescriptor.meetingDate)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
+
         }
 
         @Override
@@ -334,6 +348,7 @@ public class EditCommand extends Command {
                     .add("priority", priority)
                     .add("meetingDate", meetingDate)
                     .add("tags", tags)
+                    .add("priority", priority)
                     .toString();
         }
     }

@@ -33,6 +33,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PRIORITY = "Medium";
     public static final String DEFAULT_MEETING_DATE = "2025-03-15";
 
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -44,6 +45,7 @@ public class PersonBuilder {
     private Priority priority;
     private MeetingDate meetingDate;
     private Set<Tag> tags = new HashSet<>();
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -59,6 +61,7 @@ public class PersonBuilder {
         diet = new Diet(DEFAULT_DIET);
         priority = new Priority(DEFAULT_PRIORITY);
         meetingDate = new MeetingDate(DEFAULT_MEETING_DATE);
+        tags = new HashSet<>();
     }
 
     /**
@@ -118,7 +121,7 @@ public class PersonBuilder {
         this.gender = new Gender(gender);
         return this;
     }
-
+  
     /**
      * Sets the {@code Height} of the {@code Person} that we are building.
      */

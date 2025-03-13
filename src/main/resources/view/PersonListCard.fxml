@@ -28,6 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
+      <FlowPane fx:id="priorityTag" styleClass="priority-tag-container" />
       <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
       <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
       <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
@@ -35,7 +36,6 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="diet" styleClass="cell_small_label" text="\$diet" />
-      <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
       <Label fx:id="meetingDate" styleClass="cell_small_label" text="\$meetingDate" />
     </VBox>
   </GridPane>
