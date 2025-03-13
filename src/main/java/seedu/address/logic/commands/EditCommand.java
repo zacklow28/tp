@@ -191,7 +191,6 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setMeetingDate(toCopy.meetingDate);
             setTags(toCopy.tags);
-            setPriority(toCopy.priority);
         }
 
         /**
@@ -339,7 +338,6 @@ public class EditCommand extends Command {
                     .add("priority", priority)
                     .add("meetingDate", meetingDate)
                     .add("tags", tags)
-                    .add("priority", priority)
                     .toString();
         }
     }

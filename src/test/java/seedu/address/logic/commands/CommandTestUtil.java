@@ -3,11 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -54,6 +59,29 @@ public class CommandTestUtil {
 
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
+
+    // CommandTestUtil additions
+    public static final String VALID_GENDER_BOB = "M";
+    public static final String VALID_HEIGHT_BOB = "180";
+    public static final String VALID_WEIGHT_BOB = "75";
+    public static final String VALID_DIET_BOB = "low-sodium";
+    public static final String VALID_MEETING_DATE_BOB = "2025-04-01";
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + "F";
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
+    public static final String HEIGHT_DESC_AMY = " " + PREFIX_HEIGHT + "165";
+    public static final String HEIGHT_DESC_BOB = " " + PREFIX_HEIGHT + VALID_HEIGHT_BOB;
+    public static final String WEIGHT_DESC_AMY = " " + PREFIX_WEIGHT + "55";
+    public static final String WEIGHT_DESC_BOB = " " + PREFIX_WEIGHT + VALID_HEIGHT_BOB;
+    public static final String DIET_DESC_AMY = " " + PREFIX_DIET + "low-carb";
+    public static final String DIET_DESC_BOB = " " + PREFIX_DIET + VALID_DIET_BOB;
+    public static final String MEETING_DATE_DESC_AMY = " " + PREFIX_MEETING_DATE + "2025-04-01";
+    public static final String MEETING_DATE_DESC_BOB = " " + PREFIX_MEETING_DATE + VALID_MEETING_DATE_BOB;
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "alien"; // assuming only 'M' or 'F'
+    public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT + "two"; // non-numeric
+    public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "-55"; // negative number
+    public static final String INVALID_DIET_DESC = " " + PREFIX_DIET + ""; // empty string if not allowed
+    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "2025-02-30"; // non-existent date
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

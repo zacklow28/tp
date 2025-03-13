@@ -40,6 +40,18 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different gender -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withGender("male").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different height -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight("190").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different weight -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight("80").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -52,6 +64,18 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different diet -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDiet("Vegan").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different priority -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPriority("medium").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different meeting date -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withMeetingDate("2025-12-25").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -61,12 +85,18 @@ public class EditPersonDescriptorTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
+                + editPersonDescriptor.getName().orElse(null) + ", gender="
+                + editPersonDescriptor.getGender().orElse(null) + ", height="
+                + editPersonDescriptor.getHeight().orElse(null) + ", weight="
+                + editPersonDescriptor.getWeight().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", priority="
-                + editPersonDescriptor.getPriority().orElse(null) + "}";
+                + editPersonDescriptor.getAddress().orElse(null) + ", diet="
+                + editPersonDescriptor.getDiet().orElse(null) + ", priority="
+                + editPersonDescriptor.getPriority().orElse(null) + ", meetingDate="
+                + editPersonDescriptor.getMeetingDate().orElse(null) + ", tags="
+                + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
+
 }
