@@ -34,12 +34,11 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_DIET = "low sodium";
-    private static final String VALID_PRIORITY = "h";
+    private static final String VALID_PRIORITY = "low";
     private static final String VALID_MEETING_DATE = "2025-12-12";
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_PRIORITY = BENSON.getPriority().toString();
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
@@ -98,7 +97,6 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_HEIGHT, VALID_WEIGHT,
                 VALID_PHONE, null, VALID_ADDRESS, VALID_DIET, VALID_PRIORITY, VALID_MEETING_DATE, VALID_TAGS);
-      
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -135,16 +133,16 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidPriority_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, INVALID_PRIORITY);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_HEIGHT, VALID_WEIGHT,
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DIET, INVALID_PRIORITY, VALID_MEETING_DATE, VALID_TAGS);
         String expectedMessage = Priority.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalArgumentException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullPriority_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, null);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_HEIGHT, VALID_WEIGHT,
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DIET, null, VALID_MEETING_DATE, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

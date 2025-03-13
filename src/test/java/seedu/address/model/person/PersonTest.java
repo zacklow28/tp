@@ -74,6 +74,18 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different gender -> returns false
+        editedAlice = new PersonBuilder(ALICE).withGender("Male").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different height -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHeight("170").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different weight -> returns false
+        editedAlice = new PersonBuilder(ALICE).withWeight("60").build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -86,13 +98,22 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different diet -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDiet("Omnivore").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different priority -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_PRIORITY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different meeting date -> returns false
+        editedAlice = new PersonBuilder(ALICE).withMeetingDate("2025-05-01").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
     }
 
     @Test

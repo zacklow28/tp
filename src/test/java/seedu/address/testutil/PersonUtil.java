@@ -1,11 +1,16 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Set;
 
@@ -31,13 +36,19 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        sb.append(PREFIX_NAME).append(person.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
+        sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
+        sb.append(PREFIX_GENDER).append(person.getGender()).append(" ");
+        sb.append(PREFIX_HEIGHT).append(person.getHeight()).append(" ");
+        sb.append(PREFIX_WEIGHT).append(person.getWeight()).append(" ");
+        sb.append(PREFIX_DIET).append(person.getDiet()).append(" ");
+        sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
+        sb.append(PREFIX_MEETING_DATE).append(person.getMeetingDate()).append(" ");
+        person.getTags().forEach(
+                s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
-        sb.append(PREFIX_PRIORITY + person.getPriority().toString() + " ");
         return sb.toString();
     }
 
@@ -49,16 +60,23 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender).append(" "));
+        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height).append(" "));
+        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight).append(" "));
+        descriptor.getDiet().ifPresent(diet -> sb.append(PREFIX_DIET).append(diet).append(" "));
+        descriptor.getPriority().ifPresent(priority -> sb.append(PREFIX_PRIORITY)
+                .append(priority.getValue()).append(" "));
+        descriptor.getMeetingDate().ifPresent(meetingDate -> sb.append(PREFIX_MEETING_DATE)
+                .append(meetingDate).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(tag -> sb.append(PREFIX_TAG).append(tag.tagName).append(" "));
             }
         }
-        descriptor.getPriority().ifPresent(priority -> sb.append(PREFIX_PRIORITY).append(priority.getValue())
-                .append(" "));
         return sb.toString();
     }
 }
