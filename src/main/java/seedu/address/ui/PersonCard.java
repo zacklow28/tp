@@ -54,12 +54,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         Label priorityLabel = new Label(person.getPriority().toString());
         priorityLabel.getStyleClass().addAll("priority-label", "priority-"
                 + person.getPriority().toString().toLowerCase());
         priorityTag.getChildren().add(priorityLabel);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
     }
 }

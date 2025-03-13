@@ -19,9 +19,9 @@ public class PriorityCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing priority will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pr/ [PRIORITY]\n"
+            + "pr/[PRIORITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "pr/ HIGH.";
+            + "pr/HIGH";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Priority: %2$s";
 
