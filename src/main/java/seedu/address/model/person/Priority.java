@@ -9,12 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Priority {
 
+    public static final String DEFAULT_PRIORITY = "none";
+
     public static final String MESSAGE_CONSTRAINTS =
             "Priority must be one of the following: h, m, l";
 
     private static final String VALIDATION_REGEX = "h|m|l|none";
 
-    public static final String DEFAULT_PRIORITY = "none";
 
     public final String priority;
 

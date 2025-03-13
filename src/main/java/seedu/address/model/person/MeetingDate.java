@@ -12,13 +12,12 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetingDate(String)}
  */
 public class MeetingDate {
+    public static final String DEFAULT_MEETING_DATE = "none";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting date must be in the format YYYY-MM-DD.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    public static final String DEFAULT_MEETING_DATE = "none";
 
     private final String meetingDate;
 

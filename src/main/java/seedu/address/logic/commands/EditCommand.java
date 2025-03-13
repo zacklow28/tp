@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -26,6 +27,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -55,6 +57,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DIET + "DIET] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_MEETING_DATE + "MEETING_DATE] "
@@ -116,13 +119,14 @@ public class EditCommand extends Command {
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Diet updatedDiet = editPersonDescriptor.getDiet().orElse(personToEdit.getDiet());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
-                updatedDiet, updatedPriority, updateMeetingDate, updatedTags);
+                updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedTags);
     }
 
     @Override
@@ -160,6 +164,7 @@ public class EditCommand extends Command {
         private Weight weight;
         private Phone phone;
         private Email email;
+        private Address address;
         private Diet diet;
         private Priority priority;
         private MeetingDate meetingDate;
@@ -178,6 +183,7 @@ public class EditCommand extends Command {
             setWeight(toCopy.weight);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setAddress(toCopy.address);
             setDiet(toCopy.diet);
             setPriority(toCopy.priority);
             setMeetingDate(toCopy.meetingDate);
@@ -188,8 +194,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, diet, priority, meetingDate,
-                    tags);
+            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, address, diet, priority,
+                    meetingDate, tags);
         }
 
         public void setName(Name name) {
@@ -238,6 +244,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         public void setDiet(Diet diet) {
@@ -299,6 +313,7 @@ public class EditCommand extends Command {
                     && Objects.equals(weight, otherEditPersonDescriptor.weight)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(diet, otherEditPersonDescriptor.diet)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(meetingDate, otherEditPersonDescriptor.meetingDate)
@@ -314,6 +329,7 @@ public class EditCommand extends Command {
                     .add("weight", weight)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("address", address)
                     .add("diet", diet)
                     .add("priority", priority)
                     .add("meetingDate", meetingDate)

@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label address;
+    @FXML
     private Label diet;
     @FXML
     private Label priority;
@@ -64,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
         weight.setText(person.getWeight().toString() + " kg");
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+        address.setText(person.getAddress().value);
         diet.setText(person.getDiet().toString());
         priority.setText(person.getPriority().toString());
         meetingDate.setText(person.getMeetingDate().toString());

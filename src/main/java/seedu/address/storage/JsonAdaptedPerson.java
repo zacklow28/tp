@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String weight;
     private final String phone;
     private final String email;
+    private final String address;
     private final String diet;
     private final String priority;
     private final String meetingDate;
@@ -47,14 +49,15 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("diet") String diet, @JsonProperty String priority, @JsonProperty String meetingDate,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("diet") String diet, @JsonProperty String priority,
+            @JsonProperty String meetingDate, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
         this.phone = phone;
         this.email = email;
+        this.address = address;
         this.diet = diet;
         this.priority = priority;
         this.meetingDate = meetingDate;
@@ -73,6 +76,7 @@ class JsonAdaptedPerson {
         weight = source.getWeight().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        address = source.getAddress().value;
         diet = source.getDiet().toString();
         priority = source.getPriority().toString();
         meetingDate = source.getMeetingDate().toString();
@@ -140,6 +144,14 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Address modelAddress = new Address(address);
+
         if (diet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Diet.class.getSimpleName()));
         }
@@ -149,7 +161,8 @@ class JsonAdaptedPerson {
         final Diet modelDiet = new Diet(diet);
 
         if (priority == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Priority.class.getSimpleName()));
         }
         if (!Priority.isValidPriority(priority)) {
             throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
@@ -166,8 +179,8 @@ class JsonAdaptedPerson {
         final MeetingDate modelMeetingDate = new MeetingDate(meetingDate);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelDiet,
-                modelPriority, modelMeetingDate, modelTags);
+        return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelAddress,
+                modelDiet, modelPriority, modelMeetingDate, modelTags);
     }
 
 }

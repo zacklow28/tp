@@ -8,14 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidDiet(String)}
  */
 public class Diet {
+    public static final String DEFAULT_DIET = "none";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Diet must be one of the following: regular, low sodium, low fat, low carb, low sugar.";
 
     private static final String VALIDATION_REGEX =
             "regular|low sodium|low fat|low carb|low sugar|none";
-
-    public static final String DEFAULT_DIET = "none";
 
     public final String diet;
 

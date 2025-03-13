@@ -22,6 +22,7 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Address address;
     private final Gender gender;
     private final Height height;
     private final Weight weight;
@@ -33,15 +34,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Diet diet,
-                  Priority priority, MeetingDate meetingDate, Set<Tag> tags) {
-        requireAllNonNull(name, gender, height, weight, phone, email, diet, priority, meetingDate, tags);
+    public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Address address,
+                  Diet diet, Priority priority, MeetingDate meetingDate, Set<Tag> tags) {
+        requireAllNonNull(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
         this.name = name;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
         this.phone = phone;
         this.email = email;
+        this.address = address;
         this.diet = diet;
         this.priority = priority;
         this.meetingDate = meetingDate;
@@ -70,6 +72,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public Diet getDiet() {
@@ -126,6 +132,7 @@ public class Person {
                 && weight.equals(otherPerson.weight)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
                 && diet.equals(otherPerson.diet)
                 && priority.equals(otherPerson.priority)
                 && meetingDate.equals(otherPerson.meetingDate)
@@ -135,7 +142,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, height, weight, phone, email, diet, priority, meetingDate, tags);
+        return Objects.hash(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
     }
 
     @Override
@@ -147,6 +154,7 @@ public class Person {
                 .add("weight", weight)
                 .add("phone", phone)
                 .add("email", email)
+                .add("address", address)
                 .add("diet", diet)
                 .add("priority", priority)
                 .add("meetingDate", meetingDate)
