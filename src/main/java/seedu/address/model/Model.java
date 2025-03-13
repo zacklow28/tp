@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * The API of the Model component.
@@ -84,4 +86,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the person in the address book with the given email.
+     * @param email the email of the person
+     * @return the person
+     * @throws PersonNotFoundException
+     */
+    Person getPersonByEmail(Email email) throws PersonNotFoundException;
 }

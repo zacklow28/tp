@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -77,6 +78,26 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validEmailUnfilteredList_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Email personEmail = personToDelete.getEmail();
+        DeleteCommand deleteCommand = new DeleteCommand(personEmail);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test void execute_invalidEmailUnfilteredList_throwsCommandException() {
+        Email invalidEmail = new Email("xxxxxx@xxx.com");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidEmail);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_EMAIL_NOT_FOUND);
     }
 
     @Test
