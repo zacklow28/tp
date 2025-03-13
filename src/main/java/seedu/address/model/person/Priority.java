@@ -16,7 +16,7 @@ public class Priority {
 
     public static final String DEFAULT_PRIORITY = "none";
 
-    public final String priority; // Can be null
+    public final String priority;
 
     /**
      * Constructs a {@code Priority}.
