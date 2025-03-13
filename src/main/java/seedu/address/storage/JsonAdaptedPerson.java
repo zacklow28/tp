@@ -14,6 +14,7 @@ import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String diet;
     private final String priority;
+    private final String meetingDate;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,7 +47,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("diet") String diet, @JsonProperty String priority,
+            @JsonProperty("diet") String diet, @JsonProperty String priority, @JsonProperty String meetingDate,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
@@ -55,6 +57,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.diet = diet;
         this.priority = priority;
+        this.meetingDate = meetingDate;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -72,6 +75,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         diet = source.getDiet().toString();
         priority = source.getPriority().toString();
+        meetingDate = source.getMeetingDate().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -152,9 +156,18 @@ class JsonAdaptedPerson {
         }
         final Priority modelPriority = new Priority(priority);
 
+        if (meetingDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MeetingDate.class.getSimpleName()));
+        }
+        if (!MeetingDate.isValidMeetingDate(meetingDate)) {
+            throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        final MeetingDate modelMeetingDate = new MeetingDate(meetingDate);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelDiet,
-                modelPriority, modelTags);
+                modelPriority, modelMeetingDate, modelTags);
     }
 
 }

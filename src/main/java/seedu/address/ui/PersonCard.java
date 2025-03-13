@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label priority;
     @FXML
+    private Label meetingDate;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -64,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         diet.setText(person.getDiet().toString());
         priority.setText(person.getPriority().toString());
+        meetingDate.setText(person.getMeetingDate().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

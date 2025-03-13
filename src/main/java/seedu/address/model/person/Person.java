@@ -27,14 +27,15 @@ public class Person {
     private final Weight weight;
     private final Diet diet;
     private final Priority priority;
+    private final MeetingDate meetingDate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Diet diet,
-                  Priority priority, Set<Tag> tags) {
-        requireAllNonNull(name, gender, height, weight, phone, email, tags);
+                  Priority priority, MeetingDate meetingDate, Set<Tag> tags) {
+        requireAllNonNull(name, gender, height, weight, phone, email, diet, priority, meetingDate, tags);
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -43,6 +44,7 @@ public class Person {
         this.email = email;
         this.diet = diet;
         this.priority = priority;
+        this.meetingDate = meetingDate;
         this.tags.addAll(tags);
     }
 
@@ -76,6 +78,10 @@ public class Person {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public MeetingDate getMeetingDate() {
+        return meetingDate;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -122,13 +128,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && diet.equals(otherPerson.diet)
                 && priority.equals(otherPerson.priority)
+                && meetingDate.equals(otherPerson.meetingDate)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, height, weight, phone, email, diet, priority, tags);
+        return Objects.hash(name, gender, height, weight, phone, email, diet, priority, meetingDate, tags);
     }
 
     @Override
@@ -142,6 +149,7 @@ public class Person {
                 .add("email", email)
                 .add("diet", diet)
                 .add("priority", priority)
+                .add("meetingDate", meetingDate)
                 .add("tags", tags)
                 .toString();
     }

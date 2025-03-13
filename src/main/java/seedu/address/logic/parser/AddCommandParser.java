@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE,
                 PREFIX_EMAIL) || !argMultimap.getPreamble().isEmpty()) {
@@ -48,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_DIET, PREFIX_PRIORITY);
+                PREFIX_EMAIL, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
@@ -57,9 +59,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
+        MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, gender, height, weight, phone, email, diet, priority, tagList);
+        Person person = new Person(name, gender, height, weight, phone, email, diet, priority, meetingDate, tagList);
 
         return new AddCommand(person);
     }

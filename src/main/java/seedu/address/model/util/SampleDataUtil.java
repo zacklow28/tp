@@ -11,6 +11,7 @@ import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -26,22 +27,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("friends")),
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("99272758"), new Email("berniceyu@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("colleagues", "friends")),
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("93210283"), new Email("charlotte@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("neighbours")),
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("91031282"), new Email("lidavid@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("family")),
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("92492021"), new Email("irfan@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("classmates")),
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Gender("m"), new Height("1.7"), new Weight("70"),
                     new Phone("92624417"), new Email("royb@example.com"), new Diet("low sodium"),
-                    new Priority("h"), getTagSet("colleagues"))
+                    new Priority("h"), new MeetingDate("2025-12-12"), getTagSet("colleagues"))
         };
     }
 

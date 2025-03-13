@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -29,6 +30,7 @@ import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -55,6 +57,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_DIET + "DIET] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_MEETING_DATE + "MEETING_DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -115,10 +118,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Diet updatedDiet = editPersonDescriptor.getDiet().orElse(personToEdit.getDiet());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
+        MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
-                updatedDiet, updatedPriority, updatedTags);
+                updatedDiet, updatedPriority, updateMeetingDate, updatedTags);
     }
 
     @Override
@@ -158,6 +162,7 @@ public class EditCommand extends Command {
         private Email email;
         private Diet diet;
         private Priority priority;
+        private MeetingDate meetingDate;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -175,6 +180,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setDiet(toCopy.diet);
             setPriority(toCopy.priority);
+            setMeetingDate(toCopy.meetingDate);
             setTags(toCopy.tags);
         }
 
@@ -182,7 +188,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, diet, priority, tags);
+            return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, diet, priority, meetingDate,
+                    tags);
         }
 
         public void setName(Name name) {
@@ -249,6 +256,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(priority);
         }
 
+        public void setMeetingDate(MeetingDate meetingDate) {
+            this.meetingDate = meetingDate;
+        }
+
+        public Optional<MeetingDate> getMeetingDate() {
+            return Optional.ofNullable(meetingDate);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -286,6 +301,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(diet, otherEditPersonDescriptor.diet)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
+                    && Objects.equals(meetingDate, otherEditPersonDescriptor.meetingDate)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -300,6 +316,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("diet", diet)
                     .add("priority", priority)
+                    .add("meetingDate", meetingDate)
                     .add("tags", tags)
                     .toString();
         }

@@ -14,6 +14,7 @@ import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
@@ -160,6 +161,22 @@ public class ParserUtil {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
         return new Priority(trimmedPriority);
+    }
+
+    /**
+     * Parses a {@code Optional<String> meetingDate} into an {@code MeetingDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     * If the meetingDate is missing, returns a MeetingDate object with no value.
+     *
+     * @throws ParseException if the given {@code meetingDate} is invalid.
+     */
+    public static MeetingDate parseMeetingDate(Optional<String> meetingDate) throws ParseException {
+        String trimmedMeetingDate = meetingDate.map(String::trim).orElse(MeetingDate.DEFAULT_MEETING_DATE);
+
+        if (!MeetingDate.isValidMeetingDate(trimmedMeetingDate)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetingDate(trimmedMeetingDate);
     }
 
     /**

@@ -51,6 +51,8 @@ public class Messages {
                 .append(person.getDiet())
                 .append("; Priority: ")
                 .append(person.getPriority())
+                .append("; MeetingDate: ")
+                .append(person.getMeetingDate())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
