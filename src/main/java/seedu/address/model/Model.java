@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -94,4 +95,8 @@ public interface Model {
      * @throws PersonNotFoundException
      */
     Person getPersonByEmail(Email email) throws PersonNotFoundException;
+
+    /** Sorts the filtered person list using the given comparator */
+    void sortFilteredPersonList(Comparator<Person> comparator);
+
 }
