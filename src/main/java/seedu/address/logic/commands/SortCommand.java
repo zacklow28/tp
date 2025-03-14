@@ -18,11 +18,13 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Comparator<Person> comparator = Comparator
-                .comparing(Person::getPriority, Comparator.reverseOrder())
-                .thenComparing(p -> p.getName().toLowerCase());
-
-        model.sortFilteredPersonList(comparator);
+        model.sortFilteredPersonList((p1, p2) -> {
+            int priorityComparison = p2.getPriority().compareToIgnoreCase(p1.getPriority());
+            if (priorityComparison != 0) {
+                return priorityComparison;
+            }
+            return p1.getName().toString().compareToIgnoreCase(p2.getName().toString());
+        });
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
