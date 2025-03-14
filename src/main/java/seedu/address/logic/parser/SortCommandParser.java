@@ -9,9 +9,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String userInput) throws ParseException {
-        if (!userInput.trim().isEmpty()) {
-            throw new ParseException("Sort command should not have additional arguments. Just use: sort");
+        String trimmedInput = userInput.trim();
+
+        // Ensure the command is exactly "sort"
+        if (!trimmedInput.equals("sort")) {
+            throw new ParseException("Command should be in the following format:\n"
+                    + "sort (Sorts by priority and then, name)");
         }
+
         return new SortCommand();
     }
+
 }

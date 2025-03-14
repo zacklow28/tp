@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Comparator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 /**
  * Unit tests for SortCommand.
@@ -29,20 +26,26 @@ public class SortCommandTest {
 
     @Test
     public void execute_sort_success() {
-        // Execute SortCommand
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         SortCommand sortCommand = new SortCommand();
         CommandResult commandResult = sortCommand.execute(model);
 
-        // Sort expectedModel manually
-        expectedModel.sortFilteredPersonList(Comparator
-                .comparing(Person::getPriority, Comparator.reverseOrder())
-                .thenComparing(p -> p.getName().toLowerCase()));
+        // Manually sort the expected model
+        expectedModel.sortFilteredPersonList((p1, p2) -> {
+            int priorityComparison = p2.getPriority().getValue().ordinal() - p1.getPriority().getValue().ordinal();
+            if (priorityComparison != 0) {
+                return priorityComparison;
+            }
+            return p1.getName().toString().compareToIgnoreCase(p2.getName().toString());
+        });
 
-        // Verify command result message
-        assertEquals(SortCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-
-        // Verify that the model is correctly sorted
+        // Verify correct sorting
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+
+        // Verify command success message
+        assertEquals(SortCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
     }
 
     @Test

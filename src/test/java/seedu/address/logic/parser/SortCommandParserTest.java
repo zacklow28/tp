@@ -15,13 +15,17 @@ public class SortCommandParserTest {
     private final SortCommandParser parser = new SortCommandParser();
 
     @Test
-    public void parse_validInput_returnsSortCommand() throws ParseException {
+    public void parse_validSortCommand_success() throws ParseException {
         SortCommand command = parser.parse("sort");
         assertEquals(new SortCommand(), command);
     }
 
     @Test
-    public void parse_invalidInput_throwsParseException() {
+    public void parse_invalidSortCommand_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("sort pr"));
+        assertThrows(ParseException.class, () -> parser.parse("sort n"));
+        assertThrows(ParseException.class, () -> parser.parse("sort priority"));
+        assertThrows(ParseException.class, () -> parser.parse("sort name"));
         assertThrows(ParseException.class, () -> parser.parse("sort something"));
     }
 }

@@ -8,9 +8,9 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Email;
@@ -139,11 +139,20 @@ public class ModelManager implements Model {
     public void sortFilteredPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
 
-        SortedList<Person> sortedList = new SortedList<>(filteredPersons);
-        sortedList.setComparator(comparator);
+        // Create a new sorted list from the original filtered list
+        ObservableList<Person> sortedList = FXCollections.observableArrayList(filteredPersons);
+        sortedList.sort(comparator); // Apply sorting
 
-        filteredPersons.setPredicate(filteredPersons.getPredicate());
+        // Replace the contents of filteredPersons' source list with the sorted data
+        addressBook.setPersons(sortedList); // Update the AddressBook with sorted values
+
+        // Reapply the filter predicate to maintain the current filtered view
+        filteredPersons.setPredicate(null);
+        filteredPersons.setPredicate(person -> true); // Refreshes UI
     }
+
+
+
 
     @Override
     public Person getPersonByEmail(Email email) throws PersonNotFoundException {
