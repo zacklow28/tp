@@ -2,8 +2,16 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -12,6 +20,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,14 +82,15 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withGender("F").withHeight("1.62").withWeight("53").withDiet("low fat")
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY).withMeetingDate("2025-03-21").build();
+            .withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY).withWeight(VALID_WEIGHT_AMY)
+            .withDiet(VALID_DIET_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+            .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY)
+            .withMeetingDate(VALID_MEETING_DATE_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withGender("M").withHeight("1.80").withWeight("80").withDiet("low carb")
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB)
-            .withMeetingDate("2025-04-25").build();
+            .withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
+            .withDiet(VALID_DIET_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+            .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withPriority(VALID_PRIORITY_BOB).withMeetingDate(VALID_MEETING_DATE_BOB).build();
 
     private TypicalPersons() {} // prevents instantiation
 

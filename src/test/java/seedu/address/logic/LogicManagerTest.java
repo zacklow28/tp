@@ -143,6 +143,10 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        System.out.println("Expected AddressBook: " + expectedModel.getAddressBook());
+        System.out.println("Actual AddressBook: " + model.getAddressBook());
+        System.out.println("Expected FilteredPersonList: " + expectedModel.getFilteredPersonList());
+        System.out.println("Actual FilteredPersonList: " + model.getFilteredPersonList());
         assertEquals(expectedModel, model);
     }
 
@@ -182,7 +186,7 @@ public class LogicManagerTest {
                 + DIET_DESC_AMY
                 + PRIORITY_DESC_AMY
                 + MEETING_DATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withPriority("low").build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
