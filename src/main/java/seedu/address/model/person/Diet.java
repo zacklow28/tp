@@ -26,8 +26,9 @@ public class Diet {
      */
     public Diet(String diet) {
         requireNonNull(diet);
-        checkArgument(isValidDiet(diet), MESSAGE_CONSTRAINTS);
-        this.diet = diet;
+        String normalizedDiet = diet.trim().toLowerCase();
+        checkArgument(isValidDiet(normalizedDiet), MESSAGE_CONSTRAINTS);
+        this.diet = normalizedDiet;
     }
 
     /**

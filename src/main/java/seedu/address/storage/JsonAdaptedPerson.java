@@ -41,7 +41,6 @@ class JsonAdaptedPerson {
     private final String priority;
     private final String meetingDate;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -50,8 +49,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("diet") String diet, @JsonProperty String priority,
-            @JsonProperty String meetingDate, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("diet") String diet,
+            @JsonProperty("priority") String priority, @JsonProperty("meetingDate") String meetingDate,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -65,7 +65,6 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.priority = priority;
     }
 
     /**
@@ -85,7 +84,6 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        priority = source.getPriority().toString();
     }
 
     /**
@@ -127,7 +125,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
         }
         if (!Weight.isValidWeight(weight)) {
-            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
 

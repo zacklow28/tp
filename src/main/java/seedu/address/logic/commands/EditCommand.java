@@ -126,7 +126,6 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
 
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
@@ -173,7 +172,6 @@ public class EditCommand extends Command {
         private Priority priority;
         private MeetingDate meetingDate;
         private Set<Tag> tags;
-        private Priority priority;
 
         public EditPersonDescriptor() {}
 
@@ -193,7 +191,6 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setMeetingDate(toCopy.meetingDate);
             setTags(toCopy.tags);
-            setPriority(toCopy.priority);
         }
 
         /**
@@ -258,13 +255,6 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
-        }
-        public void setPriority(Priority priority) {
-            this.priority = priority;
-        }
-
-        public Optional<Priority> getPriority() {
-            return Optional.ofNullable(priority);
         }
 
         public void setDiet(Diet diet) {
@@ -348,7 +338,6 @@ public class EditCommand extends Command {
                     .add("priority", priority)
                     .add("meetingDate", meetingDate)
                     .add("tags", tags)
-                    .add("priority", priority)
                     .toString();
         }
     }

@@ -26,11 +26,11 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_GENDER = "Female";
-    public static final String DEFAULT_HEIGHT = "165";
+    public static final String DEFAULT_GENDER = "f";
+    public static final String DEFAULT_HEIGHT = "1.65";
     public static final String DEFAULT_WEIGHT = "55";
-    public static final String DEFAULT_DIET = "Vegetarian";
-    public static final String DEFAULT_PRIORITY = "Medium";
+    public static final String DEFAULT_DIET = "low sodium";
+    public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_MEETING_DATE = "2025-03-15";
 
 
@@ -121,7 +121,7 @@ public class PersonBuilder {
         this.gender = new Gender(gender);
         return this;
     }
-  
+
     /**
      * Sets the {@code Height} of the {@code Person} that we are building.
      */

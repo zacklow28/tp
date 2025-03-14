@@ -59,7 +59,7 @@ public class MeetingDate {
             return true;
         }
 
-        if (!(other instanceof Diet)) {
+        if (!(other instanceof MeetingDate)) {
             return false;
         }
 

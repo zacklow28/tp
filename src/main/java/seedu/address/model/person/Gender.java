@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be either 'm' or 'f', and it should not be blank";
+            "Gender should only be either 'M' or 'F', and it should not be blank";
 
     /*
      * The first character of the gender must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[mf]";
+    public static final String VALIDATION_REGEX = "[mMfF]";
 
     public final String gender;
 
@@ -27,8 +27,9 @@ public class Gender {
      */
     public Gender(String gender) {
         requireNonNull(gender);
-        checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        this.gender = gender;
+        String trimmedGender = gender.trim().toUpperCase();
+        checkArgument(isValidGender(trimmedGender), MESSAGE_CONSTRAINTS);
+        this.gender = trimmedGender;
     }
 
     /**

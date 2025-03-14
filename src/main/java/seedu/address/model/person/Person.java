@@ -30,7 +30,6 @@ public class Person {
     private final Priority priority;
     private final MeetingDate meetingDate;
     private final Set<Tag> tags = new HashSet<>();
-    private Priority priority;
 
     /**
      * Every field must be present and not null.
@@ -49,7 +48,6 @@ public class Person {
         this.priority = priority;
         this.meetingDate = meetingDate;
         this.tags.addAll(tags);
-        this.priority = priority;
     }
 
     public Name getName() {
@@ -97,9 +95,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-    public Priority getPriority() {
-        return priority;
     }
 
     /**
