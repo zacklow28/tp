@@ -21,14 +21,16 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        String trimmedTagName = tagName.trim();
+        checkArgument(isValidTagName(trimmedTagName), MESSAGE_CONSTRAINTS);
+        this.tagName = trimmedTagName;
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
+        System.out.println("Validating tag: '" + test + "'");
         return test.matches(VALIDATION_REGEX);
     }
 
