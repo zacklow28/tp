@@ -1,46 +1,96 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
-  } ]
+  "persons" : [
+    {
+      "name" : "Alice Pauline",
+      "gender" : "F",
+      "height" : "1.65",
+      "weight" : "55.00",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "diet" : "low sodium",
+      "priority" : "Low",
+      "meetingDate" : "2025-04-01",
+      "tags" : [ "friends" ]
+    },
+    {
+      "name" : "Benson Meier",
+      "gender" : "M",
+      "height" : "1.82",
+      "weight" : "85.00",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "diet" : "low carb",
+      "priority" : "High",
+      "meetingDate" : "2025-04-02",
+      "tags" : [ "owesMoney", "friends" ]
+    },
+    {
+      "name" : "Carl Kurz",
+      "gender" : "M",
+      "height" : "1.75",
+      "weight" : "70.00",
+      "phone" : "95352563",
+      "email" : "heinz@example.com",
+      "address" : "wall street",
+      "diet" : "low fat",
+      "priority" : "Medium",
+      "meetingDate" : "2025-03-16",
+      "tags" : [ ]
+    },
+    {
+      "name" : "Daniel Meier",
+      "gender" : "M",
+      "height" : "1.68",
+      "weight" : "68.00",
+      "phone" : "87652533",
+      "email" : "cornelia@example.com",
+      "address" : "10th street",
+      "diet" : "low sugar",
+      "priority" : "Low",
+      "meetingDate" : "2025-03-20",
+      "tags" : [ "friends" ]
+    },
+    {
+      "name" : "Elle Meyer",
+      "gender" : "F",
+      "height" : "1.60",
+      "weight" : "50.00",
+      "phone" : "9482224",
+      "email" : "werner@example.com",
+      "address" : "michegan ave",
+      "diet" : "low sodium",
+      "priority" : "Medium",
+      "meetingDate" : "2025-04-25",
+      "tags" : [ ]
+    },
+    {
+      "name" : "Fiona Kunz",
+      "gender" : "F",
+      "height" : "1.65",
+      "weight" : "55.00",
+      "phone" : "9482427",
+      "email" : "lydia@example.com",
+      "address" : "little tokyo",
+      "diet" : "low carb",
+      "priority" : "Low",
+      "meetingDate" : "2025-05-05",
+      "tags" : [ ]
+    },
+    {
+      "name" : "George Best",
+      "gender" : "M",
+      "height" : "1.78",
+      "weight" : "76.00",
+      "phone" : "9482442",
+      "email" : "anna@example.com",
+      "address" : "4th street",
+      "diet" : "low sugar",
+      "priority" : "High",
+      "meetingDate" : "2025-06-15",
+      "tags" : [ ]
+    }
+  ]
 }

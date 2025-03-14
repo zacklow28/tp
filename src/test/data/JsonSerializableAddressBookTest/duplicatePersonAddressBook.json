@@ -1,14 +1,26 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "name" : "Alice Pauline",
+    "gender" : "F",
+    "height" : "1.65",
+    "weight" : "55.00",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "diet" : "low sodium",
+    "priority" : "Low",
+    "meetingDate" : "2025-04-01",
+    "tags" : [ "friends" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "name" : "Alice Pauline",
+    "gender" : "F",
+    "height" : "1.65",
+    "weight" : "55.00",
+    "phone" : "94351253",
+    "email" : "pauline@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "diet" : "low carb",
+    "priority" : "Low",
+    "meetingDate" : "2025-04-01"
   } ]
 }

@@ -23,22 +23,47 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Gender gender;
+    private final Height height;
+    private final Weight weight;
+    private final Diet diet;
+    private final Priority priority;
+    private final MeetingDate meetingDate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Address address,
+                  Diet diet, Priority priority, MeetingDate meetingDate, Set<Tag> tags) {
+        requireAllNonNull(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
         this.name = name;
+        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.diet = diet;
+        this.priority = priority;
+        this.meetingDate = meetingDate;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
+
+    public Weight getWeight() {
+        return weight;
     }
 
     public Phone getPhone() {
@@ -53,6 +78,17 @@ public class Person {
         return address;
     }
 
+    public Diet getDiet() {
+        return diet;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public MeetingDate getMeetingDate() {
+        return meetingDate;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -91,25 +127,38 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && gender.equals(otherPerson.gender)
+                && height.equals(otherPerson.height)
+                && weight.equals(otherPerson.weight)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && diet.equals(otherPerson.diet)
+                && priority.equals(otherPerson.priority)
+                && meetingDate.equals(otherPerson.meetingDate)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
+
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("gender", gender)
+                .add("height", height)
+                .add("weight", weight)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("diet", diet)
+                .add("priority", priority)
+                .add("meetingDate", meetingDate)
                 .add("tags", tags)
                 .toString();
     }
