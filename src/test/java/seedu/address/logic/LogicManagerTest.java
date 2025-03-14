@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -91,6 +92,55 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void execute_addCommandAddsToHistory() throws CommandException, ParseException {
+        String addCommand = AddCommand.COMMAND_WORD
+                + NAME_DESC_AMY
+                + GENDER_DESC_AMY
+                + HEIGHT_DESC_AMY
+                + WEIGHT_DESC_AMY
+                + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY
+                + DIET_DESC_AMY
+                + PRIORITY_DESC_AMY
+                + MEETING_DATE_DESC_AMY;
+        logic.execute(addCommand);
+
+        CommandHistory commandHistory = logic.getCommandHistory();
+        assertEquals(1, commandHistory.getCommandHistory().size());
+        assertEquals(addCommand, commandHistory.getCommandHistory().get(0));
+    }
+
+    @Test
+    public void getCommandHistory_navigateThroughHistory() throws CommandException, ParseException {
+        String command1 = AddCommand.COMMAND_WORD
+                + NAME_DESC_AMY
+                + GENDER_DESC_AMY
+                + HEIGHT_DESC_AMY
+                + WEIGHT_DESC_AMY
+                + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY
+                + DIET_DESC_AMY
+                + PRIORITY_DESC_AMY
+                + MEETING_DATE_DESC_AMY;
+        String command2 = ListCommand.COMMAND_WORD;
+
+        logic.execute(command1);
+        logic.execute(command2);
+
+        CommandHistory commandHistory = logic.getCommandHistory();
+
+        // Test navigating backwards through history
+        assertEquals(command2, commandHistory.getPreviousCommand());
+        assertEquals(command1, commandHistory.getPreviousCommand());
+
+        // Test navigating forwards through history
+        assertEquals(command2, commandHistory.getNextCommand());
+        assertNull(commandHistory.getNextCommand()); // No next command
     }
 
     /**
