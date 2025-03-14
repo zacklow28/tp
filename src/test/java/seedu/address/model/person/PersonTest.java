@@ -75,11 +75,11 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different gender -> returns false
-        editedAlice = new PersonBuilder(ALICE).withGender("Male").build();
+        editedAlice = new PersonBuilder(ALICE).withGender("M").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different height -> returns false
-        editedAlice = new PersonBuilder(ALICE).withHeight("170").build();
+        editedAlice = new PersonBuilder(ALICE).withHeight("1.7").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different weight -> returns false
@@ -99,7 +99,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different diet -> returns false
-        editedAlice = new PersonBuilder(ALICE).withDiet("Omnivore").build();
+        editedAlice = new PersonBuilder(ALICE).withDiet("low carb").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different priority -> returns false
@@ -118,9 +118,11 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", priority=" + ALICE.getPriority() + "}";
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", gender=" + ALICE.getGender()
+                + ", height=" + ALICE.getHeight() + ", weight=" + ALICE.getWeight() + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", diet=" + ALICE.getDiet()
+                + ", priority=" + ALICE.getPriority() + ", meetingDate=" + ALICE.getMeetingDate()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -136,7 +136,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_HEIGHT, VALID_WEIGHT,
                 VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DIET, INVALID_PRIORITY, VALID_MEETING_DATE, VALID_TAGS);
         String expectedMessage = Priority.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalArgumentException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test

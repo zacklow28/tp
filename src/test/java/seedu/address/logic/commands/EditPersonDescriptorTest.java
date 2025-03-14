@@ -41,11 +41,11 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different gender -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withGender("male").build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withGender("m").build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different height -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight("190").build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight("1.90").build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different weight -> returns false
@@ -65,7 +65,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different diet -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDiet("Vegan").build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDiet("regular").build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different priority -> returns false

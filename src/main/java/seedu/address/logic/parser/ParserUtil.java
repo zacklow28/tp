@@ -190,7 +190,7 @@ public class ParserUtil {
         String trimmedMeetingDate = meetingDate.map(String::trim).orElse(MeetingDate.DEFAULT_MEETING_DATE);
 
         if (!MeetingDate.isValidMeetingDate(trimmedMeetingDate)) {
-            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
         }
         return new MeetingDate(trimmedMeetingDate);
     }
