@@ -47,10 +47,10 @@ public class AddCommand extends Command {
             + PREFIX_WEIGHT + "70 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "100 Clementi"
+            + PREFIX_ADDRESS + "100 Clementi "
             + PREFIX_DIET + "low sodium "
-            + PREFIX_MEETING_DATE + "2025-01-25"
-            + PREFIX_PRIORITY + "low"
+            + PREFIX_MEETING_DATE + "2025-01-25 "
+            + PREFIX_PRIORITY + "low "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
