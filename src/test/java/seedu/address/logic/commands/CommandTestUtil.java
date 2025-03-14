@@ -80,7 +80,7 @@ public class CommandTestUtil {
     public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT + "two"; // non-numeric
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "-55"; // negative number
     public static final String INVALID_DIET_DESC = " " + PREFIX_DIET + ""; // empty string if not allowed
-    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "2025-02-30"; // non-existent date
+    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "2025-02-30"; //non-existent date
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

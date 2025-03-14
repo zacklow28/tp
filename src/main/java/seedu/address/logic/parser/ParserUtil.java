@@ -67,7 +67,7 @@ public class ParserUtil {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if (!Gender.isValidGender(trimmedGender)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
         return new Gender(trimmedGender);
     }
@@ -82,7 +82,7 @@ public class ParserUtil {
         requireNonNull(height);
         String trimmedHeight = height.trim();
         if (!Height.isValidHeight(trimmedHeight)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
         return new Height(trimmedHeight);
     }
@@ -97,7 +97,7 @@ public class ParserUtil {
         requireNonNull(weight);
         String trimmedWeight = weight.trim();
         if (!Weight.isValidWeight(trimmedWeight)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
         }
         return new Weight(trimmedWeight);
     }

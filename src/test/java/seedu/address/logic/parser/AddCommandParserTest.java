@@ -113,8 +113,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         // Setup command with all valid fields
-        String validCommand = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB +
-                HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB;
+        String validCommand = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB
+                + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB;
 
         // Multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validCommand,
@@ -158,9 +158,9 @@ public class AddCommandParserTest {
 
         // Multiple fields repeated
         assertParseFailure(parser,
-                NAME_DESC_AMY +  GENDER_DESC_AMY +
-                        HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY +
-                        DIET_DESC_AMY + PRIORITY_DESC_AMY + MEETING_DATE_DESC_AMY
+                NAME_DESC_AMY + GENDER_DESC_AMY
+                        + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + DIET_DESC_AMY + PRIORITY_DESC_AMY + MEETING_DATE_DESC_AMY
                         + validCommand, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_GENDER,
                         PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DIET,
                         PREFIX_PRIORITY, PREFIX_MEETING_DATE));
@@ -234,8 +234,8 @@ public class AddCommandParserTest {
                 + MEETING_DATE_DESC_BOB, expectedMessage);
 
         // All prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB +
-                        "M" + "180" + "75" + "Keto" + "2025-05-01" + "Low",
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                        + "M" + "180" + "75" + "low-sodium" + "2025-05-01" + "Low",
                 expectedMessage);
     }
 
