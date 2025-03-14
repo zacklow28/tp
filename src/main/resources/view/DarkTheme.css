@@ -88,23 +88,36 @@
 }
 
 .list-view {
+    /*for filled lists*/
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#9BB783, 20%);
+
 }
 
 .list-cell {
+    /*for unfilled ones as well*/
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: derive(#9BB783, 20%);
+}
+
+.list-cell:filled {
+    -fx-padding: 0 0 10 0;
+    -fx-background-insets: 0 0 10px 0; /*Adds bottom margin-like spacing*/
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    /*-fx-background-color: #3c3e3f;*/
+    -fx-background-color: #FAFAF5;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    /*-fx-background-color: #515658;*/
+    -fx-background-color: #EEEEDA;
 }
 
 .list-cell:filled:selected {
@@ -117,7 +130,8 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    /*-fx-text-fill: white;*/
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
@@ -133,24 +147,28 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    /*-command typing area*/
+     -fx-background-color: derive(#4A7624, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+    /*-border for everything*/
+     -fx-background-color: derive(#9BB783, 20%);
+     -fx-border-color: derive(#9BB783, 10%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
+    /*bottom part*/
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .result-display {
+    /*type in results area*/
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .result-display .label {
@@ -182,6 +200,7 @@
 
 .grid-pane .stack-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
+
 }
 
 .context-menu {
@@ -193,13 +212,15 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    /*top part*/
+    -fx-background-color: derive(#9BB783, 20%);
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #4A7624;
+    /*-fx-font-weight: bold;*/
     -fx-opacity: 0.9;
 }
 
@@ -333,7 +354,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    /*results part*/
+    -fx-background-color: transparent, #9BB783, transparent, #9BB783;
     -fx-background-radius: 0;
 }
 
