@@ -1,15 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# AB-3 Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +61,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +69,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +88,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,7 +109,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +128,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -171,58 +174,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -262,64 +274,187 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* works as a freelance nutritionist, often visiting multiple patients daily
+* has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
+* prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
+* can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
+* is comfortable using command-line interfaces (CLI) for managing data and interactions
+* values portability and the ability to work across different devices without the need for installation or complex setups
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patient profiles faster and more efficiently than traditional GUI-driven applications by utilizing a CLI, with features designed to streamline patient management, scheduling, and follow-ups, all in a portable, easy-to-use format.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| As a …            | I want to …                                | So that I can…                                  | Notes                                                                                          |
+|-------------------|--------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Busy Nutritionist | Search for a patient by name               | Quickly access relevant dietary information     | Search results should be fast and accurate.                                                   |
+| Busy Nutritionist | Add tags to classify my patients easily    | Easily filter and find the relevant patients    | Allow for multiple tags per patient. The system should allow filtering based on tags.         |
+| Busy Nutritionist | Undo my last action when using the application | Easily revert to the original state in the event of mistakes or change of plans | Limits to actions that modify data only.                                                     |
+| Busy Nutritionist | Schedule Follow-up Appointment             | See and review patient’s status after an appropriate time |                                                                                          |
+| Busy Nutritionist | Set reminders for follow-up appointments   | Not forget important patient visits             | Notifications should appear on a dashboard.                                                  |
+| Busy Nutritionist | Receive notifications about patient dietary updates | Stay informed                                | Push/email notifications should be configurable.                                             |
+| Elderly Nutritionist | Enable high-contrast colors              | Easily read and navigate the app                | A toggle option for high contrast should be available in settings.                            |
+| Elderly Nutritionist | Increase the font size                   | Read text comfortably                           | Font size settings should be adjustable in the UI.                                            |
+| First-Time Nutritionist | Ensure no duplicates in the patient’s information are added | Refer to the correct information and make necessary changes | Alert the user of possible duplication when adding a new patient.                        |
+| First-Time Nutritionist | Access the application’s help function | Learn how to use the application effectively    | List down all available commands that the user can use.                                       |
+| First-Time Nutritionist | See some sample contacts when I open the app | Easily try out its features without needing to add my data first |                                                                                |
+| Nutritionist      | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                                |
+| Nutritionist      | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                          |
+| Nutritionist      | Clear all data in the application          | Reset the application when necessary            | Requires confirmation to prevent accidental reset.                                            |
+| Nutritionist      | Filter patients based on dietary conditions| Group similar cases                             | Filters should be easy to apply and reset.                                                    |
+| Nutritionist      | Edit/Update patient information            | Keep records accurate                           | Changes should be logged with timestamps.                                                     |
+| Nutritionist      | View a patient's information               | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted.   |
+| Nutritionist      | Archive patients that no longer require visits | Keep track of their information, yet not clutter up the address book | Able to retrieve archived information easily when needed.                                  |
+| Nutritionist      | Upload and attach files to patient profiles | Have all relevant data in one place             | Users should be able to upload PDFs, images, and other common file types.                     |
+| Nutritionist      | Sort patients based on name                | Find patients at a glance                       | Sorting options can allow easy finding of patients.                                           |
+| Nutritionist      | Mark high-risk patients                    | Quickly identify those needing urgent attention | High-risk patients should be visually highlighted.                                            |
+| Nutritionist      | Add emergency contacts to a patient profile | Contact them in urgent situations               | Emergency contacts should be stored and easily accessible.                                    |
+| Nutritionist      | Add custom notes to a patient’s profile    | Track observations over time                    | Notes should be editable and timestamped.                                                     |
 
-*{More to be added}*
+User stories for the MVP version:
+
+| As a …        | I want to …                                | So that I can…                                  | Notes                                                                                  |
+|---------------|--------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------------------|
+| Nutritionist  | View a patient's medical history, food allergies, and dietary restrictions | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted in the profile. |
+| Nutritionist  | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                         |
+| Nutritionist  | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                   |
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `Nutritionist (user)`, unless specified otherwise)
 
-**Use case: Delete a person**
 
-**MSS**
+**Use Case: UC01 - Edit Patient Information**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**MSS:**
 
+1.  Nutritionist selects a patient from the patient list or searches by name/ID.
+2.  HMS displays the selected patient’s profile.
+3.  Nutritionist clicks on the ‘Edit’ button to modify patient information.
+4.  HMS provides editable fields (e.g., contact details, dietary restrictions).
+5.  Nutritionist makes necessary changes and submits the updated information.
+6.  HMS verifies the updated data and requests confirmation.
+7.  Nutritionist confirms the updates.
+8.  HMS saves the updated information and displays the updated profile. Use case ends.
+
+
+**Use Case: UC02 - Delete Patient Record**
+
+**MSS:**
+
+1.  Nutritionist searches for a patient by name or ID in the HMS.
+2.  HMS displays the search results.
+3.  Nutritionist selects the patient whose record needs to be deleted.
+4.  HMS displays the patient's full profile.
+5.  Nutritionist selects the option to delete the patient record.
+6.  HMS requests confirmation to ensure the deletion is intentional.
+7.  Nutritionist confirms the deletion.
+8.  HMS deletes the patient record and confirms the deletion to the Nutritionist. Use case ends.
+
+**Extensions:**
+
+* 7a. Nutritionist cancels the deletion at the confirmation step.
+  * 7a1. HMS cancels the deletion process and retains the patient record.
     Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
 
-  Use case ends.
+**Use Case: UC03 - Archive Patient**
 
-* 3a. The given index is invalid.
+**MSS:**
 
-    * 3a1. AddressBook shows an error message.
+1.  Nutritionist accesses the patient list and selects a patient.
+2.  HMS displays the patient’s profile.
+3.  Nutritionist selects the option to archive the patient’s profile.
+4.  HMS asks for confirmation to archive to prevent accidental archiving.
+5.  Nutritionist confirms the archiving.
+6.  HMS archives the patient’s profile and confirms the action to the Nutritionist. Use case ends.
 
-      Use case resumes at step 2.
+**Extensions:**
 
-*{More to be added}*
+* 4a. Nutritionist decides not to archive the profile at the confirmation step.
+  * 4a1. HMS cancels the archiving request.
+    Use case ends.
 
+
+**Use Case: UC04 - Add Patient Tag**
+
+**MSS:**
+1.  Nutritionist selects the patient to tag from the patient list.
+2.  HMS displays the patient's profile.
+3.  Nutritionist chooses to add a tag.
+4.  HMS prompts for the tag details.
+5.  Nutritionist enters the tag (e.g., "Diabetic", "Low Sodium") and submits.
+6.  HMS confirms the tag addition and updates the patient's profile.
+   Use case ends.
+
+**Extensions:**
+
+* 4a. HMS detects an error in the entered tag (e.g., forbidden characters).
+  * 4a1. HMS displays an error message.
+  * 4a2. Nutritionist corrects the tag information.
+    Steps 4a1-4a2 are repeated until valid information is entered.
+    Use case resumes from step 6.
+
+* 6a. Nutritionist decides to add multiple tags at once.
+  * 6a1. HMS allows entry of additional tags.
+  * 6a2. Nutritionist enters and submits additional tags.
+  * 6a3. HMS updates the patient's profile with all new tags.
+    Use case ends.
+
+
+* 6b. HMS is unable to update the patient profile due to a system error.
+  * 6b1. HMS displays an error message indicating the failure.
+  * 6b2. HMS offers the option to retry.
+  * 6b3. Nutritionist retries the submission or cancels. Use case resumes at step 5 if retried, ends if cancelled
+    Use case ends.
+
+
+**Use Case: UC05 - Schedule Follow-up Appointment**
+
+**MSS:**
+
+1. Nutritionist accesses the appointment scheduling feature in HMS.
+2. Nutritionist selects a patient from the list and chooses to schedule a follow-up.
+3. HMS displays the appointment scheduling form.
+4. Nutritionist enters the date, time, and nature of the follow-up.
+5. HMS requests confirmation of the details.
+6. Nutritionist confirms.
+7. HMS schedules the appointment and sends a confirmation to the Nutritionist.
+   Use case ends.
+
+**Extensions:**
+
+* 4a. The selected date/time is unavailable.
+  * 4a1. HMS notifies about the scheduling conflict.
+  * 4a2. Nutritionist selects a new date/time.
+    Use case resumes from step 5.
+
+* 5a. Nutritionist decides to set a reminder for the appointment.
+  * 5a1. HMS provides options for setting reminders.
+  * 5a2. Nutritionist sets and confirms the reminder details.
+    Use case resumes at step 7.
+
+* 7a. HMS encounters a system error while scheduling the appointment.
+  * 7a1. HMS displays an error message and offers to retry.
+  * 7a2. Nutritionist retries or cancels the scheduling.
+    Use case resumes at step 3 if retried, ends if cancelled.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should respond within 5 seconds for most user interactions.
+5.  The application should be portable, working without an installer. It should be distributed in a single JAR file for easy execution on different platforms.
+6.  Data should be stored in a human-editable file, ensuring that the nutritionist can manually back up or recover patient data if needed.
+7.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+8.  The GUI should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
+9.  The application should not use a DBMS to store data.
+10.  The product's file size, including the JAR file and necessary assets, should not exceed 100MB.
+11.  The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit.
 
 *{More to be added}*
 
@@ -327,6 +462,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
+* **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
+* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information.
+* **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
+* **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
+* **Tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
+* **Priority**: The level of importance or urgency assigned to a task or patient. For example, a high-priority patient needs immediate attention, while low-priority patients may not require urgent care.
+* **Reminder**: A notification or alert set by the nutritionist to prompt follow-up actions or visits for patients based on their care schedule.
+* **Consultation Log**: A record of all interactions with a patient, including the date, purpose, and key details from the consultation.
+* **Stale Records**: Patient profiles that have not been updated or accessed in a long time. These records are flagged for follow-up or archiving to keep the patient list organized.
+* **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
+* **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
+* **DBMS (Database Management System)**: A software used to store, manage, and retrieve data in databases. Not used in this project.
+* **JAR File (Java ARchive)**: A compressed file that contains Java classes, libraries, and resources, packaged for distribution.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +483,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
