@@ -129,22 +129,6 @@
     -fx-border-width: 1;
 }
 
-.list-cell .label {
-    /*-fx-text-fill: white;*/
-    -fx-text-fill: black;
-}
-
-.cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
-}
-
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
-}
 
 .stack-pane {
     /*-command typing area*/
@@ -357,6 +341,32 @@
     /*results part*/
     -fx-background-color: transparent, #9BB783, transparent, #9BB783;
     -fx-background-radius: 0;
+}
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.name-label {
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.gender-label,
+.height-label,
+.weight-label {
+    -fx-text-fill: #004d00;
+}
+
+.email-label {
+    -fx-text-fill: #2196F3; /* bright blue */
+}
+
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
 }
 
 .priority-label {
