@@ -25,8 +25,8 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validPriorityInput_success() throws ParseException {
-        FilterCommand command = parser.parse("p/h");
-        assertEquals(new FilterCommand("p", "h"), command);
+        FilterCommand command = parser.parse("pr/h");
+        assertEquals(new FilterCommand("pr", "h"), command);
     }
 
     @Test

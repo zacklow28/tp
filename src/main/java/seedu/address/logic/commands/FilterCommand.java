@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Filters the list of patients based on the specified prefix and value.
@@ -14,14 +14,23 @@ import java.util.function.Predicate;
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the patient list based on a prefix and value.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the patient list based "
+            + "on a prefix and value.\n"
             + "Parameters: [PREFIX]/[VALUE]\n"
             + "Example: " + COMMAND_WORD + " d/low fat\n"
-            + "Valid prefixes: d/ (diet), g/ (gender), p/ (priority), a/ (food allergies), m/ (meeting date)";
+            + "Valid prefixes: d/(diet), g/(gender), p/(priority), m/(meeting date)";
 
     private final String prefix;
     private final String value;
 
+    /**
+     * Constructs a {@code FilterCommand} with the given prefix and value.
+     * The prefix represents the filter category (e.g., diet, gender, priority),
+     * and the value is the filtering criterion.
+     *
+     * @param prefix The prefix representing the filter category (e.g., "d" for diet, "g" for gender).
+     * @param value The value used to filter persons based on the given category.
+     */
     public FilterCommand(String prefix, String value) {
         this.prefix = prefix.toLowerCase();
         this.value = value.toLowerCase();
@@ -31,15 +40,12 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Predicate<Person> filterPredicate = person -> {
-            switch (prefix) {
-                case "d": return person.getDiet().equalsIgnoreCase(value);
-                case "g": return person.getGender().equalsIgnoreCase(value);
-                case "p": return person.getPriority().equalsIgnoreCase(value);
-                case "a": return person.getFoodAllergies().contains(value);
-                case "m": return person.getMeetingDate().toString().equals(value);
-                default: return false;
-            }
+        Predicate<Person> filterPredicate = switch (prefix) {
+        case "d" -> person -> person.getDiet().toString().equalsIgnoreCase(value);
+        case "g" -> person -> person.getGender().toString().equalsIgnoreCase(value);
+        case "pr" -> person -> person.getPriority().toString().equalsIgnoreCase(value);
+        case "m" -> person -> person.getMeetingDate().toString().equals(value);
+        default -> throw new CommandException("Invalid filter prefix: " + prefix);
         };
 
         model.updateFilteredPersonList(filterPredicate);
@@ -49,15 +55,9 @@ public class FilterCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other instanceof FilterCommand otherFilterCommand) {
+            return prefix.equals(otherFilterCommand.prefix) && value.equals(otherFilterCommand.value);
         }
-
-        if (!(other instanceof FilterCommand)) {
-            return false;
-        }
-
-        FilterCommand otherFilterCommand = (FilterCommand) other;
-        return prefix.equals(otherFilterCommand.prefix) && value.equals(otherFilterCommand.value);
+        return false;
     }
 }

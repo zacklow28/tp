@@ -30,9 +30,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String prefix = parts[0].trim().toLowerCase();
         String value = parts[1].trim();
 
-        if (!prefix.matches("[dgpam]")) {  // Allowed: d, g, p, a, m
+        if (!prefix.matches("d|g|pr|m")) {
             throw new ParseException("Invalid filter category! Use:\n"
-                    + "d/ (diet), g/ (gender), p/ (priority), a/ (food allergies), m/ (meeting date)");
+                    + "d/ (diet), g/(gender), pr/(priority), a/(food allergies), m/(meeting date)");
         }
 
         return new FilterCommand(prefix, value);
