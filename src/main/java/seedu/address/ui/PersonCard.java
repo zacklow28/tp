@@ -45,13 +45,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label diet;
+    private FlowPane dietTag;
     @FXML
     private FlowPane priorityTag;
     @FXML
     private Label meetingDate;
     @FXML
-    private FlowPane tags;
+    private FlowPane allTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -67,15 +67,24 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
-        diet.setText(person.getDiet().toString());
+        meetingDate.setText(person.getMeetingDate().toString());
+
         Label priorityLabel = new Label(person.getPriority().toString());
         priorityLabel.getStyleClass().addAll("priority-label", "priority-"
                 + person.getPriority().toString().toLowerCase());
-        priorityTag.getChildren().add(priorityLabel);
-        meetingDate.setText(person.getMeetingDate().toString());
+        allTags.getChildren().add(priorityLabel);
+
+        Label dietLabel = new Label("D: " + person.getDiet().toString());
+        dietLabel.getStyleClass().add("diet-label");
+        allTags.getChildren().add(dietLabel);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("tag-label");
+                    allTags.getChildren().add(tagLabel);
+                });
 
     }
 }
