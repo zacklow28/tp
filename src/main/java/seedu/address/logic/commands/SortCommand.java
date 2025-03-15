@@ -26,9 +26,6 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        // Print list before sorting
-        System.out.println("Before sorting: " + model.getFilteredPersonList());
-
         Comparator<Person> comparator;
         switch (sortType) {
         case "priority":
@@ -47,9 +44,6 @@ public class SortCommand extends Command {
         }
 
         model.sortFilteredPersonList(comparator);
-
-        // Print list after sorting
-        System.out.println("After sorting: " + model.getFilteredPersonList());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortType));
     }
