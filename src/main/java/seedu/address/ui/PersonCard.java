@@ -31,13 +31,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label gender;
+    @FXML
+    private Label height;
+    @FXML
+    private Label weight;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
+    private Label email;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label diet;
+    @FXML
+    private FlowPane priorityTag;
+    @FXML
+    private Label meetingDate;
     @FXML
     private FlowPane tags;
 
@@ -49,11 +61,21 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        gender.setText(person.getGender().gender);
+        height.setText(person.getHeight().toString() + " m");
+        weight.setText(person.getWeight().toString() + " kg");
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        address.setText(person.getAddress().value);
+        diet.setText(person.getDiet().toString());
+        Label priorityLabel = new Label(person.getPriority().toString());
+        priorityLabel.getStyleClass().addAll("priority-label", "priority-"
+                + person.getPriority().toString().toLowerCase());
+        priorityTag.getChildren().add(priorityLabel);
+        meetingDate.setText(person.getMeetingDate().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
     }
 }

@@ -147,4 +147,20 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Searches person by unique email
+     * @param email email
+     * @return person
+     */
+    public Person getPersonByEmail(Email email) {
+        requireNonNull(email);
+        for (Person person : internalList) {
+            if (person.getEmail().equals(email)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
 }
