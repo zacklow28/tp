@@ -9,15 +9,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String userInput) throws ParseException {
-        String trimmedInput = userInput.trim();
+        String trimmedInput = userInput.trim().toLowerCase();
+        String[] splitArgs = trimmedInput.split("\\s+");
 
-        // Ensure the command is exactly "sort"
-        if (!trimmedInput.equals("sort")) {
-            throw new ParseException("Command should be in the following format:\n"
-                    + "sort (Sorts by priority and then, name)");
+        if (splitArgs.length != 2) {
+            throw new ParseException("Invalid sort type. " + SortCommand.MESSAGE_USAGE);
         }
 
-        return new SortCommand();
-    }
+        String sortType = splitArgs[1];
 
+        if (!(sortType.equals("priority") || sortType.equals("name") || sortType.equals("diet"))) {
+            throw new ParseException("Invalid sort type. " + SortCommand.MESSAGE_USAGE);
+        }
+
+        return new SortCommand(sortType);
+    }
 }
