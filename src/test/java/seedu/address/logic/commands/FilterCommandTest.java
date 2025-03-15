@@ -8,9 +8,9 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,16 +27,12 @@ public class FilterCommandTest {
     public void execute_validDietFilter_success() throws CommandException {
         model.addPerson(ALICE);
         model.addPerson(FIONA);
-        model.addPerson(ELLE); // Elle also has "low sodium"
+        model.addPerson(ELLE);
 
         FilterCommand command = new FilterCommand("d", "low sodium");
         command.execute(model);
 
         List<Person> filteredList = model.getFilteredPersonList();
-
-        // Debugging output
-        System.out.println("Filtered List: " + filteredList);
-
         assertEquals(2, filteredList.size());
         assertTrue(filteredList.contains(ALICE));
         assertTrue(filteredList.contains(ELLE));
@@ -50,36 +46,34 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand("g", "f");
         command.execute(model);
 
-        Predicate<Person> expectedPredicate = person -> person.getGender().toString().equalsIgnoreCase("f");
-        model.updateFilteredPersonList(expectedPredicate);
-
         List<Person> filteredList = model.getFilteredPersonList();
         assertEquals(1, filteredList.size());
         assertTrue(filteredList.contains(ALICE));
     }
 
     @Test
-    public void execute_noMatchingResults_returnsEmptyList() throws CommandException {
+    public void execute_validPriorityFilter_success() throws CommandException {
         model.addPerson(ALICE);
-        model.addPerson(BOB);
+        model.addPerson(GEORGE);
 
-        FilterCommand command = new FilterCommand("d", "high protein");
+        FilterCommand command = new FilterCommand("pr", "high");
         command.execute(model);
 
         List<Person> filteredList = model.getFilteredPersonList();
-        assertEquals(0, filteredList.size());
+        assertEquals(1, filteredList.size());
+        assertTrue(filteredList.contains(GEORGE));
     }
 
     @Test
     public void execute_invalidFilterPrefix_throwsException() {
-        FilterCommand command = new FilterCommand("x", "something");
+        FilterCommand command = new FilterCommand("x", "random");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void equals() {
-        FilterCommand firstCommand = new FilterCommand("d", "low fat");
-        FilterCommand secondCommand = new FilterCommand("d", "regular");
+        FilterCommand firstCommand = new FilterCommand("d", "low sodium");
+        FilterCommand secondCommand = new FilterCommand("d", "low fat");
 
         assertEquals(firstCommand, firstCommand);
         assertNotEquals(firstCommand, secondCommand);

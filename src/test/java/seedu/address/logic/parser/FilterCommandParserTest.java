@@ -12,9 +12,9 @@ public class FilterCommandParserTest {
     private final FilterCommandParser parser = new FilterCommandParser();
 
     @Test
-    public void parse_validInput_success() throws ParseException {
-        FilterCommand command = parser.parse("d/low fat");
-        assertEquals(new FilterCommand("d", "low fat"), command);
+    public void parse_validDietInput_success() throws ParseException {
+        FilterCommand command = parser.parse("d/low sodium");
+        assertEquals(new FilterCommand("d", "low sodium"), command);
     }
 
     @Test
@@ -25,13 +25,19 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validPriorityInput_success() throws ParseException {
-        FilterCommand command = parser.parse("pr/h");
-        assertEquals(new FilterCommand("pr", "h"), command);
+        FilterCommand command = parser.parse("pr/high");
+        assertEquals(new FilterCommand("pr", "high"), command);
+    }
+
+    @Test
+    public void parse_validMeetingDateInput_success() throws ParseException {
+        FilterCommand command = parser.parse("m/2025-03-20");
+        assertEquals(new FilterCommand("m", "2025-03-20"), command);
     }
 
     @Test
     public void parse_missingPrefix_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("low fat"));
+        assertThrows(ParseException.class, () -> parser.parse("low sodium"));
     }
 
     @Test
@@ -44,4 +50,3 @@ public class FilterCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("x/something"));
     }
 }
-
