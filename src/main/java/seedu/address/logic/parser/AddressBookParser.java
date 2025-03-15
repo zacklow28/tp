@@ -83,7 +83,14 @@ public class AddressBookParser {
             return new PriorityCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommand();
+            String sortType = arguments.trim().toLowerCase();
+
+            if (!(sortType.equals("priority") || sortType.equals("name") || sortType.equals("diet"))) {
+                throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet");
+            }
+
+            return new SortCommand(sortType);
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
