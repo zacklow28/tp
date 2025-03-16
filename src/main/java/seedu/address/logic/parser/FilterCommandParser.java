@@ -28,13 +28,41 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         String prefix = parts[0].trim().toLowerCase();
-        String value = parts[1].trim();
+        String value = parts[1].trim().toLowerCase();
 
         if (!prefix.matches("d|g|pr|m")) {
             throw new ParseException("Invalid filter category! Use:\n"
-                    + "d/ (diet), g/(gender), pr/(priority), a/(food allergies), m/(meeting date)");
+                    + "d/ (diet), g/(gender), pr/(priority), m/(meeting date)");
+        }
+
+        switch (prefix) {
+        case "d":
+            if (!value.matches("regular|low sodium|low fat|low carb|low sugar|none")) {
+                throw new ParseException("Invalid diet value! Use: regular, low sodium, low fat, "
+                        + "low carb, low sugar, none");
+            }
+            break;
+
+        case "g":
+            if (!value.matches("m|f")) {
+                throw new ParseException("Invalid gender value! Use: m (male), f (female)");
+            }
+            break;
+
+        case "pr":
+            if (!value.matches("low|medium|high")) {
+                throw new ParseException("Invalid priority value! Use: low, medium, high");
+            }
+            break;
+
+        case "m":
+            break;
+
+        default:
+            throw new ParseException("Invalid filter prefix: " + prefix);
         }
 
         return new FilterCommand(prefix, value);
     }
+
 }

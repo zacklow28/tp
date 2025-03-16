@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class FilterCommandParserTest {
     private final FilterCommandParser parser = new FilterCommandParser();
 
+    // Valid test cases
     @Test
     public void parse_validDietInput_success() throws ParseException {
         FilterCommand command = parser.parse("d/low sodium");
@@ -35,6 +36,34 @@ public class FilterCommandParserTest {
         assertEquals(new FilterCommand("m", "2025-03-20"), command);
     }
 
+    // Invalid test cases (newly added)
+    @Test
+    public void parse_invalidDietValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("d/extreme keto"));
+        assertThrows(ParseException.class, () -> parser.parse("d/keto"));
+        assertThrows(ParseException.class, () -> parser.parse("d/vegan"));
+    }
+
+    @Test
+    public void parse_invalidGenderValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("g/other"));
+        assertThrows(ParseException.class, () -> parser.parse("g/male"));
+        assertThrows(ParseException.class, () -> parser.parse("g/female"));
+    }
+
+    @Test
+    public void parse_invalidPriorityValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("pr/urgent"));
+        assertThrows(ParseException.class, () -> parser.parse("pr/none"));
+        assertThrows(ParseException.class, () -> parser.parse("pr/low priority"));
+    }
+
+    @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("x/something"));
+        assertThrows(ParseException.class, () -> parser.parse("xyz/random"));
+    }
+
     @Test
     public void parse_missingPrefix_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse("low sodium"));
@@ -43,10 +72,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_missingValue_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse("d/"));
-    }
-
-    @Test
-    public void parse_invalidPrefix_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("x/something"));
+        assertThrows(ParseException.class, () -> parser.parse("pr/"));
+        assertThrows(ParseException.class, () -> parser.parse("g/"));
     }
 }
