@@ -29,16 +29,16 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_GENDER + "[gender] "
-            + PREFIX_HEIGHT + "[height] "
-            + PREFIX_WEIGHT + "[weight] "
+            + PREFIX_GENDER + "GENDER "
+            + PREFIX_HEIGHT + "HEIGHT "
+            + PREFIX_WEIGHT + "WEIGHT "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_DIET + "[diet] "
-            + PREFIX_PRIORITY + "PRIORITY"
-            + PREFIX_MEETING_DATE + "MEETING DATE"
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_DIET + "DIET "
+            + PREFIX_PRIORITY + "PRIORITY "
+            + PREFIX_MEETING_DATE + "MEETING DATE "
+            + "[" + PREFIX_TAG + "ALLERGY]...\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -51,8 +51,8 @@ public class AddCommand extends Command {
             + PREFIX_DIET + "low sodium "
             + PREFIX_MEETING_DATE + "2025-01-25 "
             + PREFIX_PRIORITY + "low "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "corn "
+            + PREFIX_TAG + "mushroom";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
