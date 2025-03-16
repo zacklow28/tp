@@ -8,24 +8,28 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-/**
- * Unit tests for SortCommandParser.
- */
 public class SortCommandParserTest {
     private final SortCommandParser parser = new SortCommandParser();
 
     @Test
-    public void parse_validSortCommand_success() throws ParseException {
-        SortCommand command = parser.parse("sort");
-        assertEquals(new SortCommand(), command);
+    public void parse_validArgs_returnsSortCommand() throws Exception {
+        assertEquals(new SortCommand("priority"), parser.parse("sort priority"));
+        assertEquals(new SortCommand("name"), parser.parse("sort name"));
+        assertEquals(new SortCommand("diet"), parser.parse("sort diet"));
     }
 
     @Test
-    public void parse_invalidSortCommand_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("sort pr"));
-        assertThrows(ParseException.class, () -> parser.parse("sort n"));
-        assertThrows(ParseException.class, () -> parser.parse("sort priority"));
-        assertThrows(ParseException.class, () -> parser.parse("sort name"));
-        assertThrows(ParseException.class, () -> parser.parse("sort something"));
+    public void parse_invalidArgs_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("sort"));
+        assertThrows(ParseException.class, () -> parser.parse("sort xyz"));
+        assertThrows(ParseException.class, () -> parser.parse("sortpriority")); // No space
+        assertThrows(ParseException.class, () -> parser.parse("sort 123"));
+    }
+
+    @Test
+    public void parse_extraWhitespace_stillParsesCorrectly() throws Exception {
+        assertEquals(new SortCommand("priority"), parser.parse(" sort   priority   "));
+        assertEquals(new SortCommand("name"), parser.parse(" sort  name  "));
+        assertEquals(new SortCommand("diet"), parser.parse("   sort diet   "));
     }
 }

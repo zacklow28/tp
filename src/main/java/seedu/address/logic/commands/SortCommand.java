@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
+
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Sorts the patient list by priority (h > m > l) and then alphabetically by name.
@@ -10,26 +13,51 @@ import seedu.address.model.Model;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_SUCCESS = "Sorted patient list by priority and then, name.";
+    public static final String MESSAGE_SUCCESS = "Sorted patient list by %s.";
+    public static final String MESSAGE_USAGE = "Usage: sort [priority|name|diet]";
+
+    private final String sortType;
+
+    public SortCommand(String sortType) {
+        this.sortType = sortType;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.sortFilteredPersonList((p1, p2) -> {
-            int priorityComparison = p2.getPriority().getValue().ordinal() - p1.getPriority().getValue().ordinal();
-            if (priorityComparison != 0) {
-                return priorityComparison;
-            }
-            return p1.getName().toString().compareToIgnoreCase(p2.getName().toString());
-        });
+        Comparator<Person> comparator;
+        switch (sortType) {
+        case "priority":
+            comparator = Comparator.comparing((Person p) -> p.getPriority().getValue().ordinal()).reversed()
+                    .thenComparing(p -> p.getName().toString().toLowerCase());
+            break;
+        case "name":
+            comparator = Comparator.comparing(p -> p.getName().toString().toLowerCase());
+            break;
+        case "diet":
+            comparator = Comparator.comparing(p -> p.getDiet().toString().toLowerCase(),
+                    String.CASE_INSENSITIVE_ORDER);
+            break;
+        default:
+            throw new IllegalArgumentException("Invalid sort type.");
+        }
 
+        model.sortFilteredPersonList(comparator);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortType));
     }
+
 
     @Override
     public boolean equals(Object other) {
-        return other instanceof SortCommand;
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+        SortCommand otherCommand = (SortCommand) other;
+        return this.sortType.equals(otherCommand.sortType);
     }
 }

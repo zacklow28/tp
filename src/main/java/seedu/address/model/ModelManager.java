@@ -139,20 +139,13 @@ public class ModelManager implements Model {
     public void sortFilteredPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
 
-        // Create a new sorted list from the original filtered list
         ObservableList<Person> sortedList = FXCollections.observableArrayList(filteredPersons);
-        sortedList.sort(comparator); // Apply sorting
+        sortedList.sort(comparator);
 
-        // Replace the contents of filteredPersons' source list with the sorted data
-        addressBook.setPersons(sortedList); // Update the AddressBook with sorted values
+        addressBook.setPersons(sortedList);
 
-        // Reapply the filter predicate to maintain the current filtered view
-        filteredPersons.setPredicate(null);
-        filteredPersons.setPredicate(person -> true); // Refreshes UI
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
-
-
-
 
     @Override
     public Person getPersonByEmail(Email email) throws PersonNotFoundException {
@@ -175,5 +168,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }
