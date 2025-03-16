@@ -38,6 +38,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="diet" styleClass="cell_small_label" text="\$diet" />
       <Label fx:id="meetingDate" styleClass="cell_small_label" text="\$meetingDate" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
       <rowConstraints>
          <RowConstraints />

@@ -20,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -40,6 +41,7 @@ class JsonAdaptedPerson {
     private final String diet;
     private final String priority;
     private final String meetingDate;
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -51,7 +53,7 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("diet") String diet,
             @JsonProperty("priority") String priority, @JsonProperty("meetingDate") String meetingDate,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -62,6 +64,7 @@ class JsonAdaptedPerson {
         this.diet = diet;
         this.priority = priority;
         this.meetingDate = meetingDate;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -81,6 +84,7 @@ class JsonAdaptedPerson {
         diet = source.getDiet().toString();
         priority = source.getPriority().toString();
         meetingDate = source.getMeetingDate().toString();
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -181,8 +185,12 @@ class JsonAdaptedPerson {
         final MeetingDate modelMeetingDate = new MeetingDate(meetingDate);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
         return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelAddress,
-                modelDiet, modelPriority, modelMeetingDate, modelTags);
+                modelDiet, modelPriority, modelMeetingDate, modelRemark, modelTags);
     }
 
 }

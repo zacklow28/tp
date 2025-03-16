@@ -24,6 +24,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -46,7 +47,8 @@ class SortCommandTest {
                         new Diet("low sodium"),
                         new Priority("low"),
                         new MeetingDate("2025-02-10"),
-                        Set.of(new Tag("diabetic"))),
+                        new Remark("diabetic"),
+                        Set.of(new Tag("mushroom"))),
 
                 new Person(new Name("Alice Tan"),
                         new Gender("f"),
@@ -58,7 +60,8 @@ class SortCommandTest {
                         new Diet("low carb"),
                         new Priority("high"),
                         new MeetingDate("2025-02-10"),
-                        Set.of(new Tag("diabetic"))),
+                        new Remark("diabetic"),
+                        Set.of(new Tag("mushroom"))),
 
                 new Person(new Name("Bob Lim"),
                         new Gender("m"),
@@ -70,7 +73,8 @@ class SortCommandTest {
                         new Diet("low sugar"),
                         new Priority("medium"),
                         new MeetingDate("2025-03-05"),
-                        Set.of(new Tag("hypertension")))
+                        new Remark("hypertension"),
+                        Set.of(new Tag("prawn")))
         ));
 
         // Add persons to the model

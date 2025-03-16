@@ -38,12 +38,13 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withGender("F").withHeight("1.65").withWeight("55").withDiet("low sodium")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withPriority("Low").withMeetingDate("2025-04-01")
+            .withPhone("94351253").withPriority("Low").withMeetingDate("2025-04-01").withRemark("She likes aardvarks.")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withGender("M").withHeight("1.82").withWeight("85").withDiet("Low Carb")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withPriority("High").withMeetingDate("2025-04-02").withTags("owesMoney", "friends").build();
+            .withPriority("High").withMeetingDate("2025-04-02").withRemark("He can't take beer!")
+            .withTags("owesMoney", "friends").build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withGender("M").withHeight("1.75").withWeight("70").withDiet("low fat")

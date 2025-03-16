@@ -13,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     public static final String DEFAULT_DIET = "low sodium";
     public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_MEETING_DATE = "2025-03-15";
+    public static final String DEFAULT_REMARK = "She likes food";
 
 
     private Name name;
@@ -44,6 +46,7 @@ public class PersonBuilder {
     private Diet diet;
     private Priority priority;
     private MeetingDate meetingDate;
+    private Remark remark;
     private Set<Tag> tags = new HashSet<>();
 
 
@@ -61,6 +64,7 @@ public class PersonBuilder {
         diet = new Diet(DEFAULT_DIET);
         priority = new Priority(DEFAULT_PRIORITY);
         meetingDate = new MeetingDate(DEFAULT_MEETING_DATE);
+        remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
 
@@ -78,6 +82,7 @@ public class PersonBuilder {
         diet = personToCopy.getDiet();
         priority = personToCopy.getPriority();
         meetingDate = personToCopy.getMeetingDate();
+        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -170,8 +175,19 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
+     * Builds a new {@code Person}.
+     */
     public Person build() {
-        return new Person(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
+        return new Person(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, remark,
+                tags);
     }
 }
-

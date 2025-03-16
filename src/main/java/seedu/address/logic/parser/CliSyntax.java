@@ -18,5 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_MEETING_DATE = new Prefix("m/");
     //al for allergies
     public static final Prefix PREFIX_TAG = new Prefix("al/");
-
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
 }

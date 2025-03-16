@@ -12,6 +12,7 @@
       "diet" : "low sodium",
       "priority" : "Low",
       "meetingDate" : "2025-04-01",
+      "remark": "",
       "tags" : [ "friends" ]
     },
     {
@@ -25,6 +26,7 @@
       "diet" : "low carb",
       "priority" : "High",
       "meetingDate" : "2025-04-02",
+      "remark": "",
       "tags" : [ "owesMoney", "friends" ]
     },
     {
@@ -38,6 +40,7 @@
       "diet" : "low fat",
       "priority" : "Medium",
       "meetingDate" : "2025-03-16",
+      "remark": "",
       "tags" : [ ]
     },
     {
@@ -51,6 +54,7 @@
       "diet" : "low sugar",
       "priority" : "Low",
       "meetingDate" : "2025-03-20",
+      "remark": "",
       "tags" : [ "friends" ]
     },
     {
@@ -64,6 +68,7 @@
       "diet" : "low sodium",
       "priority" : "Medium",
       "meetingDate" : "2025-04-25",
+      "remark": "",
       "tags" : [ ]
     },
     {
@@ -77,6 +82,7 @@
       "diet" : "low carb",
       "priority" : "Low",
       "meetingDate" : "2025-05-05",
+      "remark": "",
       "tags" : [ ]
     },
     {
@@ -90,6 +96,7 @@
       "diet" : "low sugar",
       "priority" : "High",
       "meetingDate" : "2025-06-15",
+      "remark": "",
       "tags" : [ ]
     }
   ]

@@ -37,6 +37,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -124,11 +125,12 @@ public class EditCommand extends Command {
         Diet updatedDiet = editPersonDescriptor.getDiet().orElse(personToEdit.getDiet());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
+        Remark updatedRemark = personToEdit.getRemark(); //edit comm does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
-                updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedTags);
+                updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedRemark, updatedTags);
     }
 
     @Override

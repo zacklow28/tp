@@ -10,6 +10,7 @@
     "diet" : "low sodium",
     "priority" : "Low",
     "meetingDate" : "2025-04-01",
+    "remark": "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Pauline Alice",
@@ -21,6 +22,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "diet" : "low carb",
     "priority" : "Low",
-    "meetingDate" : "2025-04-01"
+    "meetingDate" : "2025-04-01",
+    "remark": ""
   } ]
 }
