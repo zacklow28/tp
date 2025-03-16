@@ -30,11 +30,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String prefix = parts[0].trim().toLowerCase();
         String value = parts[1].trim().toLowerCase();
 
+        // Validate prefix
         if (!prefix.matches("d|g|pr|m")) {
             throw new ParseException("Invalid filter category! Use:\n"
                     + "d/ (diet), g/(gender), pr/(priority), m/(meeting date)");
         }
 
+        // Validate values based on prefix
         switch (prefix) {
         case "d":
             if (!value.matches("regular|low sodium|low fat|low carb|low sugar|none")) {
@@ -56,6 +58,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             break;
 
         case "m":
+            if (!value.matches("\\d{4}-\\d{2}-\\d{2}")) { // YYYY-MM-DD format
+                throw new ParseException("Invalid meeting date format! Use: YYYY-MM-DD");
+            }
             break;
 
         default:
@@ -64,5 +69,5 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(prefix, value);
     }
-
 }
+

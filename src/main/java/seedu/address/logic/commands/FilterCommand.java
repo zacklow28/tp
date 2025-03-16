@@ -40,16 +40,16 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // Apply the filter (no validation here anymore)
         Predicate<Person> filterPredicate = switch (prefix) {
         case "d" -> person -> person.getDiet().toString().equalsIgnoreCase(value);
         case "g" -> person -> person.getGender().toString().equalsIgnoreCase(value);
         case "pr" -> person -> person.getPriority().toString().equalsIgnoreCase(value);
         case "m" -> person -> person.getMeetingDate().toString().equals(value);
-        default -> throw new CommandException("Invalid filter prefix: " + prefix);
+        default -> throw new CommandException("Unexpected error: invalid filter prefix passed execution.");
         };
 
         model.updateFilteredPersonList(filterPredicate);
-
         return new CommandResult("Filtered patients by " + prefix + ": " + value);
     }
 

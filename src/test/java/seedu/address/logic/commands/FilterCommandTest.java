@@ -65,9 +65,33 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_validMeetingDateFilter_success() throws CommandException {
+        model.addPerson(ALICE);
+        model.addPerson(BOB);
+
+        FilterCommand command = new FilterCommand("m", "2025-03-20");
+        command.execute(model);
+
+        List<Person> filteredList = model.getFilteredPersonList();
+        assertEquals(0, filteredList.size());
+    }
+
+    @Test
     public void execute_invalidFilterPrefix_throwsException() {
         FilterCommand command = new FilterCommand("x", "random");
         assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_noMatchingResults_returnsEmptyList() throws CommandException {
+        model.addPerson(ALICE);
+        model.addPerson(BOB);
+
+        FilterCommand command = new FilterCommand("d", "low carb");
+        command.execute(model);
+
+        List<Person> filteredList = model.getFilteredPersonList();
+        assertEquals(0, filteredList.size());
     }
 
     @Test
