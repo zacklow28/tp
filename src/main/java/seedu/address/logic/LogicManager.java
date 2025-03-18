@@ -33,6 +33,8 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private final CommandHistory commandHistory = new CommandHistory(); // Initialize CommandHistory
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -45,6 +47,7 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        commandHistory.addCommand(commandText); // Add command to history
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
@@ -84,5 +87,16 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    /**
+     * Returns the command history.
+     * This method provides access to the history of commands executed by the user,
+     * allowing retrieval and navigation of past commands.
+     *
+     * @return The current command history.
+     */
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
     }
 }

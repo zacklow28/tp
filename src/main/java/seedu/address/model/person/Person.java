@@ -29,13 +29,14 @@ public class Person {
     private final Diet diet;
     private final Priority priority;
     private final MeetingDate meetingDate;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Address address,
-                  Diet diet, Priority priority, MeetingDate meetingDate, Set<Tag> tags) {
+                  Diet diet, Priority priority, MeetingDate meetingDate, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
         this.name = name;
         this.gender = gender;
@@ -47,6 +48,7 @@ public class Person {
         this.diet = diet;
         this.priority = priority;
         this.meetingDate = meetingDate;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -89,6 +91,10 @@ public class Person {
     public MeetingDate getMeetingDate() {
         return meetingDate;
     }
+
+    public Remark getRemark() {
+        return remark;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -98,7 +104,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -107,7 +113,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**

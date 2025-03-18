@@ -10,17 +10,19 @@
     "diet" : "low sodium",
     "priority" : "Low",
     "meetingDate" : "2025-04-01",
+    "remark": "",
     "tags" : [ "friends" ]
   }, {
-    "name" : "Alice Pauline",
+    "name" : "Pauline Alice",
     "gender" : "F",
     "height" : "1.65",
     "weight" : "55.00",
     "phone" : "94351253",
-    "email" : "pauline@example.com",
+    "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "diet" : "low carb",
     "priority" : "Low",
-    "meetingDate" : "2025-04-01"
+    "meetingDate" : "2025-04-01",
+    "remark": ""
   } ]
 }

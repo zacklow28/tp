@@ -49,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label meetingDate;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane allTags;
 
     /**
@@ -66,6 +68,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
         meetingDate.setText(person.getMeetingDate().toString());
+        remark.setText(person.getRemark().value);
 
         Label priorityLabel = new Label(person.getPriority().toString());
         priorityLabel.getStyleClass().addAll("priority-label", "priority-"

@@ -28,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -65,10 +66,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
         MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE));
+        Remark remark = new Remark(""); //does not allow adding remarks in add command
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, gender, height, weight, phone, email, address, diet, priority, meetingDate,
-                tagList);
+                remark, tagList);
 
 
         return new AddCommand(person);

@@ -99,4 +99,5 @@ public interface Model {
     /** Sorts the filtered person list using the given comparator */
     void sortFilteredPersonList(Comparator<Person> comparator);
 
+
 }
