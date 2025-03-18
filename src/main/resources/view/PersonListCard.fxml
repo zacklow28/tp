@@ -22,7 +22,7 @@
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="20">
         <Label fx:id="name" styleClass="name-label" text="\$first" />
-        <Label fx:id="meetingDate" styleClass="cell_small_label" text="\$meetingDate" />
+        <Label fx:id="meetingDate" styleClass="meeting-label" text="\$meetingDate" />
       </HBox>
       <HBox spacing="7">
         <Label fx:id="gender" styleClass="gender-label" />

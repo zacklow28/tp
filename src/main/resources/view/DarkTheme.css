@@ -313,8 +313,15 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-background-color: #ffffff;        /* White card background */
+        -fx-background-radius: 8;            /* Slightly rounded corners */
+        -fx-border-color: #dddddd;           /* Light gray border */
+        -fx-border-radius: 8;
+        -fx-border-width: 1;
+        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);
+        -fx-padding: 10;
+        -fx-spacing: 10;                     /* Space between child nodes */
+        -fx-alignment: CENTER_LEFT;
 }
 
 #commandTypeLabel {
@@ -344,7 +351,7 @@
 }
 .label {
     -fx-font-size: 16px;
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-family: "Open Sans", sans-serif;
 }
 
 .name-label {
@@ -363,10 +370,13 @@
     -fx-text-fill: #2196F3; /* bright blue */
 }
 
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+.meeting-label {
+    -fx-border-color: black;
+        -fx-border-width: 1;
+        -fx-border-radius: 4;
+        -fx-background-color: #ffffff;
+        -fx-padding: 2 6; /* top/bottom = 2px, left/right = 6px */
+        -fx-alignment: center;
 }
 
 .priority-label {
