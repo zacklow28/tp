@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,7 +26,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-
     @FXML
     private HBox cardPane;
     @FXML
@@ -37,15 +37,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label weight;
     @FXML
-    private Label id;
-    @FXML
     private Label phone;
     @FXML
     private Label email;
     @FXML
     private Label address;
     @FXML
-    private Label diet;
+    private FlowPane dietTag;
     @FXML
     private FlowPane priorityTag;
     @FXML
@@ -53,15 +51,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane tags;
+    private FlowPane allTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+
         name.setText(person.getName().fullName);
         gender.setText(person.getGender().gender);
         height.setText(person.getHeight().toString() + " m");
@@ -69,16 +67,45 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
-        diet.setText(person.getDiet().toString());
+        meetingDate.setText(person.getMeetingDate().toString());
+        remark.setText(person.getRemark().value);
+
         Label priorityLabel = new Label(person.getPriority().toString());
         priorityLabel.getStyleClass().addAll("priority-label", "priority-"
                 + person.getPriority().toString().toLowerCase());
-        priorityTag.getChildren().add(priorityLabel);
-        meetingDate.setText(person.getMeetingDate().toString());
-        remark.setText(person.getRemark().value);
+        allTags.getChildren().add(priorityLabel);
+
+        Label dietLabel = new Label("D: " + person.getDiet().toString());
+        dietLabel.getStyleClass().add("diet-label");
+        allTags.getChildren().add(dietLabel);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("tag-label");
+                    allTags.getChildren().add(tagLabel);
+                });
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short-circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof PersonCard)) {
+            return false;
+        }
+        PersonCard otherCard = (PersonCard) other;
+        // Two PersonCards are equal if they have the same underlying person.
+        return person.equals(otherCard.person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(person);
     }
 }
