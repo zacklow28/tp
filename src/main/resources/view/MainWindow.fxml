@@ -14,25 +14,21 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Vitabook" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="VitaBook" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/Tomato.png" />
   </icons>
   <scene>
     <Scene>
-      <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
-
       <VBox>
         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="header-box">
           <ImageView fx:id="logo" fitHeight="70" fitWidth="70" preserveRatio="true" pickOnBounds="true">
             <Image url="@/images/Tomato.png" />
           </ImageView>
-          <Label text="Vitabook" styleClass="label-header" />
+          <Label text="VitaBook" styleClass="label-header" />
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <Menu mnemonicParsing="false" text="File">
+              <MenuItem fx:id="toggleThemeItem" text="Dark Mode" onAction="#handleToggleTheme" />
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

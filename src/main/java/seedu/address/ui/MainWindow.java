@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -39,6 +40,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem toggleThemeItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -59,6 +63,11 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        // Set initial theme to Light Mode
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().add(getClass().getResource("/view/LightMode.css").toExternalForm());
+        toggleThemeItem.setText("Dark Mode");
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -161,6 +170,28 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Toggle theme between light mode and dark mode.
+     */
+    @FXML
+    private void handleToggleTheme() {
+        Scene scene = primaryStage.getScene();
+        String currentStyle = scene.getStylesheets().get(0);
+
+        // Ensure Extensions.css is always applied last
+        if (!scene.getStylesheets().contains(getClass().getResource("/view/Extensions.css").toExternalForm())) {
+            scene.getStylesheets().add(getClass().getResource("/view/Extensions.css").toExternalForm());
+        }
+
+        if (currentStyle.equals(getClass().getResource("/view/LightMode.css").toExternalForm())) {
+            scene.getStylesheets().set(0, getClass().getResource("/view/DarkMode.css").toExternalForm());
+            toggleThemeItem.setText("Light Mode");
+        } else {
+            scene.getStylesheets().set(0, getClass().getResource("/view/LightMode.css").toExternalForm());
+            toggleThemeItem.setText("Dark Mode");
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
