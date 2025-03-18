@@ -209,7 +209,7 @@
     -fx-background-color: derive(#BACDB0, 20%);
 }
 
-.menu-bar .label {
+.menu-bar .menu .label {
     -fx-font-size: 18pt;
     -fx-font-family: "Georgia";
     -fx-text-fill: #475B63;
@@ -224,13 +224,12 @@
     -fx-background-color: derive(#9BB783, 20%);
 }
 
-.menu-item {
-    -fx-border-width: 0;
-    -fx-text-fill: white;
-}
-
 .menu-bar .menu-item:hover {
     -fx-background-color: grey;
+}
+
+.menu-bar .menu-item .label {
+    -fx-text-fill: white;
 }
 
 /*
