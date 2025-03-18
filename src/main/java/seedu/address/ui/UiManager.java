@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
