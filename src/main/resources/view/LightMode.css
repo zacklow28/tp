@@ -2,6 +2,10 @@
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
 }
+.header-box {
+    -fx-background-color: derive(#BACDB0, 20%);
+    -fx-padding: 15px 10px 15px 10px;
+}
 
 .label {
     -fx-font-size: 11pt;
@@ -19,8 +23,8 @@
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #475B63;
     -fx-opacity: 1;
 }
 
@@ -91,7 +95,7 @@
     /*for filled lists*/
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#9BB783, 20%);
+    -fx-background-color: derive(#BACDB0, 20%);
 
 }
 
@@ -110,23 +114,13 @@
     -fx-border-radius: 25px;
 }
 
-.list-cell:filled:even {
+.list-cell:filled {
     /*-fx-background-color: #3c3e3f;*/
     -fx-background-color: #FAFAF5;
 }
 
-.list-cell:filled:odd {
-    /*-fx-background-color: #515658;*/
-    -fx-background-color: #EEEEDA;
-}
-
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-background-color: derive(#EEEEDA, 5%);
 }
 
 .list-cell .label {
@@ -148,13 +142,12 @@
 
 .stack-pane {
     /*-command typing area*/
-     -fx-background-color: derive(#4A7624, 20%);
+     -fx-background-color: derive(#F4EBD9, 80%);
 }
 
 .pane-with-border {
     /*-border for everything*/
-     -fx-background-color: derive(#9BB783, 20%);
-     -fx-border-color: derive(#9BB783, 10%);
+     -fx-background-color: derive(#BACDB0, 20%);
      -fx-border-top-width: 1px;
 }
 
@@ -213,19 +206,30 @@
 
 .menu-bar {
     /*top part*/
-    -fx-background-color: derive(#9BB783, 20%);
+    -fx-background-color: derive(#BACDB0, 20%);
 }
 
-.menu-bar .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI";
-    -fx-text-fill: #4A7624;
-    /*-fx-font-weight: bold;*/
+.menu-bar .menu .label {
+    -fx-font-size: 18pt;
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #475B63;
     -fx-opacity: 0.9;
 }
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.menu:hover {
+    -fx-background-color: derive(#9BB783, 20%);
+}
+
+.menu-bar .menu-item:hover {
+    -fx-background-color: grey;
+}
+
+.menu-bar .menu-item .label {
+    -fx-text-fill: white;
 }
 
 /*
@@ -346,7 +350,7 @@
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -355,7 +359,7 @@
 
 #resultDisplay .content {
     /*results part*/
-    -fx-background-color: transparent, #9BB783, transparent, #9BB783;
+    -fx-background-color: derive(#9BB783, 20%);
     -fx-background-radius: 0;
 }
 
