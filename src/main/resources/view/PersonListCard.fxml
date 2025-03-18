@@ -11,37 +11,37 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="150"/>
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="171.0" GridPane.columnIndex="0">
+    <VBox spacing="7" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox alignment="CENTER_LEFT" spacing="0.5">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+      <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label fx:id="name" styleClass="name-label" text="\$first" />
+        <Label fx:id="meetingDate" styleClass="meeting-label" text="\$meetingDate" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <FlowPane fx:id="priorityTag" styleClass="priority-tag-container" />
-      <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
-      <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
-      <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="7">
+        <Label fx:id="gender" styleClass="gender-label" />
+        <Label fx:id="height" styleClass="height-label" />
+        <Label fx:id="weight" styleClass="weight-label" />
+      </HBox>
+      <HBox spacing="7">
+        <Label fx:id="phone" styleClass="phone-label"/>
+        <Label fx:id="email" styleClass="email-label"/>
+      </HBox>
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="diet" styleClass="cell_small_label" text="\$diet" />
-      <Label fx:id="meetingDate" styleClass="cell_small_label" text="\$meetingDate" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      <FlowPane fx:id="allTags" xmlns:fx="http://javafx.com/fxml"
+                hgap="5" vgap="5">
+      </FlowPane>
     </VBox>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>
   </GridPane>
+  </children>
 </HBox>
