@@ -120,7 +120,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: derive(#EEEEDA, 5%);
+    -fx-background-color: #06312F;
 }
 
 .list-cell .label {
