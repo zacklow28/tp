@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,7 +26,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-
     @FXML
     private HBox cardPane;
     @FXML
@@ -54,9 +54,10 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person) {
         super(FXML);
         this.person = person;
+
         name.setText(person.getName().fullName);
         gender.setText(person.getGender().gender);
         height.setText(person.getHeight().toString() + " m");
@@ -83,5 +84,25 @@ public class PersonCard extends UiPart<Region> {
                     allTags.getChildren().add(tagLabel);
                 });
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short-circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof PersonCard)) {
+            return false;
+        }
+        PersonCard otherCard = (PersonCard) other;
+        // Two PersonCards are equal if they have the same underlying person.
+        return person.equals(otherCard.person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(person);
     }
 }

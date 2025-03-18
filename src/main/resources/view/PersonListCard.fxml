@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" minWidth="150"/>
@@ -41,4 +42,5 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
+  </children>
 </HBox>
