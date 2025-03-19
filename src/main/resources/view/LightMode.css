@@ -323,7 +323,7 @@
     -fx-border-color: #dddddd;           /* Light gray border */
     -fx-border-radius: 8;
     -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);*/
     -fx-padding: 10;
     -fx-spacing: 8;                     /* Space between child nodes */
     -fx-alignment: CENTER_LEFT;
@@ -404,7 +404,7 @@
 }
 
 .diet-label {
-    -fx-background-color: #89CFF0;
+    -fx-background-color: #75C7FA;
     -fx-text-fill: white;
     -fx-padding: 2 5;
     -fx-border-radius: 3;
