@@ -21,7 +21,7 @@
     -fx-opacity: 1;
 }
 
-.label-header {
+.header-box .header-title {
     -fx-font-size: 32pt;
     -fx-font-family: "Georgia";
     -fx-text-fill: #475B63;
@@ -96,6 +96,7 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#BACDB0, 20%);
+    -fx-background-radius: 8;
 
 }
 
@@ -104,14 +105,12 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: derive(#9BB783, 20%);
+    -fx-background-radius: 8;
 }
 
 .list-cell:filled {
     -fx-padding: 0 0 10 0;
     -fx-background-insets: 0 0 10px 0; /*Adds bottom margin-like spacing*/
-    -fx-background-radius: 25px;
-    -fx-border-radius: 25px;
 }
 
 .list-cell:filled {
@@ -123,6 +122,9 @@
     -fx-background-color: derive(#EEEEDA, 5%);
 }
 
+.list-cell:filled #cardPane:selected {
+    -fx-background-color: #EEEEDA;
+}
 
 .stack-pane {
     /*-command typing area*/
@@ -317,15 +319,14 @@
 }
 
 #cardPane {
-    -fx-background-color: #ffffff;        /* White card background */
-        -fx-background-radius: 8;            /* Slightly rounded corners */
-        -fx-border-color: #dddddd;           /* Light gray border */
-        -fx-border-radius: 8;
-        -fx-border-width: 1;
-        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);
-        -fx-padding: 10;
-        -fx-spacing: 10;                     /* Space between child nodes */
-        -fx-alignment: CENTER_LEFT;
+    -fx-background-radius: 8;            /* Slightly rounded corners */
+    -fx-border-color: #dddddd;           /* Light gray border */
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);*/
+    -fx-padding: 10;
+    -fx-spacing: 8;                     /* Space between child nodes */
+    -fx-alignment: CENTER_LEFT;
 }
 
 #commandTypeLabel {
@@ -376,11 +377,11 @@
 
 .meeting-label {
     -fx-border-color: black;
-        -fx-border-width: 1;
-        -fx-border-radius: 4;
-        -fx-background-color: #ffffff;
-        -fx-padding: 2 6; /* top/bottom = 2px, left/right = 6px */
-        -fx-alignment: center;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-color: #ffffff;
+    -fx-padding: 2 6; /* top/bottom = 2px, left/right = 6px */
+    -fx-alignment: center;
 }
 
 .priority-label {
@@ -403,7 +404,7 @@
 }
 
 .diet-label {
-    -fx-background-color: #89CFF0;
+    -fx-background-color: #75C7FA;
     -fx-text-fill: white;
     -fx-padding: 2 5;
     -fx-border-radius: 3;
