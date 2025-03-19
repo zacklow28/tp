@@ -375,7 +375,7 @@
 }
 
 .meeting-label {
-    -fx-border-color: black;
+    -fx-border-color: #B8B8B8;
     -fx-border-width: 1;
     -fx-border-radius: 4;
     -fx-background-color:  #19271F;
