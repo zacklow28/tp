@@ -71,7 +71,7 @@ public class RemarkCommand extends Command {
     private String generateSuccessMessage(Person personToEdit) {
         //if empty remark, this deletes current remark
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override
