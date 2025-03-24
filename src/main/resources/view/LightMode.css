@@ -349,6 +349,10 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+.list-cell:empty {
+    -fx-background-color: transparent;
+}
+
 #resultDisplay .content {
     /*results part*/
     -fx-background-color: derive(#9BB783, 20%);
