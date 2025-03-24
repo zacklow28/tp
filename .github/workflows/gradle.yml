@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Set up repository
+        (ref: master)
         uses: actions/checkout@main
         with:
           ref: master
@@ -23,20 +24,34 @@ jobs:
 
       - name: Run repository-wide tests
         if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/.github
+        working-directory: ${{ github.workspace }}/.github
         run: ./run-checks.sh
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
 
-      - name: Setup JDK 17
+      - name: Setup JDK 17 with JavaFX
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
           java-package: jdk+fx
 
-      - name: Build and check with Gradle
+      # This step ensures OpenJFX and Xvfb are installed on Ubuntu.
+      - name: Install JavaFX and Xvfb on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjfx xvfb
+
+      # Run tests under a virtual display on Linux.
+      - name: Build and check with Gradle (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' ./gradlew check coverage
+
+      # For macOS and Windows, just run the tests normally.
+      - name: Build and check with Gradle (Non-Linux)
+        if: runner.os != 'Linux'
         run: ./gradlew check coverage
 
       - name: Upload coverage reports to Codecov
