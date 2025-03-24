@@ -20,6 +20,12 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+task guiTests
+task nonGuiTests
+task allTests {
+    dependsOn guiTests, nonGuiTests
+}
+
 test {
     useJUnitPlatform()
     // Set a longer timeout for TestFX setup
