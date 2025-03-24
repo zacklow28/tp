@@ -32,10 +32,11 @@ test {
     systemProperty 'testfx.setup.timeout', '60000'
 
     systemProperty 'testfx.robot', 'glass'
-    systemProperty 'testfx.headless', 'true'
     systemProperty 'prism.order', 'sw'
     systemProperty 'prism.text', 't2k'
     systemProperty 'java.awt.headless', 'true'
+
+    jvmArgs '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED'
 
     testLogging {
         events 'FAILED', 'SKIPPED'
@@ -109,6 +110,7 @@ dependencies {
 
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+
 
 }
 
