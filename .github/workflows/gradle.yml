@@ -1,9 +1,6 @@
 name: Java CI
 
-on:
-  push:
-    branches:
-      - '**'   # Run on push to any branch (works around the PR limitation)
+on: [push, pull_request]
 
 jobs:
   build:
@@ -14,28 +11,36 @@ jobs:
 
     steps:
       - name: Set up repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
+
+      - name: Set up repository
+        uses: actions/checkout@main
+        with:
+          ref: master
+
+      - name: Merge to master
+        run: git checkout --progress --force ${{ github.sha }}
+
+      - name: Run repository-wide tests
+        if: runner.os == 'Linux'
+        working-directory:  ${{ github.workspace }}/.github
+        run: ./run-checks.sh
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
 
-      - name: Setup JDK 17 with JavaFX
+      - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
           java-package: jdk+fx
 
-      - name: Install JavaFX and Xvfb on Linux
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openjfx xvfb
-
-      - name: Build and test (Linux with xvfb)
-        if: runner.os == 'Linux'
-        run: xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' ./gradlew check coverage
-
-      - name: Build and test (Non-Linux)
-        if: runner.os != 'Linux'
+      - name: Build and check with Gradle
         run: ./gradlew check coverage
+
+      - name: Upload coverage reports to Codecov
+        if: runner.os == 'Linux'
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
