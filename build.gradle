@@ -22,7 +22,15 @@ checkstyle {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
+    // Set a longer timeout for TestFX setup
+    systemProperty 'testfx.setup.timeout', '60000'
+
+    testLogging {
+        events 'FAILED', 'SKIPPED'
+        if (System.env.'CI') {
+            events 'STARTED'
+        }
+    }
 }
 
 task coverage(type: JacocoReport) {
@@ -73,85 +81,6 @@ shadowJar {
     archiveFileName = 'Vitabook.jar'
 }
 
-task coverage(type: JacocoReport) {
-    sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
-    classDirectories.from files(sourceSets.main.output)
-    executionData.from files(jacocoTestReport.executionData)
-    afterEvaluate {
-        classDirectories.from files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*.jar'])
-        })
-    }
-    reports {
-        html.enabled = true
-        xml.enabled = true
-    }
-}
-
-coveralls {
-    sourceDirs = sourceSets.main.allSource.srcDirs.absolutePath
-    jacocoReportPath = "${buildDir}/reports/jacoco/coverage/coverage.xml"
-}
-
-tasks.coveralls {
-    dependsOn coverage
-    onlyIf { System.env.'CI' }
-}
-
-task(guiTests)
-task(nonGuiTests)
-
-// Run `test` task if `guiTests` or `nonGuiTests` is specified
-guiTests.dependsOn test
-nonGuiTests.dependsOn test
-
-task(allTests)
-
-// `allTests` implies both `guiTests` and `nonGuiTests`
-allTests.dependsOn guiTests
-allTests.dependsOn nonGuiTests
-
-test {
-    systemProperty 'testfx.setup.timeout', '60000'
-
-    testLogging {
-        events TestLogEvent.FAILED, TestLogEvent.SKIPPED
-
-        // Prints the currently running test's name in the CI's build log,
-        // so that we can check if tests are being silently skipped or
-        // stalling the build.
-        if (System.env.'CI') {
-            events << TestLogEvent.STARTED
-        }
-    }
-
-    jacoco {
-        destinationFile = new File("${buildDir}/jacoco/test.exec")
-    }
-
-    doFirst {
-        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
-        boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
-
-        if (!runGuiTests && !runNonGuiTests) {
-            runGuiTests = true
-            runNonGuiTests = true
-        }
-
-        if (runNonGuiTests) {
-            test.include 'seedu/address/**'
-        }
-
-        if (runGuiTests) {
-            test.include 'systemtests/**'
-            test.include 'seedu/address/ui/**'
-        }
-
-        if (!runGuiTests) {
-            test.exclude 'seedu/address/ui/**'
-        }
-    }
-}
 
 task headless {
     doLast {
@@ -170,55 +99,4 @@ task headless {
 // Makes sure that headless properties are set before running tests
 test.mustRunAfter headless
 
-asciidoctor {
-    backends 'html5'
-    sourceDir 'docs'
-    outputDir "${buildDir}/docs"
-
-    options = [
-            template_dirs: [file("${sourceDir}/templates")],
-    ]
-
-    attributes = [
-            linkcss: true,
-            stylesheet: 'gh-pages.css',
-            'source-highlighter': 'coderay',
-            icons: 'font',
-            experimental: true,
-            sectlinks: true,
-            idprefix: '',  // for compatibility with GitHub preview
-            idseparator: '-',
-            'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-            'site-name': 'AddressBook-Level4',
-            'site-githuburl': 'https://github.com/se-edu/addressbook-level4',
-            'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
-    ]
-
-    options['template_dirs'].each {
-        inputs.files fileTree(it)
-    }
-}
-
-// Copies stylesheets into the directory containing generated HTML files as
-// Asciidoctor does not copy linked CSS files to the output directory when rendering.
-// This is needed for linked stylesheets and embedded stylesheets which import other files.
-task copyStylesheets(type: Copy) {
-    from "${asciidoctor.sourceDir}/stylesheets"
-    into "${asciidoctor.outputDir}/html5/stylesheets"
-}
-asciidoctor.dependsOn copyStylesheets
-
-task deployOfflineDocs(type: Copy) {
-    into('src/main/resources/docs')
-
-    from ("${asciidoctor.outputDir}/html5") {
-        include 'stylesheets/*'
-        include 'images/*'
-        include 'HelpWindow.html'
-    }
-}
-
-deployOfflineDocs.dependsOn asciidoctor
-processResources.dependsOn deployOfflineDocs
-
-defaultTasks 'clean', 'headless', 'allTests', 'coverage', 'asciidoctor'
+defaultTasks 'clean', 'headless', 'allTests', 'coverage'
