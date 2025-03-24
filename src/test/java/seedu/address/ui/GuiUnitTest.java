@@ -17,10 +17,19 @@ public abstract class GuiUnitTest {
     // This is a workaround to solve headless test failure on Windows OS
     // Refer to https://github.com/javafxports/openjdk-jfx/issues/66 for more details.
     static {
+        // Workaround for Windows headless issues
         if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
             System.loadLibrary("WindowsCodecs");
         }
+
+        // Headless mode settings for all OSes
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("prism.order", "sw");
+        System.setProperty("prism.text", "t2k");
+        System.setProperty("java.awt.headless", "true");
     }
+
 
     @RegisterExtension
     public final UiPartExtension uiPartExtension = new UiPartExtension();
