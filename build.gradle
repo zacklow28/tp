@@ -25,10 +25,39 @@ test {
     // Set a longer timeout for TestFX setup
     systemProperty 'testfx.setup.timeout', '60000'
 
+    systemProperty 'testfx.robot', 'glass'
+    systemProperty 'testfx.headless', 'true'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'prism.text', 't2k'
+    systemProperty 'java.awt.headless', 'true'
+
     testLogging {
         events 'FAILED', 'SKIPPED'
         if (System.env.'CI') {
             events 'STARTED'
+        }
+    }
+
+    doFirst {
+        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
+        boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
+
+        if (!runGuiTests && !runNonGuiTests) {
+            runGuiTests = true
+            runNonGuiTests = true
+        }
+
+        if (runNonGuiTests) {
+            test.include 'seedu/address/**'
+        }
+
+        if (runGuiTests) {
+            test.include 'systemtests/**'
+            test.include 'seedu/address/ui/**'
+        }
+
+        if (!runGuiTests) {
+            test.exclude 'seedu/address/ui/**'
         }
     }
 }
@@ -82,21 +111,6 @@ shadowJar {
 }
 
 
-task headless {
-    doLast {
-        println 'Setting headless mode properties.'
-        test {
-            systemProperties = [
-                    'testfx.robot': 'glass',
-                    'testfx.headless': 'true',
-                    'prism.order': 'sw',
-                    'prism.text': 't2k',
-            ]
-        }
-    }
-}
 
-// Makes sure that headless properties are set before running tests
-test.mustRunAfter headless
 
-defaultTasks 'clean', 'headless', 'allTests', 'coverage'
+defaultTasks 'clean', 'allTests', 'coverage'
