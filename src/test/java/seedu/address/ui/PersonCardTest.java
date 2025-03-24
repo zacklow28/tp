@@ -79,7 +79,6 @@ public class PersonCardTest extends GuiUnitTest {
 
         PersonCardHandle handle = new PersonCardHandle(personCard.getRoot());
 
-        // verify person details are displayed correctly, including new fields
         assertCardDisplaysPerson(expectedPerson, handle);
     }
 }
