@@ -3,10 +3,17 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of address book states over time.
+ */
 public class VersionedAddressBook extends AddressBook {
     private final List<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
+    /**
+     * Constructs a VersionedAddressBook.
+     * @param initialState The initial state of the address book
+     */
     public VersionedAddressBook(ReadOnlyAddressBook initialState) {
         super(initialState);
         addressBookStateList = new ArrayList<>();
@@ -42,7 +49,7 @@ public class VersionedAddressBook extends AddressBook {
 
     /**
      * Restores the next address book state.
-     * @throws IllegalStateException if there are no redoable states.
+     * @throws IllegalStateException if there are no next states.
      */
     public void redo() {
         if (!canRedo()) {
@@ -53,16 +60,21 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Returns true if there is an undoable state.
+     * Returns true if there is a previous state.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if there is a redoable state.
+     * Returns true if there is a next state.
      */
     public boolean canRedo() {
         return currentStatePointer < addressBookStateList.size() - 1;
+    }
+
+
+    public int getCurrentStatePointer() {
+        return currentStatePointer;
     }
 }

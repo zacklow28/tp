@@ -24,7 +24,7 @@ public class RedoCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other instanceof UndoCommand;
+        return other instanceof RedoCommand;
     }
 }
 
