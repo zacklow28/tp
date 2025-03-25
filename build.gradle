@@ -20,9 +20,54 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+task guiTests
+task nonGuiTests
+task allTests {
+    dependsOn guiTests, nonGuiTests
+}
+
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
+    // Set a longer timeout for TestFX setup
+    systemProperty 'testfx.setup.timeout', '60000'
+
+    systemProperty 'testfx.robot', 'glass'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'prism.text', 't2k'
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'fast.testing', 'true'
+
+    jvmArgs '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED'
+
+    testLogging {
+        events 'FAILED', 'SKIPPED'
+        if (System.env.'CI') {
+            events 'STARTED'
+        }
+    }
+
+    doFirst {
+        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
+        boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
+
+        if (!runGuiTests && !runNonGuiTests) {
+            runGuiTests = true
+            runNonGuiTests = true
+        }
+
+        if (runNonGuiTests) {
+            test.include 'seedu/address/**'
+        }
+
+        if (runGuiTests) {
+            test.include 'systemtests/**'
+            test.include 'seedu/address/ui/**'
+        }
+
+        if (!runGuiTests) {
+            test.exclude 'seedu/address/ui/**'
+        }
+    }
 }
 
 task coverage(type: JacocoReport) {
@@ -67,10 +112,14 @@ dependencies {
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 
+
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'Vitabook.jar'
 }
 
-defaultTasks 'clean', 'test'
+
+
+
+defaultTasks 'clean', 'allTests', 'coverage'
