@@ -181,26 +181,79 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: What is VitaBook?
+**A**: VitaBook is a desktop application designed for freelance nutritionists to manage patient information efficiently 
+using a typing-preferred interface. It is optimized for fast data entry and offline use.
 
+**Q**: Who is VitaBook for?
+**A**: VitaBook is for freelance or home-based nutritionists who need to keep track of patient profiles, dietary 
+restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
+
+**Q**: How is VitaBook different from a regular address book?
+**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight, 
+dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for 
+fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
+
+**Q**: Do I need to install any special software to run VitaBook?
+**A**: You just need to have Java 17 installed. No installation is required — simply run the JAR file.
+
+**Q**: What kind of information can I store about a patient?
+**A**: You can store:
+
+Name, phone, email, address
+Gender, height, weight
+Dietary tags (e.g., low sodium, peanuts)
+Meeting date
+Priority level (LOW, MEDIUM, HIGH)
+Remarks
+
+**Q**:What happens when I delete a patient?
+**A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from 
+the address book.
+
+**Q**: Can I undo a mistaken command?
+**A**: Yes, you can! Just write undo, followed by the patient index, the field to be changed, and the updated info
+
+**Q**: Can I add custom fields or conditions?
+**A**: Any other relevant info other than the fields provided can be added to the remark field as a workaround
+
+**Q**: Can I import data from another app or CSV file?
+**A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable with the format.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+- **Allergy fields are case-sensitive**  
+  Adding allergy tags like `peanuts` and `Peanuts` results in two different tags being stored. This can lead to duplicates or confusion when filtering/searching.
 
+- **No support for recurring meeting dates or reminders**  
+  Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
+
+- **Commands must follow strict ordering and prefixes**  
+  Forgetting a prefix (like `n/`) or misordering fields will result in an invalid command, even if the content is correct.
+
+- **No concurrency or multi-user support**  
+  VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
+
+- **No graphical support for charts or health analytics**  
+  Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
+
+- **Application crashes if `addressbook.json` is manually corrupted**  
+  If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action        | Format, Examples
+--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [t/TAG]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 t/peanuts`
+**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [t/TAG]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
+**Delete**    | `delete INDEX`<br>e.g., `delete 3`
+**List**      | `list`
+**Find**      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`
+**Sort**      | `sort FIELD`<br>e.g., `sort priority`, `sort name`, `sort weight`
+**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 HIGH`
+**Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
+**Clear**     | `clear`
+**Help**      | `help`
+
