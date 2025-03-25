@@ -182,16 +182,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: What is VitaBook?
-**A**: VitaBook is a desktop application designed for freelance nutritionists to manage patient information efficiently 
+**A**: VitaBook is a desktop application designed for freelance nutritionists to manage patient information efficiently
 using a typing-preferred interface. It is optimized for fast data entry and offline use.
 
 **Q**: Who is VitaBook for?
-**A**: VitaBook is for freelance or home-based nutritionists who need to keep track of patient profiles, dietary 
+**A**: VitaBook is for freelance or home-based nutritionists who need to keep track of patient profiles, dietary
 restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
 
 **Q**: How is VitaBook different from a regular address book?
-**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight, 
-dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for 
+**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight,
+dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for
 fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
 
 **Q**: Do I need to install any special software to run VitaBook?
@@ -208,7 +208,7 @@ Priority level (LOW, MEDIUM, HIGH)
 Remarks
 
 **Q**:What happens when I delete a patient?
-**A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from 
+**A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from
 the address book.
 
 **Q**: Can I undo a mistaken command?
@@ -218,27 +218,28 @@ the address book.
 **A**: Any other relevant info other than the fields provided can be added to the remark field as a workaround
 
 **Q**: Can I import data from another app or CSV file?
-**A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable with the format.
+**A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable
+with the format.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-- **Allergy fields are case-sensitive**  
+- **Allergy fields are case-sensitive**
   Adding allergy tags like `peanuts` and `Peanuts` results in two different tags being stored. This can lead to duplicates or confusion when filtering/searching.
 
-- **No support for recurring meeting dates or reminders**  
+- **No support for recurring meeting dates or reminders**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
 
-- **Commands must follow strict ordering and prefixes**  
+- **Commands must follow strict ordering and prefixes**
   Forgetting a prefix (like `n/`) or misordering fields will result in an invalid command, even if the content is correct.
 
-- **No concurrency or multi-user support**  
+- **No concurrency or multi-user support**
   VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
 
-- **No graphical support for charts or health analytics**  
+- **No graphical support for charts or health analytics**
   Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
 
-- **Application crashes if `addressbook.json` is manually corrupted**  
+- **Application crashes if `addressbook.json` is manually corrupted**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
 --------------------------------------------------------------------------------------------------------------------
 
