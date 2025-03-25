@@ -18,4 +18,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Priority
+Person *--> Gender
+Person *--> Diet
+Person *--> Height
+Person *--> Weight
+Person *--> MeetingDate
 @enduml
