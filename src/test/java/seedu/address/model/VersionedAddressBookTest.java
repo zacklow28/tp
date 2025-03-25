@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -9,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.Test;
 
 public class VersionedAddressBookTest {
     private final VersionedAddressBook versionedAddressBook = new VersionedAddressBook(getTypicalAddressBook());
@@ -35,7 +34,7 @@ public class VersionedAddressBookTest {
     }
 
     @Test
-    public void undo_ChangesAddressBookToPrevious_statePointerDecremented() {
+    public void undo_changesAddressBookToPrevious_statePointerDecremented() {
         versionedAddressBook.removePerson(versionedAddressBook.getPersonList().get(0));
         versionedAddressBook.commit();
         versionedAddressBook.undo();
@@ -59,7 +58,7 @@ public class VersionedAddressBookTest {
     }
 
     @Test
-    public void redo_ChangesAddressBookToNext_statePointerIncremented() {
+    public void redo_changesAddressBookToNext_statePointerIncremented() {
         versionedAddressBook.removePerson(versionedAddressBook.getPersonList().get(0));
         versionedAddressBook.commit();
         versionedAddressBook.undo();

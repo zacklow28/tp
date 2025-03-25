@@ -110,7 +110,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void undoAddressBookAfterOneCommit_canRedoAddressBook_returnsTrue_() {
+    public void undoAddressBookAfterOneCommit_canRedoAddressBook_returnsTrue() {
         modelManager.commitAddressBook();
         modelManager.undoAddressBook();
         assertTrue(modelManager.canRedoAddressBook());
