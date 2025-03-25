@@ -85,6 +85,7 @@ public class AddressBookParser {
             return new FilterCommandParser().parse(arguments);
 
         case PriorityCommand.COMMAND_WORD:
+        case PriorityCommand.SHORT_COMMAND_WORD:
             return new PriorityCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
