@@ -6,19 +6,19 @@ import seedu.address.model.Model;
 /**
  * Command to undo the previous action performed on the address book.
  */
-public class UndoCommand extends Command {
+public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo successful: AddressBook undone to previous state.";
-    public static final String MESSAGE_FAILURE = "No previous state to undo.";
+    public static final String COMMAND_WORD = "redo";
+    public static final String MESSAGE_SUCCESS = "Redo successful: AddressBook redone to next state.";
+    public static final String MESSAGE_FAILURE = "No next state to redo.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.canUndoAddressBook()) {
+        if (!model.canRedoAddressBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook(); // Calls VersionedAddressBook#undo()
+        model.redoAddressBook(); // Calls VersionedAddressBook#undo()
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -27,4 +27,5 @@ public class UndoCommand extends Command {
         return other instanceof UndoCommand;
     }
 }
+
 

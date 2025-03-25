@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.util.VersionedAddressBook;
+import seedu.address.model.VersionedAddressBook;
 
 /**
  * Represents the in-memory model of the address book data.

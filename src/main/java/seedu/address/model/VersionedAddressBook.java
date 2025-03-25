@@ -1,7 +1,4 @@
-package seedu.address.model.util;
-
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +46,7 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void redo() {
         if (!canRedo()) {
-            throw new IllegalStateException("No state to redo.");
+            throw new IllegalStateException("No next state to redo.");
         }
         currentStatePointer++;
         resetData(addressBookStateList.get(currentStatePointer));

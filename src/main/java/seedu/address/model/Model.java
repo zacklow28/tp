@@ -99,10 +99,19 @@ public interface Model {
     /** Sorts the filtered person list using the given comparator */
     void sortFilteredPersonList(Comparator<Person> comparator);
 
+    /** Commits the address book state*/
     void commitAddressBook();
+
+    /** Undoes the address book state*/
     void undoAddressBook();
+
+    /** Redoes the address book state*/
     void redoAddressBook();
+
+    /** Returns true if the address book state can be undone*/
     boolean canUndoAddressBook();
+
+    /** Returns true if the address book state can be redone*/
     boolean canRedoAddressBook();
 
 }
