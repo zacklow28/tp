@@ -35,7 +35,7 @@ public class GuiRobot extends FxRobot {
      * unnecessary delays.
      */
     public void pauseForHuman() {
-        if (isHeadlessMode) {
+        if (isHeadlessMode || Boolean.getBoolean("fast.testing")) {
             return;
         }
 
