@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -26,7 +27,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 
 class SortCommandTest {
     private Model model;
@@ -48,7 +48,7 @@ class SortCommandTest {
                         new Priority("low"),
                         new MeetingDate("2025-02-10"),
                         new Remark("diabetic"),
-                        Set.of(new Tag("mushroom"))),
+                        Set.of(new Allergy("mushroom"))),
 
                 new Person(new Name("Alice Tan"),
                         new Gender("f"),
@@ -61,7 +61,7 @@ class SortCommandTest {
                         new Priority("high"),
                         new MeetingDate("2025-02-10"),
                         new Remark("diabetic"),
-                        Set.of(new Tag("mushroom"))),
+                        Set.of(new Allergy("mushroom"))),
 
                 new Person(new Name("Bob Lim"),
                         new Gender("m"),
@@ -74,7 +74,7 @@ class SortCommandTest {
                         new Priority("medium"),
                         new MeetingDate("2025-03-05"),
                         new Remark("hypertension"),
-                        Set.of(new Tag("prawn")))
+                        Set.of(new Allergy("prawn")))
         ));
 
         // Add persons to the model

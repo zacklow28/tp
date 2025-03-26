@@ -14,8 +14,8 @@ public class PersonCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags, basic fields
-        Person personWithNoTags = new PersonBuilder()
+        // no allergies, basic fields
+        Person personWithNoAllergies = new PersonBuilder()
                 .withGender("F")
                 .withHeight("1.65")
                 .withWeight("55")
@@ -25,14 +25,14 @@ public class PersonCardTest extends GuiUnitTest {
                 .withDiet("regular")
                 .withPriority("High")
                 .withMeetingDate("2025-03-21")
-                .withTags()
+                .withAllergies()
                 .build();
-        PersonCard personCard = new PersonCard(personWithNoTags);
+        PersonCard personCard = new PersonCard(personWithNoAllergies);
         uiPartExtension.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithNoTags);
+        assertCardDisplay(personCard, personWithNoAllergies);
 
-        // with tags and all fields
-        Person personWithTags = new PersonBuilder()
+        // with allergies and all fields
+        Person personWithAllergies = new PersonBuilder()
                 .withGender("M")
                 .withHeight("1.80")
                 .withWeight("75")
@@ -42,11 +42,11 @@ public class PersonCardTest extends GuiUnitTest {
                 .withDiet("low sodium")
                 .withPriority("Medium")
                 .withMeetingDate("2025-03-22")
-                .withTags("Diabetic", "Asthma")
+                .withAllergies("milk", "eggs")
                 .build();
-        personCard = new PersonCard(personWithTags);
+        personCard = new PersonCard(personWithAllergies);
         uiPartExtension.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithTags);
+        assertCardDisplay(personCard, personWithAllergies);
     }
 
     @Test

@@ -56,7 +56,7 @@ public class RemarkCommand extends Command {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getGender(), personToEdit.getHeight(),
                 personToEdit.getWeight(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDiet(), personToEdit.getPriority(),
-                personToEdit.getMeetingDate(), remark, personToEdit.getTags());
+                personToEdit.getMeetingDate(), remark, personToEdit.getAllergies());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -50,8 +50,8 @@ public class GuiTestAssert {
         List<String> expectedTags = new ArrayList<>();
         expectedTags.add(expectedPerson.getPriority().toString());
         expectedTags.add("D: " + expectedPerson.getDiet().toString());
-        List<String> additionalTags = expectedPerson.getTags().stream()
-                .map(tag -> tag.tagName)
+        List<String> additionalTags = expectedPerson.getAllergies().stream()
+                .map(allergy -> allergy.allergyName)
                 .sorted()
                 .collect(Collectors.toList());
         expectedTags.addAll(additionalTags);

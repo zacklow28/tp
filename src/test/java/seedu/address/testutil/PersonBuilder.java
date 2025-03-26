@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -15,7 +16,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -47,7 +47,7 @@ public class PersonBuilder {
     private Priority priority;
     private MeetingDate meetingDate;
     private Remark remark;
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Allergy> allergies = new HashSet<>();
 
 
     /**
@@ -65,7 +65,7 @@ public class PersonBuilder {
         priority = new Priority(DEFAULT_PRIORITY);
         meetingDate = new MeetingDate(DEFAULT_MEETING_DATE);
         remark = new Remark(DEFAULT_REMARK);
-        tags = new HashSet<>();
+        allergies = new HashSet<>();
     }
 
     /**
@@ -83,7 +83,7 @@ public class PersonBuilder {
         priority = personToCopy.getPriority();
         meetingDate = personToCopy.getMeetingDate();
         remark = personToCopy.getRemark();
-        tags = new HashSet<>(personToCopy.getTags());
+        allergies = new HashSet<>(personToCopy.getAllergies());
     }
 
     /**
@@ -168,10 +168,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withAllergies(String... tags) {
+        this.allergies = SampleDataUtil.getAllergySet(tags);
         return this;
     }
 
@@ -188,6 +188,6 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, remark,
-                tags);
+                allergies);
     }
 }

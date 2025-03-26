@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -22,7 +22,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getAllergies().remove(0));
     }
 
     @Test
@@ -35,7 +35,8 @@ public class PersonTest {
 
         // same email, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(BOB).withPhone(VALID_PHONE_BOB).withEmail("alice@example.com")
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withPriority(VALID_PRIORITY_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_HUSBAND)
+                .withPriority(VALID_PRIORITY_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different email, all other attributes same -> returns false
@@ -108,15 +109,15 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different priority -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_PRIORITY_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withPriority(VALID_PRIORITY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different meeting date -> returns false
         editedAlice = new PersonBuilder(ALICE).withMeetingDate("2025-05-01").build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different allergies -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAllergies(VALID_ALLERGY_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
 
     }
@@ -127,7 +128,7 @@ public class PersonTest {
                 + ", height=" + ALICE.getHeight() + ", weight=" + ALICE.getWeight() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", diet=" + ALICE.getDiet()
                 + ", priority=" + ALICE.getPriority() + ", meetingDate=" + ALICE.getMeetingDate()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", allergies=" + ALICE.getAllergies() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

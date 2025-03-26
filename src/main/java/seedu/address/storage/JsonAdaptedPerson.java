@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -22,7 +23,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -42,7 +42,7 @@ class JsonAdaptedPerson {
     private final String priority;
     private final String meetingDate;
     private final String remark;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("diet") String diet,
             @JsonProperty("priority") String priority, @JsonProperty("meetingDate") String meetingDate,
-            @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("remark") String remark, @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies) {
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -65,8 +65,8 @@ class JsonAdaptedPerson {
         this.priority = priority;
         this.meetingDate = meetingDate;
         this.remark = remark;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
         }
     }
 
@@ -85,8 +85,8 @@ class JsonAdaptedPerson {
         priority = source.getPriority().toString();
         meetingDate = source.getMeetingDate().toString();
         remark = source.getRemark().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        allergies.addAll(source.getAllergies().stream()
+                .map(JsonAdaptedAllergy::new)
                 .collect(Collectors.toList()));
     }
 
@@ -96,9 +96,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<Allergy> personAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
+            personAllergies.add(allergy.toModelType());
         }
 
         if (name == null) {
@@ -184,13 +184,13 @@ class JsonAdaptedPerson {
         }
         final MeetingDate modelMeetingDate = new MeetingDate(meetingDate);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
         return new Person(modelName, modelGender, modelHeight, modelWeight, modelPhone, modelEmail, modelAddress,
-                modelDiet, modelPriority, modelMeetingDate, modelRemark, modelTags);
+                modelDiet, modelPriority, modelMeetingDate, modelRemark, modelAllergies);
     }
 
 }
