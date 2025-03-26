@@ -15,6 +15,7 @@
 - **[List Patients](#listing-all-patients--list)** — `list` : Show all stored patients.
 - **[Edit Patient](#editing-a-patient--edit)** — `edit` : Modify an existing patient’s information.
 - **[Remark](#add-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
+- **[Priority](#changing-a-patients-priority-pr)** - `pr` : Change a patient's priority by index.
 - **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
 - **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
 - **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by name, diet, or priority.
@@ -111,6 +112,7 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 1. A patient can have any number of allergies (including 0)
 1. Emails must be unique i.e. duplicate emails are not allowed.
 1. Patient names can be duplicated i.e. duplicate names are allowed.
+1. Priority must be one of the following: `high`, `medium`, `low`.
 1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`. 
 </box>
 
@@ -137,8 +139,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 1. At least one field to edit must be provided.
 1. Existing values will be updated to the input values.
 1. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
-1. You can remove all the patient’s allergies by typing `al/` without
-    specifying any allergies after it.
+1. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
+1. Priority must be one of the following: `high`, `medium`, `low`.
+1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
 </box>
 
 Examples:
@@ -165,6 +168,21 @@ Examples:
 * `list` followed by `remark 2 r/Enjoyed last week's meal plan, keep similar items` adds a remark to the 2nd patient in the patient list.
 * `find Betsy` followed by `remark 1 r/Tends to skip meals when stressed` adds a remark to the 1st patient in the results list of the `find` command.
 * `remark 3 r/` removes existing remark to the 3rd patient in the list.
+### Changing a patient's priority: `pr`
+
+Changes a patient's priority by index.
+
+Format: `pr INDEX PRIORITY`
+
+<box type="tip" seamless>
+
+**Tips:**
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+1. Priority must be one of the following: `high`, `medium`, `low`.
+</box>
+
+Examples:
+* `pr 1 high` changes the priority of the 1st patient in the patient list to `high`.
 
 ### Locating patients by name: `find`
 
