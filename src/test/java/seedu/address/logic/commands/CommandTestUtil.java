@@ -41,7 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_PRIORITY_AMY = "low";
-    public static final String VALID_PRIORITY_BOB = "low";
+    public static final String VALID_PRIORITY_BOB = "high";
     public static final String VALID_ALLERGY_HUSBAND = "husband";
     public static final String VALID_ALLERGY_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "Like skiing.";

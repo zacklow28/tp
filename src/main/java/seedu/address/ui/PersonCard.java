@@ -51,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane allAllergies;
+    private FlowPane allTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -73,18 +73,18 @@ public class PersonCard extends UiPart<Region> {
         Label priorityLabel = new Label(person.getPriority().toString());
         priorityLabel.getStyleClass().addAll("priority-label", "priority-"
                 + person.getPriority().toString().toLowerCase());
-        allAllergies.getChildren().add(priorityLabel);
+        allTags.getChildren().add(priorityLabel);
 
         Label dietLabel = new Label("D: " + person.getDiet().toString());
         dietLabel.getStyleClass().add("diet-label");
-        allAllergies.getChildren().add(dietLabel);
+        allTags.getChildren().add(dietLabel);
 
         person.getAllergies().stream()
                 .sorted(Comparator.comparing(allergy -> allergy.allergyName))
                 .forEach(allergy -> {
                     Label allergyLabel = new Label(allergy.allergyName);
                     allergyLabel.getStyleClass().add("allergy-label");
-                    allAllergies.getChildren().add(allergyLabel);
+                    allTags.getChildren().add(allergyLabel);
                 });
 
     }
