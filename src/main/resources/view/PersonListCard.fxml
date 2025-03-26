@@ -35,7 +35,7 @@
       </HBox>
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-      <FlowPane fx:id="allTags" xmlns:fx="http://javafx.com/fxml"
+      <FlowPane fx:id="allAllergies" xmlns:fx="http://javafx.com/fxml"
                 hgap="5" vgap="5">
       </FlowPane>
     </VBox>
