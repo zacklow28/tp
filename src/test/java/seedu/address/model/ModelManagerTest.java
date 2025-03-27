@@ -94,6 +94,37 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void commitAddressBook_canUndoAddressBook_returnsTrue() {
+        assertFalse(modelManager.canUndoAddressBook());
+        modelManager.commitAddressBook();
+        //means a certain state was saved
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void undoAddressBookAfterOneCommit_canUndoAddressBook_returnsFalse() {
+        modelManager.commitAddressBook();
+        modelManager.undoAddressBook();
+        //state was undone
+        assertFalse(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void undoAddressBookAfterOneCommit_canRedoAddressBook_returnsTrue() {
+        modelManager.commitAddressBook();
+        modelManager.undoAddressBook();
+        assertTrue(modelManager.canRedoAddressBook());
+    }
+
+    @Test
+    public void redoAddressBookAfterOneCommitAndOneUndo_canRedoAddressBook_returnsFalse() {
+        modelManager.commitAddressBook();
+        modelManager.undoAddressBook();
+        modelManager.redoAddressBook();
+        assertFalse(modelManager.canRedoAddressBook());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

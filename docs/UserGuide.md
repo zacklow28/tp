@@ -290,31 +290,94 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: What is VitaBook?
+**A**: VitaBook is a desktop application designed for freelance nutritionists to manage patient information efficiently
+using a typing-preferred interface. It is optimized for fast data entry and offline use.
 
+**Q**: Who is VitaBook for?
+**A**: VitaBook is for freelance or home-based nutritionists who need to keep track of patient profiles, dietary
+restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
+
+**Q**: How is VitaBook different from a regular address book?
+**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight,
+dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for
+fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
+
+**Q**: Do I need to install any special software to run VitaBook?
+**A**: You just need to have Java 17 installed. No installation is required — simply run the JAR file.
+
+**Q**: What kind of information can I store about a patient?
+**A**: You can store:
+
+Name, phone, email, address
+Gender, height, weight
+Diet  (e.g., low sodium)
+Meeting date
+Priority level (LOW, MEDIUM, HIGH)
+Remarks
+Allergy (e.g., peanuts)
+
+**Q**:What happens when I delete a patient?
+**A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from
+the address book.
+
+**Q**: Can I undo a mistaken command?
+**A**: Yes, you can! Just write undo, followed by the patient index, the field to be changed, and the updated info
+
+**Q**: Can I add custom fields or conditions?
+**A**: Any other relevant info other than the fields provided can be added to the remark field as a workaround
+
+**Q**: Can I import data from another app or CSV file?
+**A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable
+with the format.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+- **Allergy fields are case-sensitive**
+  Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
+
+- **No support for recurring meeting dates or reminders**
+  Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
+
+- **Commands must follow strict prefixes**
+  Forgetting a prefix (like `n/`) will result in an invalid command, even if the content is correct.
+
+- **No concurrency or multi-user support**
+  VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
+
+- **No graphical support for charts or health analytics**
+  Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
+
+- **Application crashes if `vitabook.json` is manually corrupted**
+  If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
+- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
+-------------------------------------------------------------------------------------------------------------------
+
+## Command Summary
+
+Action        | Format, Examples
+--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 al/peanuts`
+**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
+**Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
+**List**      | `list`
+**Find**      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`
+**Filter**    | `filter [PRIORITY] / [DIET] / [GENDER] / [MEETING DATE] `<br>e.g., `filter low sodium`
+**Sort**      | `sort [PRIORITY] / [DIET] / [NAME] `<br>e.g., `sort low`
+**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 high`
+**Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
+**Command History** | `Use the arrow keys to navigate to past commands easily`
+**Clear**     | `clear`
+**Help**      | `help`
 
 --------------------------------------------------------------------------------------------------------------------
-[↑ Back to Top](#vitabook-user-guide)
-## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+## Glossary
 
---------------------------------------------------------------------------------------------------------------------
+**Java 17**  
+The 17th version of the Java programming language and runtime environment. 
+Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3. 
 
 ## Java Setup Instructions
 
@@ -335,5 +398,13 @@ If you see an error or a lower version, install Java 17 using the steps below.
 [Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
 [Installation Guide for Linux Users](https://se-education.org/guides/tutorials/javaInstallationLinux.html)<br>
 
-[↑ Back to Top](#vitabook-user-guide)<br>
+**JDK (Java Development Kit)**  
+A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
+
+**Terminal / Command Line Interface (CLI)**  
+A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
+```bash
+java -jar vitabook.jar
+  [↑ Back to Top](#vitabook-user-guide)<br>
 [↑ Go to Quick Start](#quick-start)<br> 
+
