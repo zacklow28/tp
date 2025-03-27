@@ -29,6 +29,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
     private Label gender;
@@ -56,9 +58,10 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        id.setText(displayedIndex + ".");
 
         name.setText(person.getName().fullName);
         gender.setText(person.getGender().gender);

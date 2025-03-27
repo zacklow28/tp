@@ -141,6 +141,21 @@ public class CommandTestUtil {
 
     /**
      * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} without comparing objects<br>
+     */
+    public static void assertCommandSuccessNoObjectComparison(Command command, Model actualModel,
+                                 String expectedMessage) {
+        try {
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            CommandResult result = command.execute(actualModel);
+            assertEquals(expectedCommandResult, result);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged

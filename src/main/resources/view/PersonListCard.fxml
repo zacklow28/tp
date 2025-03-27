@@ -20,7 +20,8 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox alignment="CENTER_LEFT" spacing="20">
+      <HBox alignment="BASELINE_LEFT" spacing="20">
+        <Label fx:id="id" styleClass="id-label"/>
         <Label fx:id="name" styleClass="name-label" text="\$first" />
         <Label fx:id="meetingDate" styleClass="meeting-label" text="\$meetingDate" />
       </HBox>
