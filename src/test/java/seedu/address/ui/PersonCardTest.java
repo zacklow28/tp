@@ -27,7 +27,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-21")
                 .withTags()
                 .build();
-        PersonCard personCard = new PersonCard(personWithNoTags, 1); // 👈 pass index
+        PersonCard personCard = new PersonCard(personWithNoTags, 1);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithNoTags);
 
@@ -44,7 +44,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-22")
                 .withTags("Diabetic", "Asthma")
                 .build();
-        personCard = new PersonCard(personWithTags, 2); // 👈 pass index
+        personCard = new PersonCard(personWithTags, 2);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithTags);
     }
