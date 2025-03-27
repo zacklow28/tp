@@ -170,8 +170,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withAllergies(String... tags) {
-        this.allergies = SampleDataUtil.getAllergySet(tags);
+    public PersonBuilder withAllergies(String... allergies) {
+        this.allergies = SampleDataUtil.getAllergySet(allergies);
         return this;
     }
 

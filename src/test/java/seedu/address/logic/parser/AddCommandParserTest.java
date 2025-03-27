@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_FISH;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_PEANUTS;
 import static seedu.address.logic.commands.CommandTestUtil.DIET_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIET_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -35,8 +35,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_FISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_PEANUTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -98,23 +98,23 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB)
                 .withWeight(VALID_WEIGHT_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withDiet(VALID_DIET_BOB).withPriority(VALID_PRIORITY_BOB)
-                .withMeetingDate(VALID_MEETING_DATE_BOB).withAllergies(VALID_ALLERGY_FRIEND).build();
+                .withMeetingDate(VALID_MEETING_DATE_BOB).withAllergies(VALID_ALLERGY_PEANUTS).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB + ALLERGY_DESC_FRIEND, new AddCommand(expectedPerson));
+                + MEETING_DATE_DESC_BOB + ALLERGY_DESC_PEANUTS, new AddCommand(expectedPerson));
 
         // multiple allergies - all accepted
         Person expectedPersonMultipleAllergies = new PersonBuilder(BOB).withGender(VALID_GENDER_BOB)
                 .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withDiet(VALID_DIET_BOB)
                 .withPriority(VALID_PRIORITY_BOB).withMeetingDate(VALID_MEETING_DATE_BOB)
-                .withAllergies(VALID_ALLERGY_FRIEND, VALID_ALLERGY_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_PEANUTS, VALID_ALLERGY_FISH).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND, new AddCommand(expectedPersonMultipleAllergies));
+                        + ALLERGY_DESC_FISH + ALLERGY_DESC_PEANUTS, new AddCommand(expectedPersonMultipleAllergies));
     }
 
     @Test
@@ -261,7 +261,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Invalid phone
@@ -276,7 +276,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // Invalid email
@@ -291,7 +291,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Email.MESSAGE_CONSTRAINTS);
 
         // Invalid address
@@ -306,7 +306,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Address.MESSAGE_CONSTRAINTS);
 
         // Invalid gender
@@ -321,7 +321,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Gender.MESSAGE_CONSTRAINTS);
 
         // Invalid height
@@ -336,7 +336,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Height.MESSAGE_CONSTRAINTS);
 
         // Invalid weight
@@ -351,7 +351,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Weight.MESSAGE_CONSTRAINTS);
 
         // Invalid diet
@@ -366,7 +366,7 @@ public class AddCommandParserTest {
                         + INVALID_DIET_DESC
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Diet.MESSAGE_CONSTRAINTS);
 
         // Invalid priority
@@ -381,7 +381,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + INVALID_PRIORITY_DESC
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Priority.MESSAGE_CONSTRAINTS);
 
         // Invalid meeting date
@@ -396,7 +396,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + INVALID_MEETING_DATE_DESC
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 MeetingDate.MESSAGE_CONSTRAINTS);
 
         // Invalid allergies
@@ -426,7 +426,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Non-empty preamble
@@ -442,7 +442,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
