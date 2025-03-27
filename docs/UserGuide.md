@@ -63,9 +63,9 @@
 
   * `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/low` : Adds a new patient named `John Doe` to your VitaBook.
 
-  * `delete 3` : Deletes the 3rd contact in the current list.
+  * `delete 3` : Deletes the 3rd patient in the current list.
 
-  * `clear` : Deletes all contacts.
+  * `clear` : Deletes all patients.
 
   * `exit` : Exits the app.
 </p>
@@ -397,7 +397,7 @@ using a typing-preferred interface. It is optimized for fast data entry and offl
 restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
 
 **Q**: How is VitaBook different from a regular address book?
-**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight,
+**A**: In addition to patient details, VitaBook stores patient-specific information like gender, height, weight,
 dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for
 fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
 
@@ -425,24 +425,24 @@ with the format.
 
 ## Known issues
 
-- **Allergy fields are case-sensitive**
+- **Allergy fields are case-sensitive.**
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
 
-- **No support for recurring meeting dates or reminders**
+- **No support for recurring meeting dates or reminders.**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
 
-- **Commands must follow strict prefixes**
+- **Commands must follow strict prefixes.**
   Forgetting a prefix (like `n/`) will result in an invalid command, even if the content is correct.
 
-- **No concurrency or multi-user support**
+- **No concurrency or multi-user support.**
   VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
 
-- **No graphical support for charts or health analytics**
+- **No graphical support for charts or health analytics.**
   Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
 
-- **Application crashes if `vitabook.json` is manually corrupted**
+- **Application crashes if `vitabook.json` is manually corrupted.**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
-- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
+- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting.
 -------------------------------------------------------------------------------------------------------------------
 [↑ Back to Top](#vitabook-user-guide)
 ## Command Summary
