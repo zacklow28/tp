@@ -67,14 +67,11 @@ public class PriorityCommand extends Command {
                 priority,
                 personToEdit.getMeetingDate(),
                 personToEdit.getRemark(),
-                personToEdit.getTags()
+                personToEdit.getAllergies()
         );
 
         model.setPerson(personToEdit, updatedPerson);
         return new CommandResult(String.format("Updated priority for %s to %s",
                 personToEdit.getName(), priority));
     }
-
-
-
 }

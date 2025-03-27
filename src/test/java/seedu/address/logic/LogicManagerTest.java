@@ -236,7 +236,7 @@ public class LogicManagerTest {
                 + DIET_DESC_AMY
                 + PRIORITY_DESC_AMY
                 + MEETING_DATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withAllergies().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

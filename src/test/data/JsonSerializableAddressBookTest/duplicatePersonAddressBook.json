@@ -11,7 +11,7 @@
     "priority" : "Low",
     "meetingDate" : "2025-04-01",
     "remark": "",
-    "tags" : [ "friends" ]
+    "allergies" : [ "peanuts" ]
   }, {
     "name" : "Pauline Alice",
     "gender" : "F",
@@ -23,6 +23,7 @@
     "diet" : "low carb",
     "priority" : "Low",
     "meetingDate" : "2025-04-01",
-    "remark": ""
+    "remark": "",
+    "allergies": [ ]
   } ]
 }

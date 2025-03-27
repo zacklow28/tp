@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_FISH;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_PEANUTS;
 import static seedu.address.logic.commands.CommandTestUtil.DIET_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIET_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -12,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIET_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
@@ -20,7 +23,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_DATE_
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEIGHT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_BOB;
@@ -31,10 +33,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_FISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_PEANUTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -51,8 +53,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_AMY;
@@ -76,6 +76,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -87,7 +88,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -98,27 +98,27 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB)
                 .withWeight(VALID_WEIGHT_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withDiet(VALID_DIET_BOB).withPriority(VALID_PRIORITY_BOB)
-                .withMeetingDate(VALID_MEETING_DATE_BOB).withTags(VALID_TAG_FRIEND).build();
+                .withMeetingDate(VALID_MEETING_DATE_BOB).withAllergies(VALID_ALLERGY_PEANUTS).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + MEETING_DATE_DESC_BOB + ALLERGY_DESC_PEANUTS, new AddCommand(expectedPerson));
 
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withGender(VALID_GENDER_BOB)
+        // multiple allergies - all accepted
+        Person expectedPersonMultipleAllergies = new PersonBuilder(BOB).withGender(VALID_GENDER_BOB)
                 .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withDiet(VALID_DIET_BOB)
                 .withPriority(VALID_PRIORITY_BOB).withMeetingDate(VALID_MEETING_DATE_BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_PEANUTS, VALID_ALLERGY_FISH).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                        + ALLERGY_DESC_FISH + ALLERGY_DESC_PEANUTS, new AddCommand(expectedPersonMultipleAllergies));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonAllergyValue_failure() {
         // Setup command with all valid fields
         String validCommand = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB
                 + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB;
@@ -176,11 +176,11 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero allergies
         Person expectedPerson = new PersonBuilder(AMY).withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY)
                 .withWeight(VALID_WEIGHT_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withDiet(VALID_DIET_AMY).withPriority(VALID_PRIORITY_AMY)
-                .withMeetingDate(VALID_MEETING_DATE_AMY).withTags().build();
+                .withMeetingDate(VALID_MEETING_DATE_AMY).withAllergies().build();
         assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DIET_DESC_AMY + PRIORITY_DESC_AMY
                 + MEETING_DATE_DESC_AMY, new AddCommand(expectedPerson));
@@ -261,7 +261,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Invalid phone
@@ -276,7 +276,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // Invalid email
@@ -291,7 +291,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Email.MESSAGE_CONSTRAINTS);
 
         // Invalid address
@@ -306,7 +306,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Address.MESSAGE_CONSTRAINTS);
 
         // Invalid gender
@@ -321,7 +321,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Gender.MESSAGE_CONSTRAINTS);
 
         // Invalid height
@@ -336,7 +336,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Height.MESSAGE_CONSTRAINTS);
 
         // Invalid weight
@@ -351,7 +351,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Weight.MESSAGE_CONSTRAINTS);
 
         // Invalid diet
@@ -366,7 +366,7 @@ public class AddCommandParserTest {
                         + INVALID_DIET_DESC
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Diet.MESSAGE_CONSTRAINTS);
 
         // Invalid priority
@@ -381,7 +381,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + INVALID_PRIORITY_DESC
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Priority.MESSAGE_CONSTRAINTS);
 
         // Invalid meeting date
@@ -396,10 +396,10 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + INVALID_MEETING_DATE_DESC
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 MeetingDate.MESSAGE_CONSTRAINTS);
 
-        // Invalid tags
+        // Invalid allergies
         assertParseFailure(parser,
                 NAME_DESC_BOB
                         + GENDER_DESC_BOB
@@ -411,8 +411,8 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + INVALID_TAG_DESC,
-                Tag.MESSAGE_CONSTRAINTS);
+                        + INVALID_ALLERGY_DESC,
+                Allergy.MESSAGE_CONSTRAINTS);
 
         // Two invalid values: only the first invalid value should be reported.
         assertParseFailure(parser,
@@ -426,7 +426,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 Name.MESSAGE_CONSTRAINTS);
 
         // Non-empty preamble
@@ -442,7 +442,7 @@ public class AddCommandParserTest {
                         + DIET_DESC_BOB
                         + PRIORITY_DESC_BOB
                         + MEETING_DATE_DESC_BOB
-                        + TAG_DESC_HUSBAND,
+                        + ALLERGY_DESC_FISH,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 

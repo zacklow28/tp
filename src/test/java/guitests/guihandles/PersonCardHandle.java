@@ -115,8 +115,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getAddress().equals(person.getAddress().value)
                 && getMeetingDate().equals(person.getMeetingDate().toString());
         // Construct expected tag list: first priority, then "D: " + diet, then additional tags sorted alphabetically.
-        List<String> expectedAdditionalTags = person.getTags().stream()
-                .map(tag -> tag.tagName)
+        List<String> expectedAdditionalTags = person.getAllergies().stream()
+                .map(allergy -> allergy.allergyName)
                 .sorted()
                 .collect(Collectors.toList());
         List<String> expectedTags = new java.util.ArrayList<>();
