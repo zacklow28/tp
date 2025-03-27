@@ -6,7 +6,26 @@
 
 # VitaBook User Guide
 
-**VitaBook** is a **desktop application for freelance nutritionists** to manage patient profiles, dietary information, and follow-ups efficiently. It combines the speed of a **Command Line Interface (CLI)** with the ease of a **Graphical User Interface (GUI)** to support fast and accurate data entry, retrieval, and updates.
+**VitaBook** is a **desktop application for freelance nutritionists** to manage patient profiles, dietary information, and follow-ups efficiently. Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean **Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
+
+### Key Features
+
+- **[Help](#viewing-help--help)** — `help` : View available commands and usage.
+- **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with full details.
+- **[List Patients](#listing-all-patients--list)** — `list` : Show all stored patients.
+- **[Edit Patient](#editing-a-patient--edit)** — `edit` : Modify an existing patient’s information.
+- **[Remark](#add-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
+- **[Priority](#changing-a-patients-priority-pr)** - `pr` : Change a patient's priority by index.
+- **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
+- **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
+- **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by name, diet, or priority.
+- **[Delete](#deleting-a-patient--delete)** — `delete` : Remove a patient by index or email.
+- **[History Navigation](#command-history-navigation)** — ↑ ↓ : Cycle through previous commands.
+- **[Theme Toggle](#light-mode-and-dark-mode)** — GUI : Switch between dark and light modes.
+- **[Clear All](#clearing-all-entries--clear)** — `clear` : Remove all patient data.
+- **[Exit](#exiting-the-program--exit)** — `exit` : Quit the application.
+
+[↓ Go to Command Summary](#command-summary)
 
 <page-nav-print />
 <!-- * Table of Contents -->
@@ -16,8 +35,9 @@
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Ensure you have Java `17` or above installed in your computer.<br>
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
+   To check or install Java, [see Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases).
 
@@ -82,16 +102,18 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a new patient to VitaBook with its personal details.
+Adds a new patient to VitaBook with their personal details.
 
 Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…​`
 
 <box type="tip" seamless>
 
-* Emails must be unique i.e. duplicate emails are not allowed.
-* Patient names can be duplicated i.e. duplicate names are allowed.
-
-**Tip:** A patient can have any number of allergies (including 0)
+**Tips:** 
+1. A patient can have any number of allergies (including 0)
+1. Emails must be unique i.e. duplicate emails are not allowed.
+1. Patient names can be duplicated i.e. duplicate names are allowed.
+1. Priority must be one of the following: `high`, `medium`, `low`.
+1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`. 
 </box>
 
 Examples:
@@ -100,22 +122,27 @@ Examples:
 
 ### Listing all patients : `list`
 
-Shows a list of all patients in VitaBook.
+Shows a list of all the patients in VitaBook.
 
 Format: `list`
 
 ### Editing a patient : `edit`
 
-Edits an existing patient in VitaBook.
+Edits the details of an existing patient in VitaBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one field to edit must be provided.
-* Existing values will be updated to the input values.
-* When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
-* You can remove all the patient’s allergies by typing `al/` without
-    specifying any allergies after it.
+<box type="tip" seamless>
+
+**Tips:**
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+1. At least one field to edit must be provided.
+1. Existing values will be updated to the input values.
+1. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
+1. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
+1. Priority must be one of the following: `high`, `medium`, `low`.
+1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
+</box>
 
 Examples:
 *  `edit 1 no/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient (in the list) to be `91234567` and `johndoe@example.com` respectively.
@@ -127,15 +154,35 @@ Adds a new remark or replaces an existing remark of a patient.
 
 Format: `remark INDEX r/[REMARK]`
 
-* Adds a new remark or replaces an existing remark to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-* You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
-* You can add exactly one remark to a patient. e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
+<box type="tip" seamless>
+
+**Tips:**
+1. You can use this command to add any conditions or custom information.
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+1. You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
+1. You can add exactly one remark to a patient. e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
   ![result for 'remark 1 r/needs visual guides r/very motivated'](images/multipleRemarksResult.png)
+</box>
 
 Examples:
 * `list` followed by `remark 2 r/Enjoyed last week's meal plan, keep similar items` adds a remark to the 2nd patient in the patient list.
 * `find Betsy` followed by `remark 1 r/Tends to skip meals when stressed` adds a remark to the 1st patient in the results list of the `find` command.
 * `remark 3 r/` removes existing remark to the 3rd patient in the list.
+### Changing a patient's priority: `pr`
+
+Changes a patient's priority by index.
+
+Format: `pr INDEX PRIORITY`
+
+<box type="tip" seamless>
+
+**Tips:**
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+1. Priority must be one of the following: `high`, `medium`, `low`.
+</box>
+
+Examples:
+* `pr 1 high` changes the priority of the 1st patient in the patient list to `high`.
 
 ### Locating patients by name: `find`
 
@@ -143,11 +190,14 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
+<box type="tip" seamless>
+
+**Tips:**
+1. The search is case-insensitive. e.g `hans` will match `Hans`
+1. The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+1. Only the name is searched.
+1. Only full words will be matched e.g. `Han` will not match `Hans`
+1. Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -157,35 +207,42 @@ Examples:
 
 ### Filtering patients: `filter`
 
-Filter patient entries based on either priority or diet.
+Filter patients based on a field (priority, diet, gender, meeting date).
 
-Format: `filter pr/PRIORITY` or `filter d/DIET`
+Format: `filter pr/PRIORITY` or `filter d/DIET` or `filter g/GENDER` or `filter m/MEETING_DATE`
 
 Examples:
-* `filter pr/high` returns all patient entries with high priority.
-* `filter d/low sugar` returns all patient entries with low sugar diet.
+* `filter pr/high` returns all patients with high priority.
+* `filter d/low sugar` returns all patients with low sugar diet.
+* `filter g/f` returns all female patients.
+* `filter m/2025-12-12` returns all patients with meeting date on `2025-12-12`.
 
 
 ### Sorting patients: `sort`
 
-Sorts patient entries based on specific criteria (priority, name, diet).
+Sorts patients based on specific criteria (priority, name, diet).
 
 Format: `sort priority` or `sort name` or `sort diet`
 
-* `sort priority` sorts patients from high priority to low priority. 
-* `sort name` sorts patients in lexicographical (alphabetical) order by name in ascending order.
-* `sort diet` sorts patients in lexicographical (alphabetical) order by diet in ascending order.
+Examples:
+
+* `sort priority` returns patient list sorted from high priority to low priority. 
+* `sort name` returns patient list sorted in lexicographical (alphabetical) order by name in ascending order.
+* `sort diet` returns patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 
 ### Deleting a patient : `delete`
 
-Deletes the specified patient from VitaBook.
+Deletes a patient from VitaBook.
 
 Format: `delete INDEX` or `delete EMAIL`
 
-* Deletes the patient at the specified `INDEX`.
-* Alternatively, deletes the patient with a specified `EMAIL`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+<box type="tip" seamless>
+
+**Tips:**
+* You can choose to delete the patient at the specified `INDEX`.
+* Alternatively, you can also delete the patient with a specified `EMAIL`.
+* The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient list.
@@ -194,15 +251,16 @@ Examples:
 
 ### Command History Navigation
 
-Use up and down arrow keys to navigate previously entered commands.
+Use up `↑` and down `↓` arrow keys to navigate previously entered commands.
 
 ### Light Mode and Dark Mode
 
-Transition between light mode and dark mode by for a more customisable and improved visual experience.
+Transition between light mode and dark mode for a more customisable and improved visual experience.
 
-* Click `File` → `Dark Mode` : for transition from light mode to dark mode.
-* Click `File` → `Light Mode` : for transition from dark mode to light mode.
-
+* Click `File` → `Dark Mode` : to change to `Dark Mode`
+  ![Dark Mode Button](images/LightMode.png)
+* Click `File` → `Light Mode` : to change to `Light Mode`
+  ![Light Mode Button](images/DarkMode.png)
 ### Clearing all entries : `clear`
 
 Clears all patient entries from VitaBook.
@@ -294,7 +352,7 @@ with the format.
 - **Application crashes if `vitabook.json` is manually corrupted**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
 - To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
@@ -320,7 +378,25 @@ Action        | Format, Examples
 **Java 17**  
 The 17th version of the Java programming language and runtime environment. 
 Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3. 
-If you don't have Java 17 installed, you can download it from the official [Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or choose an OpenJDK distribution.
+
+## Java Setup Instructions
+
+VitaBook requires **Java 17 or higher** to run.
+
+### Check your Java version
+
+Open a terminal or command prompt and run:
+```
+java -version
+```
+If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`
+If you see an error or a lower version, install Java 17 using the steps below.
+
+### Install Java 17
+
+[Installation Guide for Windows Users](https://se-education.org/guides/tutorials/javaInstallationWindows.html)<br>
+[Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
+[Installation Guide for Linux Users](https://se-education.org/guides/tutorials/javaInstallationLinux.html)<br>
 
 **JDK (Java Development Kit)**  
 A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
@@ -329,3 +405,6 @@ A complete software development package that includes the Java runtime, compiler
 A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
 ```bash
 java -jar vitabook.jar
+  [↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Go to Quick Start](#quick-start)<br> 
+
