@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # VitaBook User Guide
@@ -108,12 +108,12 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 <box type="tip" seamless>
 
-**Tips:** 
+**Tips:**
 1. A patient can have any number of allergies (including 0)
 1. Emails must be unique i.e. duplicate emails are not allowed.
 1. Patient names can be duplicated i.e. duplicate names are allowed.
 1. Priority must be one of the following: `high`, `medium`, `low`.
-1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`. 
+1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
 </box>
 
 Examples:
@@ -159,7 +159,7 @@ Format: `remark INDEX r/[REMARK]`
 **Tips:**
 1. You can use this command to add any conditions or custom information.
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-1. You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
+1. You can remove a patient's remark by typing `r/` without specifying any remarks after it.
 1. You can add exactly one remark to a patient. e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
   ![result for 'remark 1 r/needs visual guides r/very motivated'](images/multipleRemarksResult.png)
 </box>
@@ -227,7 +227,7 @@ Format: `sort priority` or `sort name` or `sort diet`
 
 Examples:
 
-* `sort priority` returns patient list sorted from high priority to low priority. 
+* `sort priority` returns patient list sorted from high priority to low priority.
 * `sort name` returns patient list sorted in lexicographical (alphabetical) order by name in ascending order.
 * `sort diet` returns patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 
@@ -376,9 +376,9 @@ Action        | Format, Examples
 
 ## Glossary
 
-**Java 17**  
-The 17th version of the Java programming language and runtime environment. 
-Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3. 
+**Java 17**
+The 17th version of the Java programming language and runtime environment.
+Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3.
 
 ## Java Setup Instructions
 
@@ -399,14 +399,13 @@ If you see an error or a lower version, install Java 17 using the steps below.
 [Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
 [Installation Guide for Linux Users](https://se-education.org/guides/tutorials/javaInstallationLinux.html)<br>
 
-**JDK (Java Development Kit)**  
+**JDK (Java Development Kit)**
 A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
 
-**Terminal / Command Line Interface (CLI)**  
+**Terminal / Command Line Interface (CLI)**
 A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
 ```bash
 java -jar vitabook.jar
 ```
 [↑ Back to Top](#vitabook-user-guide)<br>
-[↑ Go to Quick Start](#quick-start)<br> 
-
+[↑ Go to Quick Start](#quick-start)<br>
