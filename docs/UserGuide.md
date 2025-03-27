@@ -202,10 +202,11 @@ fast typers, offers structured patient management, and prevents data entry mista
 
 Name, phone, email, address
 Gender, height, weight
-Dietary tags (e.g., low sodium, peanuts)
+Diet  (e.g., low sodium)
 Meeting date
 Priority level (LOW, MEDIUM, HIGH)
 Remarks
+Allergy (e.g., peanuts)
 
 **Q**:What happens when I delete a patient?
 **A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from
@@ -225,13 +226,13 @@ with the format.
 ## Known issues
 
 - **Allergy fields are case-sensitive**
-  Adding allergy tags like `peanuts` and `Peanuts` results in two different tags being stored. This can lead to duplicates or confusion when filtering/searching.
+  Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
 
 - **No support for recurring meeting dates or reminders**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
 
-- **Commands must follow strict ordering and prefixes**
-  Forgetting a prefix (like `n/`) or misordering fields will result in an invalid command, even if the content is correct.
+- **Commands must follow strict prefixes**
+  Forgetting a prefix (like `n/`) will result in an invalid command, even if the content is correct.
 
 - **No concurrency or multi-user support**
   VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
@@ -239,22 +240,41 @@ with the format.
 - **No graphical support for charts or health analytics**
   Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
 
-- **Application crashes if `addressbook.json` is manually corrupted**
+- **Application crashes if `vitabook.json` is manually corrupted**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
+- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
 Action        | Format, Examples
 --------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [t/TAG]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 t/peanuts`
-**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [t/TAG]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
-**Delete**    | `delete INDEX`<br>e.g., `delete 3`
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 al/peanuts`
+**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
+**Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
 **List**      | `list`
 **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`
-**Sort**      | `sort FIELD`<br>e.g., `sort priority`, `sort name`, `sort weight`
-**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 HIGH`
+**Filter**    | `filter [PRIORITY] / [DIET] / [GENDER] / [MEETING DATE] `<br>e.g., `filter low sodium`
+**Sort**      | `sort [PRIORITY] / [DIET] / [NAME] `<br>e.g., `sort low`
+**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 high`
 **Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
+**Command History** | `Use the arrow keys to navigate to past commands easily`
 **Clear**     | `clear`
 **Help**      | `help`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+**Java 17**  
+The 17th version of the Java programming language and runtime environment. 
+Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3. 
+If you don't have Java 17 installed, you can download it from the official [Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or choose an OpenJDK distribution.
+
+**JDK (Java Development Kit)**  
+A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
+
+**Terminal / Command Line Interface (CLI)**  
+A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
+```bash
+java -jar vitabook.jar
