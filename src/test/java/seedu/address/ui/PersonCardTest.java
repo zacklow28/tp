@@ -27,7 +27,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-21")
                 .withAllergies()
                 .build();
-        PersonCard personCard = new PersonCard(personWithNoAllergies);
+        PersonCard personCard = new PersonCard(personWithNoAllergies, 1);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithNoAllergies);
 
@@ -44,7 +44,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-22")
                 .withAllergies("milk", "eggs")
                 .build();
-        personCard = new PersonCard(personWithAllergies);
+        personCard = new PersonCard(personWithAllergies, 2);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithAllergies);
     }
@@ -52,10 +52,10 @@ public class PersonCardTest extends GuiUnitTest {
     @Test
     public void equals() {
         Person person = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(person);
+        PersonCard personCard = new PersonCard(person, 1);
 
         // same person -> true
-        PersonCard copy = new PersonCard(person);
+        PersonCard copy = new PersonCard(person, 1);
         assertTrue(personCard.equals(copy));
 
         // same object -> true
@@ -69,7 +69,7 @@ public class PersonCardTest extends GuiUnitTest {
 
         // different person -> false
         Person differentPerson = new PersonBuilder().withName("different").build();
-        assertFalse(personCard.equals(new PersonCard(differentPerson)));
+        assertFalse(personCard.equals(new PersonCard(differentPerson, 1)));
     }
 
     /**
