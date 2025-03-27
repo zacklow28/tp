@@ -199,6 +199,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 1. Only full words will be matched e.g. `Han` will not match `Hans`
 1. Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+</box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -353,7 +354,7 @@ with the format.
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
 - To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
 -------------------------------------------------------------------------------------------------------------------
-
+[↑ Back to Top](#vitabook-user-guide)
 ## Command Summary
 
 Action        | Format, Examples
@@ -405,6 +406,7 @@ A complete software development package that includes the Java runtime, compiler
 A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
 ```bash
 java -jar vitabook.jar
-  [↑ Back to Top](#vitabook-user-guide)<br>
+```
+[↑ Back to Top](#vitabook-user-guide)<br>
 [↑ Go to Quick Start](#quick-start)<br> 
 
