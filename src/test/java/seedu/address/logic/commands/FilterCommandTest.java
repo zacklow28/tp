@@ -102,4 +102,12 @@ public class FilterCommandTest {
         assertEquals(firstCommand, firstCommand);
         assertNotEquals(firstCommand, secondCommand);
     }
+
+    @Test
+    public void equals_withDifferentObjectType_returnsFalse() {
+        FilterCommand command = new FilterCommand("d", "low sodium");
+        Object notAFilterCommand = new Object();
+
+        assertNotEquals(command, notAFilterCommand);
+    }
 }
