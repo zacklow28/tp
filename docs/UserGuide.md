@@ -331,6 +331,7 @@ the address book.
 **Q**: Can I import data from another app or CSV file?
 **A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable
 with the format.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -359,7 +360,7 @@ with the format.
 
 Action        | Format, Examples
 --------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 al/peanuts`
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts`
 **Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
 **Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
 **List**      | `list`

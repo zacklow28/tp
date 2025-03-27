@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# VitaBook-1 Developer Guide
+# VitaBook Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,8 +17,8 @@ We would like to thank the developers of the [_AddressBook-Level4 (AB4)_](https:
 
 Additionally, we would like to acknowledge the following:
 
-* My course instructors and teaching assistants for their guidance and feedback throughout the development process.
-* My peers and collaborators who provided support, code reviews, and valuable discussions.
+* Our course instructors and teaching assistants for their guidance and feedback throughout the development process.
+* Our peers and collaborators who provided support, code reviews, and valuable discussions.
 * The open-source Java and JavaFX communities for documentation and tools that supported this project.
 * The maintainers of relevant libraries and tools used in the project, such as Jackson for JSON processing and JUnit for testing.
 
