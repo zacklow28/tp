@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# VitaBook-1 Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,14 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }
+We would like to thank the developers of the [_AddressBook-Level4 (AB4)_](https://github.com/se-edu/addressbook-level4) project by the SE-EDU team, which served as a foundational reference for the architecture and testing approaches used of the GUI tests for this application.
+
+Additionally, we would like to acknowledge the following:
+
+* My course instructors and teaching assistants for their guidance and feedback throughout the development process.
+* My peers and collaborators who provided support, code reviews, and valuable discussions.
+* The open-source Java and JavaFX communities for documentation and tools that supported this project.
+* The maintainers of relevant libraries and tools used in the project, such as Jackson for JSON processing and JUnit for testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,12 +281,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* works as a freelance nutritionist, often visiting multiple patients daily
-* has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
-* prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
-* can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
-* is comfortable using command-line interfaces (CLI) for managing data and interactions
-* values portability and the ability to work across different devices without the need for installation or complex setups
+* Works as a freelance nutritionist, often visiting multiple patients daily
+* Has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
+* Prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
+* Can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
+* Is comfortable using command-line interfaces (CLI) for managing data and interactions
+* Values portability and the ability to work across different devices without the need for installation or complex setups
 
 **Value proposition**: manage patient profiles faster and more efficiently than traditional GUI-driven applications by utilizing a CLI, with features designed to streamline patient management, scheduling, and follow-ups, all in a portable, easy-to-use format.
 
@@ -287,161 +294,181 @@ _{Explain here how the data archiving feature will be implemented}_
 ### User stories
 
 
-| As a …            | I want to …                                | So that I can…                                  | Notes                                                                                          |
-|-------------------|--------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------|
-| Busy Nutritionist | Search for a patient by name               | Quickly access relevant dietary information     | Search results should be fast and accurate.                                                   |
-| Busy Nutritionist | Add tags to classify my patients easily    | Easily filter and find the relevant patients    | Allow for multiple tags per patient. The system should allow filtering based on tags.         |
-| Busy Nutritionist | Undo my last action when using the application | Easily revert to the original state in the event of mistakes or change of plans | Limits to actions that modify data only.                                                     |
-| Busy Nutritionist | Schedule Follow-up Appointment             | See and review patient’s status after an appropriate time |                                                                                          |
-| Busy Nutritionist | Set reminders for follow-up appointments   | Not forget important patient visits             | Notifications should appear on a dashboard.                                                  |
-| Busy Nutritionist | Receive notifications about patient dietary updates | Stay informed                                | Push/email notifications should be configurable.                                             |
-| Elderly Nutritionist | Enable high-contrast colors              | Easily read and navigate the app                | A toggle option for high contrast should be available in settings.                            |
-| Elderly Nutritionist | Increase the font size                   | Read text comfortably                           | Font size settings should be adjustable in the UI.                                            |
-| First-Time Nutritionist | Ensure no duplicates in the patient’s information are added | Refer to the correct information and make necessary changes | Alert the user of possible duplication when adding a new patient.                        |
-| First-Time Nutritionist | Access the application’s help function | Learn how to use the application effectively    | List down all available commands that the user can use.                                       |
-| First-Time Nutritionist | See some sample contacts when I open the app | Easily try out its features without needing to add my data first |                                                                                |
-| Nutritionist      | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                                |
-| Nutritionist      | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                          |
-| Nutritionist      | Clear all data in the application          | Reset the application when necessary            | Requires confirmation to prevent accidental reset.                                            |
-| Nutritionist      | Filter patients based on dietary conditions| Group similar cases                             | Filters should be easy to apply and reset.                                                    |
-| Nutritionist      | Edit/Update patient information            | Keep records accurate                           | Changes should be logged with timestamps.                                                     |
-| Nutritionist      | View a patient's information               | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted.   |
-| Nutritionist      | Archive patients that no longer require visits | Keep track of their information, yet not clutter up the address book | Able to retrieve archived information easily when needed.                                  |
-| Nutritionist      | Upload and attach files to patient profiles | Have all relevant data in one place             | Users should be able to upload PDFs, images, and other common file types.                     |
-| Nutritionist      | Sort patients based on name                | Find patients at a glance                       | Sorting options can allow easy finding of patients.                                           |
-| Nutritionist      | Mark high-risk patients                    | Quickly identify those needing urgent attention | High-risk patients should be visually highlighted.                                            |
-| Nutritionist      | Add emergency contacts to a patient profile | Contact them in urgent situations               | Emergency contacts should be stored and easily accessible.                                    |
-| Nutritionist      | Add custom notes to a patient’s profile    | Track observations over time                    | Notes should be editable and timestamped.                                                     |
+| **As a …**              | **I want to …**                                             | **So that I can…**                                                               | **Notes**                                                                                   |
+|-------------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| Busy Nutritionist       | Search for a patient by name                                | Quickly access relevant dietary information                                      | Search results should be fast and accurate.                                                 |
+| Busy Nutritionist       | Add tags to classify my patients easily                     | Easily filter and find the relevant patients                                     | Allow for multiple tags per patient. The system should allow filtering based on tags.       |
+| Busy Nutritionist       | Undo my last action when using the application              | Easily revert to the original state in the event of mistakes or change of plans  | Limits to actions that modify data only.                                                    |
+| Busy Nutritionist       | Schedule Follow-up Appointment                              | See and review patient’s status after an appropriate time                        |                                                                                             |
+| Busy Nutritionist       | Set reminders for follow-up appointments                    | Not forget important patient visits                                              | Notifications should appear on a dashboard.                                                 |
+| Busy Nutritionist       | Receive notifications about patient dietary updates         | Stay informed                                                                    | Push/email notifications should be configurable.                                            |
+| Elderly Nutritionist    | Enable high-contrast colors                                 | Easily read and navigate the app                                                 | A toggle option for high contrast should be available in settings.                          |
+| Elderly Nutritionist    | Increase the font size                                      | Read text comfortably                                                            | Font size settings should be adjustable in the UI.                                          |
+| First-Time Nutritionist | Ensure no duplicates in the patient’s information are added | Refer to the correct information and make necessary changes                      | Alert the user of possible duplication when adding a new patient.                           |
+| First-Time Nutritionist | Access the application’s help function                      | Learn how to use the application effectively                                     | List down all available commands that the user can use.                                     |
+| First-Time Nutritionist | See some sample contacts when I open the app                | Easily try out its features without needing to add my data first                 |                                                                                             |
+| Nutritionist            | Add new patients to the system                              | Maintain an updated record of my clients                                         | Each new patient should have a unique profile.                                              |
+| Nutritionist            | Delete patient records                                      | Remove outdated or irrelevant data                                               | A confirmation prompt should appear before deletion.                                        |
+| Nutritionist            | Clear all data in the application                           | Reset the application when necessary                                             | Requires confirmation to prevent accidental reset.                                          |
+| Nutritionist            | Filter patients based on dietary conditions                 | Group similar cases                                                              | Filters should be easy to apply and reset.                                                  |
+| Nutritionist            | Edit/Update patient information                             | Keep records accurate                                                            | Changes should be logged with timestamps.                                                   |
+| Nutritionist            | View a patient's information                                | Make informed dietary recommendations                                            | Medical history should be displayed clearly and concisely. Allergies should be highlighted. |
+| Nutritionist            | Archive patients that no longer require visits              | Keep track of their information, yet not clutter up the address book             | Able to retrieve archived information easily when needed.                                   |
+| Nutritionist            | Upload and attach files to patient profiles                 | Have all relevant data in one place                                              | Users should be able to upload PDFs, images, and other common file types.                   |
+| Nutritionist            | Sort patients based on name                                 | Find patients at a glance                                                        | Sorting options can allow easy finding of patients.                                         |
+| Nutritionist            | Mark high-risk patients                                     | Quickly identify those needing urgent attention                                  | High-risk patients should be visually highlighted.                                          |
+| Nutritionist            | Add emergency contacts to a patient profile                 | Contact them in urgent situations                                                | Emergency contacts should be stored and easily accessible.                                  |
+| Nutritionist            | Add custom notes to a patient’s profile                     | Track observations over time                                                     | Notes should be editable and timestamped.                                                   |
 
 User stories for the MVP version:
 
-| As a …        | I want to …                                | So that I can…                                  | Notes                                                                                  |
-|---------------|--------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------------------|
-| Nutritionist  | View a patient's medical history, food allergies, and dietary restrictions | Make informed dietary recommendations           | Medical history should be displayed clearly and concisely. Allergies should be highlighted in the profile. |
-| Nutritionist  | Add new patients to the system             | Maintain an updated record of my clients        | Each new patient should have a unique profile.                                         |
-| Nutritionist  | Delete patient records                     | Remove outdated or irrelevant data              | A confirmation prompt should appear before deletion.                                   |
+| As a …        | I want to …                                                                | So that I can…                                    | Notes                                                                                                      |
+|---------------|----------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| Nutritionist  | View a patient's medical history, food allergies, and dietary restrictions | Make informed dietary recommendations             | Medical history should be displayed clearly and concisely. Allergies should be highlighted in the profile. |
+| Nutritionist  | Add new patients to the system                                             | Maintain an updated record of my clients          | Each new patient should have a unique profile.                                                             |
+| Nutritionist  | Delete patient records                                                     | Remove outdated or irrelevant data                | A confirmation prompt should appear before deletion.                                                       |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `Nutritionist (user)`, unless specified otherwise)
+(For all use cases below, the **System** is the `VitaBook` and the **Actor** is the `Nutritionist (user)`, unless specified otherwise)
 
-
-**Use Case: UC01 - Edit Patient Information**
-
-**MSS:**
-
-1.  Nutritionist selects a patient from the patient list or searches by name/ID.
-2.  HMS displays the selected patient’s profile.
-3.  Nutritionist clicks on the ‘Edit’ button to modify patient information.
-4.  HMS provides editable fields (e.g., contact details, dietary restrictions).
-5.  Nutritionist makes necessary changes and submits the updated information.
-6.  HMS verifies the updated data and requests confirmation.
-7.  Nutritionist confirms the updates.
-8.  HMS saves the updated information and displays the updated profile. Use case ends.
-
-
-**Use Case: UC02 - Delete Patient Record**
+**Use Case: UC01 - Add Patient**
 
 **MSS:**
 
-1.  Nutritionist searches for a patient by name or ID in the HMS.
-2.  HMS displays the search results.
-3.  Nutritionist selects the patient whose record needs to be deleted.
-4.  HMS displays the patient's full profile.
-5.  Nutritionist selects the option to delete the patient record.
-6.  HMS requests confirmation to ensure the deletion is intentional.
-7.  Nutritionist confirms the deletion.
-8.  HMS deletes the patient record and confirms the deletion to the Nutritionist. Use case ends.
+| No. | MSS                                                                                                                                                      | Extensions                                                                                                                                                                                                   |
+|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist decides to register a new patient in VitaBook.                                                                                              | N.A.                                                                                                                                                                                                         |
+| 2   | Nutritionist types the add command followed by all required patient details in the specified format.                                                     | N.A.                                                                                                                                                                                                         |
+| 3   | VitaBook checks that all fields (name, gender, height, weight, phone, email, address, diet, priority, meeting date) are present and correctly formatted. | One or more fields are invalid or missing.<br/>  (a) VitaBook displays an error message specifying the field(s) that need correction.<br/>  (b) Nutritionist retypes the command with corrected input.       |
+| 4   | VitaBook checks that the email is unique.                                                                                                                | A patient with the same email already exists.<br/>  (a) VitaBook rejects the addition and displays a duplicate email error.<br/>  (b) Nutritionist provides a different email. Use case resumes from step 3. |
+| 5   | VitaBook adds the new patient to the system.                                                                                                             | N.A.                                                                                                                                                                                                         |
+| 6   | VitaBook displays a success message with the newly added patient’s summary. Use case ends.                                                               | N.A.                                                                                                                                                                                                         |
 
-**Extensions:**
-
-* 7a. Nutritionist cancels the deletion at the confirmation step.
-  * 7a1. HMS cancels the deletion process and retains the patient record.
-    Use case ends.
-
-
-
-**Use Case: UC03 - Archive Patient**
+**Use Case: UC02 - List Patients**
 
 **MSS:**
 
-1.  Nutritionist accesses the patient list and selects a patient.
-2.  HMS displays the patient’s profile.
-3.  Nutritionist selects the option to archive the patient’s profile.
-4.  HMS asks for confirmation to archive to prevent accidental archiving.
-5.  Nutritionist confirms the archiving.
-6.  HMS archives the patient’s profile and confirms the action to the Nutritionist. Use case ends.
+| No. | MSS                                                                                             | Extensions |
+|-----|-------------------------------------------------------------------------------------------------|------------|
+| 1   | Nutritionist wants to view all registered patients.                                             | N.A.       |
+| 2   | Nutritionist types the list command.                                                            | N.A.       |
+| 3   | VitaBook displays the complete list of patients, ordered by the order of entry. Use case ends.  | N.A.       |
 
-**Extensions:**
-
-* 4a. Nutritionist decides not to archive the profile at the confirmation step.
-  * 4a1. HMS cancels the archiving request.
-    Use case ends.
-
-
-**Use Case: UC04 - Add Patient Tag**
-
-**MSS:**
-1.  Nutritionist selects the patient to tag from the patient list.
-2.  HMS displays the patient's profile.
-3.  Nutritionist chooses to add a tag.
-4.  HMS prompts for the tag details.
-5.  Nutritionist enters the tag (e.g., "Diabetic", "Low Sodium") and submits.
-6.  HMS confirms the tag addition and updates the patient's profile.
-   Use case ends.
-
-**Extensions:**
-
-* 4a. HMS detects an error in the entered tag (e.g., forbidden characters).
-  * 4a1. HMS displays an error message.
-  * 4a2. Nutritionist corrects the tag information.
-    Steps 4a1-4a2 are repeated until valid information is entered.
-    Use case resumes from step 6.
-
-* 6a. Nutritionist decides to add multiple tags at once.
-  * 6a1. HMS allows entry of additional tags.
-  * 6a2. Nutritionist enters and submits additional tags.
-  * 6a3. HMS updates the patient's profile with all new tags.
-    Use case ends.
-
-
-* 6b. HMS is unable to update the patient profile due to a system error.
-  * 6b1. HMS displays an error message indicating the failure.
-  * 6b2. HMS offers the option to retry.
-  * 6b3. Nutritionist retries the submission or cancels. Use case resumes at step 5 if retried, ends if cancelled
-    Use case ends.
-
-
-**Use Case: UC05 - Schedule Follow-up Appointment**
+**Use Case: UC03 - Edit Patient**
 
 **MSS:**
 
-1. Nutritionist accesses the appointment scheduling feature in HMS.
-2. Nutritionist selects a patient from the list and chooses to schedule a follow-up.
-3. HMS displays the appointment scheduling form.
-4. Nutritionist enters the date, time, and nature of the follow-up.
-5. HMS requests confirmation of the details.
-6. Nutritionist confirms.
-7. HMS schedules the appointment and sends a confirmation to the Nutritionist.
-   Use case ends.
+| No. | MSS                                                                                         | Extensions                                                                                                                                      |
+|-----|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist identifies a patient whose details need updating.                              | N.A.                                                                                                                                            |
+| 2   | Nutritionist types the edit command followed by the patient's index and the updated fields. | No fields are provided to update.<br/>  (a) VitaBook displays an error indicating at least one field is required.                               |
+| 3   | VitaBook validates the index and ensures the patient exists.                                | Index is invalid.<br/>  (a) VitaBook displays an index error message.<br/>  (b) Nutritionist re-enters the command with a valid index.          |
+| 4   | VitaBook validates all provided input fields.                                               | A field contains invalid data.<br/>  (a) VitaBook displays specific validation errors.<br/>  (b) Nutritionist corrects and retypes the command. |
+| 5   | VitaBook updates the patient information accordingly.                                       | N.A.                                                                                                                                            |
+| 6   | VitaBook displays a confirmation message with updated details. Use case ends.               | N.A.                                                                                                                                            |
 
-**Extensions:**
+**Use Case: UC04 - Add or Update Remark**
 
-* 4a. The selected date/time is unavailable.
-  * 4a1. HMS notifies about the scheduling conflict.
-  * 4a2. Nutritionist selects a new date/time.
-    Use case resumes from step 5.
+**MSS:**
 
-* 5a. Nutritionist decides to set a reminder for the appointment.
-  * 5a1. HMS provides options for setting reminders.
-  * 5a2. Nutritionist sets and confirms the reminder details.
-    Use case resumes at step 7.
+| No. | MSS                                                                                                 | Extensions                                                                                             |
+|-----|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to add or update a note about a patient’s condition or behavior.                 | N.A.                                                                                                   |
+| 2   | Nutritionist enters the remark command followed by the index of the patient and the remark content. | No remark content is provided.<br/>  (a) VitaBook clears the existing re mark and confirms the update. |
+| 3   | VitaBook validates the index.                                                                       | Index is invalid.<br/>  (a) VitaBook displays an error.<br/>  (b) Nutritionist corrects the index.     |
+| 4   | VitaBook updates or adds the remark for the patient.                                                | N.A.                                                                                                   |
+| 5   | VitaBook displays a success message. Use case ends.                                                 | N.A.                                                                                                   |
 
-* 7a. HMS encounters a system error while scheduling the appointment.
-  * 7a1. HMS displays an error message and offers to retry.
-  * 7a2. Nutritionist retries or cancels the scheduling.
-    Use case resumes at step 3 if retried, ends if cancelled.
+**Use Case: UC05 - Change Patient Priority**
+
+**MSS:**
+
+| No. | MSS                                                                                               | Extensions                                                                                                                                        |
+|-----|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist reviews a patient’s condition and decides their priority level needs updating.       | N.A.                                                                                                                                              |
+| 2   | Nutritionist types the pr command with the patient index and new priority (high, medium, or low). | Invalid index.<br/>  (a) VitaBook displays an error.<br/>  (b) Nutritionist retypes the command.                                                  |
+| 3   | VitaBook validates the index and new priority value.                                              | Priority value is not among allowed options.<br/>  (a) VitaBook displays constraint error.<br/>  (b) Nutritionist retries with a valid priority.  |
+| 4   | VitaBook updates the patient’s priority.                                                          | N.A.                                                                                                                                              |
+| 5   | VitaBook displays a confirmation message. Use case ends.                                          | N.A.                                                                                                                                              |
+
+**Use Case: UC06 - Find Patient by Name**
+
+**MSS:**
+
+| No. | MSS                                                                   | Extensions                                                                         |
+|-----|-----------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to find a patient based on their name.             | N.A.                                                                               |
+| 2   | Nutritionist types the find command followed by one or more keywords. | No patients match the search.<br/>  (a) VitaBook displays an empty result message. |
+| 3   | VitaBook performs a case-insensitive search in the name fields.       | N.A.                                                                               |
+| 4   | VitaBook displays a list of matching patients. Use case ends.         | N.A.                                                                               |
+
+**Use Case: UC07 - Filter Patients**
+
+**MSS:**
+
+| No. | MSS                                                                                            | Extensions                                                                                      |
+|-----|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to view patients by a specific criterion (e.g. diet, gender).               | N.A.                                                                                            |
+| 2   | Nutritionist types the filter command followed by a valid prefix and value (e.g. d/low sugar). | The filter prefix is invalid.<br/>  (a) VitaBook displays an error message with correct format. |
+| 3   | VitaBook applies the filter and displays matching patients. Use case ends.                     | No patients match the filter.<br/>  (a) VitaBook displays an empty list message.                |
+
+**Use Case: UC08 - Sort Patients**
+
+**MSS:**
+
+| No. | MSS                                                                          | Extensions                                                                                         |
+|-----|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to organize patients by a particular field (e.g. name).   | N.A.                                                                                               |
+| 2   | Nutritionist types the sort command with the desired field (e.g. sort name). | Field specified is invalid.<br/>  (a) VitaBook shows a list of valid fields and an error message.  |
+| 3   | VitaBook sorts the patient list based on the chosen field.                   | N.A.                                                                                               |
+| 3   | VitaBook displays the sorted list. Use case ends.                            | N.A.                                                                                               |
+
+**Use Case: UC09 - Delete Patient**
+
+**MSS:**
+
+| No. | MSS                                                                  | Extensions                                                                        |
+|-----|----------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to remove a patient from the system.              | N.A.                                                                              |
+| 2   | Nutritionist types the delete command with either an index or email. | The index or email is invalid or not found.<br/>  (a) VitaBook displays an error. |
+| 3   | VitaBook validates the input and deletes the patient.                | N.A.                                                                              |
+| 3   | VitaBook displays a confirmation message. Use case ends.             | N.A.                                                                              |
+
+**Use Case: UC10 - History Navigation**
+
+**MSS:**
+
+| No. | MSS                                                               | Extensions                                                                                |
+|-----|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to reuse a previously entered command.         | N.A.                                                                                      |
+| 2   | Nutritionist presses the up ( ↑ ) or down ( ↓ ) arrow keys.       | No previous or next command exists.<br/>  (a) VitaBook does not change the current input. |
+| 3   | VitaBook displays the previous or next command in the input box.  | N.A.                                                                                      |
+| 3   | Nutritionist can re-execute or modify it. Use case ends.          | N.A.                                                                                      |
+
+**Use Case: UC11 - Clear All Patients**
+
+**MSS:**
+
+| No. | MSS                                                               | Extensions                                                                                                |
+|-----|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| 1   | Nutritionist wants to remove all patient data.                    | N.A.                                                                                                      |
+| 2   | Nutritionist types the clear command.                             | The command was entered by mistake.<br/>  (a) VitaBook may include a confirmation step before executing.  |
+| 3   | VitaBook deletes all patient entries.                             | N.A.                                                                                                      |
+| 3   | VitaBook confirms that the data has been cleared. Use case ends.  | N.A.                                                                                                      |
+
+**Use Case: UC12 - Exit Application**
+
+**MSS:**
+
+| No. | MSS                                          | Extensions |
+|-----|----------------------------------------------|------------|
+| 1   | Nutritionist is done using the application.  | N.A.       |
+| 2   | Nutritionist types the exit command.         | N.A.       |
+| 3   | VitaBook saves any unsaved data.             | N.A.       |
+| 3   | VitaBook shuts down the CLI. Use case ends.  | N.A.       |
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
