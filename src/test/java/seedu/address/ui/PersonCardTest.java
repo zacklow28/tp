@@ -27,7 +27,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-21")
                 .withTags()
                 .build();
-        PersonCard personCard = new PersonCard(personWithNoTags);
+        PersonCard personCard = new PersonCard(personWithNoTags, 1);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithNoTags);
 
@@ -44,7 +44,7 @@ public class PersonCardTest extends GuiUnitTest {
                 .withMeetingDate("2025-03-22")
                 .withTags("Diabetic", "Asthma")
                 .build();
-        personCard = new PersonCard(personWithTags);
+        personCard = new PersonCard(personWithTags, 2);
         uiPartExtension.setUiPart(personCard);
         assertCardDisplay(personCard, personWithTags);
     }
@@ -52,10 +52,10 @@ public class PersonCardTest extends GuiUnitTest {
     @Test
     public void equals() {
         Person person = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(person);
+        PersonCard personCard = new PersonCard(person, 1);
 
-        // same person -> true
-        PersonCard copy = new PersonCard(person);
+        // same person, same index -> true
+        PersonCard copy = new PersonCard(person, 1);
         assertTrue(personCard.equals(copy));
 
         // same object -> true
@@ -69,16 +69,17 @@ public class PersonCardTest extends GuiUnitTest {
 
         // different person -> false
         Person differentPerson = new PersonBuilder().withName("different").build();
-        assertFalse(personCard.equals(new PersonCard(differentPerson)));
+        assertFalse(personCard.equals(new PersonCard(differentPerson, 1)));
+
+        // same person, different index -> false (if equality includes index in future)
+        // assertFalse(personCard.equals(new PersonCard(person, 2))); // optional
     }
 
     /**
      * Asserts that {@code personCard} displays the details of {@code expectedPerson} correctly.
      */
     private void assertCardDisplay(PersonCard personCard, Person expectedPerson) {
-
         PersonCardHandle handle = new PersonCardHandle(personCard.getRoot());
-
         assertCardDisplaysPerson(expectedPerson, handle);
     }
 }
