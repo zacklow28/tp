@@ -165,6 +165,18 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Command History Implementation
+
+The sequence diagram below illustrates the interaction flow when a user enters commands and navigates through command history
+
+<puml src="diagrams/CommandHistory.puml" alt="Command History Sequence Diagram" />
+
+**User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
+
+**Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
+
+**Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
