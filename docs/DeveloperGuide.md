@@ -293,7 +293,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-
 | **As a …**              | **I want to …**                                             | **So that I can…**                                                               | **Notes**                                                                                   |
 |-------------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | Busy Nutritionist       | Search for a patient by name                                | Quickly access relevant dietary information                                      | Search results should be fast and accurate.                                                 |
@@ -521,35 +520,133 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder 
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Saving window preferences
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a patient
 
-### Deleting a person
+1. Prerequisite: Ensure no patient with the same email exists.
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `add n/John Doe g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
+      * Expected: New patient is added and listed.
+   
+   2. Test case: `add` (with no parameters)
+      * Expected: Error indicating missing required fields.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Prerequisite: Patient with e/john@example.com exists.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `add n/Alice Tan g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
+      * Expected: Error due to duplicate email.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a patient
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Prerequisite: At least one patient is listed.
 
-1. _{ more test cases …​ }_
+   1. Test case: `edit 1 no/98765432`
+      * Expected: Patient at index 1 has updated phone number.
+   
+   2. Test case: `edit 1`
+      * Expected: Error due to no fields to edit.
+
+2. Prerequisite: List contains fewer than 999 patients.
+
+   1. Test case: `edit 999 e/abc@example.com`
+      * Expected: Error due to index being out of bounds.
+
+### Adding/Updating a Remark
+
+1. Prerequisite: At least one patient is listed.
+
+   1. Test case: `remark 1 r/Very cooperative`
+      * Expected: Remark is added to patient 1.
+
+   2. Test case: `remark 0 r/Test`
+      * Expected: Error due to invalid index.
+
+### Change Priority
+
+1. Prerequisite: At least 2 patient is listed.
+
+   1. Test case: `pr 2 high`
+      * Expected: Priority of patient 2 updated to high.
+
+   2. Test case: `pr 1 urgent`
+      * Expected: Error due to invalid priority.
+
+2. Prerequisite: Fewer than 10 patients.
+
+   1. Test case: `pr 10 high`
+      * Expected: Error due to invalid index.
+
+### Find by name
+
+1. Prerequisite: At least one patient with name containing "John" exists.
+
+   1. Test case: `find John`
+      * Expected: Patients with 'John' in their name are listed.
+
+   2. Test case: `find`
+      * Expected: Error due to missing keyword.
+
+2. Prerequisite: No patient with name containing "la".
+
+   1. Test case: `find zz`
+      * Expected: No matches found.
+
+### Filter patients
+
+1. Prerequisite: At least one female patient exists.
+
+   1. Test case: `filter g/f`
+      * Expected: Only female patients are shown.
+
+2. Prerequisite: There are only a few valid prefixes and values.
+
+   1. Test case: `filter x/test`
+      * Expected: Error due to invalid prefix.
+
+   2. Test case: `filter g/Male`
+      * Expected: Error due to invalid value.
+
+### Sort patients
+
+1. Prerequisite: Multiple patients with different names exist.
+
+   1. Test case: `sort name`
+      * Expected: Patient List is sorted alphabetically by name.
+
+   2. Test case: `sort priority`
+      * Expected: Patient List is sorted high to low priority and then alphabetically by name.
+
+2. Prerequisite: There are only a few valid values to sort.
+
+   1. Test case: `sort invalid`
+      * Expected: Error due to invalid sort field.
+   
+### Deleting a patient
+
+1. Prerequisite: At least one patient in list.
+
+   1. Test case: `delete 1`
+      * Expected: Patient at index 1 is deleted.
+
+2. Prerequisite: No patient with email fake@email.com.
+
+   1. Test case: `delete fake@email.com`.
+      * Expected: Error due to no patient with that email.
+
+### Clear all patients
+
+1. Prerequisite: Multiple patients are listed.
+
+   1. Test case: `clear`
+      * Expected: App prompts confirmation before clearing data.
 
 ### Saving data
 
