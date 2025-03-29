@@ -520,12 +520,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder 
+   1. Download the jar file and copy into an empty folder.
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
@@ -535,7 +535,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add n/John Doe g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
       * Expected: New patient is added and listed.
-   
+
    2. Test case: `add` (with no parameters)
       * Expected: Error indicating missing required fields.
 
@@ -550,7 +550,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `edit 1 no/98765432`
       * Expected: Patient at index 1 has updated phone number.
-   
+
    2. Test case: `edit 1`
       * Expected: Error due to no fields to edit.
 
@@ -628,7 +628,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `sort invalid`
       * Expected: Error due to invalid sort field.
-   
+
 ### Deleting a patient
 
 1. Prerequisite: At least one patient in list.
