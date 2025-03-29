@@ -10,20 +10,22 @@ pageNav: 3
 
 ### Key Features
 
-- **[Help](#viewing-help--help)** — `help` : View available commands and usage.
+- **[Help](#viewing-help-help)** — `help` : View available commands and usage.
 - **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with full details.
-- **[List Patients](#listing-all-patients--list)** — `list` : Show all stored patients.
-- **[Edit Patient](#editing-a-patient--edit)** — `edit` : Modify an existing patient’s information.
-- **[Remark](#add-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
-- **[Priority](#changing-a-patients-priority-pr)** - `pr` : Change a patient's priority by index.
+- **[List Patients](#listing-all-patients-list)** — `list` : Show all stored patients.
+- **[Edit Patient](#editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
+- **[Priority](#changing-a-patients-priority-pr)** — `pr` : Change a patient's priority by index.
+- **[Remark](#adding-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
 - **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
 - **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
 - **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by name, diet, or priority.
-- **[Delete](#deleting-a-patient--delete)** — `delete` : Remove a patient by index or email.
-- **[History Navigation](#command-history-navigation)** — ↑ ↓ : Cycle through previous commands.
-- **[Theme Toggle](#light-mode-and-dark-mode)** — GUI : Switch between dark and light modes.
-- **[Clear All](#clearing-all-entries--clear)** — `clear` : Remove all patient data.
-- **[Exit](#exiting-the-program--exit)** — `exit` : Quit the application.
+- **[Delete](#deleting-a-patient-delete)** — `delete` : Remove a patient by index or email.
+- **[Clear All](#clearing-all-entries-clear)** — `clear` : Remove all patient data.
+- **[Undo](#undoing-the-last-change-undo)** — `undo` : Undo the previous action.
+- **[Redo](#redoing-the-last-undo-redo)** — `redo` : Redo the previous action.
+- **[Navigate Command History](#navigating-through-the-command-history-and)** — `↑` and `↓` : Cycle through previous commands.
+- **[Toggle Theme](#toggling-light-mode-and-dark-mode)** : Switch between dark and light modes.
+- **[Exit](#exiting-the-program-exit)** — `exit` : Quit the application.
 
 [↓ Go to Command Summary](#command-summary)
 
@@ -37,30 +39,40 @@ pageNav: 3
 
 1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
-   To check or install Java, [see Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
+   **Check/Install Java:** see [Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases).
+2. Download the latest `.jar` file [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal, type `cd` to navigate to the folder you put the jar file in. 
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command `java -jar vitabook.jar` to run the application. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
 
-   * `list` : Lists all patients.
+<a href="images/Ui.png">
 
-   * `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/low` : Adds a new patient named `John Doe` to the VitaBook.
+<img src="images/Ui.png" alt="Ui" style="width: 100%; max-width: 700px; display: block;"/>
+</a>
+   
+*Figure 1: The VitaBook UI*<br>
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+6. Type the command in the command box and press *Enter* to execute it.<br> 
+   e.g. typing `help` and pressing *Enter* will open the help window. Other example commands you can try:
+   
+<p style="padding-left: 20px">
 
-   * `clear` : Deletes all contacts.
+* `list` : Lists all patients.
 
-   * `exit` : Exits the app.
+* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/low` : Adds a new patient named `John Doe` to your VitaBook.
 
-1. Refer to the [Features](#features) below for details of each command.
+* `delete 3` : Deletes the 3rd patient in the current list.
+
+* `clear` : Deletes all patients.
+
+* `exit` : Exits the app.
+</p>
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,104 +82,110 @@ pageNav: 3
 
 **Notes about the command format:**<br>
 
-* Command keywords are case-sensitive.<br>
+1. Command keywords are case-sensitive.<br>
   e.g. `delete 1` is a known command, while `Delete 1` is an unknown command.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+2. Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/friend` or as `n/John Doe`.
+3. Items in square brackets are optional.<br>
+  e.g `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/fish` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+4. Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/milk`, `al/milk al/peanut` etc.
 
-* Parameters can be in any order.<br>
+5. Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME no/PHONE`, `no/PHONE n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+6. Extraneous parameters for commands that do not take in parameters (i.e. `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+7. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+<a href="images/helpMessage.png">
+
+<img src="images/helpMessage.png" alt="help message" style="width: 100%; max-width: 700px; display: block;"/>
+</a>
+
+*Figure 2: The help message displayed*
+
 
 
 ### Adding a patient: `add`
 
-Adds a new patient to VitaBook with their personal details.
+Adds a new patient to your VitaBook with their personal details.
 
 Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…​`
 
 <box type="tip" seamless>
 
-**Tips:**
-1. A patient can have any number of allergies (including 0)
-1. Emails must be unique i.e. duplicate emails are not allowed.
-1. Patient names can be duplicated i.e. duplicate names are allowed.
-1. Priority must be one of the following: `high`, `medium`, `low`.
-1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
+**Tips/Constraints:** 
+1. A patient can have any number of allergies (including 0) 
+
+2. Emails must be unique i.e. duplicate emails are not allowed.
+
+3. Patient names can be duplicated i.e. duplicate names are allowed.
+
+4. Gender must be one of the following: `m`, `M`, `f`, `F`.
+
+5. Height must be between `0.50` and `2.50`.
+
+6. Weight must be a positive integer greater than 0. 
+
+7. Priority must be one of the following: `high`, `medium`, `low`.
+
+8. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`. 
+
+9. Meeting date must be in the format `YYYY-MM-DD`.
 </box>
 
 Examples:
-* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/low`
-* `add n/Betsy Crowe al/milk e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat al/peanuts m/2025-02-24 pr/medium`
+* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/low m/2025-01-25`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat pr/medium m/2025-02-24 al/peanuts al/milk`
+
 
 ### Listing all patients : `list`
 
-Shows a list of all the patients in VitaBook.
+Shows a list of all the patients in your VitaBook.
 
 Format: `list`
 
+
 ### Editing a patient : `edit`
 
-Edits the details of an existing patient in VitaBook.
+Edits the details of an existing patient in your VitaBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 
 <box type="tip" seamless>
 
-**Tips:**
+**Tips/Constraints:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-1. At least one field to edit must be provided.
-1. Existing values will be updated to the input values.
-1. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
-1. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
-1. Priority must be one of the following: `high`, `medium`, `low`.
-1. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
+
+2. At least one field to edit must be provided.
+
+3. Existing values will be updated to the input values.
+
+4. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
+
+5. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
+
+6. Same constraints that apply to the `add` command also apply to the `edit` command.
 </box>
 
 Examples:
 *  `edit 1 no/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient (in the list) to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower al/` Edits the name of the 2nd patient (in the list) to be `Betsy Crower` and clears all existing allergies.
 
-### Add a remark to a patient: `remark`
 
-Adds a new remark or replaces an existing remark of a patient.
-
-Format: `remark INDEX r/[REMARK]`
-
-<box type="tip" seamless>
-
-**Tips:**
-1. You can use this command to add any conditions or custom information.
-1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-1. You can remove a patient's remark by typing `r/` without specifying any remarks after it.
-1. You can add exactly one remark to a patient. e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
-  ![result for 'remark 1 r/needs visual guides r/very motivated'](images/multipleRemarksResult.png)
-</box>
-
-Examples:
-* `list` followed by `remark 2 r/Enjoyed last week's meal plan, keep similar items` adds a remark to the 2nd patient in the patient list.
-* `find Betsy` followed by `remark 1 r/Tends to skip meals when stressed` adds a remark to the 1st patient in the results list of the `find` command.
-* `remark 3 r/` removes existing remark to the 3rd patient in the list.
 ### Changing a patient's priority: `pr`
 
 Changes a patient's priority by index.
@@ -176,13 +194,47 @@ Format: `pr INDEX PRIORITY`
 
 <box type="tip" seamless>
 
-**Tips:**
+**Tips/Constraints:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-1. Priority must be one of the following: `high`, `medium`, `low`.
-</box>
+
+2. Priority must be one of the following: `high`, `medium`, `low`.
+   </box>
 
 Examples:
 * `pr 1 high` changes the priority of the 1st patient in the patient list to `high`.
+
+
+### Adding a remark to a patient: `remark`
+
+Adds a new remark or replaces an existing remark of a patient.
+
+Format: `remark INDEX r/[REMARK]`
+
+<box type="tip" seamless>
+
+**Tips/Constraints:**
+1. You can use this command to add any conditions or custom information.
+
+2. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+
+3. You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
+
+4. You can add exactly one remark to a patient.<br
+e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
+</box>
+
+Examples:
+* `list` followed by `remark 2 r/Enjoyed last week's meal plan, keep similar items` adds a remark to the 2nd patient in the patient list.
+* `find Betsy` followed by `remark 1 r/Tends to skip meals when stressed` adds a remark to the 1st patient in the results list of the `find` command.
+* `remark 3 r/` removes existing remark to the 3rd patient in the list.
+
+<a href="images/multipleRemarksResult.png">
+
+<img src="images/multipleRemarksResult.png" alt="result for 'remark 1 r/needs visual guides r/very motivated'" style="width: 100%; max-width: 700px; display: block;">
+</a>
+
+*Figure 3: Result for adding multiple remarks to a patient using `remark 1 r/needs visual guides r/very motivated`*
+
 
 ### Locating patients by name: `find`
 
@@ -192,19 +244,33 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <box type="tip" seamless>
 
-**Tips:**
-1. The search is case-insensitive. e.g `hans` will match `Hans`
-1. The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-1. Only the name is searched.
-1. Only full words will be matched e.g. `Han` will not match `Hans`
-1. Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+**Tips/Constraints:**
+1. The search is case-insensitive.<br>
+e.g `hans` will match `Hans`
+
+2. The order of the keywords does not matter.<br>
+e.g. `Hans Bo` will match `Bo Hans`
+
+3. Only the name is searched.
+
+4. Only full words will be matched.<br>
+e.g. `Han` will not match `Hans`
+
+5. Patients matching at least one keyword will be returned (i.e. `OR` search).<br>
+e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<a href="images/findAlexDavidResult.png">
+
+<img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" style="width: 100%; max-width: 700px; display: block;">
+</a>
+
+*Figure 4: Results for `find alex david`*
+
 
 ### Filtering patients: `filter`
 
@@ -226,10 +292,10 @@ Sorts patients based on specific criteria (priority, name, diet).
 Format: `sort priority` or `sort name` or `sort diet`
 
 Examples:
-
 * `sort priority` returns patient list sorted from high priority to low priority.
 * `sort name` returns patient list sorted in lexicographical (alphabetical) order by name in ascending order.
 * `sort diet` returns patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
+
 
 ### Deleting a patient : `delete`
 
@@ -239,10 +305,12 @@ Format: `delete INDEX` or `delete EMAIL`
 
 <box type="tip" seamless>
 
-**Tips:**
-* You can choose to delete the patient at the specified `INDEX`.
-* Alternatively, you can also delete the patient with a specified `EMAIL`.
-* The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+**Tips/Constraints:**
+1. You can choose to delete the patient at the specified `INDEX`.
+
+2. Alternatively, you can also delete the patient with a specified `EMAIL`.
+
+3. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
 Examples:
@@ -250,23 +318,69 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
 * `delete johnd@example.com` deletes the patient with email address `johnd@example.com`.
 
-### Command History Navigation
 
-Use up `↑` and down `↓` arrow keys to navigate previously entered commands.
-
-### Light Mode and Dark Mode
-
-Transition between light mode and dark mode for a more customisable and improved visual experience.
-
-* Click `File` → `Dark Mode` : to change to `Dark Mode`
-  ![Dark Mode Button](images/LightMode.png)
-* Click `File` → `Light Mode` : to change to `Light Mode`
-  ![Light Mode Button](images/DarkMode.png)
 ### Clearing all entries : `clear`
 
 Clears all patient entries from VitaBook.
 
 Format: `clear`
+
+
+### Undoing the last change : `undo`
+
+Undoes the last command that changed the patient list.
+
+Format: `undo`
+
+<box type="tip" seamless>
+
+**Tips/Constraints:**   
+1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `pr`, `redo`).
+
+2. Support multiple undo commands until it reaches the initial state.
+</box>
+
+
+### Redoing the last undo : `redo`
+
+Redoes the last undo.
+
+Format: `redo`
+
+<box type="tip" seamless>
+
+**Tips/Constraints:**
+1. You can only redo if you executed an undo command.
+
+2. Support multiple redo commands until it reaches the final state.
+</box>
+
+
+### Navigating through the Command History : `↑` and `↓` 
+
+Navigates through the command history for quick access to previously executed commands.
+
+Format: `↑` or `↓` arrow keys
+
+
+### Toggling Light Mode and Dark Mode
+
+Transition between light mode and dark mode for a more customisable and improved visual experience. Click the `File` menu to toggle between light mode and dark mode.
+
+<a href="images/LightMode.png">
+
+<img src="images/LightMode.png" alt="Light Mode Button" style="width: 100%; max-width: 700px; display: block;">
+</a>
+
+*Figure 5: Change from light mode to dark mode*
+
+<a href="images/DarkMode.png">
+
+<img src="images/DarkMode.png" alt="Dark Mode Button" style="width: 100%; max-width: 700px; display: block;">
+</a>
+
+*Figure 6: Change from dark mode to light mode*
+  
 
 ### Exiting the program : `exit`
 
@@ -274,9 +388,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 VitaBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -289,6 +405,7 @@ If your changes to the data file makes its format invalid, VitaBook will discard
 Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+
 ## FAQ
 
 **Q**: What is VitaBook?
@@ -300,7 +417,7 @@ using a typing-preferred interface. It is optimized for fast data entry and offl
 restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
 
 **Q**: How is VitaBook different from a regular address book?
-**A**: In addition to contact details, VitaBook stores patient-specific information like gender, height, weight,
+**A**: In addition to patient details, VitaBook stores patient-specific information like gender, height, weight,
 dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for
 fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
 
@@ -308,15 +425,7 @@ fast typers, offers structured patient management, and prevents data entry mista
 **A**: You just need to have Java 17 installed. No installation is required — simply run the JAR file.
 
 **Q**: What kind of information can I store about a patient?
-**A**: You can store:
-
-Name, phone, email, address
-Gender, height, weight
-Diet  (e.g., low sodium)
-Meeting date
-Priority level (LOW, MEDIUM, HIGH)
-Remarks
-Allergy (e.g., peanuts)
+**A**: You can store: name, phone, email, address, gender, height, weight, diet  (e.g., low sodium), meeting date, priority level (e.g. high), remarks and allergies (e.g., peanuts)
 
 **Q**:What happens when I delete a patient?
 **A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from
@@ -334,56 +443,74 @@ with the format.
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Known issues
 
-- **Allergy fields are case-sensitive**
+- **Allergy fields are case-sensitive.**
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
 
-- **No support for recurring meeting dates or reminders**
+- **No support for recurring meeting dates or reminders.**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
 
-- **Commands must follow strict prefixes**
+- **Commands must follow strict prefixes.**
   Forgetting a prefix (like `n/`) will result in an invalid command, even if the content is correct.
 
-- **No concurrency or multi-user support**
+- **No concurrency or multi-user support.**
   VitaBook is designed as a single-user desktop application. Running two instances may cause file conflicts or data loss.
 
-- **No graphical support for charts or health analytics**
+- **No graphical support for charts or health analytics.**
   Patient data is presented in text format only. Features like BMI calculation, graphs, or dashboards are not supported.
 
-- **Application crashes if `vitabook.json` is manually corrupted**
+- **Application crashes if `vitabook.json` is manually corrupted.**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state.
-- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting
+- To solve this issue, try deleting vitabook.json and rerunning the application. Remember to backup the file before deleting.
 -------------------------------------------------------------------------------------------------------------------
 [↑ Back to Top](#vitabook-user-guide)
+
+
 ## Command Summary
 
 Action        | Format, Examples
 --------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts`
-**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
-**Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
+**Help**      | `help`
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 al/peanuts`
 **List**      | `list`
+**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
+**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 high`
+**Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
 **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`
 **Filter**    | `filter [PRIORITY] / [DIET] / [GENDER] / [MEETING DATE] `<br>e.g., `filter low sodium`
 **Sort**      | `sort [PRIORITY] / [DIET] / [NAME] `<br>e.g., `sort low`
-**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 high`
-**Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
-**Command History** | `Use the arrow keys to navigate to past commands easily`
+**Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
 **Clear**     | `clear`
-**Help**      | `help`
+**Undo**      | `undo`
+**Redo**      | `redo`
+**Navigate Command History** | `↑` or `↓` arrow keys
+**Exit**      | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Glossary
 
-**Java 17**
-The 17th version of the Java programming language and runtime environment.
-Java 17 provides the libraries and tools necessary to run Java applications—such as AB-3.
+**Java 17**  
+The 17th version of the Java programming language and runtime environment. 
+Java 17 provides the libraries and tools necessary to run Java applications—such as VitaBook.
+
+**JDK (Java Development Kit)**  
+A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
+
+**Terminal / Command Line Interface (CLI)**  
+A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
+```bash
+java -jar vitabook.jar
+```
+
 
 ## Java Setup Instructions
 
 VitaBook requires **Java 17 or higher** to run.
+
 
 ### Check your Java version
 
@@ -391,8 +518,9 @@ Open a terminal or command prompt and run:
 ```
 java -version
 ```
-If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`
+If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`.
 If you see an error or a lower version, install Java 17 using the steps below.
+
 
 ### Install Java 17
 
@@ -400,13 +528,6 @@ If you see an error or a lower version, install Java 17 using the steps below.
 [Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
 [Installation Guide for Linux Users](https://se-education.org/guides/tutorials/javaInstallationLinux.html)<br>
 
-**JDK (Java Development Kit)**
-A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
 
-**Terminal / Command Line Interface (CLI)**
-A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
-```bash
-java -jar vitabook.jar
-```
 [↑ Back to Top](#vitabook-user-guide)<br>
 [↑ Go to Quick Start](#quick-start)<br>
