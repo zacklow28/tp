@@ -82,12 +82,12 @@ public class PersonCard extends UiPart<Region> {
         dietLabel.getStyleClass().add("diet-label");
         allTags.getChildren().add(dietLabel);
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().add("tag-label");
-                    allTags.getChildren().add(tagLabel);
+        person.getAllergies().stream()
+                .sorted(Comparator.comparing(allergy -> allergy.allergyName))
+                .forEach(allergy -> {
+                    Label allergyLabel = new Label(allergy.allergyName);
+                    allergyLabel.getStyleClass().add("allergy-label");
+                    allTags.getChildren().add(allergyLabel);
                 });
 
     }

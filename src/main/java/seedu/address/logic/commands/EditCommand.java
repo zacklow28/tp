@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -10,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -27,6 +27,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -39,7 +40,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 
 
 /**
@@ -63,7 +63,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DIET + "DIET] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_MEETING_DATE + "MEETING_DATE] "
-            + "[" + PREFIX_TAG + "ALLERGY]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -126,11 +126,11 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         MeetingDate updateMeetingDate = editPersonDescriptor.getMeetingDate().orElse(personToEdit.getMeetingDate());
         Remark updatedRemark = personToEdit.getRemark(); //edit comm does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Allergy> updatedAllergies = editPersonDescriptor.getAllergies().orElse(personToEdit.getAllergies());
 
 
         return new Person(updatedName, updatedGender, updatedHeight, updatedWeight, updatedPhone, updatedEmail,
-                updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedRemark, updatedTags);
+                updatedAddress, updatedDiet, updatedPriority, updateMeetingDate, updatedRemark, updatedAllergies);
     }
 
     @Override
@@ -172,13 +172,13 @@ public class EditCommand extends Command {
         private Diet diet;
         private Priority priority;
         private MeetingDate meetingDate;
-        private Set<Tag> tags;
+        private Set<Allergy> allergies;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code allergies} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -191,7 +191,7 @@ public class EditCommand extends Command {
             setDiet(toCopy.diet);
             setPriority(toCopy.priority);
             setMeetingDate(toCopy.meetingDate);
-            setTags(toCopy.tags);
+            setAllergies(toCopy.allergies);
         }
 
         /**
@@ -199,7 +199,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, gender, height, weight, phone, email, address, diet, priority,
-                    meetingDate, tags);
+                    meetingDate, allergies);
         }
 
         public void setName(Name name) {
@@ -283,20 +283,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code allergies} to this object's {@code allergies}.
+         * A defensive copy of {@code allergies} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAllergies(Set<Allergy> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable allergy set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code allergies} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Allergy>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
         }
 
         @Override
@@ -321,7 +321,7 @@ public class EditCommand extends Command {
                     && Objects.equals(diet, otherEditPersonDescriptor.diet)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(meetingDate, otherEditPersonDescriptor.meetingDate)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(allergies, otherEditPersonDescriptor.allergies);
 
         }
 
@@ -338,7 +338,7 @@ public class EditCommand extends Command {
                     .add("diet", diet)
                     .add("priority", priority)
                     .add("meetingDate", meetingDate)
-                    .add("tags", tags)
+                    .add("allergies", allergies)
                     .toString();
         }
     }

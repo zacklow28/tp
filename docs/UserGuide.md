@@ -283,7 +283,7 @@ Format: `sort priority` or `sort name` or `sort diet`
 
 Examples:
 
-* `sort priority` returns patient list sorted from high priority to low priority. 
+* `sort priority` returns patient list sorted from high priority to low priority.
 * `sort name` returns patient list sorted in lexicographical (alphabetical) order by name in ascending order.
 * `sort diet` returns patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 
@@ -486,7 +486,7 @@ java -jar vitabook.jar
 
 VitaBook requires **Java 17 or higher** to run.
 
-#### Check your Java version
+### Check your Java version
 
 Open a terminal or command prompt and run:
 ```
@@ -495,7 +495,7 @@ java -version
 If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`.
 If you see an error or a lower version, install Java 17 using the steps below.
 
-#### Install Java 17
+### Install Java 17
 
 [Installation Guide for Windows Users](https://se-education.org/guides/tutorials/javaInstallationWindows.html)<br>
 [Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
@@ -503,5 +503,4 @@ If you see an error or a lower version, install Java 17 using the steps below.
 
 
 [↑ Back to Top](#vitabook-user-guide)<br>
-[↑ Go to Quick Start](#quick-start)<br> 
-
+[↑ Go to Quick Start](#quick-start)<br>

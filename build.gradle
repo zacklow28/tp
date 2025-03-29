@@ -116,10 +116,12 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'Vitabook.jar'
+    archiveFileName = 'vitabook.jar'
 }
 
-
+run {
+    enableAssertions = true
+}
 
 
 defaultTasks 'clean', 'allTests', 'coverage'

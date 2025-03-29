@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -10,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_DIET + "DIET "
             + PREFIX_PRIORITY + "PRIORITY "
             + PREFIX_MEETING_DATE + "MEETING DATE "
-            + "[" + PREFIX_TAG + "ALLERGY]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -51,8 +51,8 @@ public class AddCommand extends Command {
             + PREFIX_DIET + "low sodium "
             + PREFIX_MEETING_DATE + "2025-01-25 "
             + PREFIX_PRIORITY + "low "
-            + PREFIX_TAG + "corn "
-            + PREFIX_TAG + "mushroom";
+            + PREFIX_ALLERGY + "corn "
+            + PREFIX_ALLERGY + "mushroom";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

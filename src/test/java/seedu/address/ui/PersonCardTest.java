@@ -14,8 +14,8 @@ public class PersonCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags, basic fields
-        Person personWithNoTags = new PersonBuilder()
+        // no allergies, basic fields
+        Person personWithNoAllergies = new PersonBuilder()
                 .withGender("F")
                 .withHeight("1.65")
                 .withWeight("55")
@@ -25,14 +25,14 @@ public class PersonCardTest extends GuiUnitTest {
                 .withDiet("regular")
                 .withPriority("High")
                 .withMeetingDate("2025-03-21")
-                .withTags()
+                .withAllergies()
                 .build();
-        PersonCard personCard = new PersonCard(personWithNoTags, 1);
+        PersonCard personCard = new PersonCard(personWithNoAllergies, 1);
         uiPartExtension.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithNoTags);
+        assertCardDisplay(personCard, personWithNoAllergies);
 
-        // with tags and all fields
-        Person personWithTags = new PersonBuilder()
+        // with allergies and all fields
+        Person personWithAllergies = new PersonBuilder()
                 .withGender("M")
                 .withHeight("1.80")
                 .withWeight("75")
@@ -42,11 +42,11 @@ public class PersonCardTest extends GuiUnitTest {
                 .withDiet("low sodium")
                 .withPriority("Medium")
                 .withMeetingDate("2025-03-22")
-                .withTags("Diabetic", "Asthma")
+                .withAllergies("milk", "eggs")
                 .build();
-        personCard = new PersonCard(personWithTags, 2);
+        personCard = new PersonCard(personWithAllergies, 2);
         uiPartExtension.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithTags);
+        assertCardDisplay(personCard, personWithAllergies);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class PersonCardTest extends GuiUnitTest {
         Person person = new PersonBuilder().build();
         PersonCard personCard = new PersonCard(person, 1);
 
-        // same person, same index -> true
+        // same person -> true
         PersonCard copy = new PersonCard(person, 1);
         assertTrue(personCard.equals(copy));
 
@@ -70,16 +70,15 @@ public class PersonCardTest extends GuiUnitTest {
         // different person -> false
         Person differentPerson = new PersonBuilder().withName("different").build();
         assertFalse(personCard.equals(new PersonCard(differentPerson, 1)));
-
-        // same person, different index -> false (if equality includes index in future)
-        // assertFalse(personCard.equals(new PersonCard(person, 2))); // optional
     }
 
     /**
      * Asserts that {@code personCard} displays the details of {@code expectedPerson} correctly.
      */
     private void assertCardDisplay(PersonCard personCard, Person expectedPerson) {
+
         PersonCardHandle handle = new PersonCardHandle(personCard.getRoot());
+
         assertCardDisplaysPerson(expectedPerson, handle);
     }
 }

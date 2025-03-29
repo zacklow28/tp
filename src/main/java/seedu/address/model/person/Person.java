@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.allergy.Allergy;
 
 /**
  * Represents a Person in the address book.
@@ -30,14 +30,14 @@ public class Person {
     private final Priority priority;
     private final MeetingDate meetingDate;
     private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Allergy> allergies = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Gender gender, Height height, Weight weight, Phone phone, Email email, Address address,
-                  Diet diet, Priority priority, MeetingDate meetingDate, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
+                  Diet diet, Priority priority, MeetingDate meetingDate, Remark remark, Set<Allergy> allergies) {
+        requireAllNonNull(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, allergies);
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -49,7 +49,7 @@ public class Person {
         this.priority = priority;
         this.meetingDate = meetingDate;
         this.remark = remark;
-        this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
     }
 
     public Name getName() {
@@ -96,11 +96,11 @@ public class Person {
         return remark;
     }
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
@@ -142,13 +142,14 @@ public class Person {
                 && diet.equals(otherPerson.diet)
                 && priority.equals(otherPerson.priority)
                 && meetingDate.equals(otherPerson.meetingDate)
-                && tags.equals(otherPerson.tags);
+                && allergies.equals(otherPerson.allergies);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, height, weight, phone, email, address, diet, priority, meetingDate, tags);
+        return Objects.hash(name, gender, height, weight, phone, email, address, diet, priority,
+                meetingDate, allergies);
 
     }
 
@@ -165,7 +166,7 @@ public class Person {
                 .add("diet", diet)
                 .add("priority", priority)
                 .add("meetingDate", meetingDate)
-                .add("tags", tags)
+                .add("allergies", allergies)
                 .toString();
     }
 

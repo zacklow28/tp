@@ -13,7 +13,7 @@
       "priority" : "Low",
       "meetingDate" : "2025-04-01",
       "remark": "",
-      "tags" : [ "friends" ]
+      "allergies" : [ "peanuts" ]
     },
     {
       "name" : "Benson Meier",
@@ -27,7 +27,7 @@
       "priority" : "High",
       "meetingDate" : "2025-04-02",
       "remark": "",
-      "tags" : [ "owesMoney", "friends" ]
+      "allergies" : [ "milk", "eggs" ]
     },
     {
       "name" : "Carl Kurz",
@@ -41,7 +41,7 @@
       "priority" : "Medium",
       "meetingDate" : "2025-03-16",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "Daniel Meier",
@@ -55,7 +55,7 @@
       "priority" : "Low",
       "meetingDate" : "2025-03-20",
       "remark": "",
-      "tags" : [ "friends" ]
+      "allergies" : [ "fish" ]
     },
     {
       "name" : "Elle Meyer",
@@ -69,7 +69,7 @@
       "priority" : "Medium",
       "meetingDate" : "2025-04-25",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "Fiona Kunz",
@@ -83,7 +83,7 @@
       "priority" : "Low",
       "meetingDate" : "2025-05-05",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "George Best",
@@ -97,7 +97,7 @@
       "priority" : "High",
       "meetingDate" : "2025-06-15",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     }
   ]
 }
