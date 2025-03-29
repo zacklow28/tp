@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # VitaBook User Guide
@@ -248,15 +248,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 1. The search is case-insensitive.<br>
 e.g `hans` will match `Hans`
 
-1. The order of the keywords does not matter.<br>
+2. The order of the keywords does not matter.<br>
 e.g. `Hans Bo` will match `Bo Hans`
 
-1. Only the name is searched.
+3. Only the name is searched.
 
-1. Only full words will be matched.<br>
+4. Only full words will be matched.<br>
 e.g. `Han` will not match `Hans`
 
-1. Patients matching at least one keyword will be returned (i.e. `OR` search).<br>
+5. Patients matching at least one keyword will be returned (i.e. `OR` search).<br>
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
