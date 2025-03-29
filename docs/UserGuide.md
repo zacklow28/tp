@@ -52,6 +52,7 @@
    <a href="images/Ui.png"> 
    <img src="images/Ui.png" alt="Ui" style="width: 100%; max-width: 700px; display: block;"/>
    </a>
+   
    *Figure 1: The VitaBook UI*
    <br/>
 
