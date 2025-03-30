@@ -9,8 +9,8 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "Redo successful: AddressBook redone to next state.";
-    public static final String MESSAGE_FAILURE = "No next state to redo.";
+    public static final String MESSAGE_SUCCESS = "Redo successful: patient list redone to next state.";
+    public static final String MESSAGE_FAILURE = "No next state to redo. Already at final state.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
