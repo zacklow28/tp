@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -38,11 +39,17 @@ public class MeetingDate {
         if (test.equals(DEFAULT_MEETING_DATE)) {
             return true; // "none" is valid
         }
+        String dateRegex = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"; // Enforces exact format
+        if (!test.matches(dateRegex)) {
+            return false;
+        }
         try {
-            DateUtils.parseDateStrictly(test, "yyyy-MM-dd"); // Strict parsing
-            return true;
+            DateUtils.parseDateStrictly(test, "yyyy-MM-dd");
+            LocalDate parsedDate = LocalDate.parse(test); // Parse into LocalDate for year extraction
+            int year = parsedDate.getYear();
+            return year >= 1 && year <= 9999;
         } catch (ParseException e) {
-            return false; // Invalid date format or logical date
+            return false;
         }
     }
 
