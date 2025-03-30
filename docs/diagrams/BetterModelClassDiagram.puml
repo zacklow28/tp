@@ -24,5 +24,5 @@ Person *---> Diet
 Person *---> Height
 Person *---> Weight
 Person *---> MeetingDate
-Person *---> Remark
+Person *---> "0..1"Remark
 @enduml
