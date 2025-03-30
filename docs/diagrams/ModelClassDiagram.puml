@@ -15,10 +15,17 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
+Class Diet
 Class Email
+Class Gender
+Class Height
+Class MeetingDate
 Class Name
 Class Phone
-Class Tag
+Class Priority
+Class Remark
+Class Weight
+Class Allergy
 
 Class I #FFFFFF
 }
@@ -41,7 +48,14 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> Weight
+Person *--> Height
+Person *--> Gender
+Person *--> Diet
+Person *--> MeetingDate
+Person *--> Priority
+Person *--> "0..1"Remark
+Person *--> "*" Allergy
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
