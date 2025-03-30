@@ -177,11 +177,9 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 
 **Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature Implementation
 
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -255,22 +253,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+#### Summary of Edge Cases:
+* **Undo/Redo Unavailable:** 
+  * Undo: When current state is at the initial state (currentStatePointer = 0).
+  * Redo: When current state is at the latest state (currentStatePointer = size() - 1).
+* **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
+* **State Purge:** Executing a new command after an undo will purge the redo history. Only relevant states are restorable.
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * **Why Chosen:** This approach provides a reliable and comprehensive way to store all changes, ensuring that undo and redo actions always restore the address book accurately.
+  * **Potential Improvement:** Limit history size (e.g. 100) to prevent excessive memory usage over time.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * **Why Not Chosen:** This approach introduces significant complexity in implementation and testing, as commands must independently manage their undo/redo operations
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
+### Data archiving Implementation
 
 _{Explain here how the data archiving feature will be implemented}_
 
