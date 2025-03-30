@@ -166,6 +166,7 @@ public class Person {
                 .add("diet", diet)
                 .add("priority", priority)
                 .add("meetingDate", meetingDate)
+                .add("remark", remark)
                 .add("allergies", allergies)
                 .toString();
     }

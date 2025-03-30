@@ -56,6 +56,8 @@ public class Messages {
                 .append(person.getPriority())
                 .append("; MeetingDate: ")
                 .append(person.getMeetingDate())
+                .append("; Remark: ")
+                .append(person.getRemark())
                 .append("; Allergies: ");
         person.getAllergies().forEach(builder::append);
         return builder.toString();
