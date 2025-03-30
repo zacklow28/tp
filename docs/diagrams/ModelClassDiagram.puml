@@ -48,8 +48,8 @@ VersionedAddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
 Person *--> Address
+Person *--> Email
 Person *--> Weight
 Person *--> Height
 Person *--> Gender
@@ -65,6 +65,14 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Weight
+Weight -[hidden]right-> Height
+Height -[hidden]right-> Gender
+Gender -[hidden]right-> Diet
+Diet -[hidden]right-> MeetingDate
+MeetingDate -[hidden]right-> Priority
+Priority -[hidden]right-> Remark
+Remark -[hidden]right-> Allergy
 
 ModelManager --> "~* filtered" Person
 @enduml
