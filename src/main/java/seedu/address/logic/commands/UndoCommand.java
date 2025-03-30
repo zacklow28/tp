@@ -9,8 +9,8 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo successful: AddressBook undone to previous state.";
-    public static final String MESSAGE_FAILURE = "No previous state to undo.";
+    public static final String MESSAGE_SUCCESS = "Undo successful: patient list undone to previous state.";
+    public static final String MESSAGE_FAILURE = "No previous state to undo. Already at initial state.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
