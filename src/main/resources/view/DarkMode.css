@@ -92,7 +92,7 @@
 }
 
 .list-view {
-    /*for filled lists*/
+    /* for filled lists */
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#36453D, 20%);
@@ -101,7 +101,7 @@
 }
 
 .list-cell {
-    /*for unfilled ones as well*/
+    /* for unfilled ones as well */
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
@@ -111,11 +111,10 @@
 
 .list-cell:filled {
     -fx-padding: 0 0 10 0;
-    -fx-background-insets: 0 0 10px 0; /*Adds bottom margin-like spacing*/
+    -fx-background-insets: 0 0 10px 0; /* Adds bottom margin-like spacing */
 }
 
 .list-cell:filled {
-    /*-fx-background-color: #3c3e3f;*/
     -fx-background-color: #19271F;
 }
 
@@ -124,23 +123,21 @@
 }
 
 .stack-pane {
-    /*-command typing area*/
     -fx-background-color: #6E726E;
 }
 
 .pane-with-border {
-    /*-border for everything*/
     -fx-background-color: derive(#36453D, 20%);
     -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    /*bottom part*/
-    -fx-background-color: derive(#1d1d1d, 30%);
+    /* footer */
+    -fx-background-color: derive(#36453D, 30%);
 }
 
 .result-display {
-    /*type in results area*/
+    /* type in results area */
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
@@ -188,7 +185,7 @@
 }
 
 .menu-bar {
-    /*top part*/
+    /* top part */
     -fx-background-color: derive(#36453D, 20%);
 }
 
@@ -317,13 +314,12 @@
 }
 
 #cardPane {
-    -fx-background-radius: 8;            /* Slightly rounded corners */
-    /*-fx-border-color: #dddddd;           !* Light gray border *!*/
+    -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-width: 1;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);
     -fx-padding: 10;
-    -fx-spacing: 10;                     /* Space between child nodes */
+    -fx-spacing: 10;
     -fx-alignment: CENTER_LEFT;
 }
 
@@ -369,6 +365,7 @@
 
 .name-label {
     -fx-text-fill: white;
+    -fx-font-family: "Georgia";
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
