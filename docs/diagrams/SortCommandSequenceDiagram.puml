@@ -1,0 +1,57 @@
+@startuml
+skinparam participantStyle rectangle
+skinparam shadowing false
+skinparam sequence {
+  lifeLineBorderColor #000000
+  lifeLineBackgroundColor #FFFFFF
+  participantBorderColor #000000
+  participantBackgroundColor #CCCCFF
+  boxBorderColor #999999
+  boxBackgroundColor #DDDDFF
+  activateBackgroundColor #9999FF
+  activateBorderColor #333399
+}
+
+actor Nutritionist
+participant LogicManager
+participant AddressBookParser
+participant SortCommandParser
+participant SortCommand
+participant Model
+participant CommandResult
+
+== Nutritionist calls sort ==
+Nutritionist -> LogicManager : execute("sort priority")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sort priority")
+activate AddressBookParser
+
+AddressBookParser -> SortCommandParser : parse("priority")
+activate SortCommandParser
+
+SortCommandParser -> SortCommand : new SortCommand("priority")
+activate SortCommand
+
+SortCommandParser --> AddressBookParser : return SortCommand
+deactivate SortCommandParser
+
+AddressBookParser --> LogicManager : return SortCommand
+deactivate AddressBookParser
+
+== Command execution ==
+LogicManager -> SortCommand : execute(Model)
+SortCommand -> Model : sortFilteredPersonList(comparator)
+activate Model
+Model --> SortCommand : sorted list
+deactivate Model
+
+SortCommand -> CommandResult : new CommandResult("Sorted patient list by priority")
+activate CommandResult
+SortCommand --> LogicManager : return CommandResult
+deactivate CommandResult
+deactivate SortCommand
+
+LogicManager -> Nutritionist : return CommandResult
+deactivate LogicManager
+@enduml
