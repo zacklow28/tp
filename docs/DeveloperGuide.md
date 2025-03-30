@@ -199,8 +199,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 1. When the `LogicManager` receives the `filter d/low fat` command, it calls `AddressBookParser` to parse the command.
 2. `AddressBookParser` recognises that it is a `filter` command and passes control to `FilterCommandParser`.
 3. `FilterCommandParser` splits the input into the prefix (`d`) and the value (`low fat`), then constructs a `FilterCommand` object with the parsed arguments.
-4. The `FilterCommand` is returned to the `LogicManager`, which proceeds to execute it. 
-5. The `FilterCommand` builds a predicate using the prefix and value, and applies it through `model.updateFilteredPersonList(predicate)`. 
+4. The `FilterCommand` is returned to the `LogicManager`, which proceeds to execute it.
+5. The `FilterCommand` builds a predicate using the prefix and value, and applies it through `model.updateFilteredPersonList(predicate)`.
 6. A `CommandResult` containing the result message is returned to the `LogicManager`, and subsequently to the UI.
 
 ### \[Proposed\] Undo/redo feature
