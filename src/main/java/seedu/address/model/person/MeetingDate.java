@@ -3,9 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Represents a Person's meeting date with the nutritionist in the address book.
@@ -16,8 +17,6 @@ public class MeetingDate {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting date must be in the format YYYY-MM-DD.";
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private final String meetingDate;
 
@@ -40,10 +39,16 @@ public class MeetingDate {
         if (test.equals(DEFAULT_MEETING_DATE)) {
             return true; // "none" is valid
         }
+        String dateRegex = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"; // Enforces exact format
+        if (!test.matches(dateRegex)) {
+            return false;
+        }
         try {
-            LocalDate.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
+            DateUtils.parseDateStrictly(test, "yyyy-MM-dd");
+            LocalDate parsedDate = LocalDate.parse(test); // Parse into LocalDate for year extraction
+            int year = parsedDate.getYear();
+            return year >= 1 && year <= 9999;
+        } catch (ParseException e) {
             return false;
         }
     }

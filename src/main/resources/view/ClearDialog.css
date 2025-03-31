@@ -1,0 +1,33 @@
+.dialog-pane {
+    -fx-background-color: #3f3f3f;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.header-panel,
+.content {
+    -fx-background-color: #3f3f3f;
+}
+
+.header-panel .label,
+.content.label {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.button {
+    -fx-background-radius: 5;
+}
+
+.button:default {
+    -fx-background-color: #3a905c;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.button:cancel {
+    -fx-background-color: #555;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
