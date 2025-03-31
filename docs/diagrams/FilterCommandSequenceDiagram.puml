@@ -1,0 +1,57 @@
+@startuml
+skinparam participantStyle rectangle
+skinparam shadowing false
+skinparam sequence {
+    lifeLineBorderColor #000000
+    lifeLineBackgroundColor #FFFFFF
+      participantBorderColor #000000
+      participantBackgroundColor #CCCCFF
+      boxBorderColor #999999
+      boxBackgroundColor #DDDDFF
+      activateBackgroundColor #9999FF
+      activateBorderColor #333399
+}
+
+actor Nutritionist
+participant LogicManager
+participant AddressBookParser
+participant FilterCommandParser
+participant FilterCommand
+participant Model
+participant CommandResult
+
+== Nutritionist calls filter ==
+Nutritionist -> LogicManager : execute("filter d/low fat")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter d/low fat")
+activate AddressBookParser
+
+AddressBookParser -> FilterCommandParser : parse("d/low fat")
+activate FilterCommandParser
+
+FilterCommandParser -> FilterCommand : new FilterCommand("d", "low fat")
+activate FilterCommand
+
+FilterCommandParser --> AddressBookParser : return FilterCommand
+deactivate FilterCommandParser
+
+AddressBookParser --> LogicManager : return FilterCommand
+deactivate AddressBookParser
+
+== Command execution ==
+LogicManager -> FilterCommand : execute(Model)
+FilterCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+Model --> FilterCommand : updated list
+deactivate Model
+
+FilterCommand -> CommandResult : new CommandResult("Filtered patients by d: low fat")
+activate CommandResult
+FilterCommand --> LogicManager : return CommandResult
+deactivate CommandResult
+deactivate FilterCommand
+
+LogicManager -> Nutritionist : return CommandResult
+deactivate LogicManager
+@enduml
