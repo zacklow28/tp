@@ -106,7 +106,7 @@ pageNav: 3
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Opens a window with a link to this user guide.
 
 Format: `help`
 
@@ -115,7 +115,7 @@ Format: `help`
 <img src="images/helpMessage.png" alt="help message" style="width: 100%; max-width: 700px; display: block;"/>
 </a>
 
-*Figure 2: The help message displayed*
+*Figure 2: Window displaying the user guide link*
 
 
 
@@ -155,6 +155,7 @@ Examples:
 ### Listing all patients : `list`
 
 Shows a list of all the patients in your VitaBook.
+If you have previously used `filter` or `find` to narrow down the patient list, use `list` will reset the display and show all patients again.
 
 Format: `list`
 
@@ -174,7 +175,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 
 3. Existing values will be updated to the input values.
 
-4. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
+4. When editing allergies, the existing allergies will be replaced by the new ones you provide.
 
 5. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
 
@@ -219,7 +220,7 @@ Format: `remark INDEX r/[REMARK]`
 
 3. You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
 
-4. You can add exactly one remark to a patient.<br
+4. You can add exactly one remark to a patient.<br>
 e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
 </box>
 
@@ -238,7 +239,7 @@ Examples:
 
 ### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose names contain *any* of the given **keywords**.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -353,6 +354,8 @@ Format: `redo`
 1. You can only redo if you executed an undo command.
 
 2. Support multiple redo commands until it reaches the final state.
+
+3. Executing a new command after an undo will purge the redo history.
 </box>
 
 
@@ -448,6 +451,9 @@ with the format.
 
 - **Allergy fields are case-sensitive.**
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
+
+- **Allergy Validation is only alphanumeric.**
+  User can enter any combination of letters and numbers, even if they don't represent actual allergies. This is because maintaining a complete list of all possible allergies is not feasible because new allergies are always being discovered.
 
 - **No support for recurring meeting dates or reminders.**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
