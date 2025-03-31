@@ -29,7 +29,7 @@ public class PriorityCommand extends Command {
             + "pr [INDEX] [PRIORITY]\n"
             + "Example: pr 2 HIGH.";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Priority: %2$s";
+    public static final String MESSAGE_ARGUMENTS = "Index: , Priority: ";
 
     private final Index index;
     private final Priority priority;
