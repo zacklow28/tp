@@ -453,7 +453,7 @@ with the format.
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
 
 - **Allergy Validation is only alphanumeric.**
-  User can enter any combination of letters and numbers, even if they don't represent actual allergies. This is because maintaining a complete list of all possible allergies is not feasible because new allergies are always being discovered.
+  User can enter any combination of letters and numbers, even if they don't represent actual allergies. This is because maintaining a complete list of all possible allergies is not feasible.
 
 - **No support for recurring meeting dates or reminders.**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
