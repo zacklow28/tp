@@ -14,40 +14,57 @@ public class DietTest {
     }
 
     @Test
-    public void constructor_invalidDiet_throwsIllegalArgumentException() {
-        String[] invalidDiets = {
-            "",             // empty string
-            " ",            // whitespace
-            "vegetarian",   // not in list
-        };
-        for (String diet : invalidDiets) {
-            assertThrows(IllegalArgumentException.class, () -> new Diet(diet));
-        }
+    public void constructor_emptyString_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Diet(""));
     }
 
     @Test
-    public void constructor_validDiet_succeeds() {
-        String[] validDiets = {
-            "regular",
-            "low sodium",
-            "    LOW SODIUM    ", // tests trim and lowercase
-            "Low Sugar",          // tests lowercase conversion
-        };
-        for (String diet: validDiets) {
-            // Should not throw
-            new Diet(diet);
-        }
+    public void constructor_whitespaceOnly_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Diet(" "));
     }
 
     @Test
-    public void isValidDiet() {
-        // invalid
-        assertFalse(Diet.isValidDiet("")); // empty
-        assertFalse(Diet.isValidDiet(" ")); // whitespace
+    public void constructor_invalidWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Diet("vegetarian"));
+    }
+
+    @Test
+    public void constructor_validDiet_regular_succeeds() {
+        new Diet("regular");
+    }
+
+    @Test
+    public void constructor_validDiet_lowSodiumWithWhitespace_succeeds() {
+        new Diet("    LOW SODIUM   ");
+    }
+
+    @Test
+    public void constructor_validDiet_lowSugarMixedCase_succeeds() {
+        new Diet("Low Sugar");
+    }
+
+    @Test
+    public void isValidDiet_invalidEmpty_returnFalse() {
+        assertFalse(Diet.isValidDiet(""));
+    }
+
+    @Test
+    public void isValidDiet_invalidWhitespace_returnFalse() {
+        assertFalse(Diet.isValidDiet(" "));
+    }
+
+    @Test
+    public void isValidDiet_invalidUnknownWord_returnFalse() {
         assertFalse(Diet.isValidDiet("mediterranean"));
-        assertFalse(Diet.isValidDiet("low sodium ")); //trailing whitespace
+    }
 
-        // valid (must match regex exactly)
+    @Test
+    public void isValidDiet_invalidTrailingSpace_returnFalse() {
+        assertFalse(Diet.isValidDiet("low sodium "));
+    }
+
+    @Test
+    public void isValidDiet_validOptions_returnTrue() {
         assertTrue(Diet.isValidDiet("regular"));
         assertTrue(Diet.isValidDiet("low sodium"));
         assertTrue(Diet.isValidDiet("low fat"));
@@ -60,19 +77,19 @@ public class DietTest {
     public void equals() {
         Diet diet = new Diet("low fat");
 
-        // same values -> returns true
-        assertTrue(diet.equals(new Diet("LOW FAT"))); // still equal after normalization
+        // same value after normalization
+        assertTrue(diet.equals(new Diet("LOW FAT")));
 
-        // same object -> returns true
+        // same object
         assertTrue(diet.equals(diet));
 
-        // null -> returns false
+        // null
         assertFalse(diet.equals(null));
 
-        // different type -> retuns false
+        // different type
         assertFalse(diet.equals(10));
 
-        // different values -> returns false
+        // different value
         assertFalse(diet.equals(new Diet("low carb")));
     }
 }

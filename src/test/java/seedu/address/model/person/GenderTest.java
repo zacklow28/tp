@@ -14,38 +14,53 @@ public class GenderTest {
     }
 
     @Test
-    public void constructor_invalidGender_throwsIllegalArgumentException() {
-        String[] invalidGenders = {
-            "",     // empty
-            " ",    // whitespace
-            "X",    // not M or F
-            "male", // invalid full word
-        };
-        for (String gender : invalidGenders) {
-            assertThrows(IllegalArgumentException.class, () -> new Gender(gender));
-        }
+    public void constructor_emptyString_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Gender(""));
     }
 
     @Test
-    public void constructor_validGender_succeeds() {
-        String[] validGenders = {
-            "M", "F",   // uppercase
-            "m", "f",   // lowercase
-            " m ", " f", "m " // whitespaces
-        };
-        for (String gender : validGenders) {
-            new Gender(gender); //should not throw
-        }
+    public void constructor_whitespaceOnly_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Gender(" "));
     }
 
     @Test
-    public void isValidGender() {
-        // invalid
+    public void constructor_invalidCharacter_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Gender("X"));
+    }
+
+    @Test
+    public void constructor_invalidWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Gender("male"));
+    }
+
+    @Test
+    public void constructor_validGender_uppercase_succeeds() {
+        new Gender("M");
+        new Gender("F");
+    }
+
+    @Test
+    public void constructor_validGender_lowercase_succeeds() {
+        new Gender("m");
+        new Gender("f");
+    }
+
+    @Test
+    public void constructor_validGender_withWhitespace_succeeds() {
+        new Gender(" m ");
+        new Gender(" f");
+        new Gender("m ");
+    }
+
+    @Test
+    public void isValidGender_invalidInputs_returnFalse() {
         assertFalse(Gender.isValidGender(""));
         assertFalse(Gender.isValidGender("male"));
-        assertFalse(Gender.isValidGender(" m ")); // trailing space not trimmed
+        assertFalse(Gender.isValidGender(" m ")); // not trimmed inside isValidGender
+    }
 
-        // valid
+    @Test
+    public void isValidGender_validInputs_returnTrue() {
         assertTrue(Gender.isValidGender("F"));
         assertTrue(Gender.isValidGender("f"));
         assertTrue(Gender.isValidGender("M"));
@@ -58,10 +73,10 @@ public class GenderTest {
         Gender g2 = new Gender("f");
         Gender g3 = new Gender("M");
 
-        assertTrue(g1.equals(g1));      // same object -> returns true
-        assertTrue(g1.equals(g2));      // same normalized value -> returns true
-        assertFalse(g1.equals(g3));     // different values -> returns false
-        assertFalse(g1.equals(null));   // null -> returns false
-        assertFalse(g1.equals("f"));    // different type -> returns false
+        assertTrue(g1.equals(g1));       // same object
+        assertTrue(g1.equals(g2));       // same normalized value
+        assertFalse(g1.equals(g3));      // different value
+        assertFalse(g1.equals(null));    // null
+        assertFalse(g1.equals("f"));     // different type
     }
 }
