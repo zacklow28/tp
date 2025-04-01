@@ -167,7 +167,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Priority Command Implementation
 
-<puml src="diagrams/PriorityCommandClassDiagram.puml" alt="PriorityCommand Class Diagram"/>
+<puml src="diagrams/priority-command/PriorityCommandClassDiagram.puml" alt="PriorityCommand Class Diagram"/>
 
 The `PriorityCommand` allows the nutritionist to update the priority level (e.g., HIGH, MEDIUM, LOW) of a selected patient from the filtered list. This command is helpful in identifying high-risk patients for urgent follow-up.
 
@@ -182,7 +182,7 @@ When a user issues a command such as `pr 2 HIGH`, the following sequence of oper
 
 The sequence diagram below illustrates the interactions between the components when executing the priority command:
 
-<puml src="diagrams/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
+<puml src="diagrams/priority-command/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
 
 
 ### Sort feature
