@@ -224,8 +224,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 6. A `CommandResult` containing the result message is returned to the `LogicManager`, and subsequently to the UI.
 
 
-### \[Proposed\] Undo/redo feature
-
 ### Command History Implementation
 
 The sequence diagram below illustrates the interaction flow when a user enters commands and navigates through command history
