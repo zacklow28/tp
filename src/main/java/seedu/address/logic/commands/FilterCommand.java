@@ -18,7 +18,7 @@ public class FilterCommand extends Command {
             + "on a prefix and value.\n"
             + "Parameters: [PREFIX]/[VALUE]\n"
             + "Example: " + COMMAND_WORD + " d/low fat\n"
-            + "Valid prefixes: d/(diet), g/(gender), p/(priority), m/(meeting date)";
+            + "Valid prefixes: d/DIET, g/GENDER, p/PRIORITY, m/MEETING DATE";
 
     private final String prefix;
     private final String value;
