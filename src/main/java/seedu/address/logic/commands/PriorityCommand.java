@@ -26,8 +26,8 @@ public class PriorityCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing priority will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer), PRIORITY (must be low, medium or high) "
-            + "pr [INDEX] [PRIORITY]\n"
-            + "Example: pr 2 HIGH.";
+            + "priority [INDEX] pr/[PRIORITY]\n"
+            + "Example: priority 2 pr/HIGH.";
 
     public static final String MESSAGE_ARGUMENTS = "Index: , Priority: ";
 
@@ -74,4 +74,25 @@ public class PriorityCommand extends Command {
         return new CommandResult(String.format("Updated priority for %s to %s",
                 personToEdit.getName(), priority));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof PriorityCommand)) {
+            return false;
+        }
+
+        PriorityCommand otherCommand = (PriorityCommand) other;
+        return index.equals(otherCommand.index)
+                && priority.equals(otherCommand.priority);
+    }
+
+    @Override
+    public int hashCode() {
+        return index.hashCode() * 31 + priority.hashCode();
+    }
+
 }
