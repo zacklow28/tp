@@ -10,7 +10,7 @@ import seedu.address.model.person.Priority;
  */
 public class PriorityCommandParser implements Parser<PriorityCommand> {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n"
-            + "Try pr [INDEX] [PRIORITY LEVEL]. ";
+            + "Try priority [INDEX] pr/[PRIORITY LEVEL]. ";
 
     /**
      * Parses the given {@code String} of arguments in the context of the PriorityCommand
@@ -23,8 +23,7 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
         }
 
         String[] tokens = args.trim().split("\\s+");
-
-        if (tokens.length != 2) {
+        if (tokens.length != 2 || !tokens[1].startsWith("pr/")) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
@@ -35,14 +34,13 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE), pe);
         }
 
-        String priorityValue = tokens[1].toUpperCase();
+        String priorityValue = tokens[1].substring(3).toUpperCase();
 
         if (!Priority.isValidPriority(priorityValue)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
         Priority priority = new Priority(priorityValue);
-
         return new PriorityCommand(index, priority);
     }
 }
