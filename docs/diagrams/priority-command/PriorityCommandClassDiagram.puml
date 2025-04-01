@@ -1,0 +1,50 @@
+@startuml
+class PriorityCommand {
+  - index: Index
+  - priority: Priority
+  --
+  + PriorityCommand(index: Index, priority: Priority)
+  + execute(model: Model): CommandResult
+}
+
+PriorityCommand --|> Command
+
+class Command {
+  + execute(model: Model): CommandResult
+}
+
+class CommandResult {
+  +CommandResult(message: String)
+}
+
+class Index {
+  +getZeroBased(): int
+}
+
+class Priority
+
+class Model {
+  +getFilteredPersonList(): List<Person>
+  +setPerson(old: Person, updated: Person)
+}
+
+class Person {
+  +getName(): Name
+  +getGender(): Gender
+  +getHeight(): Height
+  +getWeight(): Weight
+  +getPhone(): Phone
+  +getEmail(): Email
+  +getAddress(): Address
+  +getDiet(): Diet
+  +getMeetingDate(): MeetingDate
+  +getRemark(): Remark
+  +getAllergies(): Set<Allergy>
+}
+
+PriorityCommand --> Index
+PriorityCommand --> Priority
+PriorityCommand --> Model
+PriorityCommand --> CommandResult
+Model --> Person
+@enduml

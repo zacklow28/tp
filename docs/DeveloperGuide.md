@@ -165,6 +165,26 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Priority Command Implementation
+
+<puml src="diagrams/PriorityCommandClassDiagram.puml" alt="PriorityCommand Class Diagram"/>
+
+The `PriorityCommand` allows the nutritionist to update the priority level (e.g., HIGH, MEDIUM, LOW) of a selected patient from the filtered list. This command is helpful in identifying high-risk patients for urgent follow-up.
+
+When a user issues a command such as `pr 2 HIGH`, the following sequence of operations occurs:
+
+1. The input is parsed by `PriorityCommandParser`, which creates a `PriorityCommand` object.
+2. The `LogicManager` receives the command and calls its `execute(Model model)` method.
+3. Inside `PriorityCommand#execute()`, the `Model` is queried for the current filtered list of persons.
+4. The patient at the specified index is retrieved and a new `Person` object is created with the updated `Priority`.
+5. The `Model#setPerson()` method replaces the original person with the updated one in the internal list.
+6. A `CommandResult` is returned with a success message.
+
+The sequence diagram below illustrates the interactions between the components when executing the priority command:
+
+<puml src="diagrams/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
+
+
 ### Sort feature
 
 The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
@@ -203,7 +223,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 5. The `FilterCommand` builds a predicate using the prefix and value, and applies it through `model.updateFilteredPersonList(predicate)`.
 6. A `CommandResult` containing the result message is returned to the `LogicManager`, and subsequently to the UI.
 
-### \[Proposed\] Undo/redo feature
 
 ### Command History Implementation
 
