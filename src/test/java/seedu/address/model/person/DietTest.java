@@ -26,7 +26,7 @@ public class DietTest {
     }
 
     @Test
-    public void constructor_validDiet_returnsTrue() {
+    public void constructor_validDiet_succeeds() {
         String[] validDiets = {
             "regular",
             "low sodium",
