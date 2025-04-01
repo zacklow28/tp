@@ -34,19 +34,16 @@ public class GenderTest {
     }
 
     @Test
-    public void constructor_validGender_uppercase_succeeds() {
+    public void constructor_validGender_succeeds() {
+        // uppercase
         new Gender("M");
         new Gender("F");
-    }
 
-    @Test
-    public void constructor_validGender_lowercase_succeeds() {
+        // lowercase
         new Gender("m");
         new Gender("f");
-    }
 
-    @Test
-    public void constructor_validGender_withWhitespace_succeeds() {
+        // trailing whitespaces
         new Gender(" m ");
         new Gender(" f");
         new Gender("m ");
@@ -56,7 +53,8 @@ public class GenderTest {
     public void isValidGender_invalidInputs_returnFalse() {
         assertFalse(Gender.isValidGender(""));
         assertFalse(Gender.isValidGender("male"));
-        assertFalse(Gender.isValidGender(" m ")); // not trimmed inside isValidGender
+        // not trimmed inside isValidGender
+        assertFalse(Gender.isValidGender(" m "));
     }
 
     @Test
@@ -73,10 +71,15 @@ public class GenderTest {
         Gender g2 = new Gender("f");
         Gender g3 = new Gender("M");
 
-        assertTrue(g1.equals(g1));       // same object
-        assertTrue(g1.equals(g2));       // same normalized value
-        assertFalse(g1.equals(g3));      // different value
-        assertFalse(g1.equals(null));    // null
-        assertFalse(g1.equals("f"));     // different type
+        // same object -> returns true
+        assertTrue(g1.equals(g1));
+        // same normalized value -> returns true
+        assertTrue(g1.equals(g2));
+        // different value -> returns false
+        assertFalse(g1.equals(g3));
+        // null -> returns false
+        assertFalse(g1.equals(null));
+        // different type -> returns false
+        assertFalse(g1.equals("f"));
     }
 }

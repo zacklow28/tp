@@ -79,10 +79,15 @@ public class HeightTest {
         Height h2 = new Height("1.75");
         Height h3 = new Height("2.0");
 
-        assertTrue(h1.equals(h2));         // same value -> returns true
-        assertTrue(h1.equals(h1));         // same object -> retuns true
-        assertFalse(h1.equals(h3));        // different value -> returns false
-        assertFalse(h1.equals(null));      // null -> returns false
-        assertFalse(h1.equals("1.75"));    // different type -> returns false
+        // same value -> returns true
+        assertTrue(h1.equals(h2));
+        // same object -> returns true
+        assertTrue(h1.equals(h1));
+        // different value -> returns false
+        assertFalse(h1.equals(h3));
+        // null -> returns false
+        assertFalse(h1.equals(null));
+        // different typ -> returns false
+        assertFalse(h1.equals("1.75"));
     }
 }

@@ -29,14 +29,13 @@ public class PriorityTest {
     }
 
     @Test
-    public void constructor_validPriority_uppercase_succeeds() {
+    public void constructor_validPriority_succeeds() {
+        // uppercase
         new Priority("HIGH");
         new Priority("MEDIUM");
         new Priority("LOW");
-    }
 
-    @Test
-    public void constructor_validPriority_lowercase_succeeds() {
+        // lowercase
         new Priority("high");
         new Priority("medium");
         new Priority("low");
@@ -47,14 +46,16 @@ public class PriorityTest {
         assertFalse(Priority.isValidPriority(""));
         assertFalse(Priority.isValidPriority(" "));
         assertFalse(Priority.isValidPriority("urgent"));
-        assertFalse(Priority.isValidPriority("high ")); // extra space
+        // extra space
+        assertFalse(Priority.isValidPriority("high "));
     }
 
     @Test
     public void isValidPriority_validInputs_returnTrue() {
         assertTrue(Priority.isValidPriority("LOW"));
         assertTrue(Priority.isValidPriority("Medium"));
-        assertTrue(Priority.isValidPriority("high")); // case-insensitive
+        // case-insensitive
+        assertTrue(Priority.isValidPriority("high"));
     }
 
     @Test
@@ -63,10 +64,15 @@ public class PriorityTest {
         Priority p2 = new Priority("high");
         Priority p3 = new Priority("low");
 
-        assertTrue(p1.equals(p2));       // same value after normalization
-        assertTrue(p1.equals(p1));       // same object
-        assertFalse(p1.equals(p3));      // different value
-        assertFalse(p1.equals(null));    // null
-        assertFalse(p1.equals("HIGH"));  // different type
+        // same value after normalization -> returns true
+        assertTrue(p1.equals(p2));
+        // same object -> returns true
+        assertTrue(p1.equals(p1));
+        // different value -> returns false
+        assertFalse(p1.equals(p3));
+        // null -> returns false
+        assertFalse(p1.equals(null));
+        // different type -> returns false
+        assertFalse(p1.equals("HIGH"));
     }
 }

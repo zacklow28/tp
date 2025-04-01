@@ -66,10 +66,15 @@ public class WeightTest {
         Weight w2 = new Weight("65.0");
         Weight w3 = new Weight("70.0");
 
-        assertTrue(w1.equals(w2));        // same value
-        assertTrue(w1.equals(w1));        // same object
-        assertFalse(w1.equals(w3));       // different value
-        assertFalse(w1.equals(null));     // null
-        assertFalse(w1.equals("65.0"));   // different type
+        // same value -> returns true
+        assertTrue(w1.equals(w2));
+        // same object -> returns true
+        assertTrue(w1.equals(w1));
+        // different value -> returns false
+        assertFalse(w1.equals(w3));
+        // null -> returns false
+        assertFalse(w1.equals(null));
+        // different type -> returns false
+        assertFalse(w1.equals("65.0"));
     }
 }

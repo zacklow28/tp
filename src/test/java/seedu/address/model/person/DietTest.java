@@ -29,18 +29,11 @@ public class DietTest {
     }
 
     @Test
-    public void constructor_validDiet_regular_succeeds() {
+    public void constructor_validDiet_succeeds() {
         new Diet("regular");
-    }
-
-    @Test
-    public void constructor_validDiet_lowSodiumWithWhitespace_succeeds() {
         new Diet("    LOW SODIUM   ");
-    }
-
-    @Test
-    public void constructor_validDiet_lowSugarMixedCase_succeeds() {
         new Diet("Low Sugar");
+
     }
 
     @Test
@@ -77,19 +70,19 @@ public class DietTest {
     public void equals() {
         Diet diet = new Diet("low fat");
 
-        // same value after normalization
+        // same value after normalization -> returns true
         assertTrue(diet.equals(new Diet("LOW FAT")));
 
-        // same object
+        // same object -> returns true
         assertTrue(diet.equals(diet));
 
-        // null
+        // null -> returns false
         assertFalse(diet.equals(null));
 
-        // different type
+        // different type -> returns false
         assertFalse(diet.equals(10));
 
-        // different value
+        // different value -> returns false
         assertFalse(diet.equals(new Diet("low carb")));
     }
 }
