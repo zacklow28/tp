@@ -109,10 +109,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -125,7 +125,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="750" />
 
 
 The `Model` component,
@@ -137,9 +137,9 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Allergy` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Allergy` object per unique allergy, instead of each `Person` needing their own `Allergy` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="750" />
 
 </box>
 
@@ -185,13 +185,62 @@ The sequence diagram below illustrates the interactions between the components w
 <puml src="diagrams/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
 
 
+### Sort feature
+
+The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
+
+<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> <box type="info" seamless>
+
+**Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+
+</box>
+
+`SortCommand` behaviour:
+
+1. When the `LogicManager` is called to execute the `sort priority` command, it first delegates the parsing to `AddressBookParser`.
+2. `AddressBookParser` recognises the command type and uses `SortCommandParser` to interpret the command arguments.
+3. `SortCommandParser` creates a new  `SortCommand` object with the given sort type (`priority`).
+4. The constructed `SortCommand` is returned to `LogicManager`, which then calls its `execute()` method.
+5. Within `execute()`, `SortCommand` invoked `model.sortFilteredPersonList(comparator)` to sort the current patient list based on the specified criterion.
+6. A `CommandResult` object is created to encapsulate the success message and is returned up the call stack to the UI.
+
+### Filter feature
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
+
+<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" /> <box type="info" seamless>
+
+**Note:** The lifeline for FilterCommandParser should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+
+</box>
+
+`FilterCommand` behaviour:
+
+1. When the `LogicManager` receives the `filter d/low fat` command, it calls `AddressBookParser` to parse the command.
+2. `AddressBookParser` recognises that it is a `filter` command and passes control to `FilterCommandParser`.
+3. `FilterCommandParser` splits the input into the prefix (`d`) and the value (`low fat`), then constructs a `FilterCommand` object with the parsed arguments.
+4. The `FilterCommand` is returned to the `LogicManager`, which proceeds to execute it.
+5. The `FilterCommand` builds a predicate using the prefix and value, and applies it through `model.updateFilteredPersonList(predicate)`.
+6. A `CommandResult` containing the result message is returned to the `LogicManager`, and subsequently to the UI.
 
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### Command History Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The sequence diagram below illustrates the interaction flow when a user enters commands and navigates through command history
+
+<puml src="diagrams/CommandHistory.puml" alt="Command History Sequence Diagram" />
+
+**User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
+
+**Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
+
+**Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
+
+### Undo/redo feature Implementation
+
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -265,22 +314,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+#### Summary of Edge Cases:
+* **Undo/Redo Unavailable:** 
+  * Undo: When current state is at the initial state (currentStatePointer = 0).
+  * Redo: When current state is at the latest state (currentStatePointer = size() - 1).
+* **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
+* **State Purge:** Executing a new command after an undo will purge the redo history. Only relevant states are restorable.
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * **Why Chosen:** This approach provides a reliable and comprehensive way to store all changes, ensuring that undo and redo actions always restore the address book accurately.
+  * **Potential Improvement:** Limit history size (e.g. 100) to prevent excessive memory usage over time.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * **Why Not Chosen:** This approach introduces significant complexity in implementation and testing, as commands must independently manage their undo/redo operations
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
+### Data archiving Implementation
 
 _{Explain here how the data archiving feature will be implemented}_
 
@@ -314,7 +367,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 ### User stories
-
 
 | **As a …**              | **I want to …**                                             | **So that I can…**                                                               | **Notes**                                                                                   |
 |-------------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
@@ -543,35 +595,133 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a patient
 
-### Deleting a person
+1. Prerequisite: Ensure no patient with the same email exists.
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `add n/John Doe g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
+      * Expected: New patient is added and listed.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `add` (with no parameters)
+      * Expected: Error indicating missing required fields.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. Prerequisite: Patient with e/john@example.com exists.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `add n/Alice Tan g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
+      * Expected: Error due to duplicate email.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Editing a patient
 
-1. _{ more test cases …​ }_
+1. Prerequisite: At least one patient is listed.
+
+   1. Test case: `edit 1 no/98765432`
+      * Expected: Patient at index 1 has updated phone number.
+
+   2. Test case: `edit 1`
+      * Expected: Error due to no fields to edit.
+
+2. Prerequisite: List contains fewer than 999 patients.
+
+   1. Test case: `edit 999 e/abc@example.com`
+      * Expected: Error due to index being out of bounds.
+
+### Adding/Updating a Remark
+
+1. Prerequisite: At least one patient is listed.
+
+   1. Test case: `remark 1 r/Very cooperative`
+      * Expected: Remark is added to patient 1.
+
+   2. Test case: `remark 0 r/Test`
+      * Expected: Error due to invalid index.
+
+### Change Priority
+
+1. Prerequisite: At least 2 patient is listed.
+
+   1. Test case: `pr 2 high`
+      * Expected: Priority of patient 2 updated to high.
+
+   2. Test case: `pr 1 urgent`
+      * Expected: Error due to invalid priority.
+
+2. Prerequisite: Fewer than 10 patients.
+
+   1. Test case: `pr 10 high`
+      * Expected: Error due to invalid index.
+
+### Find by name
+
+1. Prerequisite: At least one patient with name containing "John" exists.
+
+   1. Test case: `find John`
+      * Expected: Patients with 'John' in their name are listed.
+
+   2. Test case: `find`
+      * Expected: Error due to missing keyword.
+
+2. Prerequisite: No patient with name containing "la".
+
+   1. Test case: `find zz`
+      * Expected: No matches found.
+
+### Filter patients
+
+1. Prerequisite: At least one female patient exists.
+
+   1. Test case: `filter g/f`
+      * Expected: Only female patients are shown.
+
+2. Prerequisite: There are only a few valid prefixes and values.
+
+   1. Test case: `filter x/test`
+      * Expected: Error due to invalid prefix.
+
+   2. Test case: `filter g/Male`
+      * Expected: Error due to invalid value.
+
+### Sort patients
+
+1. Prerequisite: Multiple patients with different names exist.
+
+   1. Test case: `sort name`
+      * Expected: Patient List is sorted alphabetically by name.
+
+   2. Test case: `sort priority`
+      * Expected: Patient List is sorted high to low priority and then alphabetically by name.
+
+2. Prerequisite: There are only a few valid values to sort.
+
+   1. Test case: `sort invalid`
+      * Expected: Error due to invalid sort field.
+
+### Deleting a patient
+
+1. Prerequisite: At least one patient in list.
+
+   1. Test case: `delete 1`
+      * Expected: Patient at index 1 is deleted.
+
+2. Prerequisite: No patient with email fake@email.com.
+
+   1. Test case: `delete fake@email.com`.
+      * Expected: Error due to no patient with that email.
+
+### Clear all patients
+
+1. Prerequisite: Multiple patients are listed.
+
+   1. Test case: `clear`
+      * Expected: App prompts confirmation before clearing data.
 
 ### Saving data
 
@@ -579,4 +729,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

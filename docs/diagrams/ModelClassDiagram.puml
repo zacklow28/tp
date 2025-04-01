@@ -9,16 +9,24 @@ Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class VersionedAddressBook
 Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
 Class Person
 Class Address
+Class Diet
 Class Email
+Class Gender
+Class Height
+Class MeetingDate
 Class Name
 Class Phone
-Class Tag
+Class Priority
+Class Remark
+Class Weight
+Class Allergy
 
 Class I #FFFFFF
 }
@@ -27,21 +35,29 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-
+VersionedAddressBook -left-|> AddressBook
+VersionedAddressBook -up-> "*" ReadOnlyAddressBook : state history
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" VersionedAddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+VersionedAddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> Email
+Person *--> Weight
+Person *--> Height
+Person *--> Gender
+Person *--> Diet
+Person *--> MeetingDate
+Person *--> Priority
+Person *--> "0..1"Remark
+Person *--> "*" Allergy
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -49,6 +65,14 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Weight
+Weight -[hidden]right-> Height
+Height -[hidden]right-> Gender
+Gender -[hidden]right-> Diet
+Diet -[hidden]right-> MeetingDate
+MeetingDate -[hidden]right-> Priority
+Priority -[hidden]right-> Remark
+Remark -[hidden]right-> Allergy
 
 ModelManager --> "~* filtered" Person
 @enduml
