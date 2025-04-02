@@ -16,21 +16,33 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MeetingDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_GENDER = "male";
+    private static final String INVALID_DIET = "low-fat";
+    private static final String INVALID_PRIORITY = "h";
+    private static final String INVALID_MEETING_DATE = "12-12-2025";
     private static final String INVALID_ALLERGY = "#peanuts";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "62345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_GENDER = "M";
+    private static final String VALID_DIET = "low fat";
+    private static final String VALID_PRIORITY = "HIGH";
+    private static final String VALID_MEETING_DATE = "2025-12-12";
     private static final String VALID_ALLERGY_1 = "peanuts";
     private static final String VALID_ALLERGY_2 = "fish";
 
@@ -146,6 +158,119 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    }
+
+    @Test
+    public void parseGender_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGender((String) null));
+    }
+
+    @Test
+    public void parseGender_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_GENDER));
+    }
+
+    @Test
+    public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
+    }
+
+    @Test
+    public void parseGender_validValueWithWhitespace_returnsGender() throws Exception {
+        String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
+    }
+
+    @Test
+    public void parseGender_validValueUpperCase_returnsGender() throws Exception {
+        String genderUpperCase = VALID_GENDER.toUpperCase();
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(genderUpperCase));
+    }
+
+    @Test
+    public void parseDiet_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDiet((String) null));
+    }
+
+    @Test
+    public void parseDiet_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDiet(INVALID_DIET));
+    }
+
+    @Test
+    public void parseDiet_validValueWithoutWhitespace_returnsDiet() throws Exception {
+        Diet expectedDiet = new Diet(VALID_DIET);
+        assertEquals(expectedDiet, ParserUtil.parseDiet(VALID_DIET));
+    }
+
+    @Test
+    public void parseDiet_validValueWithWhitespace_returnsDiet() throws Exception {
+        String dietWithWhitespace = WHITESPACE + VALID_DIET + WHITESPACE;
+        Diet expectedDiet = new Diet(VALID_DIET);
+        assertEquals(expectedDiet, ParserUtil.parseDiet(dietWithWhitespace));
+    }
+
+    @Test
+    public void parseDiet_validValueUpperCase_returnsDiet() throws Exception {
+        String dietUpperCase = VALID_DIET.toUpperCase();
+        Diet expectedDiet = new Diet(VALID_DIET);
+        assertEquals(expectedDiet, ParserUtil.parseDiet(dietUpperCase));
+    }
+
+    @Test
+    public void parsePriority_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePriority((String) null));
+    }
+
+    @Test
+    public void parsePriority_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriority(INVALID_PRIORITY));
+    }
+
+    @Test
+    public void parsePriority_validValueWithoutWhitespace_returnsPriority() throws Exception {
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        assertEquals(expectedPriority, ParserUtil.parsePriority(VALID_PRIORITY));
+    }
+
+    @Test
+    public void parsePriority_validValueWithWhitespace_returnsPriority() throws Exception {
+        String priorityWithWhitespace = WHITESPACE + VALID_PRIORITY + WHITESPACE;
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        assertEquals(expectedPriority, ParserUtil.parsePriority(priorityWithWhitespace));
+    }
+
+    @Test
+    public void parsePriority_validValueUpperCase_returnsPriority() throws Exception {
+        String priorityLowerCase = VALID_PRIORITY.toLowerCase();
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        assertEquals(expectedPriority, ParserUtil.parsePriority(priorityLowerCase));
+    }
+
+    @Test
+    public void parseMeetingDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMeetingDate((String) null));
+    }
+
+    @Test
+    public void parseMeetingDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingDate(INVALID_MEETING_DATE));
+    }
+
+    @Test
+    public void parseMeetingDate_validValueWithoutWhitespace_returnsMeetingDate() throws Exception {
+        MeetingDate expectedMeetingDate = new MeetingDate(VALID_MEETING_DATE);
+        assertEquals(expectedMeetingDate, ParserUtil.parseMeetingDate(VALID_MEETING_DATE));
+    }
+
+    @Test
+    public void parseMeetingDate_validValueWithWhitespace_returnsMeetingDate() throws Exception {
+        String meetingDateWithWhitespace = WHITESPACE + VALID_MEETING_DATE + WHITESPACE;
+        MeetingDate expectedMeetingDate = new MeetingDate(VALID_MEETING_DATE);
+        assertEquals(expectedMeetingDate, ParserUtil.parseMeetingDate(meetingDateWithWhitespace));
     }
 
     @Test
