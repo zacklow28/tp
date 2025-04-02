@@ -1,10 +1,10 @@
 @startuml
 actor Nutritionist
-participant UI
-participant LogicManager
-participant EditCommandParser
-participant EditCommand
-participant Model
+participant ":UI" as UI
+participant ":LogicManager" as LogicManager
+participant ":EditCommandParser" as EditCommandParser
+participant ":EditCommand" as EditCommand
+participant ":Model" as Model
 
 Nutritionist -> UI : enter "edit 1 e/newemail@example.com"
 UI -> LogicManager : execute("edit ...")

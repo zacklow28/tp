@@ -1,9 +1,9 @@
 @startuml
 actor Nutritionist
-participant UI
-participant LogicManager
-participant ClearCommand
-participant Model
+participant ":UI" as UI
+participant ":LogicManager" as LogicManager
+participant ":ClearCommand" as ClearCommand
+participant ":Model" as Model
 
 Nutritionist -> UI : enter "clear"
 UI -> LogicManager : execute("clear")

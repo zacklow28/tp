@@ -1,10 +1,10 @@
 @startuml
 actor Nutritionist
-participant UI
-participant LogicManager
-participant AddCommandParser
-participant AddCommand
-participant Model
+participant ":UI" as UI
+participant ":LogicManager" as LogicManager
+participant ":AddCommandParser" as AddCommandParser
+participant ":AddCommand" as AddCommand
+participant ":Model" as Model
 
 Nutritionist -> UI : enter "add ..."
 UI -> LogicManager : execute("add ...")
