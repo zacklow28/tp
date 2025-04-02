@@ -6,7 +6,7 @@ pageNav: 3
 
 # VitaBook User Guide
 
-**VitaBook** is a **desktop application for freelance nutritionists** to manage patient profiles, dietary information, and follow-ups efficiently. Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean **Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
+**VitaBook** is a **desktop application for freelance nutritionists based in Singapore** to manage patient profiles, dietary information, and follow-ups efficiently. Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean **Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
 
 ### Key Features
 
@@ -121,7 +121,7 @@ Format: `help`
 
 Adds a new patient to your VitaBook with their complete details.
 
-Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…​`
+Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…​`
 
 <box type="tip" seamless>
 
@@ -134,7 +134,7 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 4. Gender must be `m` or `f` (case-insensitive).
 
-5. Height must be between `0.50` and `2.50`.
+5. Height must be between `0.50` and `3.00`.
 
 6. Weight must be a positive integer.
 
@@ -144,7 +144,7 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 9. Meeting date must be in the format `YYYY-MM-DD`.
 
-10. Phone number must be a positive integer of 8 digits.
+10. Phone number must be a positive integer of **exactly** 8 digits and start with 6, 8 or 9.
 </box>
 
 Examples:
@@ -303,7 +303,7 @@ Examples:
 
 ### Sorting patients: `sort`
 
-Sorts patients based on specific criteria (priority, name, diet (case-insensitive)).
+Sorts patients based on specific criteria (priority, name, diet).
 
 Format: `sort CRITERIA`
 
@@ -360,7 +360,7 @@ Format: `undo`
 <box type="tip" seamless>
 
 **Tips/Constraints:**
-1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `pr`, `redo`).
+1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `priority`, `redo`).
 
 2. Support multiple undo commands until the patient list reaches the initial state.
 </box>
@@ -461,7 +461,7 @@ dietary tags, allergies, priority levels, and meeting dates. It’s tailored to 
 **A**: You can store the following information: name, phone, email, address, gender, height, weight, diet  (e.g., low sodium), meeting date, priority level, remarks and allergies (e.g., peanuts).
 
 **Q**:What happens when I delete a patient?
-**A**: All of their information (e.g. diet, priority, meeting date, medical notes etc.) will be permanently deleted from your VitaBook.
+**A**: All of their information (e.g. diet, priority, meeting date, medical notes etc.) will be deleted from your VitaBook. However, this can be recovered using the `undo` command.
 
 **Q**: Can I undo a mistaken command?
 **A**: Yes, you can! The `undo` command will undo the last command that changed the patient list.
