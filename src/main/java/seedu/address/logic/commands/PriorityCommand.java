@@ -51,7 +51,7 @@ public class PriorityCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException("Invalid person index.");
+            throw new CommandException("Invalid patient index.");
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

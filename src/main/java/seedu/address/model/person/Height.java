@@ -10,10 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Height {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Height should be a number between 0.5 and 2.5 meters, and it should not be blank";
+            "Height should be a number between 0.5 and 3.0 meters, and it should not be blank";
 
     private static final double MIN_HEIGHT = 0.5;
-    private static final double MAX_HEIGHT = 2.5;
+    private static final double MAX_HEIGHT = 3.0;
 
     public final double height;
 

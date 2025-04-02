@@ -502,8 +502,8 @@ Action        | Format, Examples
 **Clear**     | `clear`
 **Undo**      | `undo`
 **Redo**      | `redo`
-**Navigate Command History** | `↑` or `↓` arrow keys 
-**Exit**      | `exit` 
+**Navigate Command History** | `↑` or `↓` arrow keys
+**Exit**      | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
