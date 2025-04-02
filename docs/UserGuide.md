@@ -14,7 +14,7 @@ pageNav: 3
 - **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with full details.
 - **[List Patients](#listing-all-patients-list)** — `list` : Show all stored patients.
 - **[Edit Patient](#editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
-- **[Priority](#changing-a-patients-priority-pr)** — `pr` : Change a patient's priority by index.
+- **[Priority](#changing-a-patient-s-priority-pr)** — `pr` : Change a patient's priority by index.
 - **[Remark](#adding-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
 - **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
 - **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
