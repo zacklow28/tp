@@ -405,7 +405,7 @@ Format: `↑` or `↓` arrow keys
 
 ### Toggling Light Mode and Dark Mode
 
-Transition between light mode and dark mode for a more customisable and improved visual experience. Click the `File` menu to toggle between light mode and dark mode.
+Transitions between light mode and dark mode for a more customisable and improved visual experience. Click the `File` menu to toggle between light mode and dark mode.
 
 <a href="images/LightMode.png">
 
