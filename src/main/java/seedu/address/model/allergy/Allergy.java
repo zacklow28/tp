@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Allergy {
 
-    public static final String MESSAGE_CONSTRAINTS = "Allergy names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Allergy names can only contain alphanumeric values. "
+            + "Spaces are allowed.";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String allergyName;
 
@@ -22,7 +23,8 @@ public class Allergy {
     public Allergy(String allergyName) {
         requireNonNull(allergyName);
         String trimmedAllergyName = allergyName.trim();
-        checkArgument(isValidAllergyName(trimmedAllergyName), MESSAGE_CONSTRAINTS);
+        checkArgument(!trimmedAllergyName.isEmpty() && isValidAllergyName(trimmedAllergyName),
+                MESSAGE_CONSTRAINTS);
         this.allergyName = trimmedAllergyName;
     }
 
@@ -31,7 +33,8 @@ public class Allergy {
      */
     public static boolean isValidAllergyName(String test) {
         System.out.println("Validating allergy: '" + test + "'");
-        return test.matches(VALIDATION_REGEX);
+        requireNonNull(test);
+        return test != null && !test.trim().isEmpty() && test.matches(VALIDATION_REGEX);
     }
 
     @Override
