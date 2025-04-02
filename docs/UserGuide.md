@@ -328,7 +328,7 @@ Examples:
 
 ### Deleting a patient : `delete`
 
-Deletes a patient from VitaBook.
+Deletes a patient from your VitaBook.
 
 Format: `delete INDEX` or `delete EMAIL`
 
@@ -351,7 +351,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all patient entries from VitaBook.
+Clears all patient entries from your VitaBook.
 
 Format: `clear`
 
