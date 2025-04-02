@@ -21,7 +21,7 @@ You can use this guide to maintain, upgrade, and evolve VitaBook.
 
 This Developer Guide is accurate as of 2 April 2025. 
 
-Head over to [Setting up, getting started](#setting-up-getting-started)
+Head over to [How to use this Developer Guide](#how-to-use-this-developer-guide)
 to get started!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ The Developer Guide is organized into several key sections:
   Provides an architectural overview of VitaBook, including the key components (`Model`, `Logic`, `UI`, `Storage`) and how they interact. Start here for an understanding of the overall structure.
 
 - **[Implementation](#implementation)**  
-  Explains how specific features are built—such as priority tagging, sorting, filtering, command history, and undo/redo mechanisms.
+  Explains how specific features are built—such as adding, editing, clearing, changing priority, sorting, filtering, command history, and undo/redo mechanisms.
 
 - **[Documentation, Configuration, and Other Guides](#documentation-logging-testing-configuration-dev-ops)**  
   Includes focused sub-guides on areas such as testing, logging, build configuration, and DevOps setup.

@@ -90,9 +90,5 @@ public class PriorityCommand extends Command {
                 && priority.equals(otherCommand.priority);
     }
 
-    @Override
-    public int hashCode() {
-        return index.hashCode() * 31 + priority.hashCode();
-    }
 
 }

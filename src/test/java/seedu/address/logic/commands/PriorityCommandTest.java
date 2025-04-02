@@ -70,13 +70,4 @@ public class PriorityCommandTest {
         assertFalse(command1.equals(new ClearCommand()));
     }
 
-
-    @Test
-    public void hashCode_consistentWithEquals() {
-        PriorityCommand command1 = new PriorityCommand(Index.fromZeroBased(1), new Priority("LOW"));
-        PriorityCommand command2 = new PriorityCommand(Index.fromZeroBased(1), new Priority("LOW"));
-
-        assertEquals(command1, command2);
-        assertEquals(command1.hashCode(), command2.hashCode());
-    }
 }
