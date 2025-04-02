@@ -413,7 +413,7 @@ Your VitaBook data is saved in the hard disk automatically after any command tha
 
 ### Editing the data file
 
-Your VitaBook data are saved automatically as a JSON file `[JAR file location]/data/vitabook.json`. Advanced users are welcome to update data directly by editing that data file.
+Your VitaBook data is saved automatically as a JSON file `[JAR file location]/data/vitabook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
