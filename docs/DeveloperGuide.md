@@ -36,9 +36,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -54,6 +53,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
 
 **How the architecture components interact with each other**
 
@@ -72,6 +72,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -82,12 +83,13 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+1. Executes user commands using the `Logic` component.
+2. Listens for changes to `Model` data so that the UI can be updated with the modified data.
+3. Keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands. 
+4. Depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
 
 ### Logic component
 
@@ -97,7 +99,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -105,6 +109,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
 
 How the `Logic` component works:
 
@@ -119,21 +124,24 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+1. When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+2. All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="1000" />
 
 
-The `Model` component,
+The `Model` component:
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+1. Stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+2. Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+3. Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+4. Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
@@ -150,10 +158,11 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component:
+1. can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+2. inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+3. depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
 
 ### Common classes
 
@@ -164,6 +173,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
 
 ### Priority Command Implementation
 
@@ -204,6 +214,7 @@ The sequence below illustrates the interactions within the `Logic` component, ta
 5. Within `execute()`, `SortCommand` invoked `model.sortFilteredPersonList(comparator)` to sort the current patient list based on the specified criterion.
 6. A `CommandResult` object is created to encapsulate the success message and is returned up the call stack to the UI.
 
+
 ### Filter feature
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
@@ -230,11 +241,10 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 
 <puml src="diagrams/CommandHistory.puml" alt="Command History Sequence Diagram" />
 
-**User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
+1. **User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
+2. **Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
+3. **Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
 
-**Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
-
-**Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
 
 ### Undo/redo feature Implementation
 
@@ -244,19 +254,17 @@ The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `Ad
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively. Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -266,7 +274,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -300,11 +308,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -560,20 +568,14 @@ User stories for the MVP version:
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
 * **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
 * **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information.
 * **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
 * **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
-* **Tag**: A label assigned to a patient that helps categorize and filter patients based on specific conditions or characteristics (e.g. “high-risk”, “low sodium diet”).
 * **Priority**: The level of importance or urgency assigned to a task or patient. For example, a high-priority patient needs immediate attention, while low-priority patients may not require urgent care.
-* **Reminder**: A notification or alert set by the nutritionist to prompt follow-up actions or visits for patients based on their care schedule.
-* **Consultation Log**: A record of all interactions with a patient, including the date, purpose, and key details from the consultation.
-* **Stale Records**: Patient profiles that have not been updated or accessed in a long time. These records are flagged for follow-up or archiving to keep the patient list organized.
 * **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
 * **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
-* **DBMS (Database Management System)**: A software used to store, manage, and retrieve data in databases. Not used in this project.
 * **JAR File (Java ARchive)**: A compressed file that contains Java classes, libraries, and resources, packaged for distribution.
 
 --------------------------------------------------------------------------------------------------------------------
