@@ -144,7 +144,7 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 
 9. Meeting date must be in the format `YYYY-MM-DD`.
 
-10. Phone number must be a positive integer of **exactly** 8 digits and start with 6, 8 or 9.
+10. Phone number must be a positive integer of **exactly** 8 digits and starts with 6, 8 or 9.
 </box>
 
 Examples:
