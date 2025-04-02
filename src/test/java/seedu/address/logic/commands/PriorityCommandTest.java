@@ -69,4 +69,5 @@ public class PriorityCommandTest {
         // different type
         assertFalse(command1.equals(new ClearCommand()));
     }
+
 }

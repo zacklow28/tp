@@ -1,0 +1,18 @@
+@startuml
+actor User
+participant UI
+participant LogicManager
+participant EditCommandParser
+participant EditCommand
+participant Model
+
+User -> UI : enter "edit 1 e/newemail@example.com"
+UI -> LogicManager : execute("edit ...")
+LogicManager -> EditCommandParser : parse(...)
+EditCommandParser -> EditCommand : new EditCommand(index, descriptor)
+LogicManager -> EditCommand : execute(model)
+EditCommand -> Model : getFilteredPersonList()
+EditCommand -> Model : setPerson(original, edited)
+EditCommand -> LogicManager : return CommandResult
+LogicManager -> UI : update display
+@enduml

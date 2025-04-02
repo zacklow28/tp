@@ -6,6 +6,25 @@ pageNav: 3
 
 # VitaBook Developer Guide
 
+## **About Us**
+
+**VitaBook** is a **desktop application for freelance nutritionists** 
+to manage patient profiles, dietary information, and follow-ups efficiently. 
+Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean 
+**Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
+
+This Developer Guide provides in-depth documentation on how VitaBook is designed and implemented. 
+It covers the architecture of VitaBook, detailed specifications on smaller pieces of the design, and an outline of 
+all parts of the software and how they will work.
+
+You can use this guide to maintain, upgrade, and evolve VitaBook.
+
+This Developer Guide is accurate as of 2 April 2025. 
+
+Head over to [How to use this Developer Guide](#how-to-use-this-developer-guide)
+to get started!
+
+--------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -13,24 +32,127 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-We would like to thank the developers of the [_AddressBook-Level4 (AB4)_](https://github.com/se-edu/addressbook-level4) project by the SE-EDU team, which served as a foundational reference for the architecture and testing approaches used of the GUI tests for this application.
-
-Additionally, we would like to acknowledge the following:
+We would like to acknowledge the following:
 
 * Our course instructors and teaching assistants for their guidance and feedback throughout the development process.
 * Our peers and collaborators who provided support, code reviews, and valuable discussions.
 * The open-source Java and JavaFX communities for documentation and tools that supported this project.
 * The maintainers of relevant libraries and tools used in the project, such as Jackson for JSON processing and JUnit for testing.
 
+### Java Dependencies
+
+- **JavaFX** – for GUI rendering and user interaction
+- **Jackson** – for JSON serialization and deserialization
+- **JUnit 5** – for unit testing
+- **TestFX** – for JavaFX GUI testing
+- **Apache Commons Lang** – for additional utility methods
+- **JaCoCo** – for generating test coverage reports
+- **Gradle Shadow Plugin** – for building executable JARs
+- **Checkstyle** – for enforcing coding standards
+
+
+### Documentation Tools
+
+- **MarkBind** – for authoring and building the project website
+- **PlantUML** – for generating UML diagrams used in the Developer Guide
+
+
+### Fonts Used in the Application
+
+- **Segoe UI**, **Segoe UI Light**, **Segoe UI Semibold** – used for GUI text elements
+- **Georgia** – used for headers and titles
+- **Open Sans** – used in certain label elements
+- **Helvetica**, **Arial** – as fallback system fonts in UI components
+
+
+### UI and Code Inspirations
+
+- **Metro-style JavaFX buttons** adapted from [Pedro Duque Vieira’s JMetro](https://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/)
+- **Color themes** guided by [SchemeColor](https://www.schemecolor.com/) and [Coolors](https://coolors.co/)
+- CLI-GUI hybrid design inspired by the SE-EDU AddressBook examples
+- Admonition and navigation layout patterns adapted from MarkBind presets and [Docusaurus](https://docusaurus.io/) design principles
+
+
+### Badges and Icons
+
+- **GitHub Actions** – for CI status badges
+- **Codecov** – for test coverage badge
+- **GitHub Pages / Octicons** – for site layout and UI styling references
+
+
+### Special Thanks
+
+- The SE-EDU team for maintaining the **AddressBook-Level3** project
+- We would like to thank the developers of the [_AddressBook-Level4 (AB4)_](https://github.com/se-edu/addressbook-level4) project by the SE-EDU team, which served as a foundational reference for the architecture and testing approaches used of the GUI tests for this application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+-------
+
+## How to Use This Developer Guide
+
+Welcome, and thank you for your interest in understanding how **VitaBook** works behind the scenes. This Developer Guide is designed to support you in maintaining, enhancing, and evolving VitaBook—whether you're a developer, tester, or simply exploring the technical foundation of the application.
+
+> **Tip:** You do not need to read this guide in sequential order.  
+> However, we recommend starting with the [Design](#design) section to gain a high-level understanding of the system. With this foundation, you can easily dive into sections most relevant to your goals.
+
+
+### What's Inside?
+
+The Developer Guide is organized into several key sections:
+
+- **[Design](#design)**  
+  Provides an architectural overview of VitaBook, including the key components (`Model`, `Logic`, `UI`, `Storage`) and how they interact. Start here for an understanding of the overall structure.
+
+- **[Implementation](#implementation)**  
+  Explains how specific features are built—such as adding, editing, clearing, changing priority, sorting, filtering, command history, and undo/redo mechanisms.
+
+- **[Documentation, Configuration, and Other Guides](#documentation-logging-testing-configuration-dev-ops)**  
+  Includes focused sub-guides on areas such as testing, logging, build configuration, and DevOps setup.
+
+- **[Requirements](#appendix-requirements)**  
+  Details the product scope, target user profile, value proposition, user stories, use cases, and non-functional requirements. This section is particularly useful for project stakeholders and planners.
+
+- **[Instructions for Manual Testing](#appendix-instructions-for-manual-testing)**  
+  Provides clear steps for testing key functionality, including input examples and expected results. Ideal for QA testers and contributors performing system verification.
+
+
+
+### Who Should Read What?
+
+| Role                  | Recommended Sections                                                                                      |
+|-----------------------|-----------------------------------------------------------------------------------------------------------|
+| Developer             | Start with [Design](#design), followed by [Implementation](#implementation) for feature-specific insights. |
+| Tester                | Refer to [Instructions for Manual Testing](#appendix-instructions-for-manual-testing).                    |
+| Product or UX Team    | Read the [Requirements](#appendix-requirements) section for user needs and application goals.             |
+| New Contributor       | Begin with [Design](#design), then explore [Implementation](#implementation) and [Glossary](#glossary).   |
+
+You can also refer to the [Glossary](#glossary) for definitions of commonly used terms in VitaBook.
+
+-------------------------------------------------------------------------------------------------------------
 
 ## **Design**
+
+This section provides a high-level overview of how **VitaBook** is architected, and how its key components work together to support core features like patient management, filtering, sorting, and undo/redo.
+
+The [Architecture](#architecture) subsection presents a visual and conceptual overview of how VitaBook's major components interact with each other.
+
+VitaBook is designed with four main components:
+
+- **[UI Component](#ui-component)** – Handles user interface rendering and interaction using JavaFX.
+- **[Logic Component](#logic-component)** – Parses and executes user commands via a central command parser.
+- **[Model Component](#model-component)** – Maintains the in-memory state of the application, including the patient list.
+- **[Storage Component](#storage-component)** – Reads from and writes to JSON files to persist user data.
+
+In addition, the [Common Classes](#common-classes) section documents utility classes shared across multiple packages.
+
+> **Note:** All diagrams in this section (e.g., architecture, class, sequence diagrams) are generated using PlantUML.  
+> The corresponding `.puml` source files are located in the `diagrams` folder of this project.  
+> You can refer to the [SE-EDU PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) if you wish to modify or create new diagrams for future enhancements.
+
 
 ### Architecture
 
@@ -87,7 +209,7 @@ The `UI` component:
 
 1. Executes user commands using the `Logic` component.
 2. Listens for changes to `Model` data so that the UI can be updated with the modified data.
-3. Keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands. 
+3. Keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 4. Depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 
@@ -127,6 +249,7 @@ How the parsing works:
 
 1. When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 2. All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 
 ### Model component
@@ -174,6 +297,61 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Command Implementation
+<puml src="diagrams/AddCommandClassDiagram.puml" alt="AddCommand Class Diagram"/>
+
+The `AddCommand` allows the user to register a new patient by specifying all the required fields such as name, gender, contact details, dietary needs, and medical priorities. This command ensures that each patient added is unique based on identity fields.
+
+When a user issues a command such as `add n/John d/vegan`, the following sequence of operations occurs:
+
+1. The input is parsed by `AddCommandParser`, which creates a `Person` object and wraps it inside an `AddCommand`.
+2. The `LogicManager` executes the command by calling its `execute(Model model)` method.
+3. Inside `AddCommand#execute()`, the `Model` is checked for any duplicate entries using `hasPerson()`.
+4. If no duplicates are found, the new `Person` is added to the address book via `model.addPerson()`.
+5. A `CommandResult` is returned with a success message. 
+
+The following sequence diagram outlines the flow of the AddCommand:
+
+<puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommand Sequence Diagram"/>
+
+### Edit Command Implementation
+
+<puml src="diagrams/edit-command/EditCommandClassDiagram.puml" alt="EditCommand Class Diagram"/>
+
+The `EditCommand` allows users to update one or more fields of an existing patient in the list. Fields that are not specified in the command remain unchanged.
+
+When a user issues a command such as `edit 1 e/john@example.com`, the following steps take place:
+
+1. The command is parsed by `EditCommandParser`, which produces an `EditCommand` with an index and an `EditPersonDescriptor`.
+2. The `LogicManager` invokes the `execute()` method of the `EditCommand`.
+3. Inside `EditCommand#execute()`, the selected patient is fetched from the filtered list using the index.
+4. A new `Person` is created by merging the original details with the updated fields from `EditPersonDescriptor`.
+5. If the new `Person` is not a duplicate, `model.setPerson()` replaces the original person.
+6. A `CommandResult` is returned indicating the successful update.
+
+The sequence diagram below depicts the interaction of components involved:
+
+<puml src="diagrams/edit-command/EditCommandSequenceDiagram.puml" alt="EditCommand Sequence Diagram"/>
+
+
+### Clear Command Implementation
+
+<puml src="diagrams/clear-command/ClearCommandClassDiagram.puml" alt="ClearCommand Class Diagram"/>
+
+The `ClearCommand` removes all patient entries from the address book. To prevent accidental deletions, a confirmation dialog is shown (unless bypassed in test scenarios).
+
+When the user enters `clear`, the command follows this sequence:
+
+1. `LogicManager` calls the `execute()` method of the `ClearCommand`.
+2. If the address book is already empty, a message is returned immediately.
+3. If confirmation is required, the UI invokes `ClearDialogUtil.showConfirmationDialog()`.
+4. Upon confirmation, a new, empty `AddressBook` replaces the current one via `model.setAddressBook()`.
+5. A `CommandResult` with a success message is returned.
+
+The process is visualized in the following sequence diagram:
+
+<puml src="diagrams/clear-command/ClearCommandSequenceDiagram.puml" alt="ClearCommand Sequence Diagram"/>
+
 
 ### Priority Command Implementation
 
@@ -181,7 +359,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The `PriorityCommand` allows the nutritionist to update the priority level (e.g., HIGH, MEDIUM, LOW) of a selected patient from the filtered list. This command is helpful in identifying high-risk patients for urgent follow-up.
 
-When a user issues a command such as `pr 2 HIGH`, the following sequence of operations occurs:
+When a user issues a command such as `priority 2 pr/HIGH`, the following sequence of operations occurs:
 
 1. The input is parsed by `PriorityCommandParser`, which creates a `PriorityCommand` object.
 2. The `LogicManager` receives the command and calls its `execute(Model model)` method.
@@ -339,11 +517,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * **Why Not Chosen:** This approach introduces significant complexity in implementation and testing, as commands must independently manage their undo/redo operations
 
-### Data archiving Implementation
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -363,7 +536,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * Works as a freelance nutritionist, often visiting multiple patients daily
-* Has a need to manage a significant number of patient profiles, including contact information, medical history, dietary restrictions, and follow-ups
+* Has a need to manage a significant number of patient profiles, including patient information, medical history, dietary restrictions, and follow-ups
 * Prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
 * Can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
 * Is comfortable using command-line interfaces (CLI) for managing data and interactions
@@ -386,7 +559,7 @@ _{Explain here how the data archiving feature will be implemented}_
 | Elderly Nutritionist    | Increase the font size                                      | Read text comfortably                                                            | Font size settings should be adjustable in the UI.                                          |
 | First-Time Nutritionist | Ensure no duplicates in the patient’s information are added | Refer to the correct information and make necessary changes                      | Alert the user of possible duplication when adding a new patient.                           |
 | First-Time Nutritionist | Access the application’s help function                      | Learn how to use the application effectively                                     | List down all available commands that the user can use.                                     |
-| First-Time Nutritionist | See some sample contacts when I open the app                | Easily try out its features without needing to add my data first                 |                                                                                             |
+| First-Time Nutritionist | See some sample patients when I open the app                | Easily try out its features without needing to add my data first                 |                                                                                             |
 | Nutritionist            | Add new patients to the system                              | Maintain an updated record of my clients                                         | Each new patient should have a unique profile.                                              |
 | Nutritionist            | Delete patient records                                      | Remove outdated or irrelevant data                                               | A confirmation prompt should appear before deletion.                                        |
 | Nutritionist            | Clear all data in the application                           | Reset the application when necessary                                             | Requires confirmation to prevent accidental reset.                                          |
@@ -596,7 +769,7 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample patients. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -723,10 +896,3 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `clear`
       * Expected: App prompts confirmation before clearing data.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
