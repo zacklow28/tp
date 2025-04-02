@@ -90,6 +90,15 @@ public class PersonCard extends UiPart<Region> {
                     allTags.getChildren().add(allergyLabel);
                 });
 
+        // dynamically bind width to Scene
+        cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                address.maxWidthProperty().bind(newScene.widthProperty().multiply(0.89));
+                remark.maxWidthProperty().bind(newScene.widthProperty().multiply(0.89));
+            }
+        });
+        address.setWrapText(true);
+        remark.setWrapText(true);
     }
 
     @Override
