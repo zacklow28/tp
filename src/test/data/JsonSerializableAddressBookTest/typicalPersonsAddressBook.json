@@ -12,7 +12,7 @@
       "diet" : "low sodium",
       "priority" : "Low",
       "meetingDate" : "2025-04-01",
-      "remark": "",
+      "remark": "She likes food",
       "allergies" : [ "peanuts" ]
     },
     {
@@ -26,7 +26,7 @@
       "diet" : "low carb",
       "priority" : "High",
       "meetingDate" : "2025-04-02",
-      "remark": "",
+      "remark": "He can't take beer!",
       "allergies" : [ "milk", "eggs" ]
     },
     {
