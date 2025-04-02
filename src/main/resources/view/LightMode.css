@@ -416,7 +416,9 @@
     -fx-background-radius: 3;
 }
 
-
+.remark-label {
+    -fx-text-fill: #9C27B0;
+}
 /* For general allergies */
 .allergy-label {
     -fx-background-color: #6082B6;
