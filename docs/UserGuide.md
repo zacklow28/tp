@@ -115,7 +115,7 @@ Format: `help`
 
 *Figure 2: Window displaying the user guide link*
 
-
+<br>
 
 ### Adding a patient: `add`
 
@@ -151,6 +151,7 @@ Examples:
 * `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
 * `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
 
+<br>
 
 ### Listing all patients : `list`
 
@@ -159,6 +160,7 @@ If you have previously used `filter` or `find` to narrow down the patient list, 
 
 Format: `list`
 
+<br>
 
 ### Editing a patient : `edit`
 
@@ -186,6 +188,7 @@ Examples:
 *  `edit 1 no/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient (in the list) to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower al/` Edits the name of the 2nd patient (in the list) to be `Betsy Crower` and clears all existing allergies.
 
+<br>
 
 ### Changing a patient's priority: `priority`
 
@@ -204,6 +207,7 @@ Format: `priority INDEX pr/PRIORITY`
 Examples:
 * `priority 1 pr/HIGH` changes the priority of the 1st patient in the patient list to `HIGH`.
 
+<br>
 
 ### Adding a remark to a patient: `remark`
 
@@ -221,7 +225,7 @@ Format: `remark INDEX r/[REMARK]`
 3. You can remove a patient's remark by typing `r/` without specifying any remarks after it.
 
 4. You can add or edit exactly one remark for each patient.<br>
-e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` updated as a remark to the specified patient.
+e.g. `remark 1 r/needs visual guides r/very motivated` will result in only the last remark `very motivated` updated as a remark to the specified patient.
 </box>
 
 Examples:
@@ -236,6 +240,7 @@ Examples:
 
 *Figure 3: Result when adding multiple remarks to a patient using `remark 1 r/needs visual guides r/very motivated`*
 
+<br>
 
 ### Locating patients by name: `find`
 
@@ -272,6 +277,7 @@ Examples:
 
 *Figure 4: Results for `find alex david`*
 
+<br>
 
 ### Filtering patients: `filter`
 
@@ -293,6 +299,7 @@ Examples:
 * `filter g/f` returns all female patients.
 * `filter m/2025-12-12` returns all patients with meeting date on `2025-12-12`.
 
+<br>
 
 ### Sorting patients: `sort`
 
@@ -311,6 +318,7 @@ Examples:
 * `sort name` returns the patient list sorted in lexicographical (alphabetical) order by name in ascending order.
 * `sort diet` returns the patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 
+<br>
 
 ### Deleting a patient : `delete`
 
@@ -333,6 +341,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
 * `delete johnd@example.com` deletes the patient with email address `johnd@example.com`.
 
+<br>
 
 ### Clearing all entries : `clear`
 
@@ -340,6 +349,7 @@ Clears all patient entries from VitaBook.
 
 Format: `clear`
 
+<br>
 
 ### Undoing the last change : `undo`
 
@@ -355,6 +365,7 @@ Format: `undo`
 2. Support multiple undo commands until the patient list reaches the initial state.
 </box>
 
+<br>
 
 ### Redoing the last undo : `redo`
 
@@ -372,6 +383,7 @@ Format: `redo`
 3. Executing a new command after an undo will purge the redo history.
 </box>
 
+<br>
 
 ### Navigating through the Command History : `↑` and `↓`
 
@@ -379,6 +391,7 @@ Navigates through the command history for quick access to previously executed co
 
 Format: `↑` or `↓` arrow keys
 
+<br>
 
 ### Toggling Light Mode and Dark Mode
 
@@ -398,6 +411,7 @@ Transition between light mode and dark mode for a more customisable and improved
 
 *Figure 6: Change from dark mode to light mode*
 
+<br>
 
 ### Exiting the program : `exit`
 
@@ -405,11 +419,13 @@ Exits the program.
 
 Format: `exit`
 
+<br>
 
 ### Saving the data
 
 Your VitaBook data is saved in the hard disk automatically after any command that modifies the data. There is no need to save manually.
 
+<br>
 
 ### Editing the data file
 
@@ -422,6 +438,7 @@ If your changes to the data file makes its format invalid, VitaBook will discard
 Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<br>
 
 ## FAQ
 
@@ -522,12 +539,13 @@ A text-based interface used to interact with your computer’s operating system.
 ```bash
 java -jar vitabook.jar
 ```
-
+<br>
 
 ## Java Setup Instructions
 
 VitaBook requires **Java 17 or higher** to run.
 
+<br>
 
 ### Check your Java version
 
@@ -538,6 +556,7 @@ java -version
 If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`.
 If you see an error or a lower version, install Java 17 using the steps below.
 
+<br>
 
 ### Install Java 17
 
