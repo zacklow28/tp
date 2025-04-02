@@ -136,7 +136,7 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 5. Height must be between `0.50` and `2.50`.
 
-6. Weight must be a positive integer.
+6. Weight must be a positive integer greater than 0.
 
 7. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive).
 
@@ -171,7 +171,7 @@ Format: `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAI
 <box type="tip" seamless>
 
 **Tips/Constraints:**
-1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
 2. At least one field to edit must be provided.
 
@@ -199,7 +199,7 @@ Format: `priority INDEX pr/PRIORITY`
 <box type="tip" seamless>
 
 **Tips/Constraints:**
-1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
+1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
 2. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive) and cannot be blank.
 </box>
@@ -220,7 +220,7 @@ Format: `remark INDEX r/[REMARK]`
 **Tips/Constraints:**
 1. You can use this command to add any conditions or custom information.
 
-2. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
+2. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
 3. You can remove a patient's remark by typing `r/` without specifying any remarks after it.
 
@@ -333,7 +333,7 @@ Format: `delete INDEX` or `delete EMAIL`
 
 2. Alternatively, you can also delete the patient with a specified `EMAIL`.
 
-3. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
+3. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
 Examples:
