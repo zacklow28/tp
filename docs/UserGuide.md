@@ -14,15 +14,15 @@ pageNav: 3
 - **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with complete details.
 - **[List Patients](#listing-all-patients-list)** — `list` : Show all stored patients.
 - **[Edit Patient](#editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
-- **[Priority](#changing-a-patient-s-priority-priority)** — `priority` : Change a patient's priority by index.
+- **[Priority](#changing-a-patient-s-priority-priority)** — `priority` : Change a patient's priority by their index.
 - **[Remark](#adding-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
 - **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
-- **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
-- **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by name, diet, or priority.
+- **[Filter](#filtering-patients-filter)** — `filter` : View patients by priority, diet, gender, or meeting date.
+- **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by priority, name, or diet.
 - **[Delete](#deleting-a-patient-delete)** — `delete` : Remove a patient by index or email.
 - **[Clear All](#clearing-all-entries-clear)** — `clear` : Remove all patient data.
-- **[Undo](#undoing-the-last-change-undo)** — `undo` : Undo the previous action.
-- **[Redo](#redoing-the-last-undo-redo)** — `redo` : Redo the previous action.
+- **[Undo](#undoing-the-last-change-undo)** — `undo` : Undo the last command that changed the patient list.
+- **[Redo](#redoing-the-last-undo-redo)** — `redo` : Redo the last undo.
 - **[Navigate Command History](#navigating-through-the-command-history-and)** — `↑` and `↓` : Cycle through previous commands.
 - **[Toggle Theme](#toggling-light-mode-and-dark-mode)** : Switch between dark and light modes.
 - **[Exit](#exiting-the-program-exit)** — `exit` : Quit the application.
@@ -43,7 +43,7 @@ pageNav: 3
 
 3. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
 
-4. Open a command terminal and use the `cd` command to navigate to the folder containing the jar file.
+4. Open a command terminal and use the `cd` command to navigate to the folder containing the `.jar` file.
 
 5. Type the command `java -jar vitabook.jar` to run the application. A GUI similar to the one below should appear in a few seconds. Note that the app contains some sample data.<br>
 
@@ -119,7 +119,7 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a new patient to your VitaBook with their personal details.
+Adds a new patient to your VitaBook with their complete details.
 
 Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…​`
 
