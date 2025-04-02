@@ -77,13 +77,14 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_DIET).isPresent()) {
-            editPersonDescriptor.setDiet(ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET)));
+            editPersonDescriptor.setDiet(ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get()));
         }
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
-            editPersonDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY)));
+            editPersonDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
         }
         if (argMultimap.getValue(PREFIX_MEETING_DATE).isPresent()) {
-            editPersonDescriptor.setMeetingDate(ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE)));
+            editPersonDescriptor.setMeetingDate(ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE)
+                    .get()));
         }
         parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPersonDescriptor::setAllergies);
 

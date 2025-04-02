@@ -15,7 +15,6 @@ public class Priority {
         LOW, MEDIUM, HIGH
     }
 
-    public static final String DEFAULT_PRIORITY = "LOW";
     public static final String MESSAGE_CONSTRAINTS = "Priority must be high, medium, or low";
     public static final String VALIDATION_REGEX = "HIGH|MEDIUM|LOW";
 

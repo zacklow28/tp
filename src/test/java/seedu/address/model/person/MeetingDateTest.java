@@ -44,11 +44,6 @@ public class MeetingDateTest {
     }
 
     @Test
-    public void constructor_defaultNone_succeeds() {
-        new MeetingDate("none");
-    }
-
-    @Test
     public void isValidMeetingDate_invalidInputs_returnFalse() {
         assertFalse(MeetingDate.isValidMeetingDate(""));
         assertFalse(MeetingDate.isValidMeetingDate(" "));
@@ -64,7 +59,6 @@ public class MeetingDateTest {
     public void isValidMeetingDate_validInputs_returnTrue() {
         assertTrue(MeetingDate.isValidMeetingDate("2024-01-01"));
         assertTrue(MeetingDate.isValidMeetingDate("9999-12-31"));
-        assertTrue(MeetingDate.isValidMeetingDate("none"));
     }
 
     @Test

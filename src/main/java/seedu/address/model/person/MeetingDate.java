@@ -13,7 +13,6 @@ import org.apache.commons.lang3.time.DateUtils;
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetingDate(String)}
  */
 public class MeetingDate {
-    public static final String DEFAULT_MEETING_DATE = "none";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting date must be in the format YYYY-MM-DD.";
@@ -22,7 +21,6 @@ public class MeetingDate {
 
     /**
      * Constructs a {@code MeetingDate}.
-     *  If the given date is null or empty, it is stored as "none".
      *
      * @param date A valid meeting date or empty value
      */
@@ -36,9 +34,6 @@ public class MeetingDate {
      * Returns true if a given string is a valid diet type.
      */
     public static boolean isValidMeetingDate(String test) {
-        if (test.equals(DEFAULT_MEETING_DATE)) {
-            return true; // "none" is valid
-        }
         String dateRegex = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"; // Enforces exact format
         if (!test.matches(dateRegex)) {
             return false;

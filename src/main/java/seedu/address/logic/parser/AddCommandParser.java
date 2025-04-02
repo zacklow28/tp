@@ -64,9 +64,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET));
-        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
-        MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE));
+        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+        MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE).get());
         Remark remark = new Remark(""); // does not allow adding remarks in add command
         Set<Allergy> allergyList = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
 
