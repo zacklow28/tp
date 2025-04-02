@@ -109,10 +109,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -125,7 +125,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="750" />
+<puml src="diagrams/ModelClassDiagram.puml" width="1000" />
 
 
 The `Model` component,
@@ -139,7 +139,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Allergy` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Allergy` object per unique allergy, instead of each `Person` needing their own `Allergy` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="750" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="1000" />
 
 </box>
 
@@ -164,6 +164,65 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Priority Command Implementation
+
+<puml src="diagrams/priority-command/PriorityCommandClassDiagram.puml" alt="PriorityCommand Class Diagram"/>
+
+The `PriorityCommand` allows the nutritionist to update the priority level (e.g., HIGH, MEDIUM, LOW) of a selected patient from the filtered list. This command is helpful in identifying high-risk patients for urgent follow-up.
+
+When a user issues a command such as `pr 2 HIGH`, the following sequence of operations occurs:
+
+1. The input is parsed by `PriorityCommandParser`, which creates a `PriorityCommand` object.
+2. The `LogicManager` receives the command and calls its `execute(Model model)` method.
+3. Inside `PriorityCommand#execute()`, the `Model` is queried for the current filtered list of persons.
+4. The patient at the specified index is retrieved and a new `Person` object is created with the updated `Priority`.
+5. The `Model#setPerson()` method replaces the original person with the updated one in the internal list.
+6. A `CommandResult` is returned with a success message.
+
+The sequence diagram below illustrates the interactions between the components when executing the priority command:
+
+<puml src="diagrams/priority-command/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
+
+
+### Sort feature
+
+The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
+
+<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> <box type="info" seamless>
+
+**Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+
+</box>
+
+`SortCommand` behaviour:
+
+1. When the `LogicManager` is called to execute the `sort priority` command, it first delegates the parsing to `AddressBookParser`.
+2. `AddressBookParser` recognises the command type and uses `SortCommandParser` to interpret the command arguments.
+3. `SortCommandParser` creates a new  `SortCommand` object with the given sort type (`priority`).
+4. The constructed `SortCommand` is returned to `LogicManager`, which then calls its `execute()` method.
+5. Within `execute()`, `SortCommand` invoked `model.sortFilteredPersonList(comparator)` to sort the current patient list based on the specified criterion.
+6. A `CommandResult` object is created to encapsulate the success message and is returned up the call stack to the UI.
+
+### Filter feature
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
+
+<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" /> <box type="info" seamless>
+
+**Note:** The lifeline for FilterCommandParser should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+
+</box>
+
+`FilterCommand` behaviour:
+
+1. When the `LogicManager` receives the `filter d/low fat` command, it calls `AddressBookParser` to parse the command.
+2. `AddressBookParser` recognises that it is a `filter` command and passes control to `FilterCommandParser`.
+3. `FilterCommandParser` splits the input into the prefix (`d`) and the value (`low fat`), then constructs a `FilterCommand` object with the parsed arguments.
+4. The `FilterCommand` is returned to the `LogicManager`, which proceeds to execute it.
+5. The `FilterCommand` builds a predicate using the prefix and value, and applies it through `model.updateFilteredPersonList(predicate)`.
+6. A `CommandResult` containing the result message is returned to the `LogicManager`, and subsequently to the UI.
+
 
 ### Command History Implementation
 
@@ -668,4 +727,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

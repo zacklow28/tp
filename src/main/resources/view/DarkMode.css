@@ -123,7 +123,7 @@
 }
 
 .stack-pane {
-    -fx-background-color: #6E726E;
+    -fx-background-color: #6E796E;
 }
 
 .pane-with-border {
@@ -141,7 +141,7 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .result-display .label {

@@ -7,67 +7,55 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the FilterCommand
-     * and returns a FilterCommand object for execution.
-     *
-     * @param args User input for filtering.
-     * @return A FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format.
-     */
+    public static final String MESSAGE_INVALID_FORMAT =
+            "Invalid filter format!\nUsage: filter [prefix]/[value]\n"
+                    + "Valid prefixes: d/DIET, g/GENDER, pr/PRIORITY, m/MEETING DATE";
+
+    @Override
     public FilterCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException("Invalid Format! Use: filter [prefix]/[value]");
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
         String[] parts = trimmedArgs.split("/", 2);
-        if (parts.length < 2 || parts[1].trim().isEmpty()) {
-            throw new ParseException("Invalid Filter Format! Use: filter [prefix]/[value]");
+        if (parts.length < 2 || parts[0].isBlank() || parts[1].isBlank()) {
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
         String prefix = parts[0].trim().toLowerCase();
         String value = parts[1].trim().toLowerCase();
 
-        // Validate prefix
         if (!prefix.matches("d|g|pr|m")) {
-            throw new ParseException("Invalid filter category! Use:\n"
-                    + "d/ (diet), g/(gender), pr/(priority), m/(meeting date)");
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
-        // Validate values based on prefix
         switch (prefix) {
         case "d":
             if (!value.matches("regular|low sodium|low fat|low carb|low sugar|none")) {
-                throw new ParseException("Invalid diet value! Use: regular, low sodium, low fat, "
-                        + "low carb, low sugar, none");
+                throw new ParseException(MESSAGE_INVALID_FORMAT);
             }
             break;
-
         case "g":
             if (!value.matches("m|f")) {
-                throw new ParseException("Invalid gender value! Use: m (male), f (female)");
+                throw new ParseException(MESSAGE_INVALID_FORMAT);
             }
             break;
-
         case "pr":
             if (!value.matches("low|medium|high")) {
-                throw new ParseException("Invalid priority value! Use: low, medium, high");
+                throw new ParseException(MESSAGE_INVALID_FORMAT);
             }
             break;
-
         case "m":
-            if (!value.matches("\\d{4}-\\d{2}-\\d{2}")) { // YYYY-MM-DD format
-                throw new ParseException("Invalid meeting date format! Use: YYYY-MM-DD");
+            if (!value.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new ParseException(MESSAGE_INVALID_FORMAT);
             }
             break;
-
         default:
-            throw new ParseException("Invalid filter prefix: " + prefix);
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
         return new FilterCommand(prefix, value);
     }
 }
-

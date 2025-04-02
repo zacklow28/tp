@@ -45,7 +45,7 @@ pageNav: 3
 
 3. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
 
-4. Open a command terminal, type `cd` to navigate to the folder you put the jar file in. 
+4. Open a command terminal, type `cd` to navigate to the folder you put the jar file in.
 
 5. Type the command `java -jar vitabook.jar` to run the application. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
 
@@ -53,12 +53,12 @@ pageNav: 3
 
 <img src="images/Ui.png" alt="Ui" style="width: 100%; max-width: 700px; display: block;"/>
 </a>
-   
+
 *Figure 1: The VitaBook UI*<br>
 
-6. Type the command in the command box and press *Enter* to execute it.<br> 
+6. Type the command in the command box and press *Enter* to execute it.<br>
    e.g. typing `help` and pressing *Enter* will open the help window. Other example commands you can try:
-   
+
 <p style="padding-left: 20px">
 
 * `list` : Lists all patients.
@@ -106,7 +106,7 @@ pageNav: 3
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Opens a window with a link to this user guide.
 
 Format: `help`
 
@@ -115,7 +115,7 @@ Format: `help`
 <img src="images/helpMessage.png" alt="help message" style="width: 100%; max-width: 700px; display: block;"/>
 </a>
 
-*Figure 2: The help message displayed*
+*Figure 2: Window displaying the user guide link*
 
 
 
@@ -127,8 +127,8 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 <box type="tip" seamless>
 
-**Tips/Constraints:** 
-1. A patient can have any number of allergies (including 0) 
+**Tips/Constraints:**
+1. A patient can have any number of allergies (including 0)
 
 2. Emails must be unique i.e. duplicate emails are not allowed.
 
@@ -138,11 +138,11 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 5. Height must be between `0.50` and `2.50`.
 
-6. Weight must be a positive integer greater than 0. 
+6. Weight must be a positive integer greater than 0.
 
 7. Priority must be one of the following: `high`, `medium`, `low`.
 
-8. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`. 
+8. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
 
 9. Meeting date must be in the format `YYYY-MM-DD`.
 </box>
@@ -155,6 +155,7 @@ Examples:
 ### Listing all patients : `list`
 
 Shows a list of all the patients in your VitaBook.
+If you have previously used `filter` or `find` to narrow down the patient list, use `list` will reset the display and show all patients again.
 
 Format: `list`
 
@@ -174,7 +175,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 
 3. Existing values will be updated to the input values.
 
-4. When editing allergies, the existing allergies of the patient will be removed i.e. adding of allergies is not cumulative.
+4. When editing allergies, the existing allergies will be replaced by the new ones you provide.
 
 5. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
 
@@ -217,9 +218,9 @@ Format: `remark INDEX r/[REMARK]`
 
 2. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
-3. You can remove a patient's remark by typing `r/` without specifying any remarks after it. 
+3. You can remove a patient's remark by typing `r/` without specifying any remarks after it.
 
-4. You can add exactly one remark to a patient.<br
+4. You can add exactly one remark to a patient.<br>
 e.g. `remark 1 r/needs visual guides r/very motivated` will result in only `very motivated` as a remark to the specified patient.
 </box>
 
@@ -238,7 +239,7 @@ Examples:
 
 ### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose names contain *any* of the given **keywords**.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -334,7 +335,7 @@ Format: `undo`
 
 <box type="tip" seamless>
 
-**Tips/Constraints:**   
+**Tips/Constraints:**
 1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `pr`, `redo`).
 
 2. Support multiple undo commands until it reaches the initial state.
@@ -353,10 +354,12 @@ Format: `redo`
 1. You can only redo if you executed an undo command.
 
 2. Support multiple redo commands until it reaches the final state.
+
+3. Executing a new command after an undo will purge the redo history.
 </box>
 
 
-### Navigating through the Command History : `↑` and `↓` 
+### Navigating through the Command History : `↑` and `↓`
 
 Navigates through the command history for quick access to previously executed commands.
 
@@ -380,7 +383,7 @@ Transition between light mode and dark mode for a more customisable and improved
 </a>
 
 *Figure 6: Change from dark mode to light mode*
-  
+
 
 ### Exiting the program : `exit`
 
@@ -449,6 +452,9 @@ with the format.
 - **Allergy fields are case-sensitive.**
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
 
+- **Allergy Validation is only alphanumeric.**
+  User can enter any combination of letters and numbers, even if they don't represent actual allergies. This is because maintaining a complete list of all possible allergies is not feasible.
+
 - **No support for recurring meeting dates or reminders.**
   Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
 
@@ -485,22 +491,22 @@ Action        | Format, Examples
 **Clear**     | `clear`
 **Undo**      | `undo`
 **Redo**      | `redo`
-**Navigate Command History** | `↑` or `↓` arrow keys
-**Exit**      | `exit`
+**Navigate Command History** | `↑` or `↓` arrow keys 
+**Exit**      | `exit` 
 
 --------------------------------------------------------------------------------------------------------------------
 
 
 ## Glossary
 
-**Java 17**  
-The 17th version of the Java programming language and runtime environment. 
+**Java 17**
+The 17th version of the Java programming language and runtime environment.
 Java 17 provides the libraries and tools necessary to run Java applications—such as VitaBook.
 
-**JDK (Java Development Kit)**  
+**JDK (Java Development Kit)**
 A complete software development package that includes the Java runtime, compilers, and various tools to develop and run Java applications. Vitabook requires JDK 17 or later. Make sure you install the correct version to ensure compatibility.
 
-**Terminal / Command Line Interface (CLI)**  
+**Terminal / Command Line Interface (CLI)**
 A text-based interface used to interact with your computer’s operating system. In the terminal, you can navigate between folders and execute commands. To run Vitabook, open your terminal (or Command Prompt/PowerShell on Windows), use the `cd` command to navigate to the folder containing the `vitabook.jar` file, and then type:
 ```bash
 java -jar vitabook.jar
