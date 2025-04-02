@@ -13,12 +13,12 @@ skinparam sequence {
 }
 
 actor Nutritionist
-participant LogicManager
-participant AddressBookParser
-participant FilterCommandParser
-participant FilterCommand
-participant Model
-participant CommandResult
+participant ":LogicManager" as LogicManager
+participant ":AddressBookParser" as AddressBookParser
+participant ":FilterCommandParser" as FilterCommandParser
+participant ":FilterCommand" as FilterCommand
+participant ":Model" as Model
+participant ":CommandResult" as CommandResult
 
 == Nutritionist calls filter ==
 Nutritionist -> LogicManager : execute("filter d/low fat")
@@ -54,4 +54,6 @@ deactivate FilterCommand
 
 LogicManager -> Nutritionist : return CommandResult
 deactivate LogicManager
+
+hide footbox
 @enduml

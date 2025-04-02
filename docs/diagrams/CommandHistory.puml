@@ -2,13 +2,13 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-actor User USER_COLOR
+actor Nutritionist USER_COLOR
 
 participant ":UI" as UI UI_COLOR
 participant ":Logic" as Logic LOGIC_COLOR
 participant ":CommandHistory" as CommandHistory #Brown
 
-User -[USER_COLOR]> UI : handleCommandEntered(commandText)
+Nutritionist -[USER_COLOR]> UI : handleCommandEntered(commandText)
 activate UI UI_COLOR
 
 UI -[UI_COLOR]> Logic : execute(commandText)
@@ -23,7 +23,7 @@ Logic --[LOGIC_COLOR]> UI
 deactivate Logic
 deactivate UI
 
-User -[USER_COLOR]> UI : handleKeyPressed(UP)
+Nutritionist -[USER_COLOR]> UI : handleKeyPressed(UP)
 activate UI UI_COLOR
 UI -[UI_COLOR]> CommandHistory : getPreviousCommand()
 activate CommandHistory #Brown
@@ -31,7 +31,7 @@ CommandHistory --[#Brown]> UI : previousCommand
 deactivate CommandHistory
 deactivate UI
 
-User -[USER_COLOR]> UI : handleKeyPressed(DOWN)
+Nutritionist -[USER_COLOR]> UI : handleKeyPressed(DOWN)
 activate UI UI_COLOR
 UI -[UI_COLOR]> CommandHistory : getNextCommand()
 activate CommandHistory #Brown
