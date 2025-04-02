@@ -14,7 +14,7 @@ pageNav: 3
 - **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with full details.
 - **[List Patients](#listing-all-patients-list)** — `list` : Show all stored patients.
 - **[Edit Patient](#editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
-- **[Priority](#changing-a-patient-s-priority-pr)** — `priority` : Change a patient's priority by index.
+- **[Priority](#changing-a-patient-s-priority-priority)** — `priority` : Change a patient's priority by index.
 - **[Remark](#adding-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
 - **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
 - **[Filter](#filtering-patients-filter)** — `filter` : View patients by diet or priority.
@@ -29,9 +29,7 @@ pageNav: 3
 
 [↓ Go to Command Summary](#command-summary)
 
-<page-nav-print />
 <!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,15 +37,15 @@ pageNav: 3
 
 1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
-   **Check/Install Java:** see [Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
+   **Check/Install Java:** See [Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
 
 2. Download the latest `.jar` file [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
 
-4. Open a command terminal, type `cd` to navigate to the folder you put the jar file in.
+4. Open a command terminal and use the `cd` command to navigate to the folder containing the jar file.
 
-5. Type the command `java -jar vitabook.jar` to run the application. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+5. Type the command `java -jar vitabook.jar` to run the application. A GUI similar to the one below should appear in a few seconds. Note that the app contains some sample data.<br>
 
 <a href="images/Ui.png">
 
@@ -134,15 +132,15 @@ Format: `n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/
 
 3. Patient names can be duplicated i.e. duplicate names are allowed.
 
-4. Gender must be one of the following: `m`, `M`, `f`, `F`.
+4. Gender must be `m` or `f` (case-insensitive).
 
 5. Height must be between `0.50` and `2.50`.
 
 6. Weight must be a positive integer greater than 0.
 
-7. Priority must be one of the following: `high`, `medium`, `low`.
+7. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive).
 
-8. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar`.
+8. Diet must be one of the following: `regular`, `low sodium`, `low fat`, `low carb`, `low sugar` (case-insensitive).
 
 9. Meeting date must be in the format `YYYY-MM-DD`.
 </box>
@@ -164,7 +162,7 @@ Format: `list`
 
 Edits the details of an existing patient in your VitaBook.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
+Format: `edit INDEX [n/NAME] [no/PHONE] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​`
 
 <box type="tip" seamless>
 
@@ -187,22 +185,22 @@ Examples:
 *  `edit 2 n/Betsy Crower al/` Edits the name of the 2nd patient (in the list) to be `Betsy Crower` and clears all existing allergies.
 
 
-### Changing a patient's priority: `pr`
+### Changing a patient's priority: `priority`
 
 Changes a patient's priority by index.
 
-Format: `pr INDEX PRIORITY`
+Format: `priority INDEX pr/PRIORITY`
 
 <box type="tip" seamless>
 
 **Tips/Constraints:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
-2. Priority must be one of the following: `high`, `medium`, `low`.
-   </box>
+2. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive) and cannot be blank.
+</box>
 
 Examples:
-* `pr 1 high` changes the priority of the 1st patient in the patient list to `high`.
+* `priority 1 pr/HIGH` changes the priority of the 1st patient in the patient list to `high`.
 
 
 ### Adding a remark to a patient: `remark`
@@ -288,12 +286,18 @@ Examples:
 
 ### Sorting patients: `sort`
 
-Sorts patients based on specific criteria (priority, name, diet).
+Sorts patients based on specific criteria (priority, name, diet (case-insensitive)).
 
-Format: `sort priority` or `sort name` or `sort diet`
+Format: `sort CRITERIA`
+
+<box type="tip" seamless>
+
+**Tips/Constraints:**
+1. Criteria must be one of the following: `priority`, `name`, `diet` (case-insensitive) and cannot be blank.
+</box>
 
 Examples:
-* `sort priority` returns patient list sorted from high priority to low priority.
+* `sort priority` returns patient list sorted from highest priority to lowest priority.
 * `sort name` returns patient list sorted in lexicographical (alphabetical) order by name in ascending order.
 * `sort diet` returns patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 
@@ -394,16 +398,16 @@ Format: `exit`
 
 ### Saving the data
 
-VitaBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Your VitaBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 ### Editing the data file
 
-VitaBook data are saved automatically as a JSON file `[JAR file location]/data/vitabook.json`. Advanced users are welcome to update data directly by editing that data file.
+Your VitaBook data are saved automatically as a JSON file `[JAR file location]/data/vitabook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, VitaBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -417,28 +421,27 @@ using a typing-preferred interface. It is optimized for fast data entry and offl
 
 **Q**: Who is VitaBook for?
 **A**: VitaBook is for freelance or home-based nutritionists who need to keep track of patient profiles, dietary
-restrictions, medical notes, appointments, and reminders — all from a lightweight CLI app.
+restrictions, medical notes, appointments, and reminders — all from a lightweight CLI application.
 
 **Q**: How is VitaBook different from a regular address book?
 **A**: In addition to patient details, VitaBook stores patient-specific information like gender, height, weight,
-dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s optimized for
-fast typers, offers structured patient management, and prevents data entry mistakes with input validation.
+dietary tags, allergies, priority levels, and meeting dates. It’s tailored to healthcare use cases. It’s offers structured patient management, and prevents data entry mistakes with input validation.
 
 **Q**: Do I need to install any special software to run VitaBook?
-**A**: You just need to have Java 17 installed. No installation is required — simply run the JAR file.
+**A**: You just need to have Java 17 installed. No other special software is required — simply run the JAR file.
 
 **Q**: What kind of information can I store about a patient?
-**A**: You can store: name, phone, email, address, gender, height, weight, diet  (e.g., low sodium), meeting date, priority level (e.g. high), remarks and allergies (e.g., peanuts)
+**A**: You can store: name, phone, email, address, gender, height, weight, diet  (e.g., low sodium), meeting date, priority level (e.g. high), remarks and allergies (e.g., peanuts).
 
 **Q**:What happens when I delete a patient?
 **A**: All of their information (e.g. diet, priority, meeting date, medical notes) will be permanently deleted from
 the address book.
 
 **Q**: Can I undo a mistaken command?
-**A**: Yes, you can! Just write undo, followed by the patient index, the field to be changed, and the updated info
+**A**: Yes, you can! The `undo` command will undo the last command that changed the patient list.
 
 **Q**: Can I add custom fields or conditions?
-**A**: Any other relevant info other than the fields provided can be added to the remark field as a workaround
+**A**: Any other relevant info other than the fields provided can be added to the remark field as a workaround.
 
 **Q**: Can I import data from another app or CSV file?
 **A**: Not yet — but you can manually edit the JSON file (data/addressbook.json) to add patients if you're comfortable
@@ -456,7 +459,7 @@ with the format.
   User can enter any combination of letters and numbers, even if they don't represent actual allergies. This is because maintaining a complete list of all possible allergies is not feasible.
 
 - **No support for recurring meeting dates or reminders.**
-  Only a single meeting date (`md/`) can be stored per patient, with no repeat scheduling or notification support.
+  Only a single meeting date (`m/`) can be stored per patient, with no repeat scheduling or notification support.
 
 - **Commands must follow strict prefixes.**
   Forgetting a prefix (like `n/`) will result in an invalid command, even if the content is correct.
@@ -479,15 +482,15 @@ with the format.
 Action        | Format, Examples
 --------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**      | `help`
-**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT p/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY md/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 p/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW md/2025-12-12 al/peanuts`
+**Add**       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 no/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts`
 **List**      | `list`
-**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [md/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
-**Priority**  | `pr INDEX PRIORITY`<br>e.g., `pr 2 high`
+**Edit**      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`
+**Priority**  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/high`
 **Remark**    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`
 **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`
-**Filter**    | `filter [PRIORITY] / [DIET] / [GENDER] / [MEETING DATE] `<br>e.g., `filter low sodium`
-**Sort**      | `sort [PRIORITY] / [DIET] / [NAME] `<br>e.g., `sort low`
-**Delete**    | `delete INDEX` / `delete EMAIL`<br>e.g., `delete 3` / `delete johnd@gmail.com`
+**Filter**    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`
+**Sort**      | `sort CRITERIA `<br>e.g., `sort priority`
+**Delete**    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`
 **Clear**     | `clear`
 **Undo**      | `undo`
 **Redo**      | `redo`
