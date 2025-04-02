@@ -1,0 +1,14 @@
+@startuml
+actor User
+participant UI
+participant LogicManager
+participant ClearCommand
+participant Model
+
+User -> UI : enter "clear"
+UI -> LogicManager : execute("clear")
+LogicManager -> ClearCommand : execute(model)
+ClearCommand -> Model : setAddressBook(new AddressBook)
+ClearCommand -> LogicManager : return CommandResult
+LogicManager -> UI : update patient list
+@enduml

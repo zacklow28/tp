@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant UI
+participant LogicManager
+participant AddCommandParser
+participant AddCommand
+participant Model
+
+User -> UI : enter "add ..."
+UI -> LogicManager : execute("add ...")
+LogicManager -> AddCommandParser : parse("add ...")
+AddCommandParser -> AddCommand : new AddCommand(toAdd)
+LogicManager -> AddCommand : execute(model)
+AddCommand -> Model : hasPerson(toAdd)
+alt Person exists
+    AddCommand -> LogicManager : throw CommandException
+else Person is unique
+    AddCommand -> Model : addPerson(toAdd)
+end
+AddCommand -> LogicManager : return CommandResult
+LogicManager -> UI : show success message
+@enduml
