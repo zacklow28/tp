@@ -1,12 +1,12 @@
 @startuml
-actor User
-participant UI
-participant LogicManager
-participant AddCommandParser
-participant AddCommand
-participant Model
+actor Nutritionist
+participant ":UI" as UI
+participant ":LogicManager" as LogicManager
+participant ":AddCommandParser" as AddCommandParser
+participant ":AddCommand" as AddCommand
+participant ":Model" as Model
 
-User -> UI : enter "add ..."
+Nutritionist -> UI : enter "add ..."
 UI -> LogicManager : execute("add ...")
 LogicManager -> AddCommandParser : parse("add ...")
 AddCommandParser -> AddCommand : new AddCommand(toAdd)
@@ -19,4 +19,6 @@ else Person is unique
 end
 AddCommand -> LogicManager : return CommandResult
 LogicManager -> UI : show success message
+
+hide footbox
 @enduml

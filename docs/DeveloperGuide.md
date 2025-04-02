@@ -316,7 +316,7 @@ The following sequence diagram outlines the flow of the AddCommand:
 
 ### Edit Command Implementation
 
-<puml src="diagrams/edit-command/EditCommandClassDiagram.puml" alt="EditCommand Class Diagram"/>
+<puml src="diagrams/EditCommandClassDiagram.puml" alt="EditCommand Class Diagram"/>
 
 The `EditCommand` allows users to update one or more fields of an existing patient in the list. Fields that are not specified in the command remain unchanged.
 
@@ -331,12 +331,12 @@ When a user issues a command such as `edit 1 e/john@example.com`, the following 
 
 The sequence diagram below depicts the interaction of components involved:
 
-<puml src="diagrams/edit-command/EditCommandSequenceDiagram.puml" alt="EditCommand Sequence Diagram"/>
+<puml src="diagrams/EditCommandSequenceDiagram.puml" alt="EditCommand Sequence Diagram"/>
 
 
 ### Clear Command Implementation
 
-<puml src="diagrams/clear-command/ClearCommandClassDiagram.puml" alt="ClearCommand Class Diagram"/>
+<puml src="diagrams/ClearCommandClassDiagram.puml" alt="ClearCommand Class Diagram"/>
 
 The `ClearCommand` removes all patient entries from the address book. To prevent accidental deletions, a confirmation dialog is shown (unless bypassed in test scenarios).
 
@@ -350,7 +350,7 @@ When the user enters `clear`, the command follows this sequence:
 
 The process is visualized in the following sequence diagram:
 
-<puml src="diagrams/clear-command/ClearCommandSequenceDiagram.puml" alt="ClearCommand Sequence Diagram"/>
+<puml src="diagrams/ClearCommandSequenceDiagram.puml" alt="ClearCommand Sequence Diagram"/>
 
 
 ### Priority Command Implementation
@@ -417,7 +417,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 The sequence diagram below illustrates the interaction flow when a user enters commands and navigates through command history
 
-<puml src="diagrams/CommandHistory.puml" alt="Command History Sequence Diagram" />
+<puml src="diagrams/CommandHistorySequenceDiagram.puml" alt="Command History Sequence Diagram" />
 
 1. **User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
 2. **Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
