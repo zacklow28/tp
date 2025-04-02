@@ -373,7 +373,7 @@ The sequence diagram below illustrates the interactions between the components w
 <puml src="diagrams/priority-command/PriorityCommandSequenceDiagram.puml" alt="PriorityCommand Sequence Diagram"/>
 
 
-### Sort feature
+### Sort Command Implementation
 
 The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
 
@@ -393,7 +393,7 @@ The sequence below illustrates the interactions within the `Logic` component, ta
 6. A `CommandResult` object is created to encapsulate the success message and is returned up the call stack to the UI.
 
 
-### Filter feature
+### Filter Command Implementation
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
 
@@ -424,7 +424,7 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 3. **Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
 
 
-### Undo/redo feature Implementation
+### Undo/redo Command Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -505,17 +505,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
 * **State Purge:** Executing a new command after an undo will purge the redo history. Only relevant states are restorable.
 
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * **Why Chosen:** This approach provides a reliable and comprehensive way to store all changes, ensuring that undo and redo actions always restore the address book accurately.
-  * **Potential Improvement:** Limit history size (e.g. 100) to prevent excessive memory usage over time.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * **Why Not Chosen:** This approach introduces significant complexity in implementation and testing, as commands must independently manage their undo/redo operations
 
 --------------------------------------------------------------------------------------------------------------------
 
