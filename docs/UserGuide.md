@@ -92,7 +92,7 @@ pageNav: 3
 4. Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/milk`, `al/milk al/peanut` etc.
 
-5. Parameters can be in any order.<br>
+5. Parameters for `add` and `edit` commands can be in any order.<br>
   e.g. if the command specifies `n/NAME no/PHONE`, `no/PHONE n/NAME` is also acceptable.
 
 6. Extraneous parameters for commands that do not take in parameters (i.e. `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
@@ -240,6 +240,12 @@ Examples:
 
 *Figure 3: Result when adding multiple remarks to a patient using `remark 1 r/needs visual guides r/very motivated`*
 
+<box type="warning" seamless>
+
+**Warning:**
+Remark command currently only supports adding a new remark or replacing an existing one. Thus, currently at most one remark can be displayed for each patient. Older remarks will be overwritten if you wish to add a new remark.
+</box>
+
 <br>
 
 ### Locating patients by name: `find`
@@ -379,9 +385,14 @@ Format: `redo`
 1. You can only redo if you executed an undo command.
 
 2. Support multiple redo commands until the patient list reaches the final state.
-
-3. Executing a new command after an undo will purge the redo history.
 </box>
+
+<box type="warning" seamless>
+
+**Warning:**
+1. Executing a new command that changes the patient list (excluding `undo`) after undo commands will purge the redo history. This means you cannot redo those undo commands anymore.
+</box>
+
 
 <br>
 
