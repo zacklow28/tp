@@ -21,7 +21,7 @@ You can use this guide to maintain, upgrade, and evolve VitaBook.
 
 This Developer Guide is accurate as of 2 April 2025. 
 
-Head over to [Setting up, getting started](#setting-up-getting-started)
+Head over to [How to use this Developer Guide](#how-to-use-this-developer-guide)
 to get started!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -158,6 +158,7 @@ In addition, the [Common Classes](#common-classes) section documents utility cla
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
+
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
@@ -174,6 +175,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
 
 **How the architecture components interact with each other**
 
@@ -192,6 +194,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -202,12 +205,13 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 1. Executes user commands using the `Logic` component.
 2. Listens for changes to `Model` data so that the UI can be updated with the modified data.
 3. Keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 4. Depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
 
 ### Logic component
 
@@ -217,7 +221,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -225,6 +231,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
 
 How the `Logic` component works:
 
@@ -239,21 +246,26 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 1. When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 2. All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="1000" />
 
 
-The `Model` component,
+The `Model` component:
 
 1. Stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 2. Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 3. Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 4. Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Allergy` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Allergy` object per unique allergy, instead of each `Person` needing their own `Allergy` objects.<br>
@@ -269,11 +281,11 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
-
+The `Storage` component:
 1. can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 2. inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 3. depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
 
 ### Common classes
 
@@ -340,6 +352,7 @@ The process is visualized in the following sequence diagram:
 
 <puml src="diagrams/clear-command/ClearCommandSequenceDiagram.puml" alt="ClearCommand Sequence Diagram"/>
 
+
 ### Priority Command Implementation
 
 <puml src="diagrams/priority-command/PriorityCommandClassDiagram.puml" alt="PriorityCommand Class Diagram"/>
@@ -379,6 +392,7 @@ The sequence below illustrates the interactions within the `Logic` component, ta
 5. Within `execute()`, `SortCommand` invoked `model.sortFilteredPersonList(comparator)` to sort the current patient list based on the specified criterion.
 6. A `CommandResult` object is created to encapsulate the success message and is returned up the call stack to the UI.
 
+
 ### Filter feature
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
@@ -408,6 +422,7 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 1. **User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
 2. **Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
 3. **Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
+
 
 ### Undo/redo feature Implementation
 
@@ -484,7 +499,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Summary of Edge Cases:
-* **Undo/Redo Unavailable:** 
+* **Undo/Redo Unavailable:**
   * Undo: When current state is at the initial state (currentStatePointer = 0).
   * Redo: When current state is at the latest state (currentStatePointer = size() - 1).
 * **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
