@@ -13,12 +13,12 @@ skinparam sequence {
 }
 
 actor Nutritionist
-participant LogicManager
-participant AddressBookParser
-participant SortCommandParser
-participant SortCommand
-participant Model
-participant CommandResult
+participant ":LogicManager" as LogicManager
+participant ":AddressBookParser" as AddressBookParser
+participant ":SortCommandParser" as SortCommandParser
+participant ":SortCommand" as SortCommand
+participant ":Model" as Model
+participant ":CommandResult" as CommandResult
 
 == Nutritionist calls sort ==
 Nutritionist -> LogicManager : execute("sort priority")
@@ -54,4 +54,6 @@ deactivate SortCommand
 
 LogicManager -> Nutritionist : return CommandResult
 deactivate LogicManager
+
+hide footbox
 @enduml

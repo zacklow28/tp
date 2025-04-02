@@ -1,11 +1,11 @@
 @startuml
 actor Nutritionist
-participant "LogicManager" as Logic
-participant "PriorityCommand" as Command
-participant "Model" as Model
-participant "Person" as Person
+participant ":LogicManager" as Logic
+participant ":PriorityCommand" as Command
+participant ":Model" as Model
+participant ":Person" as Person
 
-Nutritionist -> Logic : execute("pr 2 HIGH")
+Nutritionist -> Logic : execute("priority 2 pr/HIGH")
 Logic -> Command : execute(Model)
 
 Command -> Model : getFilteredPersonList()
@@ -17,4 +17,6 @@ Model --> Command : void
 
 Command --> Logic : CommandResult("Updated priority...")
 Logic --> Nutritionist : Display result
+
+hide footbox
 @enduml
