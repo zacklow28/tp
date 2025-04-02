@@ -34,7 +34,7 @@ public class HeightTest {
 
     @Test
     public void constructor_aboveMaxHeight_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Height("2.51"));
+        assertThrows(IllegalArgumentException.class, () -> new Height("3.01"));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class HeightTest {
     @Test
     public void constructor_validHeights_succeed() {
         new Height("0.5");
-        new Height("2.5");
+        new Height("3.0");
         new Height("1.75");
         new Height("1.00");
         new Height("2.0");
@@ -62,7 +62,7 @@ public class HeightTest {
         assertFalse(Height.isValidHeight(" "));
         assertFalse(Height.isValidHeight("abc"));
         assertFalse(Height.isValidHeight("0.49"));
-        assertFalse(Height.isValidHeight("2.51"));
+        assertFalse(Height.isValidHeight("3.01"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class HeightTest {
         assertTrue(Height.isValidHeight("0.5"));
         assertTrue(Height.isValidHeight("2.5"));
         assertTrue(Height.isValidHeight("1.75"));
-        assertTrue(Height.isValidHeight("2.0"));
+        assertTrue(Height.isValidHeight("3.0"));
     }
 
     @Test

@@ -313,7 +313,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Summary of Edge Cases:
-* **Undo/Redo Unavailable:** 
+* **Undo/Redo Unavailable:**
   * Undo: When current state is at the initial state (currentStatePointer = 0).
   * Redo: When current state is at the latest state (currentStatePointer = size() - 1).
 * **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
