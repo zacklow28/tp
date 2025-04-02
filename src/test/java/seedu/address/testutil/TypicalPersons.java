@@ -58,27 +58,27 @@ public class TypicalPersons {
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withGender("F").withHeight("1.60").withWeight("50").withDiet("low sodium")
-            .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave")
+            .withPhone("94822240").withEmail("werner@example.com").withAddress("michegan ave")
             .withPriority("Medium").withMeetingDate("2025-04-25").build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withGender("F").withHeight("1.65").withWeight("55").withDiet("low carb")
-            .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo")
+            .withPhone("94824270").withEmail("lydia@example.com").withAddress("little tokyo")
             .withPriority("Low").withMeetingDate("2025-05-05").build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withGender("M").withHeight("1.78").withWeight("76").withDiet("low sugar")
-            .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street")
+            .withPhone("94824420").withEmail("anna@example.com").withAddress("4th street")
             .withPriority("High").withMeetingDate("2025-06-15").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withGender("M").withHeight("1.75").withWeight("75").withDiet("low sodium")
-            .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india")
+            .withPhone("84824240").withEmail("stefan@example.com").withAddress("little india")
             .withPriority("Low").withMeetingDate("2025-05-15").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withGender("F").withHeight("1.60").withWeight("52").withDiet("low carb")
-            .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave")
+            .withPhone("84821310").withEmail("hans@example.com").withAddress("chicago ave")
             .withPriority("Low").withMeetingDate("2025-06-20").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
