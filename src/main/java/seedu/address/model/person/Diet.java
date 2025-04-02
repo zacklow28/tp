@@ -8,19 +8,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidDiet(String)}
  */
 public class Diet {
-    public static final String DEFAULT_DIET = "none";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Diet must be one of the following: regular, low sodium, low fat, low carb, low sugar.";
 
     public static final String VALIDATION_REGEX =
-            "regular|low sodium|low fat|low carb|low sugar|none";
+            "regular|low sodium|low fat|low carb|low sugar";
 
     public final String diet;
 
     /**
      * Constructs a {@code Diet}.
-     *  If the given diet is null or empty, it is stored as "none".
      *
      * @param diet A valid diet type.
      */
@@ -35,7 +33,7 @@ public class Diet {
      * Returns true if a given string is a valid diet type.
      */
     public static boolean isValidDiet(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toLowerCase().matches(VALIDATION_REGEX);
     }
 
     @Override

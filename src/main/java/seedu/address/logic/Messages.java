@@ -15,6 +15,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_MISSING_FIELDS = "The following required field(s) is/are missing: ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -41,9 +42,9 @@ public class Messages {
                 .append("; Gender: ")
                 .append(person.getGender())
                 .append("; Height: ")
-                .append(person.getHeight())
+                .append(person.getHeight()).append(" cm")
                 .append("; Weight: ")
-                .append(person.getWeight())
+                .append(person.getWeight()).append(" kg")
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
@@ -54,7 +55,7 @@ public class Messages {
                 .append(person.getDiet())
                 .append("; Priority: ")
                 .append(person.getPriority())
-                .append("; MeetingDate: ")
+                .append("; Meeting Date: ")
                 .append(person.getMeetingDate())
                 .append("; Remark: ")
                 .append(person.getRemark())
@@ -63,4 +64,15 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Returns an error message indicating the missing prefixes.
+     */
+    public static String getErrorMessageForMissingPrefixes(Prefix... missingPrefixes) {
+        assert missingPrefixes.length > 0;
+
+        Set<String> missingFields =
+                Stream.of(missingPrefixes).map(Prefix::toString).collect(Collectors.toSet());
+
+        return MESSAGE_MISSING_FIELDS + String.join(", ", missingFields);
+    }
 }

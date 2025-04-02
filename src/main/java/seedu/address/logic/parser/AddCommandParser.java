@@ -48,11 +48,17 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE,
                         PREFIX_ALLERGY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        Prefix[] requiredPrefixes = {
+            PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+            PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE
+        };
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoMissingPrefixesFor(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
+                requiredPrefixes);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DIET, PREFIX_PRIORITY, PREFIX_MEETING_DATE);
@@ -64,9 +70,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET));
-        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
-        MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE));
+        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+        MeetingDate meetingDate = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE).get());
         Remark remark = new Remark(""); // does not allow adding remarks in add command
         Set<Allergy> allergyList = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
 

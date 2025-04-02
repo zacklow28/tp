@@ -47,8 +47,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
@@ -188,63 +186,85 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingNameExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_NAME) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingGenderExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_GENDER) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingHeightExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_HEIGHT) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingWeightExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_WEIGHT) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingEmailExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_EMAIL) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingAddressExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_ADDRESS) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingPhoneExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_PHONE) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingDietExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_DIET) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingPriorityExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_PRIORITY) + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingMeetingDateExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_MEETING_DATE)
+                + "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String missingAllPrefixesExpectedMessage = Messages.getErrorMessageForMissingPrefixes(PREFIX_NAME,
+                PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DIET,
+                PREFIX_PRIORITY, PREFIX_MEETING_DATE) + "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_USAGE);
+
 
         // Missing name prefix
-        assertParseFailure(parser, VALID_NAME_AMY + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
+        assertParseFailure(parser, GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                         + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                        + MEETING_DATE_DESC_BOB, expectedMessage);
+                        + MEETING_DATE_DESC_BOB, missingNameExpectedMessage);
 
         // Missing gender prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_GENDER_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                         + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                        + MEETING_DATE_DESC_BOB, expectedMessage);
+                        + MEETING_DATE_DESC_BOB, missingGenderExpectedMessage);
 
         // Missing height prefix
-        assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + VALID_HEIGHT_BOB + WEIGHT_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + WEIGHT_DESC_BOB
                         + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                        + MEETING_DATE_DESC_BOB, expectedMessage);
+                        + MEETING_DATE_DESC_BOB, missingHeightExpectedMessage);
 
         // Missing weight prefix
-        assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + VALID_WEIGHT_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB + MEETING_DATE_DESC_BOB,
+                missingWeightExpectedMessage);
 
         // Missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
+                + MEETING_DATE_DESC_BOB, missingPhoneExpectedMessage);
 
         // Missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
+                + MEETING_DATE_DESC_BOB, missingEmailExpectedMessage);
 
         // Missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
+                + MEETING_DATE_DESC_BOB, missingAddressExpectedMessage);
 
 
         // Missing diet prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_DIET_BOB + PRIORITY_DESC_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + PRIORITY_DESC_BOB
+                + MEETING_DATE_DESC_BOB, missingDietExpectedMessage);
 
         // Missing meeting date prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB
-                + VALID_MEETING_DATE_BOB, expectedMessage);
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + PRIORITY_DESC_BOB,
+                missingMeetingDateExpectedMessage);
 
         // Missing priority prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + VALID_PRIORITY_BOB
-                + MEETING_DATE_DESC_BOB, expectedMessage);
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DIET_DESC_BOB + MEETING_DATE_DESC_BOB,
+                missingPriorityExpectedMessage);
 
         // All prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_GENDER_BOB + VALID_HEIGHT_BOB + VALID_WEIGHT_BOB
-                        + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB + VALID_DIET_BOB + VALID_PRIORITY_BOB
-                        + VALID_MEETING_DATE_BOB, expectedMessage);
+        assertParseFailure(parser, "", missingAllPrefixesExpectedMessage);
     }
 
     @Test
@@ -445,6 +465,4 @@ public class AddCommandParserTest {
                         + ALLERGY_DESC_FISH,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
-
-
 }

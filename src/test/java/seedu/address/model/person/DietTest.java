@@ -63,7 +63,6 @@ public class DietTest {
         assertTrue(Diet.isValidDiet("low fat"));
         assertTrue(Diet.isValidDiet("low carb"));
         assertTrue(Diet.isValidDiet("low sugar"));
-        assertTrue(Diet.isValidDiet("none"));
     }
 
     @Test
