@@ -7,21 +7,33 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input and creates a new SortCommand object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
+
+    public static final String VALID_SORT_TYPES = "priority|name|diet|meetingdate";
+
     @Override
     public SortCommand parse(String userInput) throws ParseException {
         String trimmedInput = userInput.trim().toLowerCase();
-        String[] splitArgs = trimmedInput.split("\\s+");
 
-        if (splitArgs.length != 2) {
-            throw new ParseException("Invalid sort type. " + SortCommand.MESSAGE_USAGE);
+        if (trimmedInput.startsWith("sort")) {
+
+            if (trimmedInput.equals("sort")) {
+                throw new ParseException("Sort type is missing. Usage: sort priority | sort name | sort diet "
+                        + "| meetingdate");
+            }
+
+            if (!trimmedInput.startsWith("sort ")) {
+                throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet | meetingdate");
+            }
+
+            trimmedInput = trimmedInput.replaceFirst("sort", "").trim(); // Strip and continue
         }
 
-        String sortType = splitArgs[1];
-
-        if (!(sortType.equals("priority") || sortType.equals("name") || sortType.equals("diet"))) {
-            throw new ParseException("Invalid sort type. " + SortCommand.MESSAGE_USAGE);
+        // Final trimmedInput should now be a valid sort type
+        if (!(trimmedInput.equals("priority") || trimmedInput.equals("name")
+                || trimmedInput.equals("diet") || trimmedInput.equals("meetingdate"))) {
+            throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet | meetingdate");
         }
 
-        return new SortCommand(sortType);
+        return new SortCommand(trimmedInput);
     }
 }

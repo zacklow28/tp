@@ -97,4 +97,19 @@ class SortCommandTest {
         SortCommand command = new SortCommand("priority");
         assertEquals(command, command);
     }
+
+    @Test
+    public void equals_sameMeetingDateSortType_returnsTrue() {
+        SortCommand sortCommand1 = new SortCommand("meetingdate");
+        SortCommand sortCommand2 = new SortCommand("meetingdate");
+        assertEquals(sortCommand1, sortCommand2);
+    }
+
+    @Test
+    public void equals_differentSortTypes_returnsFalse() {
+        SortCommand sortCommand1 = new SortCommand("meetingdate");
+        SortCommand sortCommand2 = new SortCommand("priority");
+        assertNotEquals(sortCommand1, sortCommand2);
+    }
+
 }
