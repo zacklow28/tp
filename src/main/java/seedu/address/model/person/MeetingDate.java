@@ -15,7 +15,7 @@ import org.apache.commons.lang3.time.DateUtils;
 public class MeetingDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting date must be in the format YYYY-MM-DD.";
+            "Meeting date must be valid and in the format YYYY-MM-DD.";
 
     private final String meetingDate;
 
