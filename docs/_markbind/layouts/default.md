@@ -1,10 +1,18 @@
+<head>
+  <!-- Google Fonts MUST be first -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
 <head-bottom>
   <link rel="stylesheet" href="{{baseUrl}}/stylesheets/main.css">
 </head-bottom>
 
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">VitaBook</a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">
+    <img src="{{baseUrl}}/images/VitaBookLogo.png" alt="VitaBook" style="height: 40px;">
+    </a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>

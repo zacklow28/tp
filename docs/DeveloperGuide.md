@@ -6,8 +6,6 @@ pageNav: 3
 
 # VitaBook Developer Guide
 
-## **About Us**
-
 **VitaBook** is a **desktop application for freelance nutritionists** 
 to manage patient profiles, dietary information, and follow-ups efficiently. 
 Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean 
@@ -997,19 +995,6 @@ User stories for the MVP version:
 | 3   | VitaBook saves any unsaved data.             | N.A.       |
 | 3   | VitaBook shuts down the CLI. Use case ends.  | N.A.       |
 
-### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should respond within 5 seconds for most user interactions.
-5.  The application should be portable, working without an installer. It should be distributed in a single JAR file for easy execution on different platforms.
-6.  Data should be stored in a human-editable file, ensuring that the nutritionist can manually back up or recover patient data if needed.
-7.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
-8.  The GUI should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
-9.  The application should not use a DBMS to store data.
-10.  The product's file size, including the JAR file and necessary assets, should not exceed 100MB.
-11.  The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit.
 
 ## **Non-Functional Requirements (NFRs)**
 
@@ -1018,6 +1003,9 @@ User stories for the MVP version:
 |-----|-----------------------------------------------------------------------------|--------------------------|
 | P1  | 95% of commands (e.g., `add`, `list`) respond within **2 seconds** for 1,000 patients. | ≤2s latency             |
 | P2  | Startup time (from launch to ready state) under **3 seconds**.              | 3s max                  |
+| P3  |  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. |
+| P4  | The product's file size, including the JAR file and necessary assets, should not exceed 100MB. |
+| P5  | The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit. |
 
 ### 2. **Usability**
 | ID  | Requirement                                                                 | Metric                   |
@@ -1030,12 +1018,14 @@ User stories for the MVP version:
 |-----|-----------------------------------------------------------------------------|
 | C1  | Works on **Windows 10+, macOS 12+, Linux (Ubuntu 20.04+)** with Java 17+.  |
 | C2  | Supports screen resolutions ≥1280x720 at 100-150% scaling.                  |
+| C3  | The application should be portable, working without an installer. It should be distributed in a single JAR file for easy execution on different platforms. |
 
 ### 4. **Data Integrity**
 | ID  | Requirement                                                                 |
 |-----|-----------------------------------------------------------------------------|
 | D1  | Auto-saves to `./data/vitabook.json` after every modifying command.         |
 | D2  | Data file must be human-editable (plaintext JSON) for emergency recovery.   |
+| D3 | The application should not use a DBMS to store data.  |
 
 ### 5. **Security**
 | ID  | Requirement                                                                 |
@@ -1047,9 +1037,9 @@ User stories for the MVP version:
 | ID  | Requirement                                                                 |
 |-----|-----------------------------------------------------------------------------|
 | SC1 | Supports up to **1,000 patients** without performance degradation.          |
-*{More to be added}*
 
----
+
+
 ## Glossary
 
 ### Core Concepts
