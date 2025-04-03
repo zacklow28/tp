@@ -25,8 +25,44 @@ Head over to [How to use this Developer Guide](#how-to-use-this-developer-guide)
 to get started!
 
 --------------------------------------------------------------------------------------------------------------------
-<!-- * Table of Contents -->
-<page-nav-print />
+## Table of Contents
+1. [Introduction](#vitabook-developer-guide)
+   1. [About Us](#about-us)
+   2. [Acknowledgements](#acknowledgements)
+   3. [Setting up, getting started](#setting-up-getting-started)
+   4. [How to Use This Developer Guide](#how-to-use-this-developer-guide)
+
+2. [Design](#design)
+    1. [Architecture](#architecture)
+        - [Component Diagram](#architecture)
+        - [Sequence Diagram](#architecture-sequence-diagram)
+    2. [UI Component](#ui-component)
+    3. [Logic Component](#logic-component)
+        - [Parser Classes](#parser-classes)
+    4. [Model Component](#model-component)
+    5. [Storage Component](#storage-component)
+    6. [Common Classes](#common-classes)
+
+3. [Implementation](#implementation)
+    1. [Add Command](#add-command-implementation)
+    2. [Edit Command](#edit-command-implementation)
+    3. [Clear Command](#clear-command-implementation)
+    4. [Priority Command](#priority-command-implementation)
+    5. [Sort Command](#sort-command-implementation)
+    6. [Filter Command](#filter-command-implementation)
+    7. [Command History](#command-history-implementation)
+    8. [Undo/Redo Command](#undoredo-command-implementation)
+
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+
+5. [Appendix](#appendix)
+   1. [Requirements](#appendix-requirements)
+      1. [Product Scope](#product-scope)
+      2. [User Stories](#user-stories)
+      3. [Use Cases](#use-cases)
+      4. [Non-Functional Requirements](#non-functional-requirements)
+      5. [Glossary](#glossary)
+   2. [Manual Testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,51 +130,90 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## How to Use This Developer Guide
 
-Welcome, and thank you for your interest in understanding how **VitaBook** works behind the scenes. This Developer Guide is designed to support you in maintaining, enhancing, and evolving VitaBook—whether you're a developer, tester, or simply exploring the technical foundation of the application.
+Welcome, and thank you for your interest in understanding how **VitaBook** works behind the scenes. 
 
-> **Tip:** You do not need to read this guide in sequential order.  
-> However, we recommend starting with the [Design](#design) section to gain a high-level understanding of the system. With this foundation, you can easily dive into sections most relevant to your goals.
+### Overview
+This guide provides comprehensive technical documentation for **VitaBook**, covering:
+- System architecture and design decisions
+- Implementation details of key features
+- Testing methodologies
+- Maintenance and extension guidelines
 
+### Navigation Tips
+1. **For Quick Answers**:
+    - Use `Ctrl+F` to search for keywords
+    - Check the [Glossary](#glossary) for term definitions
+    - Jump to specific commands via the [Implementation](#implementation) section
 
-### What's Inside?
+2. **For Deep Understanding**:
+    - Start with [Architecture](#architecture) for system overview
+    - Review [Sequence Diagrams](#implementation) for workflow visualization
+    - Examine [Test Cases](#appendix-instructions-for-manual-testing) for validation approaches
 
-The Developer Guide is organized into several key sections:
+### Reader Pathways
+| If You're a... | Start With | Then Explore |
+|----------------|------------|--------------|
+| **New Developer** | [Architecture](#architecture) | [Common Classes](#common-classes) → [Add Command](#add-command-implementation) |
+| **Tester** | [Manual Testing](#appendix-instructions-for-manual-testing) | [User Stories](#user-stories) → [Edge Cases](#non-functional-requirements) |
+| **Maintainer** | [Storage Component](#storage-component) | [Undo/Redo](#undoredo-command-implementation) → [Dependencies](#acknowledgements) |
 
-- **[Design](#design)**  
-  Provides an architectural overview of VitaBook, including the key components (`Model`, `Logic`, `UI`, `Storage`) and how they interact. Start here for an understanding of the overall structure.
+### Key Conventions
+1. **Code References**:
+    - `ClassName` for Java classes
+    - `methodName()` for functions
+    - ```javacodeBlocks()  
+      Java codeBlocks() for multi-line examples
 
-- **[Implementation](#implementation)**  
-  Explains how specific features are built—such as adding, editing, clearing, changing priority, sorting, filtering, command history, and undo/redo mechanisms.
+2. **Visual Guides**:
+    - Diagrams use PlantUML ([see examples](#architecture))
+    - Test cases follow Given-When-Then format
 
-- **[Documentation, Configuration, and Other Guides](#documentation-logging-testing-configuration-dev-ops)**  
-  Includes focused sub-guides on areas such as testing, logging, build configuration, and DevOps setup.
+3. **Version Info**:
+    - All documentation matches **VitaBook v2.1**
+    - Last updated: 2 April 2025
 
-- **[Requirements](#appendix-requirements)**  
-  Details the product scope, target user profile, value proposition, user stories, use cases, and non-functional requirements. This section is particularly useful for project stakeholders and planners.
-
-- **[Instructions for Manual Testing](#appendix-instructions-for-manual-testing)**  
-  Provides clear steps for testing key functionality, including input examples and expected results. Ideal for QA testers and contributors performing system verification.
-
-
-
-### Who Should Read What?
-
-| Role                  | Recommended Sections                                                                                      |
-|-----------------------|-----------------------------------------------------------------------------------------------------------|
-| Developer             | Start with [Design](#design), followed by [Implementation](#implementation) for feature-specific insights. |
-| Tester                | Refer to [Instructions for Manual Testing](#appendix-instructions-for-manual-testing).                    |
-| Product or UX Team    | Read the [Requirements](#appendix-requirements) section for user needs and application goals.             |
-| New Contributor       | Begin with [Design](#design), then explore [Implementation](#implementation) and [Glossary](#glossary).   |
-
-You can also refer to the [Glossary](#glossary) for definitions of commonly used terms in VitaBook.
+### Troubleshooting
+If content appears unclear:
+1. Check the [latest version](https://github.com/your-repo) on GitHub
+2. Compare with [API Docs](#) (if available)
+3. [Open an issue](https://github.com/your-repo/issues) for clarification
 
 -------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
-This section provides a high-level overview of how **VitaBook** is architected, and how its key components work together to support core features like patient management, filtering, sorting, and undo/redo.
+This section provides a high-level overview of how **VitaBook** is architected, and how its key components work together to support its core features.
+Whether you're new to software design or an experienced developer, use these navigation tips:
+
+### Navigation Guide
+
+**For New Developers**:
+1. Start with the [Architecture Diagram](#architecture) → High-level component map
+2. Learn how commands flow: [Delete Command Example](#logic-component)
+3. Explore the [UI Structure](#ui-component) → How JavaFX connects to code
+
+**For Experienced Developers**:
+1. Review [Component APIs](#architecture) → Interface contracts
+2. Analyze [Data Flow](#model-component) → Model update patterns
+3. Check [Storage Layer](#storage-component) → JSON serialization
+
+### System Overview
 
 The [Architecture](#architecture) subsection presents a visual and conceptual overview of how VitaBook's major components interact with each other.
+
+
+```plaintext
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│      UI         │    │     Logic       │    │     Model       │
+│ (JavaFX)        │◄──►│ (Command Parser)│◄──►│ (Patient Data)  │
+└─────────────────┘    └─────────────────┘    └────────┬────────┘
+                                                      ▲
+                                                      │
+                                               ┌──────▼──────┐
+                                               │   Storage   │
+                                               │  (JSON I/O) │
+                                               └─────────────┘
+```
 
 VitaBook is designed with four main components:
 
