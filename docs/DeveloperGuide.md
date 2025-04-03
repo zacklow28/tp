@@ -497,6 +497,23 @@ The process is visualized in the following sequence diagram:
 
 The `PriorityCommand` allows the nutritionist to update the priority level (e.g., HIGH, MEDIUM, LOW) of a selected patient from the filtered list. This command is helpful in identifying high-risk patients for urgent follow-up.
 
+#### Key Command Implementation
+- Updating Priority
+```
+Person updatedPerson = new Person(
+    originalPerson.getName(),
+    originalPerson.getGender(),
+    // ... (other fields)
+    newPriority,  // Updated field
+    originalPerson.getMeetingDate(),
+    originalPerson.getAllergies()
+);
+```
+- Example usage: `priority 2 pr/high`
+
+#### Developer Notes
+- Shortcut: pr/ can be used instead of priority.
+
 When a user issues a command such as `priority 2 pr/HIGH`, the following sequence of operations occurs:
 
 1. The input is parsed by `PriorityCommandParser`, which creates a `PriorityCommand` object.
@@ -518,8 +535,20 @@ The sequence below illustrates the interactions within the `Logic` component, ta
 <puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> <box type="info" seamless>
 
 **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
-
 </box>
+
+#### Key Code Snippets
+- Comparator Logic (Priority-first, then name):
+```
+Comparator<Person> comparator = Comparator
+    .comparing((Person p) -> p.getPriority().getValue().ordinal()).reversed()
+    .thenComparing(p -> p.getName().toString().toLowerCase());
+```
+- Example usage: `sort priority`
+
+
+#### Developer Notes
+- Extensibility: New sort criteria can be added by extending the switch block.
 
 `SortCommand` behaviour:
 
@@ -541,6 +570,20 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 </box>
 
+#### Key Code Snippets
+- Predicate Construction (Dynamic filtering):
+```
+Predicate<Person> filterPredicate = switch (prefix) {
+    case "d" -> person -> person.getDiet().toString().equalsIgnoreCase(value);
+    case "g" -> person -> person.getGender().toString().equalsIgnoreCase(value);
+    // ... (other cases)
+};
+```
+- Example usage: `filter d/vegan`
+
+#### Developer Notes
+- Case Insensitivity: Filters are case-insensitive (e.g., d/vegan matches Vegan).
+
 `FilterCommand` behaviour:
 
 1. When the `LogicManager` receives the `filter d/low fat` command, it calls `AddressBookParser` to parse the command.
@@ -557,6 +600,40 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 
 <puml src="diagrams/CommandHistorySequenceDiagram.puml" alt="Command History Sequence Diagram" />
 
+The CommandHistory class tracks all executed commands, allowing users to navigate through past commands using UP/DOWN arrow keys. It maintains:
+- A list of commands (commandHistory).
+- A pointer (currentIndex) to track navigation position.
+
+#### Key Code Snippets
+- Storing Commands:
+```
+public void addCommand(String command) {
+    commandHistory.add(command);
+    currentIndex = commandHistory.size(); // Reset pointer to end
+}
+```
+- Navigation:
+```
+public String getPreviousCommand() {
+    if (currentIndex <= 0) return null;
+    currentIndex--;
+    return commandHistory.get(currentIndex);
+}
+
+public String getNextCommand() {
+    if (currentIndex >= commandHistory.size() - 1) return null;
+    currentIndex++;
+    return commandHistory.get(currentIndex);
+}
+```
+
+#### Developer Notes
+- Pointer Reset: currentIndex resets to the end after each new command.
+- Null Handling: Returns null when reaching history bounds (no-op in UI).
+- Thread Safety: Not thread-safe; assumes single-threaded UI access.
+
+`CommandHistory` behaviour:
+
 1. **User Interaction**: The user inputs commands through the `CommandBox` in the UI, which are captured and processed by the system.
 2. **Logic Processing**: The `LogicManager` processes these commands using the `AddressBookParser` to identify and execute the appropriate command, interacting with the `Model` as needed.
 3. **Command History**: Each executed command is recorded in `CommandHistory`, allowing users to navigate through past commands using the UP and DOWN arrow keys. This navigation updates the command input field, facilitating easy re-execution or modification of previous commands.
@@ -564,12 +641,42 @@ The sequence diagram below illustrates the interaction flow when a user enters c
 
 ### Undo/redo Command Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. 
+
+#### Key Code Snippets
+- State Management (VersionedAddressBook):
+```
+public void commit() {
+    // Purge future states if pointer is not at end
+    addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+    addressBookStateList.add(new AddressBook(this));
+    currentStatePointer++;
+}
+```
+- Undo/Redo Execution:
+```
+// UndoCommand.java
+public CommandResult execute(Model model) throws CommandException {
+    if (!model.canUndoAddressBook()) {
+        throw new CommandException(MESSAGE_FAILURE);
+    }
+    model.undoAddressBook();
+    return new CommandResult(MESSAGE_SUCCESS);
+}
+
+// RedoCommand.java (similar logic)
+```
+#### Developer Notes
+- Immutable States: Each snapshot is a deep copy of AddressBook.
+- Non-Modifying Commands: list, find, sort do not trigger commits.
+- UI Sync: The UI refreshes automatically after undo/redo via Model observers.
+
+Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
+* 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively. Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
@@ -636,14 +743,43 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Summary of Edge Cases:
-* **Undo/Redo Unavailable:**
-  * Undo: When current state is at the initial state (currentStatePointer = 0).
-  * Redo: When current state is at the latest state (currentStatePointer = size() - 1).
-* **Non-Commit Commands:** Commands like `list`, `help`, `sort`, `filter`, `find`, `exit` do not call Model#commitAddressBook(). As a result, these commands have no effect on the addressBookStateList and are not considered by the undo/redo mechanism.
+
 * **State Purge:** Executing a new command after an undo will purge the redo history. Only relevant states are restorable.
 
+---
+## Edge Cases
 
+### Command-Specific Edge Cases
+
+| Command       | Edge Case                                   | System Response                          | Handling Mechanism                  |
+|---------------|---------------------------------------------|------------------------------------------|-------------------------------------|
+| **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"` | `AddCommand#execute()` checks `model.hasPerson()` |
+|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format       | `AddCommandParser` validates prefixes |
+|               | Invalid field format (e.g., `h/abc`)        | Field-specific error (e.g., `"Height must be a number"`) | Field class constructors validate input |
+| **Edit**      | Invalid index (e.g., `edit 999`)            | `"The patient index provided is invalid"` | Checks `index.getZeroBased() >= list.size()` |
+|               | No fields edited                            | `"At least one field to edit must be provided"` | `EditPersonDescriptor#isAnyFieldEdited()` |
+|               | Duplicate after edit                        | `"This patient already exists"`          | `model.hasPerson()` check           |
+| **Clear**     | Empty address book                          | `"Nothing on list!"`                     | `model.getAddressBook().isEmpty()` check |
+|               | User cancels confirmation                   | `"Clear command cancelled."`             | `ClearDialogUtil.showConfirmationDialog()` |
+| **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"` | `Priority` enum validation          |
+|               | Invalid index                               | `"Invalid patient index."`               | Index bounds check                  |
+| **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"` | `switch` default case throws error  |
+|               | Empty list                                  | Silent (no action)                       | Implicit in sorting logic           |
+| **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"` | Default `switch` case               |
+|               | No matches                                  | Empty list (no error)                    | Predicate returns `false` for all   |
+| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"`            | `model.canUndoAddressBook()` check  |
+|               | Redo at latest state                        | `"No next state to redo"`                | `model.canRedoAddressBook()` check  |
+|               | Non-modifying command (e.g., `list`)        | No state change                      | Skips `Model#commitAddressBook()`   |
+|               |  Executing a new command after an undo      | Purges the redo history              |`VersionedAddressBook#commit()`       |
+
+### General Edge Cases
+
+| Scenario                     | System Response                          | Handling Mechanism                     |
+|------------------------------|------------------------------------------|----------------------------------------|
+| **Incorrect Command Format** | Shows command-specific `MESSAGE_USAGE`   | `*CommandParser` classes validate syntax |
+| **Empty Input**              | Displays help menu                       | `ParserUtil` checks for empty strings  |
+| **File Corruption**          | Creates new empty data file              | `Storage` class handles IO exceptions  |
+| **Keyboard Interrupt**       | Returns to command prompt                | CLI main loop catches `Ctrl+C`         |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -662,15 +798,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* Works as a freelance nutritionist, often visiting multiple patients daily
-* Has a need to manage a significant number of patient profiles, including patient information, medical history, dietary restrictions, and follow-ups
-* Prefers efficiency and speed in managing patient data, with the ability to update and search profiles quickly
-* Can type fast and prefers typing commands over using a mouse or graphical user interface (GUI)
-* Is comfortable using command-line interfaces (CLI) for managing data and interactions
-* Values portability and the ability to work across different devices without the need for installation or complex setups
+* Role: Works as a freelance nutritionist, often visiting multiple patients daily
+* Needs:
+  * Has a need to manage a significant number of patient profiles, including patient information, medical history, dietary restrictions, and follow-ups
+  * CLI-first workflow for speed (typing > GUI interactions). 
+  * Portability: No installation needed; works on any OS with Java 17+.
+* Pain Points:
+  * Time wasted on manual data entry in traditional GUI apps. 
+  * Difficulty tracking patient updates across devices.
 
-**Value proposition**: manage patient profiles faster and more efficiently than traditional GUI-driven applications by utilizing a CLI, with features designed to streamline patient management, scheduling, and follow-ups, all in a portable, easy-to-use format.
 
+**Value Proposition**:
+
+VitaBook is a **command-line interface (CLI) application** designed for freelance nutritionists who need to manage patient profiles efficiently. It offers:
+
+- **Speed**: Perform tasks 3x faster than GUI apps with keyboard-only commands (e.g., add a patient in under 10 seconds).
+- **Organization**: Filter/sort patients by diet, priority, or allergies with simple commands (e.g., `filter d/vegan`).
+- **Portability**: Runs on any OS (Windows/macOS/Linux) with Java 17+—no installation needed. Just launch the JAR file.
+- **Data Control**: Human-editable JSON storage for easy backups and manual edits.
+
+> *"VitaBook cuts patient management time by 50%, letting you focus on care—not paperwork."*
 
 ### User stories
 
@@ -863,21 +1010,82 @@ User stories for the MVP version:
 10.  The product's file size, including the JAR file and necessary assets, should not exceed 100MB.
 11.  The user guide (UG) and design document (DG) should each be under 15MB, with optimized images and content to meet the file size limit.
 
+## **Non-Functional Requirements (NFRs)**
+
+### 1. **Performance**
+| ID  | Requirement                                                                 | Metric                   |
+|-----|-----------------------------------------------------------------------------|--------------------------|
+| P1  | 95% of commands (e.g., `add`, `list`) respond within **2 seconds** for 1,000 patients. | ≤2s latency             |
+| P2  | Startup time (from launch to ready state) under **3 seconds**.              | 3s max                  |
+
+### 2. **Usability**
+| ID  | Requirement                                                                 | Metric                   |
+|-----|-----------------------------------------------------------------------------|--------------------------|
+| U1  | A novice user should learn all basic commands within **15 minutes**.        | Tutorial completion time |
+| U2  | CLI error messages must clearly explain how to fix the issue (e.g., `Error: Missing 'n/'. Usage: add n/NAME...`). | User testing feedback    |
+
+### 3. **Compatibility**
+| ID  | Requirement                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| C1  | Works on **Windows 10+, macOS 12+, Linux (Ubuntu 20.04+)** with Java 17+.  |
+| C2  | Supports screen resolutions ≥1280x720 at 100-150% scaling.                  |
+
+### 4. **Data Integrity**
+| ID  | Requirement                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| D1  | Auto-saves to `./data/vitabook.json` after every modifying command.         |
+| D2  | Data file must be human-editable (plaintext JSON) for emergency recovery.   |
+
+### 5. **Security**
+| ID  | Requirement                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| S1  | Data files restrict read/write access to the user only (no global permissions). |
+| S2  | No internet connectivity required—all data stays locally.                   |
+
+### 6. **Scalability**
+| ID  | Requirement                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| SC1 | Supports up to **1,000 patients** without performance degradation.          |
 *{More to be added}*
 
-### Glossary
+---
+## Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Patient**: A person under the care of the nutritionist, whose dietary information, medical history, and personal details are tracked within the system.
-* **Nutritionist**: A healthcare professional who advises on diet and nutrition, helping individuals improve their health through dietary recommendations.
-* **Patient profile**: A record containing a patient’s personal details, medical history, food allergies, dietary restrictions, and other relevant health information.
-* **Diet**: The specific food and beverage intake recommended or required for a person, often based on health conditions or preferences (e.g., low sodium, low carb).
-* **Allergies**: Substances or foods that a patient is sensitive or allergic to, which must be taken into account when making dietary recommendations.
-* **Priority**: The level of importance or urgency assigned to a task or patient. For example, a high-priority patient needs immediate attention, while low-priority patients may not require urgent care.
-* **CLI (Command-Line Interface)**: A text-based interface where users type commands to interact with the software.
-* **GUI (Graphical User Interface)**: An interface that allows users to interact with the software through visual elements like buttons and icons.
-* **JAR File (Java ARchive)**: A compressed file that contains Java classes, libraries, and resources, packaged for distribution.
+### Core Concepts
+| Term               | Definition                                                                 | Example/Notes                                                                |
+|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Patient**        | An individual under nutritional care with stored health/dietary data.      | Created via `add n/John Doe d/vegan`                                        |
+| **Nutritionist**   | Healthcare professional managing patient diets via VitaBook.               | Primary user of the application.                                            |
+| **CLI**            | Command-Line Interface for text-based commands.                            | Faster than GUI (e.g., `edit 1 p/98765432` updates phone number).           |
+| **GUI**            | Graphical User Interface (minimal use in VitaBook).                        | Only displays results (e.g., patient lists).                                |
 
+### Technical Terms
+| Term               | Definition                                                                 | Example/Notes                                                                |
+|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **JAR File**       | Executable Java package containing all dependencies.                       | Run VitaBook via `java -jar vitabook.jar`                                   |
+| **JSON**           | Data storage format for patient records.                                   | Human-editable file at `./data/patients.json`                               |
+| **Mainstream OS**  | Supported operating systems.                                               | Windows 10+, macOS 12+, Linux (Ubuntu 20.04+)                              |
+
+### Medical/Dietary Terms
+| Term               | Definition                                                                 | Example/Notes                                                                |
+|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Diet**           | Prescribed food regimen (e.g., vegan, keto).                               | Filter via `filter d/keto`                                                  |
+| **Priority**       | Follow-up urgency level (`high`/`medium`/`low`).                           | Set via `priority 1 pr/high`                                                |
+| **Allergy**        | Food sensitivity requiring dietary exclusion.                              | Tracked via `add ... al/peanuts`                                            |
+
+### Command Syntax
+| Term               | Definition                                                                 | Example/Notes                                                                |
+|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Prefix**         | Shortcode before input values (e.g., `n/` for name).                      | `add n/Alice p/12345678` → `n/` and `p/` are prefixes.                      |
+| **Modifying Cmd**  | Commands that change data (tracked in undo history).                       | `add`, `delete`, `edit`                                                     |
+| **Non-Modifying Cmd** | Read-only commands (excluded from undo history).                        | `list`, `find`, `help`                                                      |
+
+### Key Features
+| Term               | Definition                                                                 | Example/Notes                                                                |
+|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Auto-save**      | Automatic data persistence after changes.                                  | Saves to JSON after `add`/`edit`/`delete`.                                  |
+| **Portability**    | Runs anywhere with Java 17 (no installation).                              | Single JAR file deployment.                                                 |
+| **Case-Insensitive** | Commands/filters ignore letter case.                                    | `FILTER D/KETO` works same as `filter d/keto`                               |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -886,140 +1094,109 @@ Given below are instructions to test the app manually.
 
 <box type="info" seamless>
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** These instructions provide a foundation for testers. Exploratory testing is encouraged.
 
-</box>
+---
 
-### Launch and shutdown
+### **Launch and Shutdown**
+1. **Initial Launch**
+    - *Test Case*:
+        - Download JAR → double-click in empty folder.
+        - *Expected*: GUI opens with sample patients (window size may need adjustment).
 
-1. Initial launch
+2. **Window Preferences**
+    - *Test Case*:
+        - Resize/move window → close → relaunch.
+        - *Expected*: Retains last window size/position.
 
-   1. Download the jar file and copy into an empty folder.
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample patients. The window size may not be optimum.
+---
 
-2. Saving window preferences
+### **Command Tests**
+#### **Add Patient**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `add n/John Doe g/m h/1.75 w/70 p/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed |
+| `add` (no fields) | - | Shows `MESSAGE_USAGE` with required fields |
+| `add n/Alice Tan ... e/john@example.com` | Patient with `john@example.com` exists | Error: `"This patient already exists"` |
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+#### **Edit Patient**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `edit 1 p/98765432` | ≥1 patient in list | Updates phone number for patient 1 |
+| `edit 1` (no fields) | ≥1 patient | Error: `"At least one field to edit must be provided"` |
+| `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index"` |
 
-### Adding a patient
+#### **Remark Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `remark 1 r/Very cooperative` | ≥1 patient | Adds remark to patient 1 |
+| `remark 0 r/Test` | - | Error: `"Invalid index"` |
 
-1. Prerequisite: Ensure no patient with the same email exists.
+#### **Priority Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `priority 2 high` | ≥2 patients | Updates priority of patient 2 to `high` |
+| `priority 1 urgent` | ≥1 patient | Error: `"Priority must be low/medium/high"` |
+| `priority 10 high` | <10 patients | Error: `"Invalid patient index"` |
 
-   1. Test case: `add n/John Doe g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
-      * Expected: New patient is added and listed.
+#### **Find Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `find John` | ≥1 patient with "John" in name | Lists matching patients |
+| `find` (no keyword) | - | Error: `"Keyword cannot be empty"` |
+| `find zz` | No patient with "zz" | Shows empty list |
 
-   2. Test case: `add` (with no parameters)
-      * Expected: Error indicating missing required fields.
+#### **Filter Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `filter g/f` | ≥1 female patient | Lists only female patients |
+| `filter x/test` | - | Error: `"Invalid filter prefix"` |
+| `filter g/Male` | - | Error: `"Gender must be 'm' or 'f'"` |
 
-2. Prerequisite: Patient with e/john@example.com exists.
+#### **Sort Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `sort name` | Multiple patients | Sorts alphabetically by name |
+| `sort priority` | Multiple patients | Sorts by priority (high→low) then name |
+| `sort invalid` | - | Error: `"Invalid sort type. Use: priority/name/diet"` |
 
-   1. Test case: `add n/Alice Tan g/m h/1.75 w/70 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low`
-      * Expected: Error due to duplicate email.
+#### **Delete Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `delete 1` | ≥1 patient | Deletes patient at index 1 |
+| `delete fake@email.com` | No patient with this email | Error: `"No patient found with this email"` |
 
-### Editing a patient
+#### **Clear Command**
+| Test Case | Prerequisite | Expected Outcome |
+|-----------|--------------|------------------|
+| `clear` | Multiple patients | Prompts confirmation before clearing |
 
-1. Prerequisite: At least one patient is listed.
+---
 
-   1. Test case: `edit 1 no/98765432`
-      * Expected: Patient at index 1 has updated phone number.
+### **Undo/Redo Testing**
+| Test Case | Steps | Expected Outcome |
+|-----------|-------|------------------|
+| Basic undo/redo | 1. `add` → 2. `undo` → 3. `redo` | 2. Reverts add → 3. Restores add |
+| Undo at initial state | `undo` with no history | Error: `"No previous state to undo"` |
+| State purge | 1. `add` → 2. `undo` → 3. `add` → 4. `redo` | 4. Error: `"No next state to redo"` |
 
-   2. Test case: `edit 1`
-      * Expected: Error due to no fields to edit.
+---
 
-2. Prerequisite: List contains fewer than 999 patients.
+### **General Edge Cases**
+| Scenario | Test Case | Expected Outcome |
+|----------|-----------|------------------|
+| Invalid command | `invalidCmd` | Shows error + command list |
+| File corruption | Manually corrupt `data/patients.json` | Auto-generates new file on launch |
+| Keyboard interrupt | Press `Ctrl+C` during command | Returns to input prompt |
 
-   1. Test case: `edit 999 e/abc@example.com`
-      * Expected: Error due to index being out of bounds.
+---
 
-### Adding/Updating a Remark
+### **Exploratory Testing Tips**
+1. **Combination Testing**:
+    - Chain commands (e.g., `add` → `edit` → `undo` → `filter`).
+2. **Data Limits**:
+    - Test with 1000+ patients for performance.
+3. **Localization**:
+    - Non-English names (e.g., `add n/李华`).
 
-1. Prerequisite: At least one patient is listed.
-
-   1. Test case: `remark 1 r/Very cooperative`
-      * Expected: Remark is added to patient 1.
-
-   2. Test case: `remark 0 r/Test`
-      * Expected: Error due to invalid index.
-
-### Change Priority
-
-1. Prerequisite: At least 2 patient is listed.
-
-   1. Test case: `pr 2 high`
-      * Expected: Priority of patient 2 updated to high.
-
-   2. Test case: `pr 1 urgent`
-      * Expected: Error due to invalid priority.
-
-2. Prerequisite: Fewer than 10 patients.
-
-   1. Test case: `pr 10 high`
-      * Expected: Error due to invalid index.
-
-### Find by name
-
-1. Prerequisite: At least one patient with name containing "John" exists.
-
-   1. Test case: `find John`
-      * Expected: Patients with 'John' in their name are listed.
-
-   2. Test case: `find`
-      * Expected: Error due to missing keyword.
-
-2. Prerequisite: No patient with name containing "la".
-
-   1. Test case: `find zz`
-      * Expected: No matches found.
-
-### Filter patients
-
-1. Prerequisite: At least one female patient exists.
-
-   1. Test case: `filter g/f`
-      * Expected: Only female patients are shown.
-
-2. Prerequisite: There are only a few valid prefixes and values.
-
-   1. Test case: `filter x/test`
-      * Expected: Error due to invalid prefix.
-
-   2. Test case: `filter g/Male`
-      * Expected: Error due to invalid value.
-
-### Sort patients
-
-1. Prerequisite: Multiple patients with different names exist.
-
-   1. Test case: `sort name`
-      * Expected: Patient List is sorted alphabetically by name.
-
-   2. Test case: `sort priority`
-      * Expected: Patient List is sorted high to low priority and then alphabetically by name.
-
-2. Prerequisite: There are only a few valid values to sort.
-
-   1. Test case: `sort invalid`
-      * Expected: Error due to invalid sort field.
-
-### Deleting a patient
-
-1. Prerequisite: At least one patient in list.
-
-   1. Test case: `delete 1`
-      * Expected: Patient at index 1 is deleted.
-
-2. Prerequisite: No patient with email fake@email.com.
-
-   1. Test case: `delete fake@email.com`.
-      * Expected: Error due to no patient with that email.
-
-### Clear all patients
-
-1. Prerequisite: Multiple patients are listed.
-
-   1. Test case: `clear`
-      * Expected: App prompts confirmation before clearing data.
-
+**Critical**: Always back up `data/patients.json` before testing destructive commands (`clear`, `delete`).
