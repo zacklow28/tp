@@ -18,11 +18,12 @@ public class SortCommandParser implements Parser<SortCommand> {
 
             if (trimmedInput.equals("sort")) {
                 throw new ParseException("Sort type is missing. Usage: sort priority | sort name | sort diet "
-                        + "| meetingdate");
+                        + "| sort meetingdate");
             }
 
             if (!trimmedInput.startsWith("sort ")) {
-                throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet | meetingdate");
+                throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet | "
+                        + "sort meetingdate");
             }
 
             trimmedInput = trimmedInput.replaceFirst("sort", "").trim(); // Strip and continue
@@ -31,7 +32,8 @@ public class SortCommandParser implements Parser<SortCommand> {
         // Final trimmedInput should now be a valid sort type
         if (!(trimmedInput.equals("priority") || trimmedInput.equals("name")
                 || trimmedInput.equals("diet") || trimmedInput.equals("meetingdate"))) {
-            throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet | meetingdate");
+            throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet "
+                    + "| sort meetingdate");
         }
 
         return new SortCommand(trimmedInput);
