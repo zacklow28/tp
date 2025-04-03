@@ -532,7 +532,8 @@ The sequence diagram below illustrates the interactions between the components w
 
 The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
 
-<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> <box type="info" seamless>
+<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> 
+<box type="info" seamless>
 
 **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
 </box>
@@ -564,7 +565,8 @@ Comparator<Person> comparator = Comparator
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
 
-<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" /> <box type="info" seamless>
+<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" /> 
+<box type="info" seamless>
 
 **Note:** The lifeline for FilterCommandParser should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
 
@@ -742,7 +744,6 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
 
 * **State Purge:** Executing a new command after an undo will purge the redo history. Only relevant states are restorable.
 
@@ -1092,9 +1093,8 @@ User stories for the MVP version:
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-
 **Note:** These instructions provide a foundation for testers. Exploratory testing is encouraged.
+
 
 ---
 
