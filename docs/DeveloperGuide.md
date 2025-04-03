@@ -375,9 +375,32 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Command Implementation
 <puml src="diagrams/AddCommandClassDiagram.puml" alt="AddCommand Class Diagram"/>
 
-The `AddCommand` allows the user to register a new patient by specifying all the required fields such as name, gender, contact details, dietary needs, and medical priorities. This command ensures that each patient added is unique based on identity fields.
+The `AddCommand` allows the user to register a new patient by specifying all the required fields such as name, gender, contact details, dietary needs, and medical priorities. This command ensures that each patient added is unique based on the email field.
 
-When a user issues a command such as `add n/John d/vegan`, the following sequence of operations occurs:
+#### Key Code Snippets
+
+- Command Execution (Checks for duplicates before adding):
+```
+@Override
+public CommandResult execute(Model model) throws CommandException {
+    requireNonNull(model);
+    if (model.hasPerson(toAdd)) {
+        throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+    }
+    model.addPerson(toAdd);
+    return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+}
+```
+
+- Example Usage:
+```add n/John Doe g/m h/1.75 w/70 p/98765432 e/john@example.com a/123 Street d/vegan pr/high m/2025-12-31 al/peanuts```
+
+#### Developer Notes
+
+- Validation: The Person constructor validates fields (e.g., Email format, Height range).
+- Case Sensitivity: Allergies (al/) are case-insensitive (stored in lowercase).
+
+When a user issues a command such as `add n/John d/vegan`(simplified for this example, this command does not actually run in VitaBook), the following sequence of operations occurs:
 
 1. The input is parsed by `AddCommandParser`, which creates a `Person` object and wraps it inside an `AddCommand`.
 2. The `LogicManager` executes the command by calling its `execute(Model model)` method.
@@ -389,11 +412,37 @@ The following sequence diagram outlines the flow of the AddCommand:
 
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommand Sequence Diagram"/>
 
+
+--- 
 ### Edit Command Implementation
 
 <puml src="diagrams/EditCommandClassDiagram.puml" alt="EditCommand Class Diagram"/>
 
 The `EditCommand` allows users to update one or more fields of an existing patient in the list. Fields that are not specified in the command remain unchanged.
+
+#### Key Components
+
+- `EditPersonDescriptor`: A helper class to track which fields are modified.
+- Partial Updates: Only updates non-null fields in the descriptor.
+
+#### Key Code Snippets
+- Creating an Edited Person (merges old and new fields)
+```
+private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor descriptor) {
+    Name updatedName = descriptor.getName().orElse(personToEdit.getName());
+    Phone updatedPhone = descriptor.getPhone().orElse(personToEdit.getPhone());
+    // ... (other fields)
+    return new Person(updatedName, updatedPhone, ...);
+}
+```
+- Example Usage:
+``` edit 1 p/91234567 e/new@example.com ```
+
+
+#### Developer Notes
+
+- Immutable Objects: Person is immutable; edits create a new object.
+- Index Handling: Uses Index class to validate list bounds.
 
 When a user issues a command such as `edit 1 e/john@example.com`, the following steps take place:
 
@@ -414,6 +463,20 @@ The sequence diagram below depicts the interaction of components involved:
 <puml src="diagrams/ClearCommandClassDiagram.puml" alt="ClearCommand Class Diagram"/>
 
 The `ClearCommand` removes all patient entries from the address book. To prevent accidental deletions, a confirmation dialog is shown (unless bypassed in test scenarios).
+
+#### Key Code Snippets
+- Confirmation Dialog (UI interaction)
+```
+if (!requireConfirmation || ClearDialogUtil.showConfirmationDialog(...)) {
+    model.setAddressBook(new AddressBook());
+    return new CommandResult(MESSAGE_SUCCESS);
+}
+```
+- Example Usage: `clear`
+
+#### Developer Notes
+- Safety Net: Confirmation is skipped in tests (`requireConfirmation = false`).
+- Empty Check: Early return if the address book is already empty.
 
 When the user enters `clear`, the command follows this sequence:
 
