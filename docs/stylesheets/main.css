@@ -49,20 +49,62 @@ mark {
   display: flex;
   flex: 1;
   align-items: start;
-  flex-direction: row-reverse;
+  flex-direction: row;
+   gap: 20px;
 }
 
 #content-wrapper {
   flex: 1;
   margin: 0 auto;
   min-width: 0;
-  max-width: 1000px;
-  overflow-x: auto;
-  padding: 0.8rem 20px 0 20px;
+  max-width: none;
+  padding: 0.8rem 40px 0 40px; /* Increased side padding */
+    width: 100%;
   transition: 0.4s;
   -webkit-transition: 0.4s;
 }
 
+.content-row {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.image-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.image-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Badge container */
+.badge-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Badge images */
+.badge-image {
+  height: 20px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+
+/* Optional hover effect */
+.badge-image:hover {
+  transform: scale(1.05);
+}
 
 #page-nav {
   display: flex;
@@ -92,22 +134,28 @@ mark {
   }
 }
 
-/* Bootstrap medium(md) responsive breakpoint */
-@media screen and (max-width: 991.98px) {
-  #site-nav {
-    display: none;
+@media (max-width: 991.98px) {
+  #content-wrapper {
+    padding: 0.8rem 20px 0 20px;
   }
 }
 
 /* Bootstrap small(sm) responsive breakpoint */
 @media (max-width: 767.98px) {
-  .indented {
-    padding-left: 10px;
-  }
 
-  #content-wrapper {
-    padding: 0 10px;
-  }
+  .content-row {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .image-content {
+      max-width: 100%;
+      order: -1; /* Optional: makes image appear first on mobile */
+    }
+
+    #content-wrapper {
+      padding: 0.8rem 15px 0 15px;
+    }
 }
 
 /* Bootstrap extra small(xs) responsive breakpoint */
