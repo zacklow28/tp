@@ -8,40 +8,74 @@ pageNav: 3
 
 **VitaBook** is a **desktop application for freelance nutritionists based in Singapore** to manage patient profiles, dietary information, and follow-ups efficiently. Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean **Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
 
-### Key Features
+### Table of Contents
 
-- **[Help](#viewing-help-help)** — `help` : View available commands and usage.
-- **[Add Patient](#adding-a-patient-add)** — `add` : Add a new patient with complete details.
-- **[List Patients](#listing-all-patients-list)** — `list` : Show all stored patients.
-- **[Edit Patient](#editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
-- **[Priority](#changing-a-patient-s-priority-priority)** — `priority` : Change a patient's priority by their index.
-- **[Remark](#adding-a-remark-to-a-patient-remark)** — `remark` : Add or update a note for a patient.
-- **[Find](#locating-patients-by-name-find)** — `find` : Search for patients by name.
-- **[Filter](#filtering-patients-filter)** — `filter` : View patients by priority, diet, gender, or meeting date.
-- **[Sort](#sorting-patients-sort)** — `sort` : Sort patients by priority, name, or diet.
-- **[Delete](#deleting-a-patient-delete)** — `delete` : Remove a patient by index or email.
-- **[Clear All](#clearing-all-entries-clear)** — `clear` : Remove all patient data.
-- **[Undo](#undoing-the-last-change-undo)** — `undo` : Undo the last command that changed the patient list.
-- **[Redo](#redoing-the-last-undo-redo)** — `redo` : Redo the last undo.
-- **[Navigate Command History](#navigating-through-the-command-history-and)** — `↑` and `↓` : Cycle through previous commands.
-- **[Toggle Theme](#toggling-light-mode-and-dark-mode)** : Switch between dark and light modes.
-- **[Exit](#exiting-the-program-exit)** — `exit` : Quit the application.
+#### [1. Introduction](#1-introduction)
+- [1.1 Key Features](#11-key-features)
+- [1.2 Quick Start](#12-quick-start)
+- [1.3 Instructions about Commands](#13-instructions-about-commands)
 
-[↓ Go to Command Summary](#command-summary)
+#### [2. Features](#2-features)
 
-<!-- * Table of Contents -->
+##### [2.1 To Navigate Patient Care](#21-to-navigate-patient-care)
+- [2.1.1 Adding a Patient](#211-adding-a-patient-add)
+- [2.1.2 Listing all Patients](#212-listing-all-patients-list)
+- [2.1.3 Editing a Patient](#213-editing-a-patient-edit)
+- [2.1.4 Changing a Patient's Priority](#214-changing-a-patients-priority-priority)
+- [2.1.5 Adding a Remark to a Patient](#215-adding-a-remark-to-a-patient-remark)
+- [2.1.6 Locating Patients by Name](#216-locating-patients-by-name-find)
+- [2.1.7 Filtering Patients](#217-filtering-patients-filter)
+- [2.1.8 Sorting Patients](#218-sorting-patients-sort)
+- [2.1.9 Deleting a Patient](#219-deleting-a-patient-delete)
+- [2.1.10 Clearing all Patient Entries](#2110-clearing-all-patient-entries-clear)
+
+##### [2.2 To Provide a Convenient and Pleasant Experience](#22-to-provide-a-convenient-and-pleasant-experience)
+- [2.2.1 Viewing Help](#221-viewing-help-help)
+- [2.2.2 Undoing the Last Change](#222-undoing-the-last-change-undo)
+- [2.2.3 Redoing the Last Undo](#223-redoing-the-last-undo-redo)
+- [2.2.4 Navigating Through Command History](#224-navigating-through-command-history--and-)
+- [2.2.5 Toggling between Light Mode and Dark Mode](#225-toggling-between-light-mode-and-dark-mode)
+- [2.2.6 Exiting the Program](#226-exiting-the-program-exit)
+- [2.2.7 Saving the Data](#227-saving-the-data)
+
+##### [2.3 Bonus for Advanced Nutritionists](#23-bonus-for-advanced-nutritionists)
+- [2.3.1 Edit the Data File Directly](#231-editing-the-data-file-directly)
+
+##### [3. FAQ](#3-faq)
+
+##### [4. Known Issues](#4-known-issues)
+
+##### [5. Command Summary](#5-command-summary)
+
+##### [6. Glossary](#6-glossary)
+
+##### [7. Java Setup Instructions](#7-java-setup-instructions)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Introduction
+
+### 1.1 Key Features
+
+VitaBook is built just for you, nutritionists — with commands tailored to your daily workflow. From adding and editing patient records to sorting, filtering, and setting priorities, everything is designed to help you stay organised, focused, and in control of your care delivery.
+
+- **[Add Patient](#211-adding-a-patient-add)** — `add` : Add a new patient with complete details.
+- **[Edit Patient](#213-editing-a-patient-edit)** — `edit` : Modify an existing patient’s information.
+- **[Priority](#214-changing-a-patients-priority-priority)** — `priority` : Change a patient's priority by their index.
+- **[Filter](#217-filtering-patients-filter)** — `filter` : View patients by priority, diet, gender, or meeting date.
+- **[Sort](#218-sorting-patients-sort)** — `sort` : Sort patients by priority, name, or diet.
+
+[↓ Go to Command Summary](#command-summary)
+
+### 1.2 Quick start
 
 1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
    **Check/Install Java:** See [Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
 
-2. Download the latest `.jar` file [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases).
+2. Download the latest `.jar` file [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases)!
 
-3. Copy the file to the folder you want to use as the _home folder_ for your VitaBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your own VitaBook.
 
 4. Open a command terminal and use the `cd` command to navigate to the folder containing the `.jar` file.
 
@@ -54,8 +88,8 @@ pageNav: 3
 
 *Figure 1: The VitaBook UI, showing layout and sample data*<br>
 
-6. Type the command in the command box and press *Enter* to execute it.<br>
-   e.g. typing `help` and pressing *Enter* will open the help window. Other commands you can try:
+6. Try typing the command in the command box and press *Enter* to execute it.<br>
+   e.g. typing `help` and pressing *Enter* will open the help window. Let's try some out!:
 
 <p style="padding-left: 20px">
 
@@ -70,54 +104,39 @@ pageNav: 3
 * `exit` : Exits the app.
 </p>
 
-7. Refer to the [Features](#features) below for details of each command.
+7. Feel free to explore further the functionalities of VitaBook by following [Features](#features)!
+
+### 1.3 Instructions about Commands
+
+These are a few things to take note while exploring VitaBook!
+
+1. Command keywords are case-sensitive.<br>
+   e.g. `delete 1` is a known command, while `Delete 1` is an unknown command.
+
+2. Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+3. Items in square brackets are optional.<br>
+   e.g `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/fish` or as `n/John Doe`.
+
+4. Items with `…`​ after them can be used multiple times including zero times.<br>
+   e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/milk`, `al/milk al/peanut` etc.
+
+5. Parameters for `add` and `edit` commands can be in any order.<br>
+   e.g. if the command specifies `n/NAME no/PHONE`, `no/PHONE n/NAME` is also acceptable.
+
+6. Extraneous parameters for commands that do not take in parameters (i.e. `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
+   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+7. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 2. Features
 
-<box type="info" seamless>
+### 2.1 To Help You Navigate Patient Care
 
-**Notes about the command format:**<br>
-
-1. Command keywords are case-sensitive.<br>
-  e.g. `delete 1` is a known command, while `Delete 1` is an unknown command.
-
-2. Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-3. Items in square brackets are optional.<br>
-  e.g `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/fish` or as `n/John Doe`.
-
-4. Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/milk`, `al/milk al/peanut` etc.
-
-5. Parameters for `add` and `edit` commands can be in any order.<br>
-  e.g. if the command specifies `n/NAME no/PHONE`, `no/PHONE n/NAME` is also acceptable.
-
-6. Extraneous parameters for commands that do not take in parameters (i.e. `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-7. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
-
-
-### Viewing help : `help`
-
-Opens a window with a link to this user guide.
-
-Format: `help`
-
-<a href="images/helpMessage.png">
-
-<img src="images/helpMessage.png" alt="help message" style="width: 100%; max-width: 700px; display: block;"/>
-</a>
-
-*Figure 2: Window displaying the user guide link*
-
-<br>
-
-### Adding a patient: `add`
+#### 2.1.1 Adding a Patient: `add`
 
 Adds a new patient to your VitaBook with their complete details.
 
@@ -153,7 +172,7 @@ Examples:
 
 <br>
 
-### Listing all patients : `list`
+#### 2.1.2 Listing all Patients: `list`
 
 Shows a list of all the patients in your VitaBook.
 If you have previously used `filter` or `find` to narrow down the patient list, use the `list` command to reset the display and show all patients again.
@@ -162,7 +181,7 @@ Format: `list`
 
 <br>
 
-### Editing a patient : `edit`
+#### 2.1.3 Editing a Patient: `edit`
 
 Edits the details of an existing patient in your VitaBook.
 
@@ -194,7 +213,7 @@ When editing allergies, the existing allergies will be replaced by the new ones 
 
 <br>
 
-### Changing a patient's priority: `priority`
+#### 2.1.4 Changing a Patient's Priority: `priority`
 
 Changes a patient's priority by their index.
 
@@ -213,7 +232,7 @@ Examples:
 
 <br>
 
-### Adding a remark to a patient: `remark`
+#### 2.1.5 Adding a Remark to a Patient: `remark`
 
 Adds a new remark or replaces an existing remark of a patient.
 
@@ -252,7 +271,7 @@ Remark command currently only supports adding a new remark or replacing an exist
 
 <br>
 
-### Locating patients by name: `find`
+#### 2.1.6 Locating Patients by Name: `find`
 
 Finds patients whose names contain *any* of the given **keywords**.
 
@@ -289,7 +308,7 @@ Examples:
 
 <br>
 
-### Filtering patients: `filter`
+#### 2.1.7 Filtering Patients: `filter`
 
 Filter patients based on a field (priority, diet, gender, meeting date).
 
@@ -311,7 +330,7 @@ Examples:
 
 <br>
 
-### Sorting patients: `sort`
+#### 2.1.8 Sorting Patients: `sort`
 
 Sorts patients based on specific criteria (priority, name, diet).
 
@@ -330,7 +349,7 @@ Examples:
 
 <br>
 
-### Deleting a patient : `delete`
+#### 2.1.9 Deleting a Patient: `delete`
 
 Deletes a patient from your VitaBook.
 
@@ -353,7 +372,7 @@ Examples:
 
 <br>
 
-### Clearing all entries : `clear`
+#### 2.1.10 Clearing all Patient Entries: `clear`
 
 Clears all patient entries from your VitaBook.
 
@@ -361,7 +380,24 @@ Format: `clear`
 
 <br>
 
-### Undoing the last change : `undo`
+### 2.2 To Provide a Convenient and Pleasant Experience
+
+#### 2.2.1 Viewing Help: `help`
+
+Opens a window with a link to this user guide.
+
+Format: `help`
+
+<a href="images/helpMessage.png">
+
+<img src="images/helpMessage.png" alt="help message" style="width: 100%; max-width: 700px; display: block;"/>
+</a>
+
+*Figure 2: Window displaying the user guide link*
+
+<br>
+
+#### 2.2.2 Undoing the Last Change: `undo`
 
 Undoes the last command that changed the patient list.
 
@@ -377,7 +413,7 @@ Format: `undo`
 
 <br>
 
-### Redoing the last undo : `redo`
+#### 2.2.3 Redoing the Last Undo: `redo`
 
 Redoes the last undo.
 
@@ -399,7 +435,7 @@ Executing a new command that changes the patient list (excluding `undo`) after u
 
 <br>
 
-### Navigating through the Command History : `↑` and `↓`
+#### 2.2.4 Navigating through Command History: `↑` and `↓`
 
 Navigates through the command history for quick access to previously executed commands.
 
@@ -407,7 +443,7 @@ Format: `↑` or `↓` arrow keys
 
 <br>
 
-### Toggling Light Mode and Dark Mode
+#### 2.2.5 Toggling between Light Mode and Dark Mode
 
 Transitions between light mode and dark mode for a more customisable and improved visual experience. Click the `File` menu to toggle between light mode and dark mode.
 
@@ -427,7 +463,7 @@ Transitions between light mode and dark mode for a more customisable and improve
 
 <br>
 
-### Exiting the program : `exit`
+#### 2.2.6 Exiting the Program: `exit`
 
 Exits the program.
 
@@ -435,13 +471,15 @@ Format: `exit`
 
 <br>
 
-### Saving the data
+#### 2.2.7 Saving the Data
 
 Your VitaBook data is saved in the hard disk automatically after any command that modifies the data. There is no need to save manually.
 
 <br>
 
-### Editing the data file
+### 2.3 Bonus for Advanced Nutritionists
+
+#### 2.3.1 Editing the Data File Directly!
 
 Your VitaBook data is saved automatically as a JSON file `[JAR file location]/data/vitabook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -454,7 +492,9 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 
 <br>
 
-## FAQ
+--------------------------------------------------------------------------------------------------------------------
+
+## 3. FAQ
 
 **Q**: What is VitaBook?
 **A**: VitaBook is a desktop application designed for freelance nutritionists to manage patient information efficiently
@@ -489,8 +529,7 @@ with the format.
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Known issues
+## 4. Known Issues
 
 - **Allergy fields are case-sensitive.**
   Adding allergies like `peanuts` and `Peanuts` results in two different allergies being stored. This can lead to duplicates or confusion when filtering/searching.
@@ -515,8 +554,7 @@ with the format.
 -------------------------------------------------------------------------------------------------------------------
 [↑ Back to Top](#vitabook-user-guide)
 
-
-## Command Summary
+## 5. Command Summary
 
 Action        | Format, Examples
 --------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -538,8 +576,7 @@ Action        | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Glossary
+## 6. Glossary
 
 **Java 17**
 The 17th version of the Java programming language and runtime environment.
@@ -554,8 +591,8 @@ A text-based interface used to interact with your computer’s operating system.
 java -jar vitabook.jar
 ```
 <br>
-
-## Java Setup Instructions
+--------------------------------------------------------------------------------------------------------------------
+## 7. Java Setup Instructions
 
 VitaBook requires **Java 17 or higher** to run.
 
