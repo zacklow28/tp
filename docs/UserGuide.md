@@ -177,16 +177,20 @@ Format: `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAI
 
 3. Existing values will be updated to the input values.
 
-4. When editing allergies, the existing allergies will be replaced by the new ones you provide.
+4. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
 
-5. You can remove all the patient’s allergies by typing `al/` without specifying any allergies after it.
-
-6. The fields used in the `edit` command follow the same constraints as specified in the `add` command.
+5. The fields used in the `edit` command follow the same constraints as specified in the `add` command.
 </box>
 
 Examples:
 *  `edit 1 no/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient (in the list) to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower al/` Edits the name of the 2nd patient (in the list) to be `Betsy Crower` and clears all existing allergies.
+
+<box type="warning" seamless>
+
+**Warning:**
+When editing allergies, the existing allergies will be replaced by the new ones you provide. To ensure that the old allergies are not deleted, make sure to include them in the `edit` command.
+</box>
 
 <br>
 
