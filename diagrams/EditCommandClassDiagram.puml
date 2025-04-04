@@ -1,0 +1,15 @@
+@startuml
+class EditCommand {
+  - Index index
+  - EditPersonDescriptor editDescriptor
+  + execute(Model): CommandResult
+}
+
+class EditPersonDescriptor {
+  + get/set fields
+  + isAnyFieldEdited(): boolean
+}
+
+EditCommand --> EditPersonDescriptor
+EditCommand --> Model
+@enduml

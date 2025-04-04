@@ -1,0 +1,16 @@
+@startuml
+class AddCommand {
+  - Person toAdd
+  + AddCommand(Person)
+  + CommandResult execute(Model)
+}
+
+class AddCommandParser {
+  + AddCommand parse(String args)
+}
+
+class Person
+
+AddCommand --> Person
+AddCommandParser --> AddCommand
+@enduml
