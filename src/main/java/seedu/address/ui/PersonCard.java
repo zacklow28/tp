@@ -29,6 +29,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
     private Label gender;
@@ -56,9 +58,10 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        id.setText(displayedIndex + ".");
 
         name.setText(person.getName().fullName);
         gender.setText(person.getGender().gender);
@@ -79,14 +82,23 @@ public class PersonCard extends UiPart<Region> {
         dietLabel.getStyleClass().add("diet-label");
         allTags.getChildren().add(dietLabel);
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.getStyleClass().add("tag-label");
-                    allTags.getChildren().add(tagLabel);
+        person.getAllergies().stream()
+                .sorted(Comparator.comparing(allergy -> allergy.allergyName))
+                .forEach(allergy -> {
+                    Label allergyLabel = new Label(allergy.allergyName);
+                    allergyLabel.getStyleClass().add("allergy-label");
+                    allTags.getChildren().add(allergyLabel);
                 });
 
+        // dynamically bind width to Scene
+        cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                address.maxWidthProperty().bind(newScene.widthProperty().multiply(0.89));
+                remark.maxWidthProperty().bind(newScene.widthProperty().multiply(0.89));
+            }
+        });
+        address.setWrapText(true);
+        remark.setWrapText(true);
     }
 
     @Override

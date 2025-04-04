@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Diet;
 import seedu.address.model.person.Email;
@@ -20,7 +20,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Weight;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -148,15 +147,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> diet} into an {@code Diet}.
+     * Parses a {@code String diet} into an {@code Diet}.
      * Leading and trailing whitespaces will be trimmed.
-     * If the diet is missing, returns a Diet object with no value.
      *
      * @throws ParseException if the given {@code diet} is invalid.
      */
-    public static Diet parseDiet(Optional<String> diet) throws ParseException {
-        String trimmedDiet = diet.map(String::trim).orElse(Diet.DEFAULT_DIET);
-
+    public static Diet parseDiet(String diet) throws ParseException {
+        requireNonNull(diet);
+        String trimmedDiet = diet.trim();
         if (!Diet.isValidDiet(trimmedDiet)) {
             throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
         }
@@ -164,15 +162,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> priority} into an {@code Priority}.
+     * Parses a {@code String priority} into an {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
-     * If the priority is missing, returns a Priority object with no value.
      *
      * @throws ParseException if the given {@code priority} is invalid.
      */
-    public static Priority parsePriority(Optional<String> priority) throws ParseException {
-        String trimmedPriority = priority.map(String::trim).orElse(Priority.DEFAULT_PRIORITY);
-
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        String trimmedPriority = priority.trim();
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
@@ -180,15 +177,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> meetingDate} into an {@code MeetingDate}.
+     * Parses a {@code String meetingDate} into an {@code MeetingDate}.
      * Leading and trailing whitespaces will be trimmed.
-     * If the meetingDate is missing, returns a MeetingDate object with no value.
      *
      * @throws ParseException if the given {@code meetingDate} is invalid.
      */
-    public static MeetingDate parseMeetingDate(Optional<String> meetingDate) throws ParseException {
-        String trimmedMeetingDate = meetingDate.map(String::trim).orElse(MeetingDate.DEFAULT_MEETING_DATE);
-
+    public static MeetingDate parseMeetingDate(String meetingDate) throws ParseException {
+        requireNonNull(meetingDate);
+        String trimmedMeetingDate = meetingDate.trim();
         if (!MeetingDate.isValidMeetingDate(trimmedMeetingDate)) {
             throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
         }
@@ -196,30 +192,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String allergy} into an {@code Allergy}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code allergy} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Allergy parseAllergy(String allergy) throws ParseException {
+        requireNonNull(allergy);
+        String trimmedAllergy = allergy.trim();
+        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Allergy(trimmedAllergy);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
         }
-        return tagSet;
+        return allergySet;
     }
 
 }

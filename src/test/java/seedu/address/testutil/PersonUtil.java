@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -9,15 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Person.
@@ -46,8 +46,8 @@ public class PersonUtil {
         sb.append(PREFIX_DIET).append(person.getDiet()).append(" ");
         sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
         sb.append(PREFIX_MEETING_DATE).append(person.getMeetingDate()).append(" ");
-        person.getTags().forEach(
-                s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
+        person.getAllergies().forEach(
+                s -> sb.append(PREFIX_ALLERGY).append(s.allergyName).append(" ")
         );
         return sb.toString();
     }
@@ -69,12 +69,12 @@ public class PersonUtil {
                 .append(priority.getValue()).append(" "));
         descriptor.getMeetingDate().ifPresent(meetingDate -> sb.append(PREFIX_MEETING_DATE)
                 .append(meetingDate).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getAllergies().isPresent()) {
+            Set<Allergy> allergies = descriptor.getAllergies().get();
+            if (allergies.isEmpty()) {
+                sb.append(PREFIX_ALLERGY);
             } else {
-                tags.forEach(tag -> sb.append(PREFIX_TAG).append(tag.tagName).append(" "));
+                allergies.forEach(allergy -> sb.append(PREFIX_ALLERGY).append(allergy.allergyName).append(" "));
             }
         }
         return sb.toString();

@@ -1,0 +1,10 @@
+@startuml
+class ClearCommand {
+  + execute(Model): CommandResult
+}
+
+class AddressBook
+
+ClearCommand -> AddressBook
+ClearCommand -> Model : setAddressBook(AddressBook)
+@enduml

@@ -9,28 +9,29 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class FilterCommandParserTest {
+
     private final FilterCommandParser parser = new FilterCommandParser();
 
     @Test
-    public void parse_validDietInput_success() throws ParseException {
+    public void parse_diet_success() throws ParseException {
         FilterCommand command = parser.parse("d/low sodium");
         assertEquals(new FilterCommand("d", "low sodium"), command);
     }
 
     @Test
-    public void parse_validGenderInput_success() throws ParseException {
+    public void parse_gender_success() throws ParseException {
         FilterCommand command = parser.parse("g/f");
         assertEquals(new FilterCommand("g", "f"), command);
     }
 
     @Test
-    public void parse_validPriorityInput_success() throws ParseException {
+    public void parse_priority_success() throws ParseException {
         FilterCommand command = parser.parse("pr/high");
         assertEquals(new FilterCommand("pr", "high"), command);
     }
 
     @Test
-    public void parse_validMeetingDateInput_success() throws ParseException {
+    public void parse_date_success() throws ParseException {
         FilterCommand command = parser.parse("m/2025-03-20");
         assertEquals(new FilterCommand("m", "2025-03-20"), command);
     }
@@ -46,8 +47,23 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_missingValue_throwsParseException() {
+    public void parse_missingDietValue_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse("d/"));
+    }
+
+    @Test
+    public void parse_missingGenderValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("g/"));
+    }
+
+    @Test
+    public void parse_missingPriorityValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("pr/"));
+    }
+
+    @Test
+    public void parse_missingMeetingDateValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("m/"));
     }
 
     @Test
@@ -70,4 +86,3 @@ public class FilterCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("m/16-03-2025"));
     }
 }
-

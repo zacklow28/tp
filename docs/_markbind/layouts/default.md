@@ -1,10 +1,18 @@
+<head>
+  <!-- Google Fonts MUST be first -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
 <head-bottom>
   <link rel="stylesheet" href="{{baseUrl}}/stylesheets/main.css">
 </head-bottom>
 
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">VitaBook</a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">
+    <img src="{{baseUrl}}/images/VitaBookLogo.png" alt="VitaBook" style="height: 40px;">
+    </a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -20,34 +28,6 @@
 </header>
 
 <div id="flex-body">
-  <nav id="site-nav">
-    <div class="site-nav-top">
-      <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
-    </div>
-    <div class="nav-component slim-scroll">
-      <site-nav>
-* [Home]({{ baseUrl }}/index.html)
-* [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
-  * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
-  * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
-* [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
-  * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
-  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
-  * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
-  * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
-  * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
-  * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
-  * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
-* [About Us]({{ baseUrl }}/AboutUs.html)
-      </site-nav>
-    </div>
-  </nav>
   <div id="content-wrapper">
     {{ content }}
   </div>

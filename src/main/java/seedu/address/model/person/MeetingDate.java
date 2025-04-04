@@ -3,27 +3,24 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Represents a Person's meeting date with the nutritionist in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetingDate(String)}
  */
 public class MeetingDate {
-    public static final String DEFAULT_MEETING_DATE = "none";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting date must be in the format YYYY-MM-DD.";
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            "Meeting date must be valid and in the format YYYY-MM-DD.";
 
     private final String meetingDate;
 
     /**
      * Constructs a {@code MeetingDate}.
-     *  If the given date is null or empty, it is stored as "none".
      *
      * @param date A valid meeting date or empty value
      */
@@ -37,13 +34,16 @@ public class MeetingDate {
      * Returns true if a given string is a valid diet type.
      */
     public static boolean isValidMeetingDate(String test) {
-        if (test.equals(DEFAULT_MEETING_DATE)) {
-            return true; // "none" is valid
+        String dateRegex = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"; // Enforces exact format
+        if (!test.matches(dateRegex)) {
+            return false;
         }
         try {
-            LocalDate.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
+            DateUtils.parseDateStrictly(test, "yyyy-MM-dd");
+            LocalDate parsedDate = LocalDate.parse(test); // Parse into LocalDate for year extraction
+            int year = parsedDate.getYear();
+            return year >= 1 && year <= 9999;
+        } catch (ParseException e) {
             return false;
         }
     }

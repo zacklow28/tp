@@ -1,11 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
+
+
 
 /**
  * This class is called to set the priority of the patient.
@@ -13,17 +19,17 @@ import seedu.address.model.person.Priority;
 public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "priority";
+    public static final String SHORT_COMMAND_WORD = "pr";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Indicates priority of patient "
             + "by the index number used in the last person listing. "
             + "Existing priority will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "pr/ [PRIORITY]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "pr/ HIGH.";
+            + "Parameters: INDEX (must be a positive integer), PRIORITY (must be low, medium or high) "
+            + "priority [INDEX] pr/[PRIORITY]\n"
+            + "Example: priority 2 pr/HIGH.";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Priority: %2$s";
+    public static final String MESSAGE_ARGUMENTS = "Index: , Priority: ";
 
     private final Index index;
     private final Priority priority;
@@ -41,8 +47,47 @@ public class PriorityCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), priority.toString()));
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException("Invalid patient index.");
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person updatedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getGender(),
+                personToEdit.getHeight(),
+                personToEdit.getWeight(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                personToEdit.getDiet(),
+                priority,
+                personToEdit.getMeetingDate(),
+                personToEdit.getRemark(),
+                personToEdit.getAllergies()
+        );
+
+        model.setPerson(personToEdit, updatedPerson);
+        return new CommandResult(String.format("Updated priority for %s to %s",
+                personToEdit.getName(), priority));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof PriorityCommand)) {
+            return false;
+        }
+
+        PriorityCommand otherCommand = (PriorityCommand) other;
+        return index.equals(otherCommand.index)
+                && priority.equals(otherCommand.priority);
     }
 
 

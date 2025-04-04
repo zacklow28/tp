@@ -12,8 +12,8 @@
       "diet" : "low sodium",
       "priority" : "Low",
       "meetingDate" : "2025-04-01",
-      "remark": "",
-      "tags" : [ "friends" ]
+      "remark": "She likes food",
+      "allergies" : [ "peanuts" ]
     },
     {
       "name" : "Benson Meier",
@@ -26,8 +26,8 @@
       "diet" : "low carb",
       "priority" : "High",
       "meetingDate" : "2025-04-02",
-      "remark": "",
-      "tags" : [ "owesMoney", "friends" ]
+      "remark": "He can't take beer!",
+      "allergies" : [ "milk", "eggs" ]
     },
     {
       "name" : "Carl Kurz",
@@ -41,7 +41,7 @@
       "priority" : "Medium",
       "meetingDate" : "2025-03-16",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "Daniel Meier",
@@ -55,49 +55,49 @@
       "priority" : "Low",
       "meetingDate" : "2025-03-20",
       "remark": "",
-      "tags" : [ "friends" ]
+      "allergies" : [ "fish" ]
     },
     {
       "name" : "Elle Meyer",
       "gender" : "F",
       "height" : "1.60",
       "weight" : "50.00",
-      "phone" : "9482224",
+      "phone" : "94822240",
       "email" : "werner@example.com",
       "address" : "michegan ave",
       "diet" : "low sodium",
       "priority" : "Medium",
       "meetingDate" : "2025-04-25",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "Fiona Kunz",
       "gender" : "F",
       "height" : "1.65",
       "weight" : "55.00",
-      "phone" : "9482427",
+      "phone" : "94824270",
       "email" : "lydia@example.com",
       "address" : "little tokyo",
       "diet" : "low carb",
       "priority" : "Low",
       "meetingDate" : "2025-05-05",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     },
     {
       "name" : "George Best",
       "gender" : "M",
       "height" : "1.78",
       "weight" : "76.00",
-      "phone" : "9482442",
+      "phone" : "94824420",
       "email" : "anna@example.com",
       "address" : "4th street",
       "diet" : "low sugar",
       "priority" : "High",
       "meetingDate" : "2025-06-15",
       "remark": "",
-      "tags" : [ ]
+      "allergies" : [ ]
     }
   ]
 }

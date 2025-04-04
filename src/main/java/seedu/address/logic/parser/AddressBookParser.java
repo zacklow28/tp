@@ -19,8 +19,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PriorityCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -85,20 +87,20 @@ public class AddressBookParser {
             return new FilterCommandParser().parse(arguments);
 
         case PriorityCommand.COMMAND_WORD:
+        case PriorityCommand.SHORT_COMMAND_WORD:
             return new PriorityCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-            String sortType = arguments.trim().toLowerCase();
-
-            if (!(sortType.equals("priority") || sortType.equals("name") || sortType.equals("diet"))) {
-                throw new ParseException("Invalid sort type. Use: sort priority | sort name | sort diet");
-            }
-
-            return new SortCommand(sortType);
-
+            return new SortCommandParser().parse(arguments);
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
