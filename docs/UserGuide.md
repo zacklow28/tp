@@ -575,7 +575,6 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 **❓ Q: Can I undo other actions too?**  
 **💬 A:** Yes! Whether it’s a delete, edit, or clear, the `undo` command has your back. You can even redo something if you changed your mind.
 
----
 
 **❓ Q: Can I add custom info for patients?**  
 **💬 A:** While you can't add new fields, the `remark` field is super flexible — use it to write anything extra you want to remember, like “prefers gluten-free snacks” or “has follow-up next month.”

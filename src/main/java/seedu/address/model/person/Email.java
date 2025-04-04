@@ -10,33 +10,42 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
+
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
-            + "The domain name must:\n"
-            + "    - end with a domain label at least 2 characters long\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
-    // alphanumeric and special characters
-    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+            + "and must satisfy the following constraints:\n"
+            + "1. The local-part (before the '@') should contain only alphanumeric characters and the "
+            + "special characters "
+            + "(" + SPECIAL_CHARACTERS + "). It must not start or end with a special character.\n"
+            + "2. The domain (after the '@') must be made up of domain labels separated by periods "
+            + "(e.g., example.com).\n"
+            + "   Each domain label must:\n"
+            + "   - start and end with an alphanumeric character,\n"
+            + "   - contain only alphanumeric characters or hyphens in between.\n"
+            + "   The domain must end with a top-level domain (TLD), such as '.com', which must be at least "
+            + "2 characters long.";
+
+
+    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+";
+    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE
+            + "([+" + SPECIAL_CHARACTERS + "]" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+
     private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
-    private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
+
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" // subdomains
+            + DOMAIN_PART_REGEX + "\\."
+            + "[a-zA-Z]{2,}";
+
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Email} object after validating the given string.
      *
-     * @param email A valid email address.
+     * @param email A string representing the email address.
+     * @throws NullPointerException if {@code email} is null.
+     * @throws IllegalArgumentException if {@code email} does not conform to the defined email format.
      */
     public Email(String email) {
         requireNonNull(email);
@@ -44,9 +53,6 @@ public class Email {
         value = email;
     }
 
-    /**
-     * Returns if a given string is a valid email.
-     */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
     }
@@ -61,19 +67,15 @@ public class Email {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof Email)) {
             return false;
         }
-
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value.toLowerCase().hashCode();
     }
-
 }

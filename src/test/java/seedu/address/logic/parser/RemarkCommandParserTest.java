@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.Remark;
 
@@ -39,5 +40,12 @@ public class RemarkCommandParserTest {
 
         // no index
         assertParseFailure(parser, RemarkCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessage);
+    }
+
+    @Test
+    public void parse_duplicateRemarkPrefix_throwsParseException() {
+        String userInput = "1 r/hello r/world";
+        assertParseFailure(new RemarkCommandParser(), userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
     }
 }
