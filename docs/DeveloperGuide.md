@@ -6,18 +6,18 @@ pageNav: 3
 
 # VitaBook Developer Guide
 
-**VitaBook** is a **desktop application for freelance nutritionists** 
-to manage patient profiles, dietary information, and follow-ups efficiently. 
-Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean 
+**VitaBook** is a **desktop application for freelance nutritionists**
+to manage patient profiles, dietary information, and follow-ups efficiently.
+Built for speed and efficiency, VitaBook integrates a powerful **Command Line Interface (CLI)** with a clean.
 **Graphical User Interface (GUI)**, allowing you to quickly retrieve and update patient records while on the go.
 
-This Developer Guide provides in-depth documentation on how VitaBook is designed and implemented. 
-It covers the architecture of VitaBook, detailed specifications on smaller pieces of the design, and an outline of 
+This Developer Guide provides in-depth documentation on how VitaBook is designed and implemented.
+It covers the architecture of VitaBook, detailed specifications on smaller pieces of the design, and an outline of
 all parts of the software and how they will work.
 
 You can use this guide to maintain, upgrade, and evolve VitaBook.
 
-This Developer Guide is accurate as of 2 April 2025. 
+This Developer Guide is accurate as of 2 April 2025.
 
 Head over to [How to use this Developer Guide](#how-to-use-this-developer-guide)
 to get started!
@@ -128,7 +128,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## How to Use This Developer Guide
 
-Welcome, and thank you for your interest in understanding how **VitaBook** works behind the scenes. 
+Welcome, and thank you for your interest in understanding how **VitaBook** works behind the scenes.
 
 ### Overview
 This guide provides comprehensive technical documentation for **VitaBook**, covering:
@@ -159,7 +159,7 @@ This guide provides comprehensive technical documentation for **VitaBook**, cove
 1. **Code References**:
     - `ClassName` for Java classes
     - `methodName()` for functions
-    - ```javacodeBlocks()  
+    - ```javacodeBlocks()
       Java codeBlocks() for multi-line examples
 
 2. **Visual Guides**:
@@ -222,8 +222,8 @@ VitaBook is designed with four main components:
 
 In addition, the [Common Classes](#common-classes) section documents utility classes shared across multiple packages.
 
-> **Note:** All diagrams in this section (e.g., architecture, class, sequence diagrams) are generated using PlantUML.  
-> The corresponding `.puml` source files are located in the `diagrams` folder of this project.  
+> **Note:** All diagrams in this section (e.g., architecture, class, sequence diagrams) are generated using PlantUML.
+> The corresponding `.puml` source files are located in the `diagrams` folder of this project.
 > You can refer to the [SE-EDU PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) if you wish to modify or create new diagrams for future enhancements.
 
 
@@ -404,14 +404,14 @@ When a user issues a command such as `add n/John d/vegan`(simplified for this ex
 2. The `LogicManager` executes the command by calling its `execute(Model model)` method.
 3. Inside `AddCommand#execute()`, the `Model` is checked for any duplicate entries using `hasPerson()`.
 4. If no duplicates are found, the new `Person` is added to the address book via `model.addPerson()`.
-5. A `CommandResult` is returned with a success message. 
+5. A `CommandResult` is returned with a success message.
 
 The following sequence diagram outlines the flow of the AddCommand:
 
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommand Sequence Diagram"/>
 
 
---- 
+---
 ### Edit Command Implementation
 
 <puml src="diagrams/EditCommandClassDiagram.puml" alt="EditCommand Class Diagram"/>
@@ -530,7 +530,7 @@ The sequence diagram below illustrates the interactions between the components w
 
 The sequence below illustrates the interactions within the `Logic` component, taking `execute("sort priority")` call as an example.
 
-<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" /> 
+<puml src="diagrams/SortCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `sort priority` Command" />
 <box type="info" seamless>
 
 **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
@@ -563,7 +563,7 @@ Comparator<Person> comparator = Comparator
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("filter d/low fat")` call as an example.
 
-<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" /> 
+<puml src="diagrams/FilterCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `filter d/low fat` Command" />
 <box type="info" seamless>
 
 **Note:** The lifeline for FilterCommandParser should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
@@ -641,7 +641,7 @@ public String getNextCommand() {
 
 ### Undo/redo Command Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. 
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 
 #### Key Code Snippets
 - State Management (VersionedAddressBook):
@@ -676,7 +676,7 @@ Additionally, it implements the following operations:
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-* 
+
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively. Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
@@ -800,10 +800,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Role: Works as a freelance nutritionist, often visiting multiple patients daily
 * Needs:
   * Has a need to manage a significant number of patient profiles, including patient information, medical history, dietary restrictions, and follow-ups
-  * CLI-first workflow for speed (typing > GUI interactions). 
+  * CLI-first workflow for speed (typing > GUI interactions).
   * Portability: No installation needed; works on any OS with Java 17+.
 * Pain Points:
-  * Time wasted on manual data entry in traditional GUI apps. 
+  * Time wasted on manual data entry in traditional GUI apps.
   * Difficulty tracking patient updates across devices.
 
 

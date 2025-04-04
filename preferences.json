@@ -1,10 +1,10 @@
 {
   "guiSettings" : {
-    "windowWidth" : 779.0,
-    "windowHeight" : 822.0,
+    "windowWidth" : 1549.0,
+    "windowHeight" : 925.0,
     "windowCoordinates" : {
-      "x" : 661,
-      "y" : 25
+      "x" : -6,
+      "y" : -6
     }
   },
   "addressBookFilePath" : "data/vitabook.json"

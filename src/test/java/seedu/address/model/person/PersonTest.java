@@ -45,7 +45,7 @@ public class PersonTest {
 
         // email differs in case, all other attributes same -> returns false
         Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns true as email different
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";

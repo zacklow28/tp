@@ -521,7 +521,7 @@ dietary tags, allergies, priority levels, and meeting dates. It’s tailored to 
 **A**: Yes, you can! The `undo` command will undo the last command that changed the patient list.
 
 **Q**: Can I add custom fields or conditions?
-**A**: While you cannot add custom fields directly, you can use the 'remark' command to store additional information about a patient, such as conditions or other relevant notes. 
+**A**: While you cannot add custom fields directly, you can use the 'remark' command to store additional information about a patient, such as conditions or other relevant notes.
 
 **Q**: Can I import data from another app or CSV file?
 **A**: Not yet — but you can manually edit the JSON file (`data/vitabook.json`) to add patients if you're comfortable
