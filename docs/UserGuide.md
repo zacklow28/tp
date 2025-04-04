@@ -83,7 +83,7 @@ Let VitaBook do the admin work, so you can focus on what matters most. 🧠🍎
 
 VitaBook is built just for you, nutritionists — with commands tailored to your daily workflow. From adding and editing patient records to sorting, filtering, and setting priorities, everything is designed to help you stay organised, focused, and in control of your care delivery.
 
-## Key Features ⭐
+#### Key Features ⭐
 
 - **[Add Patient](#2-1-1-adding-a-patient-add)** — `add` : Quickly create a new patient entry with all their key info.
 - **[Edit Patient](#2-1-3-editing-a-patient-edit)** — `edit` : Update patient details as their care evolves.
