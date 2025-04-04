@@ -40,7 +40,7 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_exactOrFullWordMatching_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
@@ -82,4 +82,24 @@ public class NameContainsKeywordsPredicateTest {
         String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
+
+    @Test
+    public void test_partialNameMatching_returnsTrue() {
+        // Partial match at the start
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Ale"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alex Tan").build()));
+
+        // Partial match in the middle
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("lex"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alex Tan").build()));
+
+        // Partial match at the end
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Tan"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alex Tan").build()));
+
+        // Mixed case partial match
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("tAn"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alex Tan").build()));
+    }
+
 }
