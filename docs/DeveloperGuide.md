@@ -751,26 +751,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Command-Specific Edge Cases
 
-| Command       | Edge Case                                   | System Response                          | Handling Mechanism                  |
-|---------------|---------------------------------------------|------------------------------------------|-------------------------------------|
-| **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"` | `AddCommand#execute()` checks `model.hasPerson()` |
-|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format       | `AddCommandParser` validates prefixes |
+| Command       | Edge Case                                   | System Response                                          | Handling Mechanism                  |
+|---------------|---------------------------------------------|----------------------------------------------------------|-------------------------------------|
+| **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"`               | `AddCommand#execute()` checks `model.hasPerson()` |
+|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format                        | `AddCommandParser` validates prefixes |
 |               | Invalid field format (e.g., `h/abc`)        | Field-specific error (e.g., `"Height must be a number"`) | Field class constructors validate input |
-| **Edit**      | Invalid index (e.g., `edit 999`)            | `"The patient index provided is invalid"` | Checks `index.getZeroBased() >= list.size()` |
-|               | No fields edited                            | `"At least one field to edit must be provided"` | `EditPersonDescriptor#isAnyFieldEdited()` |
-|               | Duplicate after edit                        | `"This patient already exists"`          | `model.hasPerson()` check           |
-| **Clear**     | Empty address book                          | `"Nothing on list!"`                     | `model.getAddressBook().isEmpty()` check |
-|               | User cancels confirmation                   | `"Clear command cancelled."`             | `ClearDialogUtil.showConfirmationDialog()` |
-| **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"` | `Priority` enum validation          |
-|               | Invalid index                               | `"Invalid patient index."`               | Index bounds check                  |
-| **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"` | `switch` default case throws error  |
-|               | Empty list                                  | Silent (no action)                       | Implicit in sorting logic           |
-| **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"` | Default `switch` case               |
-|               | No matches                                  | Empty list (no error)                    | Predicate returns `false` for all   |
-| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"`            | `model.canUndoAddressBook()` check  |
-|               | Redo at latest state                        | `"No next state to redo"`                | `model.canRedoAddressBook()` check  |
-|               | Non-modifying command (e.g., `list`)        | No state change                      | Skips `Model#commitAddressBook()`   |
-|               |  Executing a new command after an undo      | Purges the redo history              |`VersionedAddressBook#commit()`       |
+| **Edit**      | Invalid index (e.g., `edit 999`)            | `"The patient index provided is invalid"`                | Checks `index.getZeroBased() >= list.size()` |
+|               | No fields edited                            | `"At least one field to edit must be provided"`          | `EditPersonDescriptor#isAnyFieldEdited()` |
+|               | Duplicate after edit                        | `"This patient already exists in VitaBook."`             | `model.hasPerson()` check           |
+| **Clear**     | Empty address book                          | `"Nothing on list!"`                                     | `model.getAddressBook().isEmpty()` check |
+|               | User cancels confirmation                   | `"Clear command cancelled."`                             | `ClearDialogUtil.showConfirmationDialog()` |
+| **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"`                | `Priority` enum validation          |
+|               | Invalid index                               | `"Invalid patient index."`                               | Index bounds check                  |
+| **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"`           | `switch` default case throws error  |
+|               | Empty list                                  | Silent (no action)                                       | Implicit in sorting logic           |
+| **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"`              | Default `switch` case               |
+|               | No matches                                  | Empty list (no error)                                    | Predicate returns `false` for all   |
+| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"`                            | `model.canUndoAddressBook()` check  |
+|               | Redo at latest state                        | `"No next state to redo"`                                | `model.canRedoAddressBook()` check  |
+|               | Non-modifying command (e.g., `list`)        | No state change                                          | Skips `Model#commitAddressBook()`   |
+|               |  Executing a new command after an undo      | Purges the redo history                                  |`VersionedAddressBook#commit()`       |
 
 ### General Edge Cases
 
@@ -1104,11 +1104,11 @@ Given below are instructions to test the app manually.
 
 ### **Command Tests**
 #### **Add Patient**
-| Test Case                                                                                                       | Prerequisite | Expected Outcome                                   |
-|-----------------------------------------------------------------------------------------------------------------|--------------|----------------------------------------------------|
-| `add n/John Doe g/m h/1.75 w/70.00 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed                       |
-| `add` (no fields)                                                                                               | - | Shows `MESSAGE_USAGE` with required fields         |
-| `add n/Alice Tan ... e/john@example.com ...`                                                                    | Patient with `john@example.com` exists | Error: `"This patient already exists in VitaBook"` |
+| Test Case                                                                                                       | Prerequisite | Expected Outcome                                    |
+|-----------------------------------------------------------------------------------------------------------------|--------------|-----------------------------------------------------|
+| `add n/John Doe g/m h/1.75 w/70.00 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed                        |
+| `add` (no fields)                                                                                               | - | Shows `MESSAGE_USAGE` with required fields          |
+| `add n/Alice Tan ... e/john@example.com ...`                                                                    | Patient with `john@example.com` exists | Error: `"This patient already exists in VitaBook."` |
 
 #### **Edit Patient**
 | Test Case                    | Prerequisite | Expected Outcome                                       |
