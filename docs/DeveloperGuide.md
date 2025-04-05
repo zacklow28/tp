@@ -1118,10 +1118,10 @@ Given below are instructions to test the app manually.
 | `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index."`                      |
 
 #### **Remark Command**
-| Test Case | Prerequisite | Expected Outcome                  |
-|-----------|--------------|-----------------------------------|
-| `remark 1 r/Very cooperative` | ≥1 patient | Adds remark to patient 1          |
-| `remark 0 r/Test` | - | Error: `"Invalid patient index."` |
+| Test Case                     | Prerequisite  | Expected Outcome                  |
+|-------------------------------|---------------|-----------------------------------|
+| `remark 1 r/Very cooperative` | ≥1 patient    | Adds remark to patient 1          |
+| `remark 10 r/Test`            | < 10 patients | Error: `"Invalid patient index."` |
 
 #### **Priority Command**
 | Test Case              | Prerequisite | Expected Outcome                                 |
