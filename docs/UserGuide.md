@@ -340,7 +340,7 @@ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find john` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 <a href="images/findAlexDavidResult.png">
@@ -412,7 +412,7 @@ Format: `delete INDEX` or `delete EMAIL`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient list.
-* `find Betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
+* `find betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
 * `delete johnd@example.com` deletes the patient with email address `johnd@example.com`.
 
 ---
@@ -625,7 +625,7 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 | **Edit**                      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68.00 pr/MEDIUM`                                                        |
 | **Priority**                  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/HIGH`                                                                                                                                                                                           |
 | **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`                                                                                                                                                                               |
-| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex Bernice`                                                                                                                                                                                          |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find alex bernice`                                                                                                                                                                                          |
 | **Filter**                    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`                                                                                                                             |
 | **Sort**                      | `sort CRITERIA `<br>e.g., `sort priority`                                                                                                                                                                                                            |
 | **Delete**                    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`                                                                                                                                                                     |
