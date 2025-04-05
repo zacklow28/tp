@@ -1068,7 +1068,7 @@ User stories for the MVP version:
 ### Command Syntax
 | Term               | Definition                                                                 | Example/Notes                                            |
 |--------------------|---------------------------------------------------------------------------|----------------------------------------------------------|
-| **Prefix**         | Shortcode before input values (e.g., `n/` for name).                      | `add n/Alice no/12345678` → `n/` and `no/` are prefixes. |
+| **Prefix**         | Shortcode before input values (e.g., `n/` for name).                      | `add n/Alice no/82345678` → `n/` and `no/` are prefixes. |
 | **Modifying Cmd**  | Commands that change data (tracked in undo history).                       | `add`, `delete`, `edit`                                  |
 | **Non-Modifying Cmd** | Read-only commands (excluded from undo history).                        | `list`, `find`, `help`                                   |
 
