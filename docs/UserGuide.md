@@ -123,7 +123,7 @@ Let us guide you through your start with VitaBook:
 
 * `list` : Lists all patients.
 
-* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/LOW` : Adds a new patient named `John Doe` to your VitaBook.
+* `add n/John Doe g/m h/1.78 w/70.00 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/LOW` : Adds a new patient named `John Doe` to your VitaBook.
 
 * `delete 3` : Deletes the 3rd patient in the current list.
 
@@ -198,7 +198,7 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 
 5. Height must be between `0.50` and `3.00`.
 
-6. Weight must be a positive integer.
+6. Weight must be a positive number with **exactly** 2 decimal places, strictly greater than 0.00 and less than or equal to 1000.00.
 
 7. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive).
 
@@ -210,8 +210,8 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 </box>
 
 Examples:
-* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
-* `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
+* `add n/John Doe g/m h/1.78 w/70.00 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50.00 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
 
 <br>
 
@@ -611,23 +611,23 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 -------------------------------------------------------------------------------------------------------------------
 ## 5. Command Summary 🗂️
 
-| Action                        | Format, Examples                                                                                                                                                                                                                                  |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                      | `help`                                                                                                                                                                                                                                            |
-| **Add**                       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 no/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts` |
-| **List**                      | `list`                                                                                                                                                                                                                                            |
-| **Edit**                      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`                                                        |
-| **Priority**                  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/HIGH`                                                                                                                                                                                        |
-| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`                                                                                                                                                                            |
-| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`                                                                                                                                                                                         |
-| **Filter**                    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`                                                                                                                          |
-| **Sort**                      | `sort CRITERIA `<br>e.g., `sort priority`                                                                                                                                                                                                         |
-| **Delete**                    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`                                                                                                                                                                  |
-| **Clear**                     | `clear`                                                                                                                                                                                                                                           |
-| **Undo**                      | `undo`                                                                                                                                                                                                                                            |
-| **Redo**                      | `redo`                                                                                                                                                                                                                                            |
-| **Navigate Command History**  | `↑` or `↓` arrow keys                                                                                                                                                                                                                             |
-| **Exit**                      | `exit`                                                                                                                                                                                                                                            |
+| Action                        | Format, Examples                                                                                                                                                                                                                                     |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                      | `help`                                                                                                                                                                                                                                               |
+| **Add**                       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70.00 no/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts` |
+| **List**                      | `list`                                                                                                                                                                                                                                               |
+| **Edit**                      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68.00 pr/MEDIUM`                                                        |
+| **Priority**                  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/HIGH`                                                                                                                                                                                           |
+| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`                                                                                                                                                                               |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`                                                                                                                                                                                            |
+| **Filter**                    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`                                                                                                                             |
+| **Sort**                      | `sort CRITERIA `<br>e.g., `sort priority`                                                                                                                                                                                                            |
+| **Delete**                    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`                                                                                                                                                                     |
+| **Clear**                     | `clear`                                                                                                                                                                                                                                              |
+| **Undo**                      | `undo`                                                                                                                                                                                                                                               |
+| **Redo**                      | `redo`                                                                                                                                                                                                                                               |
+| **Navigate Command History**  | `↑` or `↓` arrow keys                                                                                                                                                                                                                                |
+| **Exit**                      | `exit`                                                                                                                                                                                                                                               |
 
 [↑ Back to Top](#-vitabook-user-guide-)<br>
 
