@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.MeetingDate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
@@ -68,9 +69,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             break;
 
         case "m":
-            if (!value.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            if (!MeetingDate.isValidMeetingDate(value)) {
                 throw new ParseException("Invalid meeting date format: '" + value + "'.\n"
-                        + "Expected format: YYYY-MM-DD");
+                        + "Expected format: YYYY-MM-DD and date must be valid");
             }
             break;
 
