@@ -10,47 +10,47 @@ Welcome to **VitaBook** — your go-to desktop companion made just for **freelan
 
 ### Table of Contents 📚
 
-#### [1. Introduction](#1-introduction)
-- [1.1 How to use User Guide?](#11-how-to-use-user-guide-)
-- [1.2 How to use VitaBook?](#12-how-to-use-vitabook-)
-- [1.3 Quick Start](#13-quick-start-)
-- [1.4 Instructions about Commands](#14-instructions-about-commands-)
+#### [1. Introduction](#1-introduction-2)
+- [1.1 How to use User Guide?](#1-1-how-to-use-user-guide)
+- [1.2 How to use VitaBook?](#1-2-how-to-use-vitabook)
+- [1.3 Quick Start](#1-3-quick-start)
+- [1.4 Instructions about Commands](#1-4-instructions-about-commands)
 
-#### [2. Features](#2-features)
+#### [2. Features](#2-features-2)
 
-##### [2.1 To Navigate Patient Care](#21-to-navigate-patient-care)
-- [2.1.1 Adding a Patient](#211-adding-a-patient-add-)
-- [2.1.2 Listing all Patients](#212-listing-all-patients-list-)
-- [2.1.3 Editing a Patient](#213-editing-a-patient-edit-)
-- [2.1.4 Changing a Patient's Priority](#214-changing-a-patients-priority-priority-)
-- [2.1.5 Adding a Remark to a Patient](#215-adding-a-remark-to-a-patient-remark-)
-- [2.1.6 Locating Patients by Name](#216-locating-patients-by-name-find-)
-- [2.1.7 Filtering Patients](#217-filtering-patients-filter-)
-- [2.1.8 Sorting Patients](#218-sorting-patients-sort-)
-- [2.1.9 Deleting a Patient](#219-deleting-a-patient-delete-)
-- [2.1.10 Clearing all Patient Entries](#2110-clearing-all-patient-entries-clear-)
+##### [2.1 To Navigate Patient Care](#2-1-to-help-you-navigate-patient-care)
+- [2.1.1 Adding a Patient](#2-1-1-adding-a-patient-add)
+- [2.1.2 Listing all Patients](#2-1-2-listing-all-patients-list)
+- [2.1.3 Editing a Patient](#2-1-3-editing-a-patient-edit)
+- [2.1.4 Changing a Patient's Priority](#2-1-4-changing-a-patient-s-priority-priority)
+- [2.1.5 Adding a Remark to a Patient](#2-1-5-adding-a-remark-to-a-patient-remark)
+- [2.1.6 Locating Patients by Name](#2-1-6-locating-patients-by-name-find)
+- [2.1.7 Filtering Patients](#2-1-7-filtering-patients-filter)
+- [2.1.8 Sorting Patients](#2-1-8-sorting-patients-sort)
+- [2.1.9 Deleting a Patient](#2-1-9-deleting-a-patient-delete)
+- [2.1.10 Clearing all Patient Entries](#2-1-10-clearing-all-patient-entries-clear)
 
-##### [2.2 To Provide a Convenient and Pleasant Experience](#22-to-provide-a-convenient-and-pleasant-experience)
-- [2.2.1 Viewing Help](#221-viewing-help-help-)
-- [2.2.2 Undoing the Last Change](#222-undoing-the-last-change-undo-)
-- [2.2.3 Redoing the Last Undo](#223-redoing-the-last-undo-redo-)
-- [2.2.4 Navigating Through Command History](#224-navigating-through-command-history--and--)
-- [2.2.5 Toggling between Light Mode and Dark Mode](#225-toggling-between-light-mode-and-dark-mode-)
-- [2.2.6 Exiting the Program](#226-exiting-the-program-exit-)
-- [2.2.7 Saving the Data](#227-saving-the-data-)
+##### [2.2 To Provide a Convenient and Pleasant Experience](#2-2-to-provide-a-convenient-and-pleasant-experience-2)
+- [2.2.1 Viewing Help](#2-2-1-viewing-help-help)
+- [2.2.2 Undoing the Last Change](#2-2-2-undoing-the-last-change-undo)
+- [2.2.3 Redoing the Last Undo](#2-2-3-redoing-the-last-undo-redo)
+- [2.2.4 Navigating Through Command History](#2-2-4-navigating-through-command-history-and)
+- [2.2.5 Toggling between Light Mode and Dark Mode](#2-2-5-toggling-between-light-mode-and-dark-mode)
+- [2.2.6 Exiting the Program](#2-2-6-exiting-the-program-exit)
+- [2.2.7 Saving the Data](#2-2-7-saving-the-data)
 
-##### [2.3 Bonus for Advanced Nutritionists](#23-bonus-for-advanced-nutritionists)
-- [2.3.1 Edit the Data File Directly](#231-editing-the-data-file-directly)
+##### [2.3 Bonus for Advanced Nutritionists](#2-3-bonus-for-advanced-nutritionists-2)
+- [2.3.1 Edit the Data File Directly](#2-3-1-editing-the-data-file-directly)
 
-##### [3. FAQ](#3-faq)
+##### [3. FAQ](#3-faq-2)
 
-##### [4. Known Issues](#4-known-issues)
+##### [4. Known Issues](#4-known-issues-2)
 
-##### [5. Command Summary](#5-command-summary)
+##### [5. Command Summary](#5-command-summary-2)
 
-##### [6. Glossary](#6-glossary)
+##### [6. Glossary](#6-glossary-2)
 
-##### [7. Java Setup Instructions](#7-java-setup-instructions)
+##### [7. Java Setup Instructions](#7-java-setup-instructions-2)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,19 +61,19 @@ Welcome to **VitaBook** — your go-to desktop companion made just for **freelan
 This guide is here to help you make the most of **VitaBook** — whether you're a first-time user or a seasoned pro.
 
 - 🆕 **First time here?**
-  Start with the [Quick Start](#13-quick-start-) and [Key Features](#12-how-to-use-vitabook-) sections to get an overview of what VitaBook offers.
+  Start with the [Quick Start](#1-3-quick-start) and [Key Features](#key-features) sections to get an overview of what VitaBook offers.
 
 - 🔍 **Need a specific command?**
-  Use the Command Summary(#5-command-summary) or [Table of Contents](#table-of-contents-) to quickly find what you need.
+  Use the [Command Summary](#5-command-summary-2) or [Table of Contents](#table-of-contents) to quickly find what you need.
 
 - ✨ **Want to learn a feature in depth?**
-  Browse the [Features](#2-features) section — each command is explained with examples.
+  Browse the [Features](#2-features-2) section — each command is explained with examples.
 
 - 🛠️ **Facing issues or bugs?**
-  Check the [FAQ](#3-faq) and [Known Issues](#4-known-issues) sections for help and common solutions.
+  Check the [FAQ](#3-faq-2) and [Known Issues](#4-known-issues-2) sections for help and common solutions.
 
 - ⚙️ **Power user?**
-  Learn how to directly edit the data file in [Edit the Data File Directly!](#edit-the-data-file-directly)
+  Learn how to directly edit the data file in [Edit the Data File Directly!](#2-3-1-editing-the-data-file-directly)
 
 Feel free to jump around or read it cover to cover — whatever suits your workflow.  
 Let VitaBook do the admin work, so you can focus on what matters most. 🧠🍎
@@ -83,15 +83,15 @@ Let VitaBook do the admin work, so you can focus on what matters most. 🧠🍎
 
 VitaBook is built just for you, nutritionists — with commands tailored to your daily workflow. From adding and editing patient records to sorting, filtering, and setting priorities, everything is designed to help you stay organised, focused, and in control of your care delivery.
 
-## Key Features ⭐
+#### Key Features ⭐
 
-- **[Add Patient](#211-adding-a-patient-add-)** — `add` : Quickly create a new patient entry with all their key info.
-- **[Edit Patient](#213-editing-a-patient-edit-)** — `edit` : Update patient details as their care evolves.
-- **[Priority](#214-changing-a-patients-priority-priority-)** — `priority` : Reprioritise patients based on urgency or attention needed.
-- **[Filter](#217-filtering-patients-filter-)** — `filter` : Narrow down your list by priority, diet, gender, or meeting date.
-- **[Sort](#218-sorting-patients-sort-)** — `sort` : Instantly organise patients by what matters most — priority, name, or diet.
+- **[Add Patient](#2-1-1-adding-a-patient-add)** — `add` : Quickly create a new patient entry with all their key info.
+- **[Edit Patient](#2-1-3-editing-a-patient-edit)** — `edit` : Update patient details as their care evolves.
+- **[Priority](#2-1-4-changing-a-patient-s-priority-priority)** — `priority` : Reprioritise patients based on urgency or attention needed.
+- **[Filter](#2-1-7-filtering-patients-filter)** — `filter` : Narrow down your list by priority, diet, gender, or meeting date.
+- **[Sort](#2-1-8-sorting-patients-sort)** — `sort` : Instantly organise patients by what matters most — priority, name, or diet.
 
-[↓ Go to Command Summary](#command-summary)
+[↓ Go to Command Summary for Quick Reference!](#5-command-summary-2)
 
 ### 1.3 Quick start 🚀
 
@@ -99,7 +99,7 @@ Let us guide you through your start with VitaBook:
 
 1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
-   **Check/Install Java:** See [Java Setup Instructions](#java-setup-instructions) at the bottom of this guide.
+   **Check/Install Java:** See [Java Setup Instructions](#7-java-setup-instructions-2) at the bottom of this guide.
 
 2. Download the latest `.jar` file [here](https://github.com/AY2425S2-CS2103T-F11-2/tp/releases)!
 
@@ -132,7 +132,7 @@ Let us guide you through your start with VitaBook:
 * `exit` : Exits the app.
 </p>
 
-7. Were these commands fun to play with? Feel free to explore further the functionalities of VitaBook by following [Features](#2-features)!
+7. Were these commands fun to play with? Feel free to explore further the functionalities of VitaBook by following [Features](#2-features-2)!
 
 ### 1.4 Instructions about Commands 🧾
 
@@ -164,7 +164,8 @@ These are a few things to take note while exploring VitaBook!
 
 7. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -213,7 +214,7 @@ Examples:
 * `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
 * `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
 
-<br>
+---
 
 #### 2.1.2 Listing all Patients: `list` 📋
 
@@ -222,7 +223,7 @@ If you have previously used `filter` or `find` to narrow down the patient list, 
 
 Format: `list`
 
-<br>
+---
 
 #### 2.1.3 Editing a Patient: `edit` ✏️
 
@@ -254,7 +255,7 @@ Examples:
 When editing allergies, the existing allergies will be replaced by the new ones you provide. To ensure that the old allergies are not deleted, make sure to include them in the `edit` command.
 </box>
 
-<br>
+---
 
 #### 2.1.4 Changing a Patient's Priority: `priority` 🔺
 
@@ -273,7 +274,7 @@ Format: `priority INDEX pr/PRIORITY`
 Example:
 * `priority 1 pr/HIGH` changes the priority of the 1st patient in the patient list to `HIGH`.
 
-<br>
+---
 
 #### 2.1.5 Adding a Remark to a Patient: `remark` 💬
 
@@ -312,7 +313,7 @@ Examples:
 Remark command currently only supports adding a new remark or replacing an existing one. Thus, currently at most one remark can be displayed for each patient. Older remarks will be overwritten if you wish to add a new remark.
 </box>
 
-<br>
+---
 
 #### 2.1.6 Locating Patients by Name: `find` 🔍
 
@@ -349,7 +350,7 @@ Examples:
 
 *Figure 4: Results for `find alex david`*
 
-<br>
+---
 
 #### 2.1.7 Filtering Patients: `filter` 🧃
 
@@ -371,7 +372,7 @@ Examples:
 * `filter g/f` returns all female patients.
 * `filter m/2025-12-12` returns all patients with meeting date on `2025-12-12`.
 
-<br>
+---
 
 #### 2.1.8 Sorting Patients: `sort` 📊
 
@@ -391,7 +392,7 @@ Examples:
 * `sort diet` returns the patient list sorted in lexicographical (alphabetical) order by diet in ascending order.
 * `sort meetingdate` returns the patient list sorted in chronological order by date from earliest to latest.
 
-<br>
+---
 
 #### 2.1.9 Deleting a Patient: `delete` ❌
 
@@ -414,7 +415,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
 * `delete johnd@example.com` deletes the patient with email address `johnd@example.com`.
 
-<br>
+---
 
 #### 2.1.10 Clearing all Patient Entries: `clear` 🧹
 
@@ -422,7 +423,7 @@ Clears all patient entries from your VitaBook.
 
 Format: `clear`
 
-<br>
+---
 
 ### 2.2 To Provide a Convenient and Pleasant Experience
 
@@ -439,7 +440,7 @@ Format: `help`
 
 *Figure 5: Window displaying the user guide link*
 
-<br>
+---
 
 #### 2.2.2 Undoing the Last Change: `undo` ↩️
 
@@ -455,7 +456,7 @@ Format: `undo`
 2. Support multiple undo commands until the patient list reaches the initial state.
 </box>
 
-<br>
+---
 
 #### 2.2.3 Redoing the Last Undo: `redo` ↪️
 
@@ -477,7 +478,7 @@ Format: `redo`
 Executing a new command that changes the patient list (excluding `undo`) after undo commands will purge the redo history. This means you cannot redo those undo commands anymore.
 </box>
 
-<br>
+---
 
 #### 2.2.4 Navigating through Command History: `↑` and `↓` ⌨️
 
@@ -485,7 +486,7 @@ Navigates through the command history for quick access to previously executed co
 
 Format: `↑` or `↓` arrow keys
 
-<br>
+---
 
 #### 2.2.5 Toggling between Light Mode and Dark Mode 🌗
 
@@ -505,7 +506,7 @@ Transitions between light mode and dark mode for a more customisable and improve
 
 *Figure 7: Change from dark mode to light mode*
 
-<br>
+---
 
 #### 2.2.6 Exiting the Program: `exit` 🚪
 
@@ -513,13 +514,13 @@ Exits the program.
 
 Format: `exit`
 
-<br>
+---
 
 #### 2.2.7 Saving the Data 💾
 
 Your VitaBook data is saved in the hard disk automatically after any command that modifies the data. There is no need to save manually.
 
-<br>
+---
 
 ### 2.3 Bonus for Advanced Nutritionists
 
@@ -533,10 +534,10 @@ Your VitaBook data is saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, VitaBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
 <br>
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -575,11 +576,14 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 **❓ Q: Can I undo other actions too?**  
 **💬 A:** Yes! Whether it’s a delete, edit, or clear, the `undo` command has your back. You can even redo something if you changed your mind.
 
+---
 
 **❓ Q: Can I add custom info for patients?**  
 **💬 A:** While you can't add new fields, the `remark` field is super flexible — use it to write anything extra you want to remember, like “prefers gluten-free snacks” or “has follow-up next month.”
+<br>
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -605,8 +609,10 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 
 - **Application crashes if `vitabook.json` is manually corrupted.**
   If the user edits or corrupts the storage file manually, VitaBook may fail to start or load a blank state. To solve this issue, try deleting `vitabook.json` and rerunning the application. Remember to backup the file before deleting.
+<br>
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 -------------------------------------------------------------------------------------------------------------------
 ## 5. Command Summary 🗂️
@@ -628,8 +634,10 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 | **Redo**                      | `redo`                                                                                                                                                                                                                                            |
 | **Navigate Command History**  | `↑` or `↓` arrow keys                                                                                                                                                                                                                             |
 | **Exit**                      | `exit`                                                                                                                                                                                                                                            |
+<br>
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -673,17 +681,16 @@ Basic health data to help you understand and track your patient’s profile.
 
 **Index**  
 The number next to each patient when you view the list — you’ll use it when editing, prioritising, or deleting someone.
-
 <br>
 
-[↑ Back to Top](#-vitabook-user-guide-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 ## 7. Java Setup Instructions ☕
 
 VitaBook requires **Java 17 or higher** to run.
 
-<br>
 
 ### Check your Java version
 
@@ -693,7 +700,6 @@ java -version
 ```
 If Java is installed, you’ll see something like: `java version "17.0.9" 2024-01-16 LTS`.
 If you see an error or a lower version, install Java 17 using the steps below.
-
 <br>
 
 ### Install Java 17
@@ -702,6 +708,5 @@ If you see an error or a lower version, install Java 17 using the steps below.
 [Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)<br>
 [Installation Guide for Linux Users](https://se-education.org/guides/tutorials/javaInstallationLinux.html)<br>
 
-
-[↑ Back to Top](#-vitabook-user-guide-)<br>
-[↑ Go to Quick Start](#13-quick-start-)<br>
+[↑ Back to Top](#vitabook-user-guide)<br>
+[↑ Back to Table of Contents](#table-of-contents)<br>
