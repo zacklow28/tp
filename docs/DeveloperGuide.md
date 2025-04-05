@@ -1104,31 +1104,31 @@ Given below are instructions to test the app manually.
 
 ### **Command Tests**
 #### **Add Patient**
-| Test Case                                                                                                      | Prerequisite | Expected Outcome |
-|----------------------------------------------------------------------------------------------------------------|--------------|------------------|
-| `add n/John Doe g/m h/1.75 w/70.00 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed |
-| `add` (no fields)                                                                                              | - | Shows `MESSAGE_USAGE` with required fields |
-| `add n/Alice Tan ... e/john@example.com`                                                                       | Patient with `john@example.com` exists | Error: `"This patient already exists"` |
+| Test Case                                                                                                       | Prerequisite | Expected Outcome                                   |
+|-----------------------------------------------------------------------------------------------------------------|--------------|----------------------------------------------------|
+| `add n/John Doe g/m h/1.75 w/70.00 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed                       |
+| `add` (no fields)                                                                                               | - | Shows `MESSAGE_USAGE` with required fields         |
+| `add n/Alice Tan ... e/john@example.com ...`                                                                    | Patient with `john@example.com` exists | Error: `"This patient already exists in VitaBook"` |
 
 #### **Edit Patient**
-| Test Case                    | Prerequisite | Expected Outcome |
-|------------------------------|--------------|------------------|
-| `edit 1 no/98765432`         | ≥1 patient in list | Updates phone number for patient 1 |
+| Test Case                    | Prerequisite | Expected Outcome                                       |
+|------------------------------|--------------|--------------------------------------------------------|
+| `edit 1 no/98765432`         | ≥1 patient in list | Updates phone number for patient 1                     |
 | `edit 1` (no fields)         | ≥1 patient | Error: `"At least one field to edit must be provided"` |
-| `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index"` |
+| `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index."`                      |
 
 #### **Remark Command**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `remark 1 r/Very cooperative` | ≥1 patient | Adds remark to patient 1 |
-| `remark 0 r/Test` | - | Error: `"Invalid index"` |
+| Test Case | Prerequisite | Expected Outcome                  |
+|-----------|--------------|-----------------------------------|
+| `remark 1 r/Very cooperative` | ≥1 patient | Adds remark to patient 1          |
+| `remark 0 r/Test` | - | Error: `"Invalid patient index."` |
 
 #### **Priority Command**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `priority 2 high` | ≥2 patients | Updates priority of patient 2 to `high` |
-| `priority 1 urgent` | ≥1 patient | Error: `"Priority must be low/medium/high"` |
-| `priority 10 high` | <10 patients | Error: `"Invalid patient index"` |
+| Test Case              | Prerequisite | Expected Outcome                                 |
+|------------------------|--------------|--------------------------------------------------|
+| `priority 2 pr/high`   | ≥2 patients | Updates priority of patient 2 to `high`          |
+| `priority 1 pr/urgent` | ≥1 patient | Error: `"Priority must be high, medium, or low"` |
+| `priority 10 pr/high`  | <10 patients | Error: `"Invalid patient index."`                |
 
 #### **Find Command**
 | Test Case | Prerequisite | Expected Outcome |
