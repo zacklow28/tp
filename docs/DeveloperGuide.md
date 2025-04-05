@@ -767,8 +767,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 |               | Empty list                                  | Silent (no action)                                       | Implicit in sorting logic           |
 | **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"`              | Default `switch` case               |
 |               | No matches                                  | Empty list (no error)                                    | Predicate returns `false` for all   |
-| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"`                            | `model.canUndoAddressBook()` check  |
-|               | Redo at latest state                        | `"No next state to redo"`                                | `model.canRedoAddressBook()` check  |
+| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo. Already at initial state."` | `model.canUndoAddressBook()` check  |
+|               | Redo at latest state                        | `"No next state to redo. Already at final state."`       | `model.canRedoAddressBook()` check  |
 |               | Non-modifying command (e.g., `list`)        | No state change                                          | Skips `Model#commitAddressBook()`   |
 |               |  Executing a new command after an undo      | Purges the redo history                                  |`VersionedAddressBook#commit()`       |
 
