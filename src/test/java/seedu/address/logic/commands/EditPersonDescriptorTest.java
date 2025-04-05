@@ -49,7 +49,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different weight -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight("80").build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight("80.00").build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false

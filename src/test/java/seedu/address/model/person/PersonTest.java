@@ -89,7 +89,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different weight -> returns false
-        editedAlice = new PersonBuilder(ALICE).withWeight("60").build();
+        editedAlice = new PersonBuilder(ALICE).withWeight("60.00").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false

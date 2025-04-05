@@ -68,8 +68,8 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_HEIGHT_AMY = "1.6";
     public static final String VALID_HEIGHT_BOB = "1.8";
-    public static final String VALID_WEIGHT_AMY = "55";
-    public static final String VALID_WEIGHT_BOB = "75";
+    public static final String VALID_WEIGHT_AMY = "55.00";
+    public static final String VALID_WEIGHT_BOB = "75.00";
     public static final String VALID_DIET_AMY = "low sodium";
     public static final String VALID_DIET_BOB = "low sodium";
     public static final String VALID_MEETING_DATE_AMY = "2025-04-01";
@@ -86,7 +86,7 @@ public class CommandTestUtil {
     public static final String MEETING_DATE_DESC_BOB = " " + PREFIX_MEETING_DATE + VALID_MEETING_DATE_BOB;
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "alien"; // assuming only 'M' or 'F'
     public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT + "two"; // non-numeric
-    public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "-55"; // negative number
+    public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "-55.00"; // negative number
     public static final String INVALID_DIET_DESC = " " + PREFIX_DIET + ""; // empty string if not allowed
     public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "2025-13-01"; //non-existent date
 
