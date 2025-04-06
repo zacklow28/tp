@@ -751,26 +751,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Command-Specific Edge Cases
 
-| Command       | Edge Case                                   | System Response                                          | Handling Mechanism                  |
-|---------------|---------------------------------------------|----------------------------------------------------------|-------------------------------------|
-| **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"`               | `AddCommand#execute()` checks `model.hasPerson()` |
-|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format                        | `AddCommandParser` validates prefixes |
+| Command       | Edge Case                                   | System Response           | Handling Mechanism                  |
+|---------------|---------------------------------------------|---------------------------|-------------------------------------|
+| **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"` | `AddCommand#execute()` checks `model.hasPerson()` |
+|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format | `AddCommandParser` validates prefixes |
 |               | Invalid field format (e.g., `h/abc`)        | Field-specific error (e.g., `"Height must be a number"`) | Field class constructors validate input |
-| **Edit**      | Invalid index (e.g., `edit 999`)            | `"Invalid patient index."`                               | Checks `index.getZeroBased() >= list.size()` |
-|               | No fields edited                            | `"At least one field to edit must be provided"`          | `EditPersonDescriptor#isAnyFieldEdited()` |
-|               | Duplicate after edit                        | `"This patient already exists in VitaBook."`             | `model.hasPerson()` check           |
-| **Clear**     | Empty address book                          | `"Nothing on list!"`                                     | `model.getAddressBook().isEmpty()` check |
-|               | User cancels confirmation                   | `"Clear command cancelled."`                             | `ClearDialogUtil.showConfirmationDialog()` |
-| **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"`                | `Priority` enum validation          |
-|               | Invalid index                               | `"Invalid patient index."`                               | Index bounds check                  |
-| **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"`           | `switch` default case throws error  |
-|               | Empty list                                  | Silent (no action)                                       | Implicit in sorting logic           |
-| **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"`              | Default `switch` case               |
-|               | No matches                                  | Empty list (no error)                                    | Predicate returns `false` for all   |
-| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo. Already at initial state."` | `model.canUndoAddressBook()` check  |
-|               | Redo at latest state                        | `"No next state to redo. Already at final state."`       | `model.canRedoAddressBook()` check  |
-|               | Non-modifying command (e.g., `list`)        | No state change                                          | Skips `Model#commitAddressBook()`   |
-|               |  Executing a new command after an undo      | Purges the redo history                                  |`VersionedAddressBook#commit()`       |
+| **Edit**      | Invalid index (e.g., `edit 999`)            | `"Invalid patient index"` | Checks `index.getZeroBased() >= list.size()` |
+|               | No fields edited                            | `"At least one field to edit must be provided"` | `EditPersonDescriptor#isAnyFieldEdited()` |
+|               | Duplicate after edit                        | `"This patient already exists in VitaBook"` | `model.hasPerson()` check           |
+| **Clear**     | Empty address book                          | `"Nothing on list!"`      | `model.getAddressBook().isEmpty()` check |
+|               | User cancels confirmation                   | `"Clear command cancelled"` | `ClearDialogUtil.showConfirmationDialog()` |
+| **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"` | `Priority` enum validation          |
+|               | Invalid index                               | `"Invalid patient index"` | Index bounds check                  |
+| **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"` | `switch` default case throws error  |
+|               | Empty list                                  | Silent (no action)        | Implicit in sorting logic           |
+| **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"` | Default `switch` case               |
+|               | No matches                                  | Empty list (no error)     | Predicate returns `false` for all   |
+| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"` | `model.canUndoAddressBook()` check  |
+|               | Redo at latest state                        | `"No next state to redo"` | `model.canRedoAddressBook()` check  |
+|               | Non-modifying command (e.g., `list`)        | No state change           | Skips `Model#commitAddressBook()`   |
+|               |  Executing a new command after an undo      | Purges the redo history   |`VersionedAddressBook#commit()`       |
 
 ### General Edge Cases
 
@@ -1117,17 +1117,17 @@ Given below are instructions to test the app manually.
 | `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index."`                      |
 
 #### **Remark Command**
-| Test Case                     | Prerequisite  | Expected Outcome                  |
-|-------------------------------|---------------|-----------------------------------|
-| `remark 1 r/Very cooperative` | ≥1 patient    | Adds remark to patient 1          |
-| `remark 10 r/Test`            | < 10 patients | Error: `"Invalid patient index."` |
+| Test Case                     | Prerequisite  | Expected Outcome                 |
+|-------------------------------|---------------|----------------------------------|
+| `remark 1 r/Very cooperative` | ≥1 patient    | Adds remark to patient 1         |
+| `remark 10 r/Test`            | < 10 patients | Error: `"Invalid patient index"` |
 
 #### **Priority Command**
-| Test Case              | Prerequisite | Expected Outcome                                 |
-|------------------------|--------------|--------------------------------------------------|
-| `priority 2 pr/high`   | ≥2 patients | Updates priority of patient 2 to `high`          |
+| Test Case              | Prerequisite | Expected Outcome                                |
+|------------------------|--------------|-------------------------------------------------|
+| `priority 2 pr/high`   | ≥2 patients | Updates priority of patient 2 to `high`         |
 | `priority 1 pr/urgent` | ≥1 patient | Error: `"Priority must be high, medium, or low"` |
-| `priority 10 pr/high`  | <10 patients | Error: `"Invalid patient index."`                |
+| `priority 10 pr/high`  | <10 patients | Error: `"Invalid patient index"`                |
 
 #### **Find Command**
 | Test Case | Prerequisite | Expected Outcome |
