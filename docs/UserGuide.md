@@ -186,7 +186,7 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 
 *Figure 2: Example of person card, containing different fields*<br>
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. A patient can have any number of allergies (including 0).
@@ -231,7 +231,7 @@ Edits the specified fields of an existing patient in your VitaBook.
 
 Format: `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
@@ -263,7 +263,7 @@ Changes a patient's priority by their index.
 
 Format: `priority INDEX pr/PRIORITY`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
@@ -282,7 +282,7 @@ Adds a new remark or replaces an existing remark of a patient.
 
 Format: `remark INDEX r/[REMARK]`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. You can use this command to add any conditions or custom information.
@@ -321,7 +321,7 @@ Finds patients whose names contain *any* of the given **keywords**.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The search is case-insensitive.<br>
@@ -358,7 +358,7 @@ Filter patients based on a field (priority, diet, gender, meeting date).
 
 Format: `filter pr/PRIORITY` or `filter d/DIET` or `filter g/GENDER` or `filter m/MEETING_DATE`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. At least one field to filter must be provided.
@@ -380,7 +380,7 @@ Sorts patients based on specific criteria (priority, name, diet and meeting date
 
 Format: `sort CRITERIA`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. Criteria must be one of the following: `priority`, `name`, `diet`, `meetingdate` (case-insensitive) and cannot be blank.
@@ -400,7 +400,7 @@ Deletes a patient from your VitaBook.
 
 Format: `delete INDEX` or `delete EMAIL`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. You can choose to delete the patient at the specified `INDEX`.
@@ -448,12 +448,14 @@ Undoes the last command that changed the patient list.
 
 Format: `undo`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
-1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `priority`, `redo`).
+1. You can only execute undo commands after using commands that may modify data in the patient list  (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `priority`, `redo`).
 
 2. Support multiple undo commands until the patient list reaches the initial state.
+
+3. Even if the patient list data is exactly the same, if you executed the commands stated in point 1 successfully, you can still execute an undo command. 
 </box>
 
 ---
@@ -464,12 +466,14 @@ Redoes the last undo.
 
 Format: `redo`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
-1. You can only redo if you executed an undo command.
+1. You can only execute redo commands after using an undo command.
 
 2. Support multiple redo commands until the patient list reaches the final state.
+
+3. Even if the patient list data is exactly the same, if you executed any undo commands successfully, you can still execute a redo command.
 </box>
 
 <box type="warning" seamless>
