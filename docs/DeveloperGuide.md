@@ -391,7 +391,7 @@ public CommandResult execute(Model model) throws CommandException {
 ```
 
 - Example Usage:
-```add n/John Doe g/m h/1.75 w/70 no/98765432 e/john@example.com a/123 Street d/vegan pr/high m/2025-12-31 al/peanuts```
+```add n/John Doe g/m h/1.75 w/70.00 no/98765432 e/john@example.com a/123 Street d/vegan pr/high m/2025-12-31 al/peanuts```
 
 #### Developer Notes
 
