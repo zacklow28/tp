@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PriorityCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Priority;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 /**
  * This class parses the priority command provided in the command input.
@@ -32,6 +35,8 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
             index = ParserUtil.parseIndex(tokens[0]);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE), pe);
+        } catch (CommandException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
         }
 
         String priorityValue = tokens[1].substring(3).toUpperCase();
