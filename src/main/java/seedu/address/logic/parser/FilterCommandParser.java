@@ -70,8 +70,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         case "m":
             if (!MeetingDate.isValidMeetingDate(value)) {
-                throw new ParseException("Invalid meeting date format: '" + value + "'.\n"
-                        + "Expected format: YYYY-MM-DD and date must be valid");
+                throw new ParseException("Invalid meeting date value: '" + value + "'.\n"
+                        + "Expected: date must be valid and in the format YYYY-MM-DD");
             }
             break;
 
