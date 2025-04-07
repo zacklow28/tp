@@ -29,7 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GENDER = "f";
     public static final String DEFAULT_HEIGHT = "1.65";
-    public static final String DEFAULT_WEIGHT = "55";
+    public static final String DEFAULT_WEIGHT = "55.00";
     public static final String DEFAULT_DIET = "low sodium";
     public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_MEETING_DATE = "2025-03-15";

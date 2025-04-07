@@ -123,7 +123,7 @@ Let us guide you through your start with VitaBook:
 
 * `list` : Lists all patients.
 
-* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/LOW` : Adds a new patient named `John Doe` to your VitaBook.
+* `add n/John Doe g/m h/1.78 w/70.00 no/98765432 e/johnd@example.com a/John Street, block 123, #01-01 d/low sodium m/2025-01-25 pr/LOW` : Adds a new patient named `John Doe` to your VitaBook.
 
 * `delete 3` : Deletes the 3rd patient in the current list.
 
@@ -186,7 +186,7 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 
 *Figure 2: Example of person card, containing different fields*<br>
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. A patient can have any number of allergies (including 0).
@@ -199,7 +199,7 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 
 5. Height must be between `0.50` and `3.00`.
 
-6. Weight must be a positive integer.
+6. Weight (in kilograms) must be a positive number with **exactly** 2 decimal places, strictly greater than 0.00 and less than or equal to 1000.00.
 
 7. Priority must be one of the following: `high`, `medium`, `low` (case-insensitive).
 
@@ -211,8 +211,8 @@ Format: `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET
 </box>
 
 Examples:
-* `add n/John Doe g/m h/1.78 w/70 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
-* `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
+* `add n/John Doe g/m h/1.78 w/70.00 no/98765432 e/johnd@example.com a/John Street block 123, #01-01 d/low sodium pr/LOW m/2025-01-25`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/f a/Newgate Prison h/1.68 w/50.00 no/97867564 d/low fat pr/MEDIUM m/2025-02-24 al/peanuts al/milk`
 
 ---
 
@@ -231,7 +231,7 @@ Edits the specified fields of an existing patient in your VitaBook.
 
 Format: `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
@@ -263,7 +263,7 @@ Changes a patient's priority by their index.
 
 Format: `priority INDEX pr/PRIORITY`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer**.
@@ -282,7 +282,7 @@ Adds a new remark or replaces an existing remark of a patient.
 
 Format: `remark INDEX r/[REMARK]`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. You can use this command to add any conditions or custom information.
@@ -321,7 +321,7 @@ Finds patients whose names contain *any* of the given **keywords**.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. The search is case-insensitive.<br>
@@ -340,7 +340,7 @@ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find john` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 <a href="images/findAlexDavidResult.png">
@@ -358,7 +358,7 @@ Filter patients based on a field (priority, diet, gender, meeting date).
 
 Format: `filter pr/PRIORITY` or `filter d/DIET` or `filter g/GENDER` or `filter m/MEETING_DATE`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. At least one field to filter must be provided.
@@ -380,7 +380,7 @@ Sorts patients based on specific criteria (priority, name, diet and meeting date
 
 Format: `sort CRITERIA`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. Criteria must be one of the following: `priority`, `name`, `diet`, `meetingdate` (case-insensitive) and cannot be blank.
@@ -400,7 +400,7 @@ Deletes a patient from your VitaBook.
 
 Format: `delete INDEX` or `delete EMAIL`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
 1. You can choose to delete the patient at the specified `INDEX`.
@@ -412,7 +412,7 @@ Format: `delete INDEX` or `delete EMAIL`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient list.
-* `find Betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
+* `find betsy` followed by `delete 1` deletes the 1st patient in the results list of the `find` command.
 * `delete johnd@example.com` deletes the patient with email address `johnd@example.com`.
 
 ---
@@ -448,12 +448,14 @@ Undoes the last command that changed the patient list.
 
 Format: `undo`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
-1. You can only undo for commands that changed the patient list (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `priority`, `redo`).
+1. You can only execute undo commands after using commands that may modify data in the patient list  (i.e. `add`, `edit`, `delete`, `remark`, `clear`, `priority`, `redo`).
 
 2. Support multiple undo commands until the patient list reaches the initial state.
+
+3. Even if the patient list data is exactly the same, if you executed the commands stated in point 1 successfully, you can still execute an undo command. 
 </box>
 
 ---
@@ -464,12 +466,14 @@ Redoes the last undo.
 
 Format: `redo`
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
 **To note:**
-1. You can only redo if you executed an undo command.
+1. You can only execute redo commands after using an undo command.
 
 2. Support multiple redo commands until the patient list reaches the final state.
+
+3. Even if the patient list data is exactly the same, if you executed any undo commands successfully, you can still execute a redo command.
 </box>
 
 <box type="warning" seamless>
@@ -617,24 +621,23 @@ Furthermore, certain edits can cause the VitaBook to behave in unexpected ways (
 -------------------------------------------------------------------------------------------------------------------
 ## 5. Command Summary 🗂️
 
-| Action                        | Format, Examples                                                                                                                                                                                                                                  |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                      | `help`                                                                                                                                                                                                                                            |
-| **Add**                       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70 no/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts` |
-| **List**                      | `list`                                                                                                                                                                                                                                            |
-| **Edit**                      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68 pr/MEDIUM`                                                        |
-| **Priority**                  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/HIGH`                                                                                                                                                                                        |
-| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`                                                                                                                                                                            |
-| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find Alex sugar`                                                                                                                                                                                         |
-| **Filter**                    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`                                                                                                                          |
-| **Sort**                      | `sort CRITERIA `<br>e.g., `sort priority`                                                                                                                                                                                                         |
-| **Delete**                    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`                                                                                                                                                                  |
-| **Clear**                     | `clear`                                                                                                                                                                                                                                           |
-| **Undo**                      | `undo`                                                                                                                                                                                                                                            |
-| **Redo**                      | `redo`                                                                                                                                                                                                                                            |
-| **Navigate Command History**  | `↑` or `↓` arrow keys                                                                                                                                                                                                                             |
-| **Exit**                      | `exit`                                                                                                                                                                                                                                            |
-<br>
+| Action                        | Format, Examples                                                                                                                                                                                                                                     |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                      | `help`                                                                                                                                                                                                                                               |
+| **Add**                       | `add n/NAME g/GENDER h/HEIGHT w/WEIGHT no/PHONE e/EMAIL a/ADDRESS d/DIET pr/PRIORITY m/MEETING_DATE [al/ALLERGY]…`<br>e.g., `add n/Alex Yeoh g/M h/1.75 w/70.00 no/87438807 e/alex@example.com a/Blk 30 d/low sodium pr/LOW m/2025-12-12 al/peanuts` |
+| **List**                      | `list`                                                                                                                                                                                                                                               |
+| **Edit**                      | `edit INDEX [n/NAME] [g/GENDER] [h/HEIGHT] [w/WEIGHT] [no/PHONE] [e/EMAIL] [a/ADDRESS] [d/DIET] [pr/PRIORITY] [m/MEETING_DATE] [al/ALLERGY]…`<br>e.g., `edit 1 d/low sugar w/68.00 pr/MEDIUM`                                                        |
+| **Priority**                  | `priority INDEX pr/PRIORITY`<br>e.g., `priority 2 pr/HIGH`                                                                                                                                                                                           |
+| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 1 r/Likes protein-rich foods`                                                                                                                                                                               |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find alex bernice`                                                                                                                                                                                          |
+| **Filter**                    | `filter pr/PRIORITY` or `filter d/DIET`  or `filter g/GENDER` or `filter m/MEETING DATE` <br>e.g., `filter d/low sodium`                                                                                                                             |
+| **Sort**                      | `sort CRITERIA `<br>e.g., `sort priority`                                                                                                                                                                                                            |
+| **Delete**                    | `delete INDEX` or `delete EMAIL`<br>e.g., `delete 3` or `delete johnd@gmail.com`                                                                                                                                                                     |
+| **Clear**                     | `clear`                                                                                                                                                                                                                                              |
+| **Undo**                      | `undo`                                                                                                                                                                                                                                               |
+| **Redo**                      | `redo`                                                                                                                                                                                                                                               |
+| **Navigate Command History**  | `↑` or `↓` arrow keys                                                                                                                                                                                                                                |
+| **Exit**                      | `exit`                                                                                                                                                                                                                                               |
 
 [↑ Back to Top](#vitabook-user-guide)<br>
 [↑ Back to Table of Contents](#table-of-contents)<br>

@@ -30,18 +30,24 @@ public class WeightTest {
 
     @Test
     public void constructor_zeroValue_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Weight("0"));
+        assertThrows(IllegalArgumentException.class, () -> new Weight("0.00"));
     }
 
     @Test
     public void constructor_negativeValue_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Weight("-1"));
+        assertThrows(IllegalArgumentException.class, () -> new Weight("-1.00"));
+    }
+
+    @Test
+    public void constructor_moreThan1000Value_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Weight("1000.01"));
     }
 
     @Test
     public void constructor_validWeight_succeeds() {
-        new Weight("55.0");
-        new Weight("0.0001"); // edge case just above 0
+        new Weight("55.00");
+        new Weight("0.01"); // edge case just above 0
+        new Weight("1000.00");
     }
 
     @Test
@@ -49,22 +55,22 @@ public class WeightTest {
         assertFalse(Weight.isValidWeight(""));
         assertFalse(Weight.isValidWeight(" "));
         assertFalse(Weight.isValidWeight("abc"));
-        assertFalse(Weight.isValidWeight("0"));
-        assertFalse(Weight.isValidWeight("-1"));
+        assertFalse(Weight.isValidWeight("0.00"));
+        assertFalse(Weight.isValidWeight("-1.00"));
     }
 
     @Test
     public void isValidWeight_validInputs_returnTrue() {
-        assertTrue(Weight.isValidWeight("1.0"));
-        assertTrue(Weight.isValidWeight("0.0001"));
-        assertTrue(Weight.isValidWeight("72.5"));
+        assertTrue(Weight.isValidWeight("1.00"));
+        assertTrue(Weight.isValidWeight("0.01"));
+        assertTrue(Weight.isValidWeight("72.50"));
     }
 
     @Test
     public void equals() {
-        Weight w1 = new Weight("65.0");
-        Weight w2 = new Weight("65.0");
-        Weight w3 = new Weight("70.0");
+        Weight w1 = new Weight("65.00");
+        Weight w2 = new Weight("65.00");
+        Weight w3 = new Weight("70.00");
 
         // same value -> returns true
         assertTrue(w1.equals(w2));
@@ -75,6 +81,6 @@ public class WeightTest {
         // null -> returns false
         assertFalse(w1.equals(null));
         // different type -> returns false
-        assertFalse(w1.equals("65.0"));
+        assertFalse(w1.equals("65.00"));
     }
 }

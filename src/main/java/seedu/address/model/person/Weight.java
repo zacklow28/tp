@@ -10,9 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Weight {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Weight should be a positive number greater than 0, and it should not be blank";
+        "Weight in kilograms must be a positive number strictly greater than 0.00 and less than or equal to 1000.00."
+        + "\nIt must be specified with 2 decimal places and should not be blank.";
 
     private static final double MIN_WEIGHT = 0.0;
+    private static final String MAX_WEIGHT = "1000.00";
 
     private final double weight;
 
@@ -32,8 +34,9 @@ public class Weight {
      */
     public static boolean isValidWeight(String test) {
         try {
+            String weightRegex = "[0-9]{1,3}\\.\\d{2}"; //for 0.01 to 999.99
             double value = Double.parseDouble(test);
-            return value > MIN_WEIGHT;
+            return (value > MIN_WEIGHT && test.matches(weightRegex)) || test.matches(MAX_WEIGHT);
         } catch (NumberFormatException e) {
             return false;
         }
