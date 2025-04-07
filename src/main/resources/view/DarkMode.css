@@ -339,6 +339,9 @@
     -fx-text-fill: white;
 }
 
+#commandTextField.error {
+    -fx-text-fill: red;
+}
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
