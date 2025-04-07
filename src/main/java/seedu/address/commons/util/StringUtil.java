@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
@@ -59,8 +60,8 @@ public class StringUtil {
         requireNonNull(s);
 
         try {
-            int value = Integer.parseInt(s);
-            return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+            BigInteger value = new BigInteger(s);
+            return value.compareTo(BigInteger.ZERO) > 0 && !s.startsWith("+");
         } catch (NumberFormatException nfe) {
             return false;
         }
