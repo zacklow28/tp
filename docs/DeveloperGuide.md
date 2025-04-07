@@ -391,7 +391,7 @@ public CommandResult execute(Model model) throws CommandException {
 ```
 
 - Example Usage:
-```add n/John Doe g/m h/1.75 w/70 p/98765432 e/john@example.com a/123 Street d/vegan pr/high m/2025-12-31 al/peanuts```
+```add n/John Doe g/m h/1.75 w/70.00 no/98765432 e/john@example.com a/123 Street d/vegan pr/high m/2025-12-31 al/peanuts```
 
 #### Developer Notes
 
@@ -435,7 +435,7 @@ private static Person createEditedPerson(Person personToEdit, EditPersonDescript
 }
 ```
 - Example Usage:
-``` edit 1 p/91234567 e/new@example.com ```
+``` edit 1 no/91234567 e/new@example.com ```
 
 
 #### Developer Notes
@@ -751,26 +751,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Command-Specific Edge Cases
 
-| Command       | Edge Case                                   | System Response                          | Handling Mechanism                  |
-|---------------|---------------------------------------------|------------------------------------------|-------------------------------------|
+| Command       | Edge Case                                   | System Response           | Handling Mechanism                  |
+|---------------|---------------------------------------------|---------------------------|-------------------------------------|
 | **Add**       | Duplicate patient (same name + phone)       | `"This person already exists in VitaBook"` | `AddCommand#execute()` checks `model.hasPerson()` |
-|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format       | `AddCommandParser` validates prefixes |
+|               | Missing required fields (e.g., no `n/NAME`) | Shows `MESSAGE_USAGE` with format | `AddCommandParser` validates prefixes |
 |               | Invalid field format (e.g., `h/abc`)        | Field-specific error (e.g., `"Height must be a number"`) | Field class constructors validate input |
-| **Edit**      | Invalid index (e.g., `edit 999`)            | `"The patient index provided is invalid"` | Checks `index.getZeroBased() >= list.size()` |
+| **Edit**      | Invalid index (e.g., `edit 999`)            | `"Invalid patient index"` | Checks `index.getZeroBased() >= list.size()` |
 |               | No fields edited                            | `"At least one field to edit must be provided"` | `EditPersonDescriptor#isAnyFieldEdited()` |
-|               | Duplicate after edit                        | `"This patient already exists"`          | `model.hasPerson()` check           |
-| **Clear**     | Empty address book                          | `"Nothing on list!"`                     | `model.getAddressBook().isEmpty()` check |
-|               | User cancels confirmation                   | `"Clear command cancelled."`             | `ClearDialogUtil.showConfirmationDialog()` |
+|               | Duplicate after edit                        | `"This patient already exists in VitaBook"` | `model.hasPerson()` check           |
+| **Clear**     | Empty address book                          | `"Nothing on list!"`      | `model.getAddressBook().isEmpty()` check |
+|               | User cancels confirmation                   | `"Clear command cancelled"` | `ClearDialogUtil.showConfirmationDialog()` |
 | **Priority**  | Invalid priority value (e.g., `pr/INVALID`) | `"Priority must be low, medium, or high"` | `Priority` enum validation          |
-|               | Invalid index                               | `"Invalid patient index."`               | Index bounds check                  |
+|               | Invalid index                               | `"Invalid patient index"` | Index bounds check                  |
 | **Sort**      | Invalid sort type (e.g., `sort invalid`)    | `"Invalid sort type. Use: priority/name/diet"` | `switch` default case throws error  |
-|               | Empty list                                  | Silent (no action)                       | Implicit in sorting logic           |
+|               | Empty list                                  | Silent (no action)        | Implicit in sorting logic           |
 | **Filter**    | Invalid prefix (e.g., `filter x/abc`)       | `"Unexpected error: invalid filter prefix"` | Default `switch` case               |
-|               | No matches                                  | Empty list (no error)                    | Predicate returns `false` for all   |
-| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"`            | `model.canUndoAddressBook()` check  |
-|               | Redo at latest state                        | `"No next state to redo"`                | `model.canRedoAddressBook()` check  |
-|               | Non-modifying command (e.g., `list`)        | No state change                      | Skips `Model#commitAddressBook()`   |
-|               |  Executing a new command after an undo      | Purges the redo history              |`VersionedAddressBook#commit()`       |
+|               | No matches                                  | Empty list (no error)     | Predicate returns `false` for all   |
+| **Undo/Redo** | Undo at initial state                       | `"No previous state to undo"` | `model.canUndoAddressBook()` check  |
+|               | Redo at latest state                        | `"No next state to redo"` | `model.canRedoAddressBook()` check  |
+|               | Non-modifying command (e.g., `list`)        | No state change           | Skips `Model#commitAddressBook()`   |
+|               |  Executing a new command after an undo      | Purges the redo history   |`VersionedAddressBook#commit()`       |
 
 ### General Edge Cases
 
@@ -1044,12 +1044,12 @@ User stories for the MVP version:
 ## Glossary
 
 ### Core Concepts
-| Term               | Definition                                                                 | Example/Notes                                                                |
-|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **Patient**        | An individual under nutritional care with stored health/dietary data.      | Created via `add n/John Doe d/vegan`                                        |
-| **Nutritionist**   | Healthcare professional managing patient diets via VitaBook.               | Primary user of the application.                                            |
-| **CLI**            | Command-Line Interface for text-based commands.                            | Faster than GUI (e.g., `edit 1 p/98765432` updates phone number).           |
-| **GUI**            | Graphical User Interface (minimal use in VitaBook).                        | Only displays results (e.g., patient lists).                                |
+| Term               | Definition                                                                 | Example/Notes                                                      |
+|--------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Patient**        | An individual under nutritional care with stored health/dietary data.      | Created via `add n/John Doe d/low fat`                             |
+| **Nutritionist**   | Healthcare professional managing patient diets via VitaBook.               | Primary user of the application.                                   |
+| **CLI**            | Command-Line Interface for text-based commands.                            | Faster than GUI (e.g., `edit 1 no/98765432` updates phone number). |
+| **GUI**            | Graphical User Interface (minimal use in VitaBook).                        | Only displays results (e.g., patient lists).                       |
 
 ### Technical Terms
 | Term               | Definition                                                                 | Example/Notes                                                                |
@@ -1059,25 +1059,24 @@ User stories for the MVP version:
 | **Mainstream OS**  | Supported operating systems.                                               | Windows 10+, macOS 12+, Linux (Ubuntu 20.04+)                              |
 
 ### Medical/Dietary Terms
-| Term               | Definition                                                                 | Example/Notes                                                                |
-|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **Diet**           | Prescribed food regimen (e.g., vegan, keto).                               | Filter via `filter d/keto`                                                  |
-| **Priority**       | Follow-up urgency level (`high`/`medium`/`low`).                           | Set via `priority 1 pr/high`                                                |
-| **Allergy**        | Food sensitivity requiring dietary exclusion.                              | Tracked via `add ... al/peanuts`                                            |
+| Term               | Definition                                          | Example/Notes                    |
+|--------------------|-----------------------------------------------------|----------------------------------|
+| **Diet**           | Prescribed food regimen (e.g., low fat, low sugar). | Filter via `filter d/low fat`    |
+| **Priority**       | Follow-up urgency level (`high`/`medium`/`low`).    | Set via `priority 1 pr/high`     |
+| **Allergy**        | Food sensitivity requiring dietary exclusion.       | Tracked via `add ... al/peanuts` |
 
 ### Command Syntax
-| Term               | Definition                                                                 | Example/Notes                                                                |
-|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **Prefix**         | Shortcode before input values (e.g., `n/` for name).                      | `add n/Alice p/12345678` → `n/` and `p/` are prefixes.                      |
-| **Modifying Cmd**  | Commands that change data (tracked in undo history).                       | `add`, `delete`, `edit`                                                     |
-| **Non-Modifying Cmd** | Read-only commands (excluded from undo history).                        | `list`, `find`, `help`                                                      |
+| Term               | Definition                                                                 | Example/Notes                                            |
+|--------------------|---------------------------------------------------------------------------|----------------------------------------------------------|
+| **Prefix**         | Shortcode before input values (e.g., `n/` for name).                      | `add n/Alice no/82345678` → `n/` and `no/` are prefixes. |
+| **Modifying Cmd**  | Commands that change data (tracked in undo history).                       | `add`, `delete`, `edit`                                  |
+| **Non-Modifying Cmd** | Read-only commands (excluded from undo history).                        | `list`, `find`, `help`                                   |
 
 ### Key Features
-| Term               | Definition                                                                 | Example/Notes                                                                |
-|--------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **Auto-save**      | Automatic data persistence after changes.                                  | Saves to JSON after `add`/`edit`/`delete`.                                  |
-| **Portability**    | Runs anywhere with Java 17 (no installation).                              | Single JAR file deployment.                                                 |
-| **Case-Insensitive** | Commands/filters ignore letter case.                                    | `FILTER D/KETO` works same as `filter d/keto`                               |
+| Term               | Definition                                                                 | Example/Notes                                                            |
+|--------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **Auto-save**      | Automatic data persistence after changes.                                  | Saves to JSON after `add`/`edit`/`delete`.                              |
+| **Portability**    | Runs anywhere with Java 17 (no installation).                              | Single JAR file deployment.                                              |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1104,31 +1103,31 @@ Given below are instructions to test the app manually.
 
 ### **Command Tests**
 #### **Add Patient**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `add n/John Doe g/m h/1.75 w/70 p/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed |
-| `add` (no fields) | - | Shows `MESSAGE_USAGE` with required fields |
-| `add n/Alice Tan ... e/john@example.com` | Patient with `john@example.com` exists | Error: `"This patient already exists"` |
+| Test Case                                                                                                       | Prerequisite | Expected Outcome                                    |
+|-----------------------------------------------------------------------------------------------------------------|--------------|-----------------------------------------------------|
+| `add n/John Doe g/m h/1.75 w/70.00 no/91234567 e/john@example.com a/Block 123 d/low sodium m/2025-04-01 pr/low` | No patient with `john@example.com` | Success + new patient listed                        |
+| `add` (no fields)                                                                                               | - | Shows `MESSAGE_USAGE` with required fields          |
+| `add n/Alice Tan ... e/john@example.com ...`                                                                    | Patient with `john@example.com` exists | Error: `"This patient already exists in VitaBook."` |
 
 #### **Edit Patient**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `edit 1 p/98765432` | ≥1 patient in list | Updates phone number for patient 1 |
-| `edit 1` (no fields) | ≥1 patient | Error: `"At least one field to edit must be provided"` |
-| `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index"` |
+| Test Case                    | Prerequisite | Expected Outcome                                       |
+|------------------------------|--------------|--------------------------------------------------------|
+| `edit 1 no/98765432`         | ≥1 patient in list | Updates phone number for patient 1                     |
+| `edit 1` (no fields)         | ≥1 patient | Error: `"At least one field to edit must be provided"` |
+| `edit 999 e/abc@example.com` | List has <999 patients | Error: `"Invalid patient index."`                      |
 
 #### **Remark Command**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `remark 1 r/Very cooperative` | ≥1 patient | Adds remark to patient 1 |
-| `remark 0 r/Test` | - | Error: `"Invalid index"` |
+| Test Case                     | Prerequisite  | Expected Outcome                 |
+|-------------------------------|---------------|----------------------------------|
+| `remark 1 r/Very cooperative` | ≥1 patient    | Adds remark to patient 1         |
+| `remark 10 r/Test`            | < 10 patients | Error: `"Invalid patient index"` |
 
 #### **Priority Command**
-| Test Case | Prerequisite | Expected Outcome |
-|-----------|--------------|------------------|
-| `priority 2 high` | ≥2 patients | Updates priority of patient 2 to `high` |
-| `priority 1 urgent` | ≥1 patient | Error: `"Priority must be low/medium/high"` |
-| `priority 10 high` | <10 patients | Error: `"Invalid patient index"` |
+| Test Case              | Prerequisite | Expected Outcome                                |
+|------------------------|--------------|-------------------------------------------------|
+| `priority 2 pr/high`   | ≥2 patients | Updates priority of patient 2 to `high`         |
+| `priority 1 pr/urgent` | ≥1 patient | Error: `"Priority must be high, medium, or low"` |
+| `priority 10 pr/high`  | <10 patients | Error: `"Invalid patient index"`                |
 
 #### **Find Command**
 | Test Case | Prerequisite | Expected Outcome |
