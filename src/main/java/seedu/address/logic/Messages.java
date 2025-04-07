@@ -42,7 +42,7 @@ public class Messages {
                 .append("; Gender: ")
                 .append(person.getGender())
                 .append("; Height: ")
-                .append(person.getHeight()).append(" cm")
+                .append(person.getHeight()).append(" m")
                 .append("; Weight: ")
                 .append(person.getWeight()).append(" kg")
                 .append("; Phone: ")
